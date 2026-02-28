@@ -1,26 +1,17 @@
 {
   "name": "@scaffold-v2/docs-docs",
-  "version": "1.0.0",
   "type": "module",
+  "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.33.0",
-    "@astrojs/tailwind": "^6.0.2",
-    "@astrojs/starlight-tailwind": "^3.0.1",
+    "@astrojs/starlight": "^0.37.6",
     "astro": "^5.6.1",
-    "sharp": "^0.34.1",
-    "tailwindcss": "^3.4.1"
-  },
-  "devDependencies": {
-    "@workspace/eslint-config": "workspace:*",
-    "@workspace/typescript-config": "workspace:*",
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.3",
-    "typescript": "^5.8.3"
+    "sharp": "^0.34.2"
   }
 }

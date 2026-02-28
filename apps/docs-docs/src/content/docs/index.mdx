@@ -1,57 +1,50 @@
 ---
-title: Welcome to docs
-description: Comprehensive documentation for the scaffold-v2 project
+title: Welcome
+description: Documentation for the Scaffold CLI — command-orchestration for TypeScript monorepos
 template: splash
 hero:
-  tagline: A complete documentation resource for the scaffold-v2 project
-  image:
-    file: ../../assets/images/hero.svg
+  tagline: Command-orchestration CLI for TypeScript monorepos with Turborepo and Bun
   actions:
-    - text: Get Started
-      link: /en/guide/introduction
+    - text: Quick Start
+      link: /guides/quick-start/
       icon: right-arrow
-      variant: primary
-    - text: View on GitHub
-      link: https://github.com/yourusername/scaffold-v2
-      icon: external
+    - text: CLI Commands
+      link: /reference/cli-commands/
+      icon: document
+      variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Features
+## What is Scaffold CLI?
+
+Scaffold CLI v2 is a **command-orchestration** tool with a layered approach. Template files (Mustache stubs) are copied and rendered; additional commands (bun create, bun add, etc.) extend the generated code. Dependency management for TypeScript packages is consolidated and centralized.
+
+## Key features
 
 <CardGrid stagger>
-  <Card title="Structured Documentation" icon="document">
-    Comprehensive guides and references for all aspects of the project.
+  <Card title="Create Projects" icon="file">
+    Bootstrap full monorepos with `scaffold project` or incremental structures with `scaffold init`.
   </Card>
-  <Card title="API Reference" icon="setting">
-    Detailed API documentation with code examples and use cases.
+  <Card title="Add Apps" icon="add-document">
+    Add Next.js, Vite, backend (Elysia), CLI, MCP server, slides, and docs apps.
   </Card>
-  <Card title="Getting Started" icon="rocket">
-    Quick start guides to help you get up and running in minutes.
+  <Card title="Add Packages" icon="pencil">
+    Create service packages, UI packages, and modules (service + UI pairs).
   </Card>
-  <Card title="Troubleshooting" icon="error">
-    Solutions to common issues and helpful resources.
-  </Card>
-</CardGrid>
-
-## What is scaffold-v2?
-
-scaffold-v2 is a powerful project scaffolding system designed to create and maintain consistent project structures. Whether you're building a complex monorepo or a simple application, scaffold-v2 provides the tools to help you maintain a clean, organized codebase.
-
-## Key Components
-
-<CardGrid>
-  <Card title="CLI Tool" icon="terminal">
-    Command-line interface for scaffolding projects, apps, and components.
-  </Card>
-  <Card title="MCP Integration" icon="open-book">
-    Model Context Protocol server for AI agent integration.
-  </Card>
-  <Card title="Project Templates" icon="puzzle">
-    Pre-configured project structures for various application types.
-  </Card>
-  <Card title="Component Library" icon="palette">
-    Reusable UI components with integrated documentation.
+  <Card title="AI-Ready" icon="setting">
+    Stable CLI API documented for AI agents and MCP integration.
   </Card>
 </CardGrid>
+
+## Get started
+
+```bash
+# Create a monorepo with apps
+bun run scaffold project my-app --apps frontend-vite,backend --app-names web,api --non-interactive
+
+# Or initialize base structure and add apps manually
+bun run scaffold init my-app
+cd my-app
+bun run scaffold app web --type frontend-vite --non-interactive
+```

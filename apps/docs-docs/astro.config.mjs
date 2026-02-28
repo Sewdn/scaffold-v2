@@ -1,53 +1,39 @@
+// @ts-check
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import tailwind from '@astrojs/tailwind';
 
+// https://astro.build/config
 export default defineConfig({
-  site: 'https://scaffold-v2.docs',
-  integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
-    starlight({
-      title: 'docs Documentation',
-      description: 'Documentation for the docs project',
-      favicon: '/favicon.svg',
-      logo: {
-        src: './src/assets/images/logo.svg',
-      },
-      social: [
-        {
-          label: 'GitHub',
-          href: 'https://github.com/yourcompany/scaffold-v2',
-          icon: 'github',
-        },
-      ],
-      sidebar: [
-        {
-          label: 'Getting Started',
-          items: [
-            { label: 'Introduction', link: '/guide/introduction' },
-            { label: 'Installation', link: '/guide/installation' },
-            { label: 'Quick Start', link: '/guide/quick-start' },
-          ],
-        },
-        {
-          label: 'API Reference',
-          autogenerate: { directory: 'api' },
-        },
-        {
-          label: 'Reference Guides',
-          autogenerate: { directory: 'reference' },
-        },
-      ],
-      defaultLocale: 'en',
-      locales: {
-        en: {
-          label: 'English',
-        },
-      },
-      customCss: ['./src/styles/tailwind.css', './src/styles/custom.css'],
-      head: [],
-    }),
-  ],
+	integrations: [
+		starlight({
+			title: 'Scaffold CLI',
+			description: 'Command-orchestration CLI for TypeScript monorepos with Turborepo and Bun',
+			social: [
+				{ icon: 'github', label: 'GitHub', href: 'https://github.com' },
+			],
+			sidebar: [
+				{ label: 'Introduction', slug: 'introduction' },
+				{ label: 'Quick Start', slug: 'guides/quick-start' },
+				{
+					label: 'Guides',
+					items: [
+						{ label: 'Create a Project', slug: 'guides/create-project' },
+						{ label: 'Add Applications', slug: 'guides/add-apps' },
+						{ label: 'Add Packages', slug: 'guides/add-packages' },
+						{ label: 'Add Modules', slug: 'guides/add-modules' },
+						{ label: 'Add Components', slug: 'guides/add-components' },
+					],
+				},
+				{
+					label: 'Reference',
+					items: [
+						{ label: 'CLI Commands', slug: 'reference/cli-commands' },
+						{ label: 'App Types', slug: 'reference/app-types' },
+						{ label: 'Project Structure', slug: 'reference/project-structure' },
+						{ label: 'E2E Scenarios', slug: 'reference/e2e-scenarios' },
+					],
+				},
+			],
+		}),
+	],
 });
