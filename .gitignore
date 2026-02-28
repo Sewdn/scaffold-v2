@@ -5,6 +5,9 @@ node_modules
 
 # testing
 coverage
+.e2e-reports/
+# Manual scaffold project runs (E2E suite uses temp dirs and cleans up)
+/e2e-*-test/
 
 # next.js
 .next/

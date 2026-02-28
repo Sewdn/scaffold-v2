@@ -151,7 +151,12 @@ export const projectCommand = new Command('project')
             });
             if (steps.length > 0) {
               await Effect.runPromise(
-                runSteps(steps, { cwd: projectDir, context, verbose: true }),
+                runSteps(steps, {
+                  cwd: projectDir,
+                  context,
+                  verbose: true,
+                  allowInteractive: !options.nonInteractive,
+                }),
               ).catch((err) => {
                 console.error('Error adding app:', err?.message ?? err);
                 process.exit(1);
@@ -161,7 +166,12 @@ export const projectCommand = new Command('project')
             const steps = phase.getSteps(appTypeContext);
             if (steps.length > 0) {
               await Effect.runPromise(
-                runSteps(steps, { cwd: projectDir, context, verbose: true }),
+                runSteps(steps, {
+                  cwd: projectDir,
+                  context,
+                  verbose: true,
+                  allowInteractive: !options.nonInteractive,
+                }),
               ).catch((err) => {
                 console.error('Error adding app:', err?.message ?? err);
                 process.exit(1);

@@ -124,6 +124,17 @@ bun run scaffold component Button --package ui-lib
 
 ---
 
+## Testing
+
+```bash
+bun test                    # All tests
+bun run test:e2e            # E2E scaffold scenarios only
+```
+
+E2E tests run scaffold commands in temporary directories, validate output, and clean up. See `apps/cli-scaffold/e2e/README.md` for adding scenarios.
+
+---
+
 ## Extending with New App Types
 
 App types are registered in the command template registry. Each type maps to a `CommandTemplate` with a sequence of steps (bun, bunx, shell, etc.). To add a new type:

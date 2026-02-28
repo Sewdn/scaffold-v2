@@ -11,7 +11,11 @@
     "dev": "bun run --watch src/index.ts",
     "lint": "eslint .",
     "scaffold": "bun run src/index.ts",
-    "link-global": "bash bin/link-global.sh"
+    "link-global": "bash bin/link-global.sh",
+    "test": "bun test",
+    "test:e2e": "bun test e2e/",
+    "e2e:report": "bun run e2e/report-viewer.ts",
+    "e2e:report:scenario": "bun run e2e/report-viewer.ts"
   },
   "dependencies": {
     "@clack/prompts": "^1.0.1",
@@ -23,6 +27,7 @@
     "@types/node": "^20.11.0",
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
+    "cli-table3": "^0.6.5",
     "typescript": "^5.8.2"
   },
   "engines": {

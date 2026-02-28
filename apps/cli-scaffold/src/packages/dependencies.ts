@@ -14,6 +14,7 @@ export const wsRef = (projectName: string, pkg: string) =>
 // ─── Version constants (single source of truth) ─────────────────────────────
 const V = {
   typescript: 'typescript@^5.8.2',
+  eslint: 'eslint@^9',
   bunTypes: 'bun-types@latest',
   effect: 'effect@^3.11.0',
   dotenv: 'dotenv@^16.4.5',
@@ -60,12 +61,13 @@ export interface DepProfile {
   readonly devDependencies?: readonly string[];
 }
 
-/** Base tooling: eslint-config, typescript-config, typescript */
+/** Base tooling: eslint-config, typescript-config, typescript, eslint */
 export const profileBase: DepProfile = {
   devDependencies: [
     '@workspace/eslint-config@workspace:*',
     '@workspace/typescript-config@workspace:*',
     V.typescript,
+    V.eslint,
   ],
 };
 

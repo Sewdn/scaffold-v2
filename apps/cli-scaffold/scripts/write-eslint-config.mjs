@@ -15,6 +15,7 @@ const pkg = {
   exports: { './base': './base.js' },
   devDependencies: {
     '@eslint/js': '^9',
+    eslint: '^9',
     'eslint-config-prettier': '^10.1.1',
     'eslint-plugin-only-warn': '^1.1.0',
     'eslint-plugin-turbo': '^2.5.0',

@@ -153,6 +153,14 @@ export function getPackageInitStepsFromConfig(
     args: [`${SCRIPTS_DIR}/write-tsconfig.mjs`],
     cwd: ctx.packageDir,
   });
+  if (devDeps.some((d) => d.includes('eslint-config'))) {
+    steps.push({
+      type: 'exec',
+      command: 'node',
+      args: [`${SCRIPTS_DIR}/write-eslint-for-package.mjs`],
+      cwd: ctx.packageDir,
+    });
+  }
   return steps;
 }
 

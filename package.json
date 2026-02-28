@@ -12,7 +12,9 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "scaffold": "bun run apps/cli-scaffold/src/index.ts"
+    "scaffold": "bun run apps/cli-scaffold/src/index.ts",
+    "test": "bun test",
+    "test:e2e": "bun test apps/cli-scaffold/e2e/"
   },
   "devDependencies": {
     "@types/mustache": "^4.2.6",
