@@ -278,7 +278,7 @@ When implementing a scenario, copy this template:
 
 ### 9. backend-plus-mcp
 
-**Status:** Planned  
+**Status:** Implemented  
 **Complexity:** 3  
 **Description:** Project with backend and MCP server apps.
 
@@ -288,22 +288,25 @@ When implementing a scenario, copy this template:
 
 #### Validations
 
-- [ ] Path: `apps/backend-api`
-- [ ] Path: `apps/mcp-mcp`
-- [ ] Script: `build`
-- [ ] Build succeeds (Turbo)
-- [ ] Lint succeeds (Turbo)
-- [ ] Dev runtime starts
+- [x] Path: `apps/backend-api`
+- [x] Path: `apps/mcp-mcp`
+- [x] Path: `apps/backend-api/package.json`
+- [x] Path: `apps/mcp-mcp/package.json`
+- [x] Script: `build`
+- [x] Build succeeds (Turbo)
+- [x] Lint succeeds (Turbo)
+- [x] Dev runtime starts
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/backend-plus-mcp.ts`
+- Scenario file: `scenarios/09-backend-plus-mcp.ts`
+- MCP server stub uses `@modelcontextprotocol/sdk` with `StdioServerTransport` and `server.connect()`
 
 ---
 
 ### 10. slide-deck-app
 
-**Status:** Planned  
+**Status:** Implemented  
 **Complexity:** 2  
 **Description:** Project with Reveal.js slide deck app.
 
@@ -313,21 +316,21 @@ When implementing a scenario, copy this template:
 
 #### Validations
 
-- [ ] Path: `apps/slides-slides`
-- [ ] Path: `apps/slides-slides/package.json`
-- [ ] Script: `build`
-- [ ] Build succeeds (Turbo)
-- [ ] Lint succeeds (Turbo)
+- [x] Path: `apps/slides-slides`
+- [x] Path: `apps/slides-slides/package.json`
+- [x] Script: `build`
+- [x] Build succeeds (Turbo)
+- [x] Lint succeeds (Turbo)
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/slide-deck-app.ts`
+- Scenario file: `scenarios/10-slide-deck-app.ts`
 
 ---
 
 ### 11. documentation-app
 
-**Status:** Planned  
+**Status:** Implemented  
 **Complexity:** 2  
 **Description:** Project with Starlight/Astro documentation app.
 
@@ -337,21 +340,21 @@ When implementing a scenario, copy this template:
 
 #### Validations
 
-- [ ] Path: `apps/docs-docs`
-- [ ] Path: `apps/docs-docs/package.json`
-- [ ] Script: `build`
-- [ ] Build succeeds (Turbo)
-- [ ] Lint succeeds (Turbo)
+- [x] Path: `apps/docs-docs`
+- [x] Path: `apps/docs-docs/package.json`
+- [x] Script: `build`
+- [x] Build succeeds (Turbo)
+- [x] Lint succeeds (Turbo)
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/documentation-app.ts`
+- Scenario file: `scenarios/11-documentation-app.ts`
 
 ---
 
 ### 12. full-packages-stack
 
-**Status:** Planned  
+**Status:** Implemented  
 **Complexity:** 3  
 **Description:** Init with all optional packages (domain, svc-config, ui, ui-lib).
 
@@ -361,23 +364,24 @@ When implementing a scenario, copy this template:
 
 #### Validations
 
-- [ ] Path: `packages/domain`
-- [ ] Path: `packages/svc-config`
-- [ ] Path: `packages/ui`
-- [ ] Path: `packages/ui-lib`
-- [ ] Script: `build`
-- [ ] Build succeeds (Turbo)
-- [ ] Lint succeeds (Turbo)
+- [x] Path: `packages/domain`
+- [x] Path: `packages/svc-config`
+- [x] Path: `packages/ui`
+- [x] Path: `packages/ui-lib`
+- [x] Script: `build`
+- [x] Build succeeds (Turbo)
+- [x] Lint succeeds (Turbo)
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/full-packages-stack.ts`
+- Scenario file: `scenarios/12-full-packages-stack.ts`
+- `timeoutMs: 150_000` — init + build + lint for all packages takes ~65–90s
 
 ---
 
 ### 13. incremental-full-stack
 
-**Status:** Planned  
+**Status:** Implemented  
 **Complexity:** 4  
 **Description:** Init, add backend app, service package, module in sequence.
 
@@ -390,25 +394,26 @@ When implementing a scenario, copy this template:
 
 #### Validations
 
-- [ ] Path: `apps/backend-api`
-- [ ] Path: `packages/svc-auth`
-- [ ] Path: `packages/svc-users`
-- [ ] Path: `packages/ui-users`
-- [ ] Script: `build`
-- [ ] Build succeeds (Turbo)
-- [ ] Lint succeeds (Turbo)
-- [ ] Dev runtime starts
+- [x] Path: `apps/backend-api`
+- [x] Path: `packages/svc-auth`
+- [x] Path: `packages/svc-users`
+- [x] Path: `packages/ui-users`
+- [x] Script: `build`
+- [x] Build succeeds (Turbo)
+- [x] Lint succeeds (Turbo)
+- [x] Dev runtime starts (5000ms)
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/incremental-full-stack.ts`
+- Scenario file: `scenarios/13-incremental-full-stack.ts`
 - Steps 2–4 run with cwd = project directory
+- `timeoutMs: 150_000` for build + lint + devStarts (~65s typical)
 
 ---
 
 ### 14. package-generic
 
-**Status:** Planned  
+**Status:** Implemented  
 **Complexity:** 2  
 **Description:** Init then add generic package with type service.
 
@@ -419,21 +424,22 @@ When implementing a scenario, copy this template:
 
 #### Validations
 
-- [ ] Path: `packages/utils` or equivalent
-- [ ] Script: `build`
-- [ ] Build succeeds (Turbo)
-- [ ] Lint succeeds (Turbo)
+- [x] Path: `packages/svc-utils` — service type creates svc- prefix
+- [x] Path: `packages/svc-utils/package.json`
+- [x] Script: `build`
+- [x] Build succeeds (Turbo)
+- [x] Lint succeeds (Turbo)
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/package-generic.ts`
-- Verify `scaffold package` args for generic package creation
+- Scenario file: `scenarios/14-package-generic.ts`
+- Service type creates `packages/svc-utils` (svc- prefix)
 
 ---
 
 ### 15. frontend-vite
 
-**Status:** Planned  
+**Status:** Implemented  
 **Complexity:** 2  
 **Description:** Project with Vite + React frontend app.
 
@@ -443,23 +449,23 @@ When implementing a scenario, copy this template:
 
 #### Validations
 
-- [ ] Path: `apps/frontend-web`
-- [ ] Path: `apps/frontend-web/package.json`
-- [ ] Script: `build`
-- [ ] Build succeeds (Turbo)
-- [ ] Lint succeeds (Turbo)
-- [ ] Dev runtime starts
+- [x] Path: `apps/frontend-web`
+- [x] Path: `apps/frontend-web/package.json`
+- [x] Script: `build`
+- [x] Build succeeds (Turbo)
+- [x] Lint succeeds (Turbo)
+- [x] Dev runtime starts
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/frontend-vite.ts`
+- Scenario file: `scenarios/15-frontend-vite.ts`
 - Uses `argsForNonInteractive` with `--template react-ts` for non-interactive Vite scaffolding
 
 ---
 
 ### 16. frontend-nextjs
 
-**Status:** Planned  
+**Status:** Implemented  
 **Complexity:** 2  
 **Description:** Project with Next.js frontend app.
 
@@ -469,23 +475,25 @@ When implementing a scenario, copy this template:
 
 #### Validations
 
-- [ ] Path: `apps/frontend-web`
-- [ ] Path: `apps/frontend-web/package.json`
-- [ ] Script: `build`
-- [ ] Build succeeds (Turbo)
-- [ ] Lint succeeds (Turbo)
-- [ ] Dev runtime starts
+- [x] Path: `apps/frontend-web`
+- [x] Path: `apps/frontend-web/package.json`
+- [x] Script: `build`
+- [x] Build succeeds (Turbo)
+- [x] Lint succeeds (Turbo)
+- [x] Dev runtime starts
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/frontend-nextjs.ts`
+- Scenario file: `scenarios/16-frontend-nextjs.ts`
 - Uses `argsForNonInteractive` with full flags for non-interactive Next.js scaffolding
+- `devStarts(5000, 'apps/frontend-web')` runs Next.js dev from app dir (avoids Turbo TTY issues)
+- `timeoutMs: 180_000` for Next.js build (~3 min)
 
 ---
 
 ### 17. frontend-tanstack
 
-**Status:** Planned  
+**Status:** Implemented  
 **Complexity:** 3  
 **Description:** Project with TanStack Start frontend app (requires TanStack CLI).
 
@@ -495,16 +503,17 @@ When implementing a scenario, copy this template:
 
 #### Validations
 
-- [ ] Path: `apps/frontend-web`
-- [ ] Path: `apps/frontend-web/package.json`
-- [ ] Script: `build`
-- [ ] Build succeeds (Turbo)
-- [ ] Lint succeeds (Turbo)
+- [x] Path: `apps/frontend-web`
+- [x] Path: `apps/frontend-web/package.json`
+- [x] Script: `build`
+- [x] Build succeeds (Turbo)
+- [x] Lint succeeds (Turbo)
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/frontend-tanstack.ts`
-- May require TanStack CLI as a peer dependency
+- Scenario file: `scenarios/17-frontend-tanstack.ts`
+- Uses `bunx @tanstack/cli create` during scaffold; no devStarts (TanStack CLI creates full app; build and lint suffice)
+- Longer timeout (150s) for TanStack build
 
 ---
 

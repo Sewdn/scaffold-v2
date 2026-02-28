@@ -21,6 +21,7 @@ export const frontendNextjs: AppTypeConfig = {
             '--app',
             '--src-dir',
             '--no-import-alias',
+            '--no-react-compiler',
           ],
           interactive: true,
         },

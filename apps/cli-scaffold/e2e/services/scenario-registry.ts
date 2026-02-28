@@ -22,6 +22,15 @@ const SCENARIO_LOADERS = [
   () => import('../scenarios/06-module-creation.js'),
   () => import('../scenarios/07-component-in-ui-lib.js'),
   () => import('../scenarios/08-backend-plus-cli.js'),
+  () => import('../scenarios/09-backend-plus-mcp.js'),
+  () => import('../scenarios/10-slide-deck-app.js'),
+  () => import('../scenarios/11-documentation-app.js'),
+  () => import('../scenarios/12-full-packages-stack.js'),
+  () => import('../scenarios/13-incremental-full-stack.js'),
+  () => import('../scenarios/14-package-generic.js'),
+  () => import('../scenarios/15-frontend-vite.js'),
+  () => import('../scenarios/16-frontend-nextjs.js'),
+  () => import('../scenarios/17-frontend-tanstack.js'),
 ];
 
 const createScenarioRegistry = (): ScenarioRegistry => {

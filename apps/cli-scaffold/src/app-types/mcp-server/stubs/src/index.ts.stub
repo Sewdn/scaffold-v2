@@ -1,13 +1,13 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
 const server = new McpServer({
   name: "{{{appName}}}",
   version: "0.1.0",
 });
 
-// Add tools here
-server.tool("example", { message: { type: "string" } }, async ({ message }) => ({
-  content: [{ type: "text", text: `Echo: ${message}` }],
+server.tool("example", async () => ({
+  content: [{ type: "text", text: `Hello from {{{appName}}}` }],
 }));
 
-server.connectStdio();
+void server.connect(new StdioServerTransport());

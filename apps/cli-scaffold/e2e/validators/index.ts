@@ -103,15 +103,24 @@ export function lintSucceeds(): AsyncValidator {
   };
 }
 
-/** Run `bun run dev`, wait briefly, then kill. Pass if it stays up; fail if it exits/crashes before timeout. */
-export function devStarts(timeoutMs = 5000): AsyncValidator {
+/** Run `bun run dev`, wait briefly, then kill. Pass if it stays up; fail if it exits/crashes before timeout.
+ * @param timeoutMs - How long to wait before considering the server "up"
+ * @param subdir - Optional subdir (e.g. "apps/frontend-web") to run dev from; uses app script directly, avoiding Turbo. Use for Next.js when root turbo dev is flaky.
+ */
+export function devStarts(timeoutMs = 5000, subdir?: string): AsyncValidator {
+  const id = subdir ? `dev-starts:${timeoutMs}:${subdir}` : `dev-starts:${timeoutMs}`;
+  const desc = subdir
+    ? `bun run dev (from ${subdir}) stays up for ${timeoutMs}ms`
+    : `bun run dev stays up for ${timeoutMs}ms`;
+
   return {
     type: 'async',
-    id: `dev-starts:${timeoutMs}`,
-    description: `bun run dev stays up for ${timeoutMs}ms`,
+    id,
+    description: desc,
     async run(ctx) {
+      const cwd = subdir ? join(ctx.projectDir, subdir) : ctx.projectDir;
       const proc = Bun.spawn(['bun', 'run', 'dev'], {
-        cwd: ctx.projectDir,
+        cwd,
         stdin: 'ignore',
         stdout: 'pipe',
         stderr: 'pipe',

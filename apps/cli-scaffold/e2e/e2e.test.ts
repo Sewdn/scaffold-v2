@@ -19,13 +19,19 @@ async function runWithLayer<A, E>(
   return Effect.runPromise(pipe(effect, Effect.provide(E2ELiveLayer)));
 }
 
-const scenarios = await runWithLayer(
+const allScenarios = await runWithLayer(
   Effect.gen(function* () {
     const registry = yield* ScenarioRegistry;
     yield* registry.loadAll();
     return yield* registry.getAll();
   }),
 );
+
+const scenarioFilter = process.env['SCAFFOLD_E2E_SCENARIO'];
+const scenarios =
+  scenarioFilter != null && scenarioFilter !== ''
+    ? allScenarios.filter((s) => s.id === scenarioFilter || s.id.includes(scenarioFilter))
+    : allScenarios;
 
 const collectedResults: RunResult[] = [];
 
@@ -48,7 +54,7 @@ describe('Scaffold E2E', () => {
           }
           expect(result.allPassed).toBe(true);
         },
-        90_000,
+        scenario.timeoutMs ?? 90_000,
       );
     }
   }

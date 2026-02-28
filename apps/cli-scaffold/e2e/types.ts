@@ -56,4 +56,6 @@ export interface Scenario {
   readonly description: string;
   readonly steps: readonly ScaffoldStep[];
   readonly validators: readonly Validator[];
+  /** Optional timeout in ms (default 90000). Use for slow scenarios (e.g. Next.js build). */
+  readonly timeoutMs?: number;
 }

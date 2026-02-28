@@ -86,10 +86,11 @@ const SCENARIO_LOADERS = [
 - `hasScript(scriptName)` — Root `package.json` has script
 - `buildSucceeds()` — `bun run build` (Turbo: TypeScript compilation across packages)
 - `lintSucceeds()` — `bun run lint` (Turbo: ESLint across packages)
-- `devStarts(timeoutMs?)` — `bun run dev` starts without errors; brief warmup, verify no crash — _to implement_
+- `devStarts(timeoutMs?, subdir?)` — `bun run dev` starts without errors; brief warmup, verify no crash, then kill. Optional `subdir` runs dev from an app directory.
 
 ## Configuration
 
+- **Scenario filter**: Set `SCAFFOLD_E2E_SCENARIO=frontend-vite` to run only scenarios whose id matches (e.g. `frontend-vite`, `backend-only`). Useful for iterating on a single scenario.
 - **Workspace base**: Scaffolded projects are created in a temp dir under `os.tmpdir()` (e.g. `/tmp` or `/var/folders/...`) and **removed after each scenario**. Set `SCAFFOLD_E2E_WORKSPACE_DIR` to use a different base (e.g. `/tmp/scaffold-e2e` or `~/tmp/scaffold-e2e`).
 - **Keep on failure**: Set `SCAFFOLD_E2E_KEEP_TEMP=1` to retain temp dirs for debugging.
 - **Reports**: Written to `apps/cli-scaffold/.e2e-reports/`; ignored via root `.gitignore`.
