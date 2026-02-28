@@ -9,11 +9,11 @@ export const frontendVite: AppTypeConfig = {
       type: 'scripts',
       getSteps: (ctx: AppTypeContext) => [
         {
-          type: 'bun',
-          command: 'create',
-          args: ['vite@latest', '{{appDir}}', '--interactive'],
-          argsForNonInteractive: ['vite@latest', '{{appDir}}', '--template', 'react-ts'],
-          interactive: true,
+          type: 'bunx',
+          command: 'create-vite@latest',
+          args: ['{{appDir}}', '--template', 'react-ts'],
+          argsForNonInteractive: ['{{appDir}}', '--template', 'react-ts'],
+          interactive: false,
         },
         {
           type: 'bun',

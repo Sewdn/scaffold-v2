@@ -33,6 +33,7 @@ Each run produces structured report files in `.e2e-reports/`:
 View the latest E2E report in the terminal:
 
 ```bash
+# From monorepo root or apps/cli-scaffold
 bun run e2e:report
 # or with a specific report file
 bun run e2e/report-viewer.ts .e2e-reports/run-2026-02-28T16-31-48.json
@@ -41,6 +42,7 @@ bun run e2e/report-viewer.ts .e2e-reports/run-2026-02-28T16-31-48.json
 View detailed validation results for a single scenario:
 
 ```bash
+# From monorepo root or apps/cli-scaffold
 bun run e2e:report:scenario minimal-project
 # or with a specific report and --scenario flag
 bun run e2e/report-viewer.ts .e2e-reports/run-latest.json -- --scenario backend-only
