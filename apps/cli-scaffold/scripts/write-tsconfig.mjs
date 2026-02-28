@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Writes a tsconfig.json that extends the workspace base.
- * Usage: node write-tsconfig.mjs [--extends path] [--outDir dist] [--rootDir src]
+ * Usage: node write-tsconfig.mjs [--extends path] [--outDir dist] [--rootDir src] [--jsx react-jsx]
  */
 import { writeFileSync } from 'fs';
 import { resolve } from 'path';
@@ -15,10 +15,14 @@ const getArg = (key) => {
 const extendsPath = getArg('--extends') ?? '@workspace/typescript-config/base.json';
 const outDir = getArg('--outDir') ?? 'dist';
 const rootDir = getArg('--rootDir') ?? 'src';
+const jsx = getArg('--jsx');
+
+const compilerOptions = { outDir, rootDir };
+if (jsx) compilerOptions.jsx = jsx;
 
 const tsconfig = {
   extends: extendsPath,
-  compilerOptions: { outDir, rootDir },
+  compilerOptions,
   include: [`${rootDir}/**/*`],
   exclude: ['node_modules', outDir],
 };

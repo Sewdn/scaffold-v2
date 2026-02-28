@@ -14,7 +14,9 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "scaffold": "bun run apps/cli-scaffold/src/index.ts",
     "test": "bun test",
-    "test:e2e": "bun test apps/cli-scaffold/e2e/"
+    "test:e2e": "bun test apps/cli-scaffold/e2e/",
+    "docs": "bun run --filter=@scaffold-v2/docs-docs dev",
+    "docs:build": "bun run build --filter=@scaffold-v2/docs-docs"
   },
   "devDependencies": {
     "@types/mustache": "^4.2.6",

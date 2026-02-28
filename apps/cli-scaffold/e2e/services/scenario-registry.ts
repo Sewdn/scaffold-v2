@@ -14,11 +14,14 @@ export const ScenarioRegistry = Context.GenericTag<ScenarioRegistry>('ScenarioRe
 
 /** Scenario module loaders - add imports here when creating new scenarios */
 const SCENARIO_LOADERS = [
-  () => import('../scenarios/minimal-project.js'),
-  () => import('../scenarios/backend-only.js'),
-  () => import('../scenarios/init-with-optional-packages.js'),
-  () => import('../scenarios/service-package.js'),
-  () => import('../scenarios/ui-package.js'),
+  () => import('../scenarios/01-minimal-project.js'),
+  () => import('../scenarios/02-backend-only.js'),
+  () => import('../scenarios/03-init-with-optional-packages.js'),
+  () => import('../scenarios/04-service-package.js'),
+  () => import('../scenarios/05-ui-package.js'),
+  () => import('../scenarios/06-module-creation.js'),
+  () => import('../scenarios/07-component-in-ui-lib.js'),
+  () => import('../scenarios/08-backend-plus-cli.js'),
 ];
 
 const createScenarioRegistry = (): ScenarioRegistry => {

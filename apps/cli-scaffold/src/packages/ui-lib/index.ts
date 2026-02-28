@@ -1,7 +1,13 @@
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import { createPackageConfig } from '../defaults.js';
-import { UI_DEPS, BASE_DEV_DEPS, wsRef } from '../dependencies.js';
+import {
+  UI_DEPS,
+  BASE_DEV_DEPS,
+  wsRef,
+  typesReact,
+  typesReactDom,
+} from '../dependencies.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -17,5 +23,9 @@ export const uiLib = createPackageConfig({
     deps.unshift(wsRef(ctx.projectName, 'ui'));
     return deps;
   },
-  getDevDependencies: () => BASE_DEV_DEPS,
+  getDevDependencies: () => [
+    ...BASE_DEV_DEPS,
+    typesReact,
+    typesReactDom,
+  ],
 });

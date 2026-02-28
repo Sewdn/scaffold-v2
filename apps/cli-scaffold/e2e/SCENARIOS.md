@@ -90,7 +90,7 @@ When implementing a scenario, copy this template:
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/minimal-project.ts`
+- Scenario file: `scenarios/01-minimal-project.ts`
 
 ---
 
@@ -114,7 +114,7 @@ When implementing a scenario, copy this template:
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/backend-only.ts`
+- Scenario file: `scenarios/02-backend-only.ts`
 
 ---
 
@@ -140,7 +140,7 @@ When implementing a scenario, copy this template:
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/init-with-optional-packages.ts`
+- Scenario file: `scenarios/03-init-with-optional-packages.ts`
 
 ---
 
@@ -165,7 +165,7 @@ When implementing a scenario, copy this template:
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/service-package.ts`
+- Scenario file: `scenarios/04-service-package.ts`
 - Second step runs with cwd = project directory
 
 ---
@@ -191,14 +191,14 @@ When implementing a scenario, copy this template:
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/ui-package.ts`
+- Scenario file: `scenarios/05-ui-package.ts`
 - Second step runs with cwd = project directory
 
 ---
 
 ### 6. module-creation
 
-**Status:** Planned  
+**Status:** Implemented  
 **Complexity:** 3  
 **Description:** Init then add module (service + UI packages).
 
@@ -209,23 +209,23 @@ When implementing a scenario, copy this template:
 
 #### Validations
 
-- [ ] Path: `packages/svc-users`
-- [ ] Path: `packages/ui-users`
-- [ ] Path: `packages/svc-users/package.json`
-- [ ] Path: `packages/ui-users/package.json`
-- [ ] Script: `build`
-- [ ] Build succeeds (Turbo)
-- [ ] Lint succeeds (Turbo)
+- [x] Path: `packages/svc-users`
+- [x] Path: `packages/ui-users`
+- [x] Path: `packages/svc-users/package.json`
+- [x] Path: `packages/ui-users/package.json`
+- [x] Script: `build`
+- [x] Build succeeds (Turbo)
+- [x] Lint succeeds (Turbo)
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/module-creation.ts`
+- Scenario file: `scenarios/06-module-creation.ts`
 
 ---
 
 ### 7. component-in-ui-lib
 
-**Status:** Planned  
+**Status:** Implemented  
 **Complexity:** 3  
 **Description:** Init with ui, ui-lib, then add component to ui-lib.
 
@@ -236,22 +236,22 @@ When implementing a scenario, copy this template:
 
 #### Validations
 
-- [ ] Path: `packages/ui`
-- [ ] Path: `packages/ui-lib`
-- [ ] Path: `packages/ui-lib/src/components/Button`
-- [ ] Script: `build`
-- [ ] Build succeeds (Turbo)
-- [ ] Lint succeeds (Turbo)
+- [x] Path: `packages/ui`
+- [x] Path: `packages/ui-lib`
+- [x] Path: `packages/ui-lib/src/components/Button`
+- [x] Script: `build`
+- [x] Build succeeds (Turbo)
+- [x] Lint succeeds (Turbo)
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/component-in-ui-lib.ts`
+- Scenario file: `scenarios/07-component-in-ui-lib.ts`
 
 ---
 
 ### 8. backend-plus-cli
 
-**Status:** Planned  
+**Status:** Implemented  
 **Complexity:** 3  
 **Description:** Project with backend and CLI apps.
 
@@ -261,18 +261,18 @@ When implementing a scenario, copy this template:
 
 #### Validations
 
-- [ ] Path: `apps/backend-api`
-- [ ] Path: `apps/cli-tools`
-- [ ] Path: `apps/backend-api/package.json`
-- [ ] Path: `apps/cli-tools/package.json`
-- [ ] Script: `build`
-- [ ] Build succeeds (Turbo)
-- [ ] Lint succeeds (Turbo)
-- [ ] Dev runtime starts (Turbo dev, brief timeout)
+- [x] Path: `apps/backend-api`
+- [x] Path: `apps/cli-tools`
+- [x] Path: `apps/backend-api/package.json`
+- [x] Path: `apps/cli-tools/package.json`
+- [x] Script: `build`
+- [x] Build succeeds (Turbo)
+- [x] Lint succeeds (Turbo)
+- [x] Dev runtime starts (Turbo dev, brief timeout)
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/backend-plus-cli.ts`
+- Scenario file: `scenarios/08-backend-plus-cli.ts`
 
 ---
 
@@ -540,6 +540,6 @@ All scaffold commands and app types support non-interactive mode:
 When implementing a scenario:
 
 1. Copy the scenario section from this file
-2. Create `scenarios/<scenario-id>.ts` following the [Adding a Scenario](../README.md#adding-a-scenario) guide
+2. Create `scenarios/NN-<scenario-id>.ts` (two-digit prefix: 01, 02, …) following the [Adding a Scenario](../README.md#adding-a-scenario) guide
 3. Register in `services/scenario-registry.ts`
 4. Update the scenario Status to Implemented above

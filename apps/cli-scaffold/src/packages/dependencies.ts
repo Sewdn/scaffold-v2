@@ -27,6 +27,8 @@ const V = {
   nextThemes: 'next-themes@^0.4.6',
   react: 'react@^19.1.0',
   reactDom: 'react-dom@^19.1.0',
+  typesReact: '@types/react@^19',
+  typesReactDom: '@types/react-dom@^19',
   tailwindMerge: 'tailwind-merge@^3.1.0',
   tailwindAnimate: 'tailwindcss-animate@^1.0.7',
   elysia: 'elysia@^1.2.9',
@@ -53,6 +55,8 @@ export const DEP_PRISMA_CLIENT = V.prismaClient;
 export const DEP_PRISMA = V.prisma;
 export const DEP_POSTCSS = V.postcss;
 export const DEP_TAILWINDCSS = V.tailwindcss;
+export const typesReact = V.typesReact;
+export const typesReactDom = V.typesReactDom;
 
 // ─── Dependency profiles (composable building blocks) ────────────────────────
 

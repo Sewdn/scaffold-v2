@@ -1,17 +1,17 @@
 # Scaffold CLI v2
 
-A command-orchestration CLI tool for setting up TypeScript monorepos with Turborepo and Bun workspaces. Unlike template-based scaffolding, Scaffold v2 orchestrates underlying commands (bun, pnpm, bunx, npx, shell) to construct projects—leveraging ecosystem tools and keeping dependency management transparent.
+A command-orchestration CLI tool for setting up TypeScript monorepos with Turborepo and Bun workspaces. Scaffold v2 uses a layered approach: template files (Mustache stubs) are copied and rendered; underlying commands (bun, bunx, npx, shell) are orchestrated in sequence to extend the generated code; dependency management for TypeScript packages is consolidated and centralized.
 
 ## Vision and Approach
 
-### Command Orchestration Over Templates
+### Layered Approach
 
-Scaffold v2 does **not** copy template directories. Instead, it orchestrates underlying commands to construct the monorepo:
+Scaffold v2 orchestrates underlying commands in the right sequence and uses template files where appropriate:
 
-- **Leverages ecosystem tools**: e.g. `bun create @tanstack/start@latest`, `bunx shadcn@latest add`, `bun create vite@latest`
-- **Simplifies dependency management**: Versions and upgrades are easier to track and apply
-- **Reproducible and transparent**: Every step is an explicit command
-- **Composable**: Cascadable command templates—umbrella commands invoke subcommand templates
+- **Template files are copied and rendered**: Mustache stub files (`.stub`) for app types (backend, CLI, MCP) and optional packages (domain, svc-config, ui, ui-lib)
+- **Extra commands extend the generated code**: e.g. `bun create vite@latest`, `bun create astro@latest`, `bun add`, patch scripts
+- **Dependency management is consolidated and centralized**: Version constants and profiles in `packages/dependencies.ts`
+- **Reproducible and transparent**: Every step is explicit; umbrella commands invoke subcommand sequences
 
 ### Composable Command Architecture
 
@@ -73,6 +73,15 @@ The app type registry is extensible; new types can be added by registering a com
 # From the monorepo
 bun install
 bun run build
+```
+
+## Documentation
+
+The documentation site (`apps/docs-docs`, Starlight/Astro) is scaffolded with the CLI itself:
+
+```bash
+bun run docs        # Start docs dev server
+bun run docs:build  # Build docs for production
 ```
 
 ```bash

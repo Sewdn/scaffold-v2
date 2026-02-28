@@ -102,6 +102,14 @@ export function getPackageInitSteps(options: {
     args: [`${SCRIPTS_DIR}/write-tsconfig.mjs`],
     cwd: packageDir,
   });
+  if (devDependencies.some((d) => d.includes('eslint-config'))) {
+    steps.push({
+      type: 'exec',
+      command: 'node',
+      args: [`${SCRIPTS_DIR}/write-eslint-for-package.mjs`],
+      cwd: packageDir,
+    });
+  }
   return steps;
 }
 
@@ -147,10 +155,14 @@ export function getPackageInitStepsFromConfig(
   if (devDeps.length > 0) {
     steps.push({ type: 'bun', command: 'add', args: ['-d', ...devDeps], cwd: ctx.packageDir });
   }
+  const tsconfigArgs = [`${SCRIPTS_DIR}/write-tsconfig.mjs`];
+  if (config.id === 'ui' || config.id === 'ui-lib') {
+    tsconfigArgs.push('--jsx', 'react-jsx');
+  }
   steps.push({
     type: 'exec',
     command: 'node',
-    args: [`${SCRIPTS_DIR}/write-tsconfig.mjs`],
+    args: tsconfigArgs,
     cwd: ctx.packageDir,
   });
   if (devDeps.some((d) => d.includes('eslint-config'))) {

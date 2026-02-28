@@ -102,3 +102,36 @@ export function lintSucceeds(): AsyncValidator {
     },
   };
 }
+
+/** Run `bun run dev`, wait briefly, then kill. Pass if it stays up; fail if it exits/crashes before timeout. */
+export function devStarts(timeoutMs = 5000): AsyncValidator {
+  return {
+    type: 'async',
+    id: `dev-starts:${timeoutMs}`,
+    description: `bun run dev stays up for ${timeoutMs}ms`,
+    async run(ctx) {
+      const proc = Bun.spawn(['bun', 'run', 'dev'], {
+        cwd: ctx.projectDir,
+        stdin: 'ignore',
+        stdout: 'pipe',
+        stderr: 'pipe',
+      });
+
+      const sleep = (ms: number) => new Promise<void>(r => setTimeout(r, ms));
+      const exitedFirst = await Promise.race([
+        proc.exited.then(exit => ({ type: 'exited' as const, exit })),
+        sleep(timeoutMs).then(() => ({ type: 'timeout' as const })),
+      ]);
+
+      if (exitedFirst.type === 'exited') {
+        const stderr = await new Response(proc.stderr).text();
+        return fail(
+          `Dev server exited before timeout (exit ${exitedFirst.exit}): ${stderr.slice(0, 200)}`
+        );
+      }
+
+      proc.kill();
+      return pass('Dev server started and ran without crash');
+    },
+  };
+}
