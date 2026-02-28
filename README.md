@@ -82,6 +82,7 @@ The documentation site (`apps/docs-docs`, Starlight/Astro) is scaffolded with th
 ```bash
 bun run docs        # Start docs dev server
 bun run docs:build  # Build docs for production
+bun run landing     # Start marketing landing page (Vite + Shadcn)
 ```
 
 ```bash

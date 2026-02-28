@@ -16,7 +16,8 @@
     "test": "bun test",
     "test:e2e": "bun test apps/cli-scaffold/e2e/",
     "docs": "bun run --filter=@scaffold-v2/docs-docs dev",
-    "docs:build": "bun run build --filter=@scaffold-v2/docs-docs"
+    "docs:build": "bun run build --filter=@scaffold-v2/docs-docs",
+    "landing": "bun run --filter=frontend-landing dev"
   },
   "devDependencies": {
     "@types/mustache": "^4.2.6",
