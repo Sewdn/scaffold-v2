@@ -1,0 +1,50 @@
+export type ConfigInput = {
+  NODE_ENV?: string;
+  PORT: string;
+  MONGO_URL?: string;
+  MONGO_DB?: string;
+  REDIS_HOST?: string;
+  REDIS_PORT?: string;
+  REDIS_PASSWORD?: string;
+  WORKOS_API_KEY?: string;
+  WORKOS_CLIENT_ID?: string;
+  IPV6_ONLY?: boolean;
+  CORS_ORIGIN?: string;
+};
+
+const getConfig = (config: ConfigInput) => {
+  const {
+    NODE_ENV,
+    MONGO_URL,
+    REDIS_HOST,
+    REDIS_PORT,
+    REDIS_PASSWORD,
+    WORKOS_API_KEY,
+    WORKOS_CLIENT_ID,
+    PORT,
+    IPV6_ONLY,
+    CORS_ORIGIN,
+  } = config;
+
+  return {
+    NODE_ENV: NODE_ENV ?? 'development',
+    redisConnection: {
+      host: REDIS_HOST ?? 'localhost',
+      port: parseInt(REDIS_PORT ?? '6379'),
+      password: REDIS_PASSWORD,
+      maxRetriesPerRequest: null,
+      enableReadyCheck: false,
+    },
+    mongoConnection: MONGO_URL ?? 'mongodb://localhost:27017',
+    workos: {
+      apiKey: WORKOS_API_KEY ?? 'workos_api_key',
+      clientId: WORKOS_CLIENT_ID ?? 'workos_client_id',
+    },
+    port: parseInt(PORT ?? '3000'),
+    ipv6Only: IPV6_ONLY,
+    corsOrigin: CORS_ORIGIN,
+  };
+};
+
+export default getConfig;
+export type Config = ReturnType<typeof getConfig>;

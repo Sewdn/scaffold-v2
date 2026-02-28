@@ -1,0 +1,11 @@
+export type User = {
+  id: string;
+  name: string;
+  email: string;
+};
+
+export type ExampleEntity = {
+  id: string;
+  name: string;
+  description: string;
+};

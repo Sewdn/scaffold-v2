@@ -1,0 +1,37 @@
+{
+  "name": "@scaffold-v2/cli-scaffold",
+  "version": "2.1.0",
+  "description": "Command-orchestration CLI for TypeScript monorepos",
+  "type": "module",
+  "bin": {
+    "scaffold": "./bin/run.js"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "bun run --watch src/index.ts",
+    "lint": "eslint .",
+    "scaffold": "bun run src/index.ts",
+    "link-global": "bash bin/link-global.sh"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.0.1",
+    "chalk": "^5.6.2",
+    "commander": "^12.1.0",
+    "effect": "^3.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@workspace/eslint-config": "workspace:*",
+    "@workspace/typescript-config": "workspace:*",
+    "typescript": "^5.8.2"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "scaffold",
+    "cli",
+    "monorepo",
+    "effect"
+  ]
+}

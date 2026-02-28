@@ -1,0 +1,13 @@
+import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
+
+const server = new McpServer({
+  name: "{{{appName}}}",
+  version: "0.1.0",
+});
+
+// Add tools here
+server.tool("example", { message: { type: "string" } }, async ({ message }) => ({
+  content: [{ type: "text", text: `Echo: ${message}` }],
+}));
+
+server.connectStdio();

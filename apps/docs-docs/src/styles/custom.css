@@ -1,0 +1,75 @@
+/* Custom styles for the documentation site */
+
+/* Override Starlight variables */
+:root {
+  --sl-color-accent-low: #d1e2f7;
+  --sl-color-accent: #0066cc;
+  --sl-color-accent-high: #003d7a;
+
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #f8f9fa;
+  --sl-color-gray-2: #e9ecef;
+  --sl-color-gray-3: #dee2e6;
+  --sl-color-gray-4: #ced4da;
+  --sl-color-gray-5: #adb5bd;
+  --sl-color-gray-6: #6c757d;
+  --sl-color-gray-7: #495057;
+  --sl-color-gray-8: #343a40;
+  --sl-color-gray-9: #212529;
+  --sl-color-black: #000000;
+}
+
+/* Dark mode adjustments */
+:root[data-theme='dark'] {
+  --sl-color-accent-low: #003d7a;
+  --sl-color-accent: #3385d6;
+  --sl-color-accent-high: #cce0f5;
+}
+
+/* Custom callout styles */
+.starlight-aside {
+  border-radius: 0.5rem;
+}
+
+.starlight-aside--tip {
+  --sl-color-asides-text: var(--sl-color-green);
+}
+
+.starlight-aside--caution {
+  --sl-color-asides-text: var(--sl-color-orange);
+}
+
+.starlight-aside--danger {
+  --sl-color-asides-text: var(--sl-color-red);
+}
+
+/* Code block styles */
+.astro-code {
+  border-radius: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Card grid enhancements */
+.card {
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom section styles */
+.custom-section {
+  padding: 2rem;
+  margin: 2rem 0;
+  background-color: var(--sl-color-gray-1);
+  border-radius: 0.5rem;
+}
+
+.custom-section h2 {
+  color: var(--sl-color-accent);
+  margin-top: 0;
+}

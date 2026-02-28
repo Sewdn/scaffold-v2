@@ -1,0 +1,8 @@
+import { PrismaClient } from '@prisma/client';
+import { Effect } from 'effect';
+
+const prisma = new PrismaClient();
+
+export const getDb = Effect.sync(() => prisma);
+
+export { prisma };

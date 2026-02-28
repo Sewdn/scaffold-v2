@@ -1,0 +1,204 @@
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+import type { CommandStep } from '../types/template.js';
+import {
+  getAppTypeConfig,
+  hasGeneratePhase,
+  type GeneratePhase,
+} from '../app-types/registry.js';
+import { BASE_DEV_DEPS } from '../packages/dependencies.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+export const SCRIPTS_DIR = join(__dirname, '../../scripts');
+
+/**
+ * Build steps for base monorepo using bun init, turbo, and init commands.
+ * Run with cwd = parent of project (process.cwd() when project is projectName/).
+ */
+export function getBaseInitSteps(projectName: string): CommandStep[] {
+  const rootMerge = JSON.stringify({
+    workspaces: ['packages/*', 'apps/*'],
+    scripts: {
+      build: 'turbo build',
+      dev: 'turbo dev',
+      lint: 'turbo lint',
+      storybook: 'turbo storybook',
+      format: 'prettier --write "**/*.{ts,tsx,md}"',
+    },
+    packageManager: 'bun@1.2.2',
+    engines: { node: '>=20' },
+  });
+
+  return [
+    { type: 'shell', command: `mkdir -p {{projectName}}/apps {{projectName}}/packages` },
+    { type: 'shell', command: `cd {{projectName}} && bun init -y` },
+    {
+      type: 'exec',
+      command: 'node',
+      args: [`${SCRIPTS_DIR}/patch-package-json.mjs`, `@{{projectName}}/root`, '--merge', rootMerge],
+      cwd: '{{projectName}}',
+    },
+    {
+      type: 'bun',
+      command: 'add',
+      args: ['-d', 'turbo', 'typescript', 'prettier'],
+      cwd: '{{projectName}}',
+    },
+    {
+      type: 'exec',
+      command: 'node',
+      args: [`${SCRIPTS_DIR}/write-turbo.mjs`],
+      cwd: '{{projectName}}',
+    },
+    {
+      type: 'exec',
+      command: 'node',
+      args: [`${SCRIPTS_DIR}/write-tsconfig.mjs`],
+      cwd: '{{projectName}}',
+    },
+  ];
+}
+
+/**
+ * Steps to create a package with explicit options (e.g. dynamic svc-X, ui-X packages).
+ */
+export function getPackageInitSteps(options: {
+  packageDir: string;
+  packageName: string;
+  dependencies: string[];
+  devDependencies: string[];
+  scripts?: Record<string, string>;
+  mkdirPaths?: string[];
+}): CommandStep[] {
+  const { packageDir, packageName, dependencies, devDependencies, scripts = {}, mkdirPaths = ['src'] } = options;
+  const merge: Record<string, unknown> = {
+    private: true,
+    type: 'module',
+    module: './src/index.ts',
+    types: './src/index.ts',
+    scripts: { build: 'tsc', dev: 'tsc --watch', lint: 'eslint .', ...scripts },
+  };
+  const dirs = mkdirPaths.map((p) => `${packageDir}/${p}`).join(' ');
+
+  const steps: CommandStep[] = [
+    { type: 'shell', command: `mkdir -p ${dirs}` },
+    { type: 'bun', command: 'init', args: ['-y'], cwd: packageDir },
+    {
+      type: 'exec',
+      command: 'node',
+      args: [`${SCRIPTS_DIR}/patch-package-json.mjs`, packageName, '--merge', JSON.stringify(merge)],
+      cwd: packageDir,
+    },
+  ];
+  if (dependencies.length > 0) {
+    steps.push({ type: 'bun', command: 'add', args: dependencies, cwd: packageDir });
+  }
+  if (devDependencies.length > 0) {
+    steps.push({ type: 'bun', command: 'add', args: ['-d', ...devDependencies], cwd: packageDir });
+  }
+  steps.push({
+    type: 'exec',
+    command: 'node',
+    args: [`${SCRIPTS_DIR}/write-tsconfig.mjs`],
+    cwd: packageDir,
+  });
+  return steps;
+}
+
+/**
+ * Steps to create a package from PackageConfig.
+ * Uses config for directory setup, merge, dependencies, and scripts.
+ */
+export function getPackageInitStepsFromConfig(
+  config: import('../packages/types.js').PackageConfig,
+  ctx: import('../packages/types.js').PackageContext,
+): CommandStep[] {
+  const merge = config.getMerge(ctx);
+  const scripts = config.getScripts?.(ctx) ?? {
+    build: 'tsc',
+    dev: 'tsc --watch',
+    lint: 'eslint .',
+  };
+  const fullMerge = { ...merge, scripts };
+  const deps = config.getDependencies(ctx);
+  const devDeps = config.getDevDependencies(ctx);
+  const mkdirPaths = config.getMkdirPaths(ctx)
+    .map((p) => `${ctx.packageDir}/${p}`)
+    .join(' ');
+
+  const steps: CommandStep[] = [
+    { type: 'shell', command: `mkdir -p ${mkdirPaths}` },
+    { type: 'bun', command: 'init', args: ['-y'], cwd: ctx.packageDir },
+    {
+      type: 'exec',
+      command: 'node',
+      args: [
+        `${SCRIPTS_DIR}/patch-package-json.mjs`,
+        ctx.packageName,
+        '--merge',
+        JSON.stringify(fullMerge),
+      ],
+      cwd: ctx.packageDir,
+    },
+  ];
+  if (deps.length > 0) {
+    steps.push({ type: 'bun', command: 'add', args: deps, cwd: ctx.packageDir });
+  }
+  if (devDeps.length > 0) {
+    steps.push({ type: 'bun', command: 'add', args: ['-d', ...devDeps], cwd: ctx.packageDir });
+  }
+  steps.push({
+    type: 'exec',
+    command: 'node',
+    args: [`${SCRIPTS_DIR}/write-tsconfig.mjs`],
+    cwd: ctx.packageDir,
+  });
+  return steps;
+}
+
+/**
+ * Steps to create an app using bun init + bun add.
+ * Uses the app-types registry; returns steps for the first generate phase.
+ */
+export function getAppInitSteps(options: {
+  appDir: string;
+  appName: string;
+  appType: string;
+  projectName: string;
+}): CommandStep[] {
+  const { appDir, appName, appType, projectName } = options;
+  const config = getAppTypeConfig(appType);
+  if (!config || !hasGeneratePhase(config)) return [];
+
+  const phase = config.phases.find((p) => p.type === 'generate') as
+    | GeneratePhase
+    | undefined;
+  if (!phase) return [];
+
+  const ctx = { projectName, appName, appDir };
+  const pkgName = `@${projectName}/${appName}`;
+  const merge = phase.getMerge(ctx);
+  const deps = phase.getDependencies(ctx);
+  const mkdirPaths = phase.getMkdirPaths(ctx)
+    .map((p) => `${appDir}/${p}`)
+    .join(' ');
+
+  return [
+    { type: 'shell', command: `mkdir -p ${mkdirPaths}` },
+    { type: 'bun', command: 'init', args: ['-y'], cwd: appDir },
+    {
+      type: 'exec',
+      command: 'node',
+      args: [`${SCRIPTS_DIR}/patch-package-json.mjs`, pkgName, '--merge', JSON.stringify(merge)],
+      cwd: appDir,
+    },
+    { type: 'bun', command: 'add', args: deps, cwd: appDir },
+    { type: 'bun', command: 'add', args: ['-d', ...BASE_DEV_DEPS], cwd: appDir },
+    {
+      type: 'exec',
+      command: 'node',
+      args: [`${SCRIPTS_DIR}/write-tsconfig.mjs`],
+      cwd: appDir,
+    },
+  ];
+}
