@@ -517,6 +517,38 @@ When implementing a scenario, copy this template:
 
 ---
 
+### 18. cli-expansion
+
+**Status:** Implemented  
+**Complexity:** 3  
+**Description:** Project with CLI app, then expand with commands and services via `scaffold cli add-command` and `scaffold cli add-service`. Validates that the CLI runs and all added commands appear in help.
+
+#### Steps
+
+1. `scaffold project e2e-cli-expand --apps cli --app-names tools --non-interactive`
+2. `scaffold cli add-command add-user --description "Add a new user"`
+3. `scaffold cli add-command list-items --description "List all items"`
+4. `scaffold cli add-service user-service`
+
+#### Validations
+
+- [x] Path: `apps/cli-tools`
+- [x] Path: `apps/cli-tools/src/commands/add-user.ts`
+- [x] Path: `apps/cli-tools/src/commands/list-items.ts`
+- [x] Path: `apps/cli-tools/src/services/user-service.ts`
+- [x] Path: `apps/cli-tools/src/commands/index.ts`
+- [x] Script: `build`
+- [x] Build succeeds (Turbo)
+- [x] Lint succeeds (Turbo)
+- [x] CLI help shows commands: `add-user`, `list-items`
+
+#### Implementation Notes
+
+- Scenario file: `scenarios/18-cli-expansion.ts`
+- Uses `cliHelpShowsCommands` validator to run `bun run src/index.ts --help` and assert command names appear in output
+
+---
+
 ## Non-Interactive Support Summary
 
 All scaffold commands and app types support non-interactive mode:
@@ -532,6 +564,7 @@ All scaffold commands and app types support non-interactive mode:
 | `ui`          | (no prompts)           | name                                           |
 | `component`   | (no prompts)           | name, `--package`                              |
 | `package`     | (no prompts)           | name, `--type`                                 |
+| `cli`         | (no prompts)           | `add-command`/`add-service` + name, `--app`, `--description` |
 
 | App type       | `argsForNonInteractive` support |
 |----------------|----------------------------------|

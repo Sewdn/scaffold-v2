@@ -31,6 +31,7 @@ const SCENARIO_LOADERS = [
   () => import('../scenarios/15-frontend-vite.js'),
   () => import('../scenarios/16-frontend-nextjs.js'),
   () => import('../scenarios/17-frontend-tanstack.js'),
+  () => import('../scenarios/18-cli-expansion.js'),
 ];
 
 const createScenarioRegistry = (): ScenarioRegistry => {

@@ -15,6 +15,8 @@
     "scaffold": "bun run apps/cli-scaffold/src/index.ts",
     "test": "bun test",
     "test:e2e": "bun test apps/cli-scaffold/e2e/",
+    "e2e:report": "bun run apps/cli-scaffold/e2e/report-viewer.ts",
+    "e2e:report:scenario": "bun run apps/cli-scaffold/e2e/report-viewer.ts",
     "docs": "bun run --filter=@scaffold-v2/docs-docs dev",
     "docs:build": "bun run build --filter=@scaffold-v2/docs-docs",
     "landing": "bun run --filter=frontend-landing dev"

@@ -103,6 +103,44 @@ export function lintSucceeds(): AsyncValidator {
   };
 }
 
+/**
+ * Run a scaffolded CLI app and assert that its help output contains all expected commands.
+ * @param cliAppDir - Relative path to CLI app (e.g. "apps/cli-tools")
+ * @param expectedCommands - Command names that must appear in the help output
+ */
+export function cliHelpShowsCommands(
+  cliAppDir: string,
+  expectedCommands: readonly string[],
+): AsyncValidator {
+  return {
+    type: 'async',
+    id: `cli-help-shows:${cliAppDir}:${expectedCommands.join(',')}`,
+    description: `CLI ${cliAppDir} --help shows commands: ${expectedCommands.join(', ')}`,
+    async run(ctx) {
+      const cwd = join(ctx.projectDir, cliAppDir);
+      const proc = Bun.spawn(['bun', 'run', 'src/index.ts', '--help'], {
+        cwd,
+        stdin: 'ignore',
+        stdout: 'pipe',
+        stderr: 'pipe',
+      });
+      const exit = await proc.exited;
+      const stdout = await new Response(proc.stdout).text();
+      const stderr = await new Response(proc.stderr).text();
+
+      if (exit !== 0) {
+        return fail(`CLI help failed (exit ${exit}): ${stderr.slice(0, 200)}`);
+      }
+
+      const missing = expectedCommands.filter((cmd) => !stdout.includes(cmd));
+      if (missing.length > 0) {
+        return fail(`CLI help missing commands: ${missing.join(', ')}. Output:\n${stdout.slice(0, 400)}`);
+      }
+      return pass(`CLI help shows all expected commands: ${expectedCommands.join(', ')}`);
+    },
+  };
+}
+
 /** Run `bun run dev`, wait briefly, then kill. Pass if it stays up; fail if it exits/crashes before timeout.
  * @param timeoutMs - How long to wait before considering the server "up"
  * @param subdir - Optional subdir (e.g. "apps/frontend-web") to run dev from; uses app script directly, avoiding Turbo. Use for Next.js when root turbo dev is flaky.

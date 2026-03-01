@@ -11,6 +11,12 @@ export const toPascalCase = (input: string): string => {
     .join('');
 };
 
+export const toCamelCase = (input: string): string => {
+  if (!input) return '';
+  const pascal = toPascalCase(input);
+  return pascal.charAt(0).toLowerCase() + pascal.slice(1);
+};
+
 export const toKebabCase = (input: string): string => {
   if (!input) return '';
   const result = input

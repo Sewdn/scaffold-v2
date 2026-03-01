@@ -1,0 +1,7 @@
+import { Command } from "commander";
+
+export const {{commandExportName}}Command = new Command("{{commandName}}")
+  .description("{{commandDescription}}")
+  .action(async () => {
+    // TODO: implement command logic
+  });

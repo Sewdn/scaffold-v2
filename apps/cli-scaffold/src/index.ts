@@ -12,6 +12,7 @@ import { uiCommand } from './commands/ui.js';
 import { componentCommand } from './commands/component.js';
 import { moduleCommand } from './commands/module.js';
 import { packageCommand } from './commands/package.js';
+import { cliCommand } from './commands/cli.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
@@ -33,5 +34,6 @@ program.addCommand(uiCommand);
 program.addCommand(componentCommand);
 program.addCommand(moduleCommand);
 program.addCommand(packageCommand);
+program.addCommand(cliCommand);
 
 program.parse();

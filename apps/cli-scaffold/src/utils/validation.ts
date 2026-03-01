@@ -6,9 +6,19 @@ import {
   formatModule,
   formatPackage,
   formatComponent,
+  formatCommand,
+  formatCliService,
 } from './entity-formatting.js';
 
-type EntityType = 'project' | 'app' | 'module' | 'package' | 'service' | 'component';
+type EntityType =
+  | 'project'
+  | 'app'
+  | 'module'
+  | 'package'
+  | 'service'
+  | 'component'
+  | 'command'
+  | 'cli-service';
 
 function validateKebabName(name: string, entityType: string): string {
   if (!/^[a-z]/.test(name)) {
@@ -65,4 +75,12 @@ export function validateModuleName(name: string): string {
 
 export function validatePackageName(name: string): string {
   return formatPackage(validateEntityName(name, 'package'));
+}
+
+export function validateCommandName(name: string): string {
+  return formatCommand(validateEntityName(name, 'command'));
+}
+
+export function validateCliServiceName(name: string): string {
+  return formatCliService(validateEntityName(name, 'cli-service'));
 }

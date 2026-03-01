@@ -1,0 +1,10 @@
+import type { Command } from "commander";
+
+/**
+ * Register all CLI commands. Commands are added here when you run:
+ *   scaffold cli add-command <name>
+ */
+export function registerCommands(program: Command): void {
+  // Commands registered below (scaffold cli add-command)
+}
+

@@ -3,7 +3,7 @@
  * Each scenario defines a sequence of scaffold commands and validation criteria.
  */
 
-/** Scaffold subcommand: project | init | app | service | ui | component | module | package */
+/** Scaffold subcommand: project | init | app | service | ui | component | module | package | cli */
 export type ScaffoldCommand =
   | 'project'
   | 'init'
@@ -12,7 +12,8 @@ export type ScaffoldCommand =
   | 'ui'
   | 'component'
   | 'module'
-  | 'package';
+  | 'package'
+  | 'cli';
 
 /** A single scaffold command step. Args are passed to the subcommand (e.g. ["my-app", "--type", "frontend-vite"]). */
 export interface ScaffoldStep {
