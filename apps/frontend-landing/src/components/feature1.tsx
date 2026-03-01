@@ -34,26 +34,26 @@ const Feature1 = ({
   className,
 }: Feature1Props) => {
   return (
-    <section className={cn("section-muted py-32", className)}>
-      <div className="container">
-        <div className="grid items-center gap-8 lg:grid-cols-2">
+    <section className={cn("py-16 md:py-24 lg:py-32", className)}>
+      <div className="container max-w-6xl mx-auto px-3 md:px-4">
+        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
-            <h2 className="my-6 mt-0 text-4xl font-semibold text-balance text-primary lg:text-5xl">
-              {title}
+            <h2 className="my-4 md:my-6 mt-0 text-3xl font-bold text-foreground md:text-4xl lg:text-5xl [text-wrap:balance]">
+              <span className="text-gradient-indigo">{title}</span>
             </h2>
             {description && (
-              <p className="mb-8 max-w-xl text-muted-foreground lg:text-lg">
+              <p className="mb-6 md:mb-8 max-w-xl text-muted-foreground text-base md:text-lg lg:text-xl text-balance">
                 {description}
               </p>
             )}
             <div className="flex w-full flex-col justify-center gap-2 sm:flex-row lg:justify-start">
-              <Button asChild>
-                <a href={buttonPrimary.href} target="_blank">
+              <Button asChild className="bg-accent-secondary hover:opacity-90 text-primary-foreground border-0">
+                <a href={buttonPrimary.href} target="_blank" rel="noreferrer">
                   {buttonPrimary.text}
                 </a>
               </Button>
-              <Button variant="outline" asChild>
-                <a href={buttonSecondary.href} target="_blank">
+              <Button variant="outline" asChild className="border-border text-muted-foreground hover:bg-muted">
+                <a href={buttonSecondary.href} target="_blank" rel="noreferrer">
                   {buttonSecondary.text}
                 </a>
               </Button>
@@ -62,7 +62,7 @@ const Feature1 = ({
           <img
             src={imageSrc}
             alt={imageAlt}
-            className="max-h-96 w-full rounded-md object-cover"
+            className="max-h-64 md:max-h-80 lg:max-h-96 w-full rounded-xl object-cover border border-border"
           />
         </div>
       </div>

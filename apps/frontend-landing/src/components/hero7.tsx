@@ -8,11 +8,13 @@ import { Button } from "@/components/ui/button";
 interface Hero7Props {
   heading?: string;
   description?: string;
+  variant?: "default" | "overlay" | "overlayLight";
   button?: {
     text: string;
     url: string;
     className?: string;
   };
+  showReviews?: boolean;
   reviews?: {
     count: number;
     rating?: number;
@@ -25,8 +27,10 @@ interface Hero7Props {
 }
 
 const Hero7 = ({
-  heading = "A Collection of Components Built With Shadcn & Tailwind",
+  heading: _heading = "A Collection of Components Built With Shadcn & Tailwind",
   description = "Finely crafted components built with React, Tailwind and Shadcn UI. Developers can copy and paste these blocks directly into their project.",
+  variant = "default",
+  showReviews = true,
   button = {
     text: "Discover all components",
     url: "https://www.shadcnblocks.com",
@@ -59,20 +63,45 @@ const Hero7 = ({
   },
   className,
 }: Hero7Props) => {
+  const isOverlay = variant === "overlay" || variant === "overlayLight";
+  const isLightOverlay = variant === "overlayLight";
+  const headingCls = isOverlay
+    ? isLightOverlay
+      ? "text-slate-800"
+      : "text-white"
+    : "text-foreground";
+  const descCls = isOverlay
+    ? isLightOverlay
+      ? "text-slate-600"
+      : "text-slate-200"
+    : "text-muted-foreground";
+  const gradientCls = isOverlay
+    ? isLightOverlay
+      ? "text-gradient-indigo"
+      : "text-gradient-indigo-overlay"
+    : "text-gradient-indigo";
+  const highlightCls = isOverlay
+    ? isLightOverlay
+      ? "text-pink-600"
+      : "text-pink-400"
+    : "text-accent-highlight";
+
   return (
-    <section className={cn("py-32", className)}>
+    <section className={cn("py-16 md:py-24 lg:py-32 px-4", className)}>
       <div className="container text-center">
         <div className="mx-auto flex max-w-5xl flex-col gap-6">
-          <h1 className="text-3xl font-semibold text-primary lg:text-6xl">
-            {heading}
+          <h1 className={cn("text-5xl font-semibold tracking-tighter md:text-6xl lg:text-7xl xl:text-9xl text-balance", headingCls)}>
+            <span className={highlightCls}>Stop</span> prompting.{" "}
+            <span className={gradientCls}>Start scaffolding.</span>
           </h1>
-          <p className="text-balance text-muted-foreground lg:text-lg">
+          <p className={cn("text-base md:text-lg lg:text-xl text-balance max-w-3xl mx-auto", descCls)}>
             {description}
           </p>
         </div>
-        <Button asChild size="lg" className="mt-10">
+        <Button asChild size="lg" className="mt-8 md:mt-10 bg-accent-secondary hover:opacity-90 text-primary-foreground">
           <a href={button.url}>{button.text}</a>
         </Button>
+        {showReviews && (
         <div className="mx-auto mt-10 flex w-fit flex-col items-center gap-4 sm:flex-row">
           <span className="mx-4 inline-flex items-center -space-x-4">
             {reviews.avatars.map((avatar, index) => (
@@ -98,6 +127,7 @@ const Hero7 = ({
             </p>
           </div>
         </div>
+        )}
       </div>
     </section>
   );

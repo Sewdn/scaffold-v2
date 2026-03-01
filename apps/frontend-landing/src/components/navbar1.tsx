@@ -143,8 +143,8 @@ const Navbar1 = ({
   className,
 }: Navbar1Props) => {
   return (
-    <section className={cn("py-4", className)}>
-      <div className="container">
+    <section className={cn("py-3 md:py-4 bg-background/95 backdrop-blur-sm border-b border-border", className)}>
+      <div className="container px-4 sm:px-6 lg:px-8">
         {/* Desktop Menu */}
         <nav className="hidden items-center justify-between lg:flex">
           <div className="flex items-center gap-6">
@@ -152,10 +152,10 @@ const Navbar1 = ({
             <a href={logo.url} className="flex items-center gap-2">
               <img
                 src={logo.src}
-                className="max-h-8 dark:invert"
+                className="max-h-8 logo-theme-aware"
                 alt={logo.alt}
               />
-              <span className="text-lg font-semibold tracking-tighter">
+              <span className="text-base md:text-lg font-semibold tracking-tighter text-foreground">
                 {logo.title}
               </span>
             </a>
@@ -184,7 +184,7 @@ const Navbar1 = ({
             <a href={logo.url} className="flex items-center gap-2">
               <img
                 src={logo.src}
-                className="max-h-8 dark:invert"
+                className="max-h-8 logo-theme-aware"
                 alt={logo.alt}
               />
             </a>
@@ -200,7 +200,7 @@ const Navbar1 = ({
                     <a href={logo.url} className="flex items-center gap-2">
                       <img
                         src={logo.src}
-                        className="max-h-8 dark:invert"
+                        className="max-h-8 logo-theme-aware"
                         alt={logo.alt}
                       />
                     </a>

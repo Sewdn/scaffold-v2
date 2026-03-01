@@ -49,6 +49,24 @@
     --radius: 0.625rem;
     --background: oklch(0.985 0.002 264);
     --foreground: oklch(0.145 0 0);
+    /* Elysia-style landing: light theme */
+    --section-primary: oklch(0.98 0.01 264);
+    --section-secondary: oklch(0.96 0.015 264);
+    --section-footer: oklch(0.94 0.02 264);
+    --hero-overlay: oklch(0.98 0.01 264 / 0.9);
+    /* Stronger gradients for light bg: darker start → vibrant end */
+    --gradient-indigo-from: rgb(67 56 202);
+    --gradient-indigo-to: rgb(99 102 241);
+    --gradient-indigo-mid: rgb(129 140 248);
+    --gradient-pink-from: rgb(190 24 93);
+    --gradient-pink-to: rgb(236 72 153);
+    --gradient-pink-mid: rgb(244 114 182);
+    --accent-highlight: rgb(236 72 153);
+    --accent-secondary: rgb(99 102 241);
+    --card-surface: oklch(1 0 0);
+    --card-surface-hover: oklch(0.98 0.01 264);
+    --border-surface: oklch(0.9 0.02 264);
+    --logo-invert: 0;
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
@@ -83,6 +101,23 @@
 .dark {
     --background: oklch(0.13 0.02 264);
     --foreground: oklch(0.97 0 0);
+    /* Elysia-style landing: dark theme */
+    --section-primary: #0d111b;
+    --section-secondary: #090c0f;
+    --section-footer: rgb(30 41 59 / 0.7);
+    --hero-overlay: rgba(13, 17, 27, 0.85);
+    --gradient-indigo-from: rgb(199 210 254);
+    --gradient-indigo-to: rgb(129 140 248);
+    --gradient-indigo-mid: rgb(165 180 252);
+    --gradient-pink-from: rgb(251 207 232);
+    --gradient-pink-to: rgb(244 114 182);
+    --gradient-pink-mid: rgb(249 168 212);
+    --accent-highlight: rgb(244 114 182);
+    --accent-secondary: rgb(129 140 248);
+    --card-surface: oklch(0.18 0.02 264);
+    --card-surface-hover: oklch(0.22 0.03 264);
+    --border-surface: oklch(0.3 0.03 264);
+    --logo-invert: 1;
     --card: oklch(0.18 0.02 264);
     --card-foreground: oklch(0.97 0 0);
     --popover: oklch(0.18 0.02 264);
@@ -123,6 +158,10 @@
     }
   .container {
     margin-inline: auto;
+    width: 100%;
+  }
+  html {
+    scroll-behavior: smooth;
   }
 }
 
@@ -151,4 +190,114 @@
 
 .dark .section-muted {
   background: oklch(0.16 0.02 264);
+}
+
+/* Elysia-style design: gradient text (theme-aware) */
+.text-gradient-indigo {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    135deg,
+    var(--gradient-indigo-from) 0%,
+    var(--gradient-indigo-mid) 50%,
+    var(--gradient-indigo-to) 100%
+  );
+}
+
+.text-gradient-pink {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    135deg,
+    var(--gradient-pink-from) 0%,
+    var(--gradient-pink-mid) 50%,
+    var(--gradient-pink-to) 100%
+  );
+}
+
+/* Overlay hero: light gradient on dark bg */
+.text-gradient-indigo-overlay {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(
+    135deg,
+    rgb(199 210 254) 0%,
+    rgb(165 180 252) 50%,
+    rgb(129 140 248) 100%
+  );
+}
+
+/* Elysia section backgrounds (theme-aware) */
+.section-elysia-dark {
+  background-color: var(--section-primary);
+}
+
+.section-elysia-darker {
+  background-color: var(--section-secondary);
+}
+
+.section-elysia-slate {
+  background-color: var(--section-footer);
+}
+
+/* Theme-aware utilities */
+.bg-section-primary {
+  background-color: var(--section-primary);
+}
+
+.bg-hero-overlay {
+  background-color: var(--hero-overlay);
+}
+
+.text-accent-highlight {
+  color: var(--accent-highlight);
+}
+
+.text-accent-secondary {
+  color: var(--accent-secondary);
+}
+
+.bg-accent-secondary {
+  background-color: var(--accent-secondary);
+}
+
+.border-surface {
+  border-color: var(--border-surface);
+}
+
+.bg-card-surface {
+  background-color: var(--card-surface);
+}
+
+.bg-card-surface-hover:hover {
+  background-color: var(--card-surface-hover);
+}
+
+/* Logo invert: only in dark mode */
+.logo-theme-aware {
+  filter: invert(var(--logo-invert));
+}
+
+/* Technology point-cloud: floating / hovering animation */
+@keyframes tech-float {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translate(-50%, -50%) translateY(-4px) rotate(0.5deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(2px) rotate(-0.3deg);
+  }
+  75% {
+    transform: translate(-50%, -50%) translateY(-2px) rotate(0.2deg);
+  }
+}
+
+.tech-node {
+  animation: tech-float ease-in-out infinite;
 }
