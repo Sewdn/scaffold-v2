@@ -3,32 +3,28 @@
  * Exports a factory to create the app type config, expansion command, and scaffold defaults.
  */
 
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
-import { cliCommand } from './expansion/index.js';
-import { scaffoldCliExampleDefaults } from './scaffold-defaults.js';
-import { createGeneratePhase, type AppTypeDepsOptions } from '@workspace/core-app-types';
-import {
-  getPackageMerge,
-  CLI_APP_MKDIR_PATHS,
-  CLI_APP_UI_DEPENDENCIES,
-} from './config.js';
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+import { cliCommand } from "./expansion/index.js";
+import { scaffoldCliExampleDefaults } from "./scaffold-defaults.js";
+import { createGeneratePhase, type AppTypeDepsOptions } from "@workspace/core-app-types";
+import { getPackageMerge, CLI_APP_MKDIR_PATHS, CLI_APP_UI_DEPENDENCIES } from "./config.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const STUBS_DIR = join(__dirname, '..', 'stubs');
+const STUBS_DIR = join(__dirname, "..", "stubs");
 
-export type { ScaffoldCliDefaultsOptions } from './scaffold-defaults.js';
-export { scaffoldCliExampleDefaults } from './scaffold-defaults.js';
-export { cliCommand, getCliExpansionCommands } from './expansion/index.js';
+export type { ScaffoldCliDefaultsOptions } from "./scaffold-defaults.js";
+export { scaffoldCliExampleDefaults } from "./scaffold-defaults.js";
+export { cliCommand, getCliExpansionCommands } from "./expansion/index.js";
 export {
   CLI_APP_SCRIPTS,
   CLI_APP_UI_DEPENDENCIES,
   DEFAULT_COMMAND_NAME,
   DEFAULT_SERVICE_NAME,
   getPackageMerge,
-} from './config.js';
-export { executeAddCommand } from './expansion/add-command.js';
-export { executeAddService } from './expansion/add-service.js';
+} from "./config.js";
+export { executeAddCommand } from "./expansion/add-command.js";
+export { executeAddService } from "./expansion/add-service.js";
 
 /**
  * Create the CLI app type config, expansion command, and scaffold defaults.
@@ -43,10 +39,10 @@ export function createCliAppType(opts: AppTypeDepsOptions) {
   });
 
   const cli = {
-    id: 'cli',
-    description: 'Command-line interface (Effect + Commander)',
-    dirPrefix: 'cli',
-    defaultAppName: 'tools',
+    id: "cli",
+    description: "Command-line interface (Effect + Commander)",
+    dirPrefix: "cli",
+    defaultAppName: "tools",
     phases: [phase],
   };
 

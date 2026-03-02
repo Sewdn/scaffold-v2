@@ -6,12 +6,12 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-product](add-product.md) | Add a product config | `src/products/<name>.ts` |
-| [add-webhook](add-webhook.md) | Add a webhook handler | `src/webhooks/<name>.ts` |
-| [add-checkout-session](add-checkout-session.md) | Add checkout session logic | `src/checkout/<name>.ts` |
-| [add-subscription-plan](add-subscription-plan.md) | Add a subscription plan | `src/plans/<name>.ts` |
+| Command                                           | Description                | Spec                     |
+| ------------------------------------------------- | -------------------------- | ------------------------ |
+| [add-product](add-product.md)                     | Add a product config       | `src/products/<name>.ts` |
+| [add-webhook](add-webhook.md)                     | Add a webhook handler      | `src/webhooks/<name>.ts` |
+| [add-checkout-session](add-checkout-session.md)   | Add checkout session logic | `src/checkout/<name>.ts` |
+| [add-subscription-plan](add-subscription-plan.md) | Add a subscription plan    | `src/plans/<name>.ts`    |
 
 ## Underlying Technology
 

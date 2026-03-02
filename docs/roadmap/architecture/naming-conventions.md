@@ -1,11 +1,11 @@
 # Naming Conventions
 
-| Context | Convention | Example |
-|---------|------------|---------|
-| File names | kebab-case | `add-user.ts`, `user-service.ts` |
-| Exported types/classes | PascalCase | `AddUserCommand`, `UserService` |
-| Variables, functions | camelCase | `addUserCommand`, `createUserService` |
-| CLI args | kebab-case | `add-user`, `user-service` |
+| Context                | Convention | Example                               |
+| ---------------------- | ---------- | ------------------------------------- |
+| File names             | kebab-case | `add-user.ts`, `user-service.ts`      |
+| Exported types/classes | PascalCase | `AddUserCommand`, `UserService`       |
+| Variables, functions   | camelCase  | `addUserCommand`, `createUserService` |
+| CLI args               | kebab-case | `add-user`, `user-service`            |
 
 ## Entity Formatting
 

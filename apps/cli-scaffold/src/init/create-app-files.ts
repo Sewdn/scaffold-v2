@@ -1,13 +1,6 @@
-import type { AppType } from '../registry.js';
-import {
-  getAppTypeConfig,
-  getStubsDir,
-  hasGeneratePhase,
-} from '../app-types/registry.js';
-import {
-  generateFromStubs,
-  resolveAppTypeStubsDir,
-} from '../services/generator.js';
+import type { AppType } from "../registry.js";
+import { getAppTypeConfig, getStubsDir, hasGeneratePhase } from "../app-types/registry.js";
+import { generateFromStubs, resolveAppTypeStubsDir } from "../services/generator.js";
 
 export interface CreateAppFilesOptions {
   projectName: string;

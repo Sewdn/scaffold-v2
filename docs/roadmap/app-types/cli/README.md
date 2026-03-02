@@ -6,10 +6,10 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
+| Command                       | Description                                  | Spec                                              |
+| ----------------------------- | -------------------------------------------- | ------------------------------------------------- |
 | [add-command](add-command.md) | Add a command and register in commands index | `src/commands/<name>.ts`, `src/commands/index.ts` |
-| [add-service](add-service.md) | Add a service in `src/services/` | `src/services/<name>.ts` |
+| [add-service](add-service.md) | Add a service in `src/services/`             | `src/services/<name>.ts`                          |
 
 ## Underlying Technology
 

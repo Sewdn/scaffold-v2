@@ -5,20 +5,18 @@
  * Run with: bun test
  */
 
-import { readdirSync, rmSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { describe, test, expect, afterAll } from 'bun:test';
-import { Effect, Metric, pipe } from 'effect';
-import { E2ELiveLayer } from './layers.js';
-import { ScenarioRegistry } from './services/scenario-registry.js';
-import { runScenario, type RunResult } from './run-scenario.js';
-import { buildReport, writeReport } from './report-writer.js';
-import type { Scenario } from './types.js';
+import { readdirSync, rmSync } from "fs";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+import { describe, test, expect, afterAll } from "bun:test";
+import { Effect, Metric, pipe } from "effect";
+import { E2ELiveLayer } from "./layers.js";
+import { ScenarioRegistry } from "./services/scenario-registry.js";
+import { runScenario, type RunResult } from "./run-scenario.js";
+import { buildReport, writeReport } from "./report-writer.js";
+import type { Scenario } from "./types.js";
 
-async function runWithLayer<A, E>(
-  effect: Effect.Effect<A, E>,
-): Promise<A> {
+async function runWithLayer<A, E>(effect: Effect.Effect<A, E>): Promise<A> {
   return Effect.runPromise(pipe(effect, Effect.provide(E2ELiveLayer)));
 }
 
@@ -30,17 +28,17 @@ const allScenarios = await runWithLayer(
   }),
 );
 
-const scenarioFilter = process.env['SCAFFOLD_E2E_SCENARIO'];
+const scenarioFilter = process.env["SCAFFOLD_E2E_SCENARIO"];
 const scenarios =
-  scenarioFilter != null && scenarioFilter !== ''
+  scenarioFilter != null && scenarioFilter !== ""
     ? allScenarios.filter((s) => s.id === scenarioFilter || s.id.includes(scenarioFilter))
     : allScenarios;
 
 const collectedResults: RunResult[] = [];
 
-describe('Scaffold E2E', () => {
+describe("Scaffold E2E", () => {
   if (scenarios.length === 0) {
-    test('no scenarios registered', () => {
+    test("no scenarios registered", () => {
       expect(scenarios.length).toBeGreaterThan(0);
     });
   } else {
@@ -52,7 +50,7 @@ describe('Scaffold E2E', () => {
           collectedResults.push(result);
           const failed = result.validationResults.filter((r) => !r.passed);
           if (failed.length > 0) {
-            const messages = failed.map((f) => `  - ${f.message}`).join('\n');
+            const messages = failed.map((f) => `  - ${f.message}`).join("\n");
             expect(result.allPassed, `Validations failed:\n${messages}`).toBe(true);
           }
           expect(result.allPassed).toBe(true);
@@ -70,12 +68,12 @@ describe('Scaffold E2E', () => {
       console.log(`  (timestamped: ${timestampedPath})`);
     }
     // Clean up any leftover temp dirs (e.g. from timeout/interrupt)
-    const monorepoRoot = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
-    const workspaceDir = join(monorepoRoot, '.e2e-workspace');
+    const monorepoRoot = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
+    const workspaceDir = join(monorepoRoot, ".e2e-workspace");
     try {
       const entries = readdirSync(workspaceDir, { withFileTypes: true });
       for (const e of entries) {
-        if (e.isDirectory() && e.name.startsWith('scaffold-e2e-')) {
+        if (e.isDirectory() && e.name.startsWith("scaffold-e2e-")) {
           rmSync(join(workspaceDir, e.name), { recursive: true, force: true });
         }
       }
@@ -85,11 +83,11 @@ describe('Scaffold E2E', () => {
   });
 });
 
-describe('E2E metrics summary', () => {
-  test('scenario metrics are defined', () => {
+describe("E2E metrics summary", () => {
+  test("scenario metrics are defined", () => {
     // Metrics are recorded during scenario runs; effect's Metric module provides
     // scenarioDurationMetric, scenarioTotalMetric, etc. for observability.
-    expect(typeof Metric.timer).toBe('function');
-    expect(typeof Metric.counter).toBe('function');
+    expect(typeof Metric.timer).toBe("function");
+    expect(typeof Metric.counter).toBe("function");
   });
 });

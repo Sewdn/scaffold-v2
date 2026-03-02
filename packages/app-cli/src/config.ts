@@ -5,29 +5,29 @@
 
 /** CLI-specific npm dependencies (chalk, cli-table3, @clack/prompts) */
 export const CLI_APP_UI_DEPENDENCIES = [
-  'chalk@^5.6.2',
-  'cli-table3@^0.6.5',
-  '@clack/prompts@^1.0.1',
+  "chalk@^5.6.2",
+  "cli-table3@^0.6.5",
+  "@clack/prompts@^1.0.1",
 ] as const;
 
 /** Scripts written to scaffolded CLI app package.json */
 export const CLI_APP_SCRIPTS = {
-  build: 'tsc -b',
+  build: "tsc -b",
   /** Run the CLI (e.g. bun run start -- hello); Bun runs TS directly */
-  start: 'bun run src/index.ts',
+  start: "bun run src/index.ts",
   /** Runs after bun install to register the CLI globally */
-  postinstall: 'bun link',
+  postinstall: "bun link",
 } as const;
 
 /** Directory structure for scaffolded CLI apps */
-export const CLI_APP_MKDIR_PATHS = ['src', 'src/commands', 'src/services', 'bin'] as const;
+export const CLI_APP_MKDIR_PATHS = ["src", "src/commands", "src/services", "bin"] as const;
 
 /** Default example command when scaffolding a new CLI app */
-export const DEFAULT_COMMAND_NAME = 'hello';
-export const DEFAULT_COMMAND_DESCRIPTION = 'Say hello';
+export const DEFAULT_COMMAND_NAME = "hello";
+export const DEFAULT_COMMAND_DESCRIPTION = "Say hello";
 
 /** Default example service when scaffolding a new CLI app */
-export const DEFAULT_SERVICE_NAME = 'example-service';
+export const DEFAULT_SERVICE_NAME = "example-service";
 
 export interface PackageMergeContext {
   projectName: string;
@@ -45,8 +45,8 @@ export function getPackageMerge(ctx: PackageMergeContext): Record<string, unknow
   const binName = appBaseName ? `${projectName}-${appBaseName}` : appName;
 
   return {
-    bin: { [binName]: './bin/run.js' },
+    bin: { [binName]: "./bin/run.js" },
     scripts: { ...CLI_APP_SCRIPTS },
-    version: '0.1.0',
+    version: "0.1.0",
   };
 }

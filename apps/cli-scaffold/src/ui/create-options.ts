@@ -1,12 +1,12 @@
-import { intro } from '@clack/prompts';
+import { intro } from "@clack/prompts";
 import {
   promptProjectName,
   promptOptionalPackages,
   promptApps,
   promptInitGit,
-} from './ui-prompts.js';
-import type { OptionalPackage } from '../init/optional-packages.js';
-import type { AppType } from '../registry.js';
+} from "./ui-prompts.js";
+import type { OptionalPackage } from "../init/optional-packages.js";
+import type { AppType } from "../registry.js";
 
 export interface CreateOptions {
   projectName: string;

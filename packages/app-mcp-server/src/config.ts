@@ -5,11 +5,11 @@
 
 /** Scripts written to scaffolded MCP server app package.json */
 export const MCP_APP_SCRIPTS = {
-  build: 'tsc -b',
+  build: "tsc -b",
 } as const;
 
 /** Directory structure for scaffolded MCP server apps */
-export const MCP_APP_MKDIR_PATHS = ['src', 'src/tools'] as const;
+export const MCP_APP_MKDIR_PATHS = ["src", "src/tools"] as const;
 
 export interface PackageMergeContext {
   projectName: string;

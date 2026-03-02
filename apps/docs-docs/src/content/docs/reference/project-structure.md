@@ -16,7 +16,6 @@ description: Standard monorepo layout created by Scaffold CLI
 │   └── slides-*/            # Slide decks (Reveal.js)
 ├── packages/                # Shared packages
 │   ├── typescript-config/  # Shared TS config
-│   ├── eslint-config/      # Shared ESLint config
 │   ├── domain/             # Shared business types (optional)
 │   ├── svc-config/         # Config service (optional)
 │   ├── ui/                 # Core UI (Shadcn) (optional)
@@ -38,5 +37,5 @@ description: Standard monorepo layout created by Scaffold CLI
 ## Turbo tasks
 
 - `build`: Compiles TypeScript across all packages (with `^build` dependency ordering)
-- `lint`: Runs ESLint across all packages
+- `lint`: Runs oxlint across all packages
 - `dev`: Starts development servers (cache disabled, persistent)

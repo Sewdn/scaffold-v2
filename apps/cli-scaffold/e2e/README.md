@@ -63,7 +63,7 @@ Each app-type package exports a `scenarios` array. Example: `@workspace/app-cli`
 
 ```ts
 const APP_TYPE_SCENARIO_LOADERS = [
-  () => import('@workspace/app-cli/e2e/scenarios'),
+  () => import("@workspace/app-cli/e2e/scenarios"),
   // () => import('@workspace/app-<your-type>/e2e/scenarios'),
 ];
 ```
@@ -74,21 +74,17 @@ const APP_TYPE_SCENARIO_LOADERS = [
 1. **Create a scenario file** — in `e2e/scenarios/` for core scenarios, or in `packages/app-<type>/src/e2e/scenarios/` for app-type packages:
 
 ```ts
-import { pathExists, hasScript, buildSucceeds } from '../validators/index.js';
-import type { Scenario } from '../types.js';
+import { pathExists, hasScript, buildSucceeds } from "../validators/index.js";
+import type { Scenario } from "../types.js";
 
 export const scenario: Scenario = {
-  id: 'my-scenario',
-  description: 'Brief description of what this tests',
+  id: "my-scenario",
+  description: "Brief description of what this tests",
   steps: [
-    { command: 'init', args: ['project-name', '--non-interactive'] },
-    { command: 'service', args: ['auth'] },
+    { command: "init", args: ["project-name", "--non-interactive"] },
+    { command: "service", args: ["auth"] },
   ],
-  validators: [
-    pathExists('packages/svc-auth'),
-    hasScript('build'),
-    buildSucceeds(),
-  ],
+  validators: [pathExists("packages/svc-auth"), hasScript("build"), buildSucceeds()],
 };
 ```
 
@@ -96,8 +92,8 @@ export const scenario: Scenario = {
 
 ```ts
 const SCENARIO_LOADERS = [
-  () => import('../scenarios/minimal-project.js'),
-  () => import('../scenarios/my-scenario.js'),
+  () => import("../scenarios/minimal-project.js"),
+  () => import("../scenarios/my-scenario.js"),
 ];
 ```
 

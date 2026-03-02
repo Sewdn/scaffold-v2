@@ -10,12 +10,12 @@
 
 ### Overall Effect Coverage & Correctness
 
-| Category | Files with Effect | Correctness | Gaps |
-|----------|-------------------|-------------|------|
-| **app-types** | 12 (frontend-tanstack ×6, cli ×2, backend ×1, svc-elysia-api ×6) | **Mostly correct** | Add `Effect.provide` at edge; prefer `Effect.tryPromise` with `catch` over `Effect.promise` |
-| **services** | 14 (svc-logging ×5, svc-prisma ×1, domain ×1, svc-elysia-api ×6) | **Mostly correct** | Add `Data.TaggedError`; clarify sync vs async I/O |
-| **architecture** | 7 (registry, DI, validation, co-generation, implementation-checklist, multi-app, naming) | **Partially incorrect** | `Effect.try` vs `Effect.tryPromise` misuse; `Effect.Either` phrasing outdated |
-| **vision** | 1 (core-principles) | **Superficial** | Mention only; could add concrete patterns |
+| Category         | Files with Effect                                                                        | Correctness             | Gaps                                                                                        |
+| ---------------- | ---------------------------------------------------------------------------------------- | ----------------------- | ------------------------------------------------------------------------------------------- |
+| **app-types**    | 12 (frontend-tanstack ×6, cli ×2, backend ×1, svc-elysia-api ×6)                         | **Mostly correct**      | Add `Effect.provide` at edge; prefer `Effect.tryPromise` with `catch` over `Effect.promise` |
+| **services**     | 14 (svc-logging ×5, svc-prisma ×1, domain ×1, svc-elysia-api ×6)                         | **Mostly correct**      | Add `Data.TaggedError`; clarify sync vs async I/O                                           |
+| **architecture** | 7 (registry, DI, validation, co-generation, implementation-checklist, multi-app, naming) | **Partially incorrect** | `Effect.try` vs `Effect.tryPromise` misuse; `Effect.Either` phrasing outdated               |
+| **vision**       | 1 (core-principles)                                                                      | **Superficial**         | Mention only; could add concrete patterns                                                   |
 
 **Total files with explicit "Effect Library Usage" sections:** 20  
 **Total files mentioning Effect:** 21+
@@ -111,13 +111,13 @@
 
 ### 3.1 Effect.try vs Effect.tryPromise
 
-| Context | Current Spec | Correction |
-|---------|--------------|------------|
-| registry-pattern | `Effect.try` wraps `fs.readFile`/`fs.writeFile` | Use `Effect.tryPromise` for `fs/promises`; `Effect.try` only for sync operations that throw (e.g. `execSync`) |
-| validation | `Effect.try` for file I/O, process exec | `Effect.tryPromise` for `fs.readFile`, `fs.access`; `Effect.try` for `execSync` |
-| multi-app-support | `Effect.try` for file system reads | `Effect.tryPromise` for async fs |
-| co-generation, implementation-checklist | `Effect.try` for I/O | Same split: async → `tryPromise`, sync → `try` |
-| naming-conventions | `Effect.try` for validation that may throw | If validation is sync (e.g. regex), `Effect.try`; if async, `Effect.tryPromise` |
+| Context                                 | Current Spec                                    | Correction                                                                                                    |
+| --------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| registry-pattern                        | `Effect.try` wraps `fs.readFile`/`fs.writeFile` | Use `Effect.tryPromise` for `fs/promises`; `Effect.try` only for sync operations that throw (e.g. `execSync`) |
+| validation                              | `Effect.try` for file I/O, process exec         | `Effect.tryPromise` for `fs.readFile`, `fs.access`; `Effect.try` for `execSync`                               |
+| multi-app-support                       | `Effect.try` for file system reads              | `Effect.tryPromise` for async fs                                                                              |
+| co-generation, implementation-checklist | `Effect.try` for I/O                            | Same split: async → `tryPromise`, sync → `try`                                                                |
+| naming-conventions                      | `Effect.try` for validation that may throw      | If validation is sync (e.g. regex), `Effect.try`; if async, `Effect.tryPromise`                               |
 
 ### 3.2 Effect.promise vs Effect.tryPromise (cli/add-command)
 
@@ -323,35 +323,35 @@ Use `Effect.tryPromise` for async validators (fs/promises `readFile`, `access`);
 
 Specs that do **not** mention Effect but could benefit:
 
-| File / Category | Opportunity |
-|-----------------|-------------|
-| **app-types/worker** (add-task, add-job, add-queue) | Effect for job execution (Effect.gen, typed errors, Layer for queue clients) |
-| **app-types/cron** | Effect for cron handlers; Effect.tryPromise for scheduled tasks |
-| **app-types/email-service** | Effect for async send; Effect.tryPromise with typed errors for transport failures |
-| **app-types/websocket-server** | Effect for message handlers; Context for per-connection services |
-| **services/svc-cache** | Effect for cache ops; Layer for Redis/client injection |
-| **services/svc-queue** | Effect for job processing; Layer composition for workers |
-| **verticals/data-pipeline** | Effect for transform steps; typed errors for pipeline failures |
-| **architecture/registry-pattern** | Effect for idempotency checks (already partially covered) |
-| **implementation/first-sprint** | Add "Effect patterns" as a first-sprint deliverable if Effect is in scope |
+| File / Category                                     | Opportunity                                                                       |
+| --------------------------------------------------- | --------------------------------------------------------------------------------- |
+| **app-types/worker** (add-task, add-job, add-queue) | Effect for job execution (Effect.gen, typed errors, Layer for queue clients)      |
+| **app-types/cron**                                  | Effect for cron handlers; Effect.tryPromise for scheduled tasks                   |
+| **app-types/email-service**                         | Effect for async send; Effect.tryPromise with typed errors for transport failures |
+| **app-types/websocket-server**                      | Effect for message handlers; Context for per-connection services                  |
+| **services/svc-cache**                              | Effect for cache ops; Layer for Redis/client injection                            |
+| **services/svc-queue**                              | Effect for job processing; Layer composition for workers                          |
+| **verticals/data-pipeline**                         | Effect for transform steps; typed errors for pipeline failures                    |
+| **architecture/registry-pattern**                   | Effect for idempotency checks (already partially covered)                         |
+| **implementation/first-sprint**                     | Add "Effect patterns" as a first-sprint deliverable if Effect is in scope         |
 
 ---
 
 ## 7. Reference Quick Facts (Effect v3)
 
-| Pattern | API |
-|---------|-----|
-| Service definition | `class X extends Context.Tag("X")<X, { method: () => Effect.Effect<...> }>() {}` |
-| Layer (no deps) | `Layer.succeed(Tag, impl)` |
-| Layer (with deps) | `Layer.effect(Tag, Effect.gen(function* () { const deps = yield* Deps; return impl })).pipe(Layer.provide(DepsLive))` |
-| Compose layers | `Layer.merge`, `Layer.mergeAll` |
-| Provide at edge | `Effect.provide(Layer)` |
-| Run at edge | `Effect.runPromise(program.pipe(Effect.provide(MainLive)))` |
-| Typed errors | `class E extends Data.TaggedError("E")<{ msg: string }>()` |
-| Discriminated handling | `Effect.catchTag("E", (e) => ...)` |
-| Async with typed errors | `Effect.tryPromise({ try: () => ..., catch: (e) => new MyError(e) })` |
-| Sync that throws | `Effect.try({ try: () => ..., catch: (e) => new MyError(e) })` |
+| Pattern                 | API                                                                                                                   |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| Service definition      | `class X extends Context.Tag("X")<X, { method: () => Effect.Effect<...> }>() {}`                                      |
+| Layer (no deps)         | `Layer.succeed(Tag, impl)`                                                                                            |
+| Layer (with deps)       | `Layer.effect(Tag, Effect.gen(function* () { const deps = yield* Deps; return impl })).pipe(Layer.provide(DepsLive))` |
+| Compose layers          | `Layer.merge`, `Layer.mergeAll`                                                                                       |
+| Provide at edge         | `Effect.provide(Layer)`                                                                                               |
+| Run at edge             | `Effect.runPromise(program.pipe(Effect.provide(MainLive)))`                                                           |
+| Typed errors            | `class E extends Data.TaggedError("E")<{ msg: string }>()`                                                            |
+| Discriminated handling  | `Effect.catchTag("E", (e) => ...)`                                                                                    |
+| Async with typed errors | `Effect.tryPromise({ try: () => ..., catch: (e) => new MyError(e) })`                                                 |
+| Sync that throws        | `Effect.try({ try: () => ..., catch: (e) => new MyError(e) })`                                                        |
 
 ---
 
-*End of report*
+_End of report_

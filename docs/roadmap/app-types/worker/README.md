@@ -6,12 +6,12 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-job](add-job.md) | Add a job handler | `src/jobs/<name>.ts` |
-| [add-cron](add-cron.md) | Add a cron schedule + handler | `src/cron/<name>.ts` |
-| [add-queue](add-queue.md) | Add a queue consumer | `src/queues/<name>.ts` |
-| [add-task](add-task.md) | Add a one-off task handler | `src/tasks/<name>.ts` |
+| Command                   | Description                   | Spec                   |
+| ------------------------- | ----------------------------- | ---------------------- |
+| [add-job](add-job.md)     | Add a job handler             | `src/jobs/<name>.ts`   |
+| [add-cron](add-cron.md)   | Add a cron schedule + handler | `src/cron/<name>.ts`   |
+| [add-queue](add-queue.md) | Add a queue consumer          | `src/queues/<name>.ts` |
+| [add-task](add-task.md)   | Add a one-off task handler    | `src/tasks/<name>.ts`  |
 
 ## Underlying Technology
 

@@ -1,7 +1,7 @@
 {
   "name": "@scaffold-v2/docs-docs",
-  "type": "module",
   "version": "0.0.1",
+  "type": "module",
   "scripts": {
     "predev": "bun run ../cli-scaffold/scripts/generate-docs-data.ts",
     "dev": "astro dev",

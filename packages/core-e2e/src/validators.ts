@@ -2,14 +2,14 @@
  * Built-in validators for E2E scenarios.
  */
 
-import { existsSync, readFileSync } from 'fs';
-import { join } from 'path';
+import { existsSync, readFileSync } from "fs";
+import { join } from "path";
 import type {
   AsyncValidator,
   SyncValidator,
   ValidationContext,
   ValidationResult,
-} from './types.js';
+} from "./types.js";
 
 const pass = (message: string): ValidationResult => ({ passed: true, message });
 const fail = (message: string): ValidationResult => ({ passed: false, message });
@@ -17,7 +17,7 @@ const fail = (message: string): ValidationResult => ({ passed: false, message })
 /** Check that a file or directory exists. */
 export function pathExists(relativePath: string): SyncValidator {
   return {
-    type: 'sync',
+    type: "sync",
     id: `path-exists:${relativePath}`,
     description: `Path exists: ${relativePath}`,
     run(ctx) {
@@ -30,22 +30,22 @@ export function pathExists(relativePath: string): SyncValidator {
 /** Check that a file contains a string or pattern. */
 export function fileContains(
   relativePath: string,
-  substringOrPattern: string | RegExp
+  substringOrPattern: string | RegExp,
 ): SyncValidator {
   const desc =
-    typeof substringOrPattern === 'string'
+    typeof substringOrPattern === "string"
       ? `File ${relativePath} contains "${substringOrPattern}"`
       : `File ${relativePath} matches ${substringOrPattern}`;
   return {
-    type: 'sync',
+    type: "sync",
     id: `file-contains:${relativePath}`,
     description: desc,
     run(ctx) {
       const p = join(ctx.projectDir, relativePath);
       if (!existsSync(p)) return fail(`File not found: ${relativePath}`);
-      const content = readFileSync(p, 'utf-8');
+      const content = readFileSync(p, "utf-8");
       const ok =
-        typeof substringOrPattern === 'string'
+        typeof substringOrPattern === "string"
           ? content.includes(substringOrPattern)
           : substringOrPattern.test(content);
       return ok ? pass(desc) : fail(desc);
@@ -56,13 +56,13 @@ export function fileContains(
 /** Check that package.json exists and has expected scripts. */
 export function hasScript(scriptName: string): SyncValidator {
   return {
-    type: 'sync',
+    type: "sync",
     id: `has-script:${scriptName}`,
     description: `Root package.json has script "${scriptName}"`,
     run(ctx) {
-      const p = join(ctx.projectDir, 'package.json');
-      if (!existsSync(p)) return fail('package.json not found');
-      const pkg = JSON.parse(readFileSync(p, 'utf-8')) as { scripts?: Record<string, string> };
+      const p = join(ctx.projectDir, "package.json");
+      if (!existsSync(p)) return fail("package.json not found");
+      const pkg = JSON.parse(readFileSync(p, "utf-8")) as { scripts?: Record<string, string> };
       const has = pkg?.scripts?.[scriptName] != null;
       return has ? pass(`Script "${scriptName}" exists`) : fail(`Script "${scriptName}" missing`);
     },
@@ -72,18 +72,18 @@ export function hasScript(scriptName: string): SyncValidator {
 /** Run `bun run build` in the project and assert success. */
 export function buildSucceeds(): AsyncValidator {
   return {
-    type: 'async',
-    id: 'build-succeeds',
-    description: 'bun run build succeeds',
+    type: "async",
+    id: "build-succeeds",
+    description: "bun run build succeeds",
     async run(ctx) {
-      const proc = Bun.spawn(['bun', 'run', 'build'], {
+      const proc = Bun.spawn(["bun", "run", "build"], {
         cwd: ctx.projectDir,
-        stdin: 'ignore',
-        stdout: 'pipe',
-        stderr: 'pipe',
+        stdin: "ignore",
+        stdout: "pipe",
+        stderr: "pipe",
       });
       const exit = await proc.exited;
-      if (exit === 0) return pass('Build succeeded');
+      if (exit === 0) return pass("Build succeeded");
       const stderr = await new Response(proc.stderr).text();
       return fail(`Build failed (exit ${exit}): ${stderr.slice(0, 200)}`);
     },
@@ -93,18 +93,18 @@ export function buildSucceeds(): AsyncValidator {
 /** Run `bun run lint` in the project and assert success. */
 export function lintSucceeds(): AsyncValidator {
   return {
-    type: 'async',
-    id: 'lint-succeeds',
-    description: 'bun run lint succeeds',
+    type: "async",
+    id: "lint-succeeds",
+    description: "bun run lint succeeds",
     async run(ctx) {
-      const proc = Bun.spawn(['bun', 'run', 'lint'], {
+      const proc = Bun.spawn(["bun", "run", "lint"], {
         cwd: ctx.projectDir,
-        stdin: 'ignore',
-        stdout: 'pipe',
-        stderr: 'pipe',
+        stdin: "ignore",
+        stdout: "pipe",
+        stderr: "pipe",
       });
       const exit = await proc.exited;
-      if (exit === 0) return pass('Lint succeeded');
+      if (exit === 0) return pass("Lint succeeded");
       const stderr = await new Response(proc.stderr).text();
       return fail(`Lint failed (exit ${exit}): ${stderr.slice(0, 200)}`);
     },
@@ -118,19 +118,19 @@ export function lintSucceeds(): AsyncValidator {
  */
 export function cliHelpShowsCommands(
   cliAppDir: string,
-  expectedCommands: readonly string[]
+  expectedCommands: readonly string[],
 ): AsyncValidator {
   return {
-    type: 'async',
-    id: `cli-help-shows:${cliAppDir}:${expectedCommands.join(',')}`,
-    description: `CLI ${cliAppDir} --help shows commands: ${expectedCommands.join(', ')}`,
+    type: "async",
+    id: `cli-help-shows:${cliAppDir}:${expectedCommands.join(",")}`,
+    description: `CLI ${cliAppDir} --help shows commands: ${expectedCommands.join(", ")}`,
     async run(ctx) {
       const cwd = join(ctx.projectDir, cliAppDir);
-      const proc = Bun.spawn(['bun', 'run', 'src/index.ts', '--help'], {
+      const proc = Bun.spawn(["bun", "run", "src/index.ts", "--help"], {
         cwd,
-        stdin: 'ignore',
-        stdout: 'pipe',
-        stderr: 'pipe',
+        stdin: "ignore",
+        stdout: "pipe",
+        stderr: "pipe",
       });
       const exit = await proc.exited;
       const stdout = await new Response(proc.stdout).text();
@@ -143,10 +143,10 @@ export function cliHelpShowsCommands(
       const missing = expectedCommands.filter((cmd) => !stdout.includes(cmd));
       if (missing.length > 0) {
         return fail(
-          `CLI help missing commands: ${missing.join(', ')}. Output:\n${stdout.slice(0, 400)}`
+          `CLI help missing commands: ${missing.join(", ")}. Output:\n${stdout.slice(0, 400)}`,
         );
       }
-      return pass(`CLI help shows all expected commands: ${expectedCommands.join(', ')}`);
+      return pass(`CLI help shows all expected commands: ${expectedCommands.join(", ")}`);
     },
   };
 }
@@ -162,33 +162,33 @@ export function devStarts(timeoutMs = 5000, subdir?: string): AsyncValidator {
     : `bun run dev stays up for ${timeoutMs}ms`;
 
   return {
-    type: 'async',
+    type: "async",
     id,
     description: desc,
     async run(ctx) {
       const cwd = subdir ? join(ctx.projectDir, subdir) : ctx.projectDir;
-      const proc = Bun.spawn(['bun', 'run', 'dev'], {
+      const proc = Bun.spawn(["bun", "run", "dev"], {
         cwd,
-        stdin: 'ignore',
-        stdout: 'pipe',
-        stderr: 'pipe',
+        stdin: "ignore",
+        stdout: "pipe",
+        stderr: "pipe",
       });
 
       const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
       const exitedFirst = await Promise.race([
-        proc.exited.then((exit) => ({ type: 'exited' as const, exit })),
-        sleep(timeoutMs).then(() => ({ type: 'timeout' as const })),
+        proc.exited.then((exit) => ({ type: "exited" as const, exit })),
+        sleep(timeoutMs).then(() => ({ type: "timeout" as const })),
       ]);
 
-      if (exitedFirst.type === 'exited') {
+      if (exitedFirst.type === "exited") {
         const stderr = await new Response(proc.stderr).text();
         return fail(
-          `Dev server exited before timeout (exit ${exitedFirst.exit}): ${stderr.slice(0, 200)}`
+          `Dev server exited before timeout (exit ${exitedFirst.exit}): ${stderr.slice(0, 200)}`,
         );
       }
 
       proc.kill();
-      return pass('Dev server started and ran without crash');
+      return pass("Dev server started and ran without crash");
     },
   };
 }

@@ -4,7 +4,7 @@
  * Scripts phase only (no stubs) — uses bunx create-vite.
  */
 
-import { getScriptSteps } from './config.js';
+import { getScriptSteps } from "./config.js";
 
 /**
  * Create the frontend-vite app type config.
@@ -12,14 +12,14 @@ import { getScriptSteps } from './config.js';
  */
 export function createFrontendViteAppType() {
   const frontendVite = {
-    id: 'frontend-vite',
-    description: 'Vite frontend application',
-    dirPrefix: 'frontend',
-    defaultAppName: 'web',
+    id: "frontend-vite",
+    description: "Vite frontend application",
+    dirPrefix: "frontend",
+    defaultAppName: "web",
     isReactFrontend: true,
     phases: [
       {
-        type: 'scripts' as const,
+        type: "scripts" as const,
         getSteps: getScriptSteps,
       },
     ],

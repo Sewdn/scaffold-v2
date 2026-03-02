@@ -52,20 +52,14 @@ const TechNode = ({ tech, position, index }: TechNodeProps) => {
     >
       <div className="flex size-10 md:size-12 items-center justify-center overflow-hidden rounded-lg bg-muted">
         {tech.logo ? (
-          <img
-            src={tech.logo}
-            alt={tech.name}
-            className="size-6 md:size-8 object-contain"
-          />
+          <img src={tech.logo} alt={tech.name} className="size-6 md:size-8 object-contain" />
         ) : (
           <span className="text-base md:text-lg font-semibold text-muted-foreground">
             {tech.name.charAt(0)}
           </span>
         )}
       </div>
-      <span className="text-[10px] md:text-xs font-medium text-muted-foreground">
-        {tech.name}
-      </span>
+      <span className="text-[10px] md:text-xs font-medium text-muted-foreground">{tech.name}</span>
     </div>
   );
 };
@@ -79,26 +73,18 @@ const TechnologyPointCloud = ({
   technologies = TECHNOLOGIES,
   className,
 }: TechnologyPointCloudProps) => {
-  const positions = useMemo(
-    () => distributeInCloud(technologies.length),
-    [technologies.length]
-  );
+  const positions = useMemo(() => distributeInCloud(technologies.length), [technologies.length]);
 
   return (
     <div
       className={cn(
         "relative mx-auto aspect-[4/3] w-full max-w-4xl min-h-[280px] md:min-h-[320px]",
         "rounded-xl md:rounded-2xl border border-surface bg-card/30 p-3 md:p-4",
-        className
+        className,
       )}
     >
       {technologies.map((tech, index) => (
-        <TechNode
-          key={tech.id}
-          tech={tech}
-          position={positions[index]}
-          index={index}
-        />
+        <TechNode key={tech.id} tech={tech} position={positions[index]} index={index} />
       ))}
     </div>
   );

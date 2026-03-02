@@ -127,13 +127,11 @@ scaffold module user-management
 ## Best Practices
 
 1. **Naming Conventions**
-
    - Use kebab-case for package and app names
    - Use PascalCase for component names
    - Use descriptive, purpose-indicating names
 
 2. **Project Structure**
-
    - Keep related components in the same UI package
    - Group related services together
    - Use modules for features that require both UI and service components

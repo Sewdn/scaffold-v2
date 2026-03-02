@@ -4,4 +4,4 @@ export {
   DEFAULT_PACKAGE_MERGE,
   DEFAULT_PACKAGE_SCRIPTS,
   DEFAULT_MKDIR_PATHS,
-} from '@workspace/core-pkg-types';
+} from "@workspace/core-pkg-types";

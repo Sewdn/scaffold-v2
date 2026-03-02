@@ -5,16 +5,16 @@ description: Complete reference for all Scaffold CLI commands
 
 ## Command overview
 
-| Command | Description | Key Args/Flags |
-|---------|-------------|----------------|
-| `scaffold project <name>` | Create monorepo + optionally add apps | `--apps`, `--app-names`, `--non-interactive` |
-| `scaffold init <name>` | Initialize base monorepo structure only | `--packages`, `--non-interactive` |
-| `scaffold app <name> --type <type>` | Add application to existing project | `--type`, `--with-ui`, `--non-interactive` |
-| `scaffold service <name>` | Add service package | |
-| `scaffold ui <name>` | Add UI package | |
-| `scaffold component <name> --package <pkg>` | Add component to UI package | `--package` |
-| `scaffold module <name>` | Add module (service + UI packages) | |
-| `scaffold package <name> --type <ui\|service>` | Add generic package | `--type` |
+| Command                                        | Description                             | Key Args/Flags                               |
+| ---------------------------------------------- | --------------------------------------- | -------------------------------------------- |
+| `scaffold project <name>`                      | Create monorepo + optionally add apps   | `--apps`, `--app-names`, `--non-interactive` |
+| `scaffold init <name>`                         | Initialize base monorepo structure only | `--packages`, `--non-interactive`            |
+| `scaffold app <name> --type <type>`            | Add application to existing project     | `--type`, `--with-ui`, `--non-interactive`   |
+| `scaffold service <name>`                      | Add service package                     |                                              |
+| `scaffold ui <name>`                           | Add UI package                          |                                              |
+| `scaffold component <name> --package <pkg>`    | Add component to UI package             | `--package`                                  |
+| `scaffold module <name>`                       | Add module (service + UI packages)      |                                              |
+| `scaffold package <name> --type <ui\|service>` | Add generic package                     | `--type`                                     |
 
 ## scaffold project
 

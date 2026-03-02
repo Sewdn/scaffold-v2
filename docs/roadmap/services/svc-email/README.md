@@ -6,12 +6,12 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-template](add-template.md) | Add an email template | `src/templates/<name>.ts` |
-| [add-transport](add-transport.md) | Add a transport config | `src/transports/<name>.ts` |
-| [add-webhook-handler](add-webhook-handler.md) | Add a webhook handler | `src/webhooks/<name>.ts` |
-| [add-queue-handler](add-queue-handler.md) | Add a queue-based send handler | `src/queue/<name>.ts` |
+| Command                                       | Description                    | Spec                       |
+| --------------------------------------------- | ------------------------------ | -------------------------- |
+| [add-template](add-template.md)               | Add an email template          | `src/templates/<name>.ts`  |
+| [add-transport](add-transport.md)             | Add a transport config         | `src/transports/<name>.ts` |
+| [add-webhook-handler](add-webhook-handler.md) | Add a webhook handler          | `src/webhooks/<name>.ts`   |
+| [add-queue-handler](add-queue-handler.md)     | Add a queue-based send handler | `src/queue/<name>.ts`      |
 
 ## Underlying Technology
 

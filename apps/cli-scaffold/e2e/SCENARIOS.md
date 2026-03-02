@@ -84,7 +84,6 @@ When implementing a scenario, copy this template:
 - [x] Path: `package.json`
 - [x] Path: `turbo.json`
 - [x] Path: `packages/typescript-config`
-- [x] Path: `packages/eslint-config`
 - [x] Script: `build`
 - [x] Build succeeds (Turbo)
 
@@ -556,27 +555,27 @@ Scenarios for CLI scaffolding live in `packages/app-cli/src/e2e/scenarios/` (imp
 
 All scaffold commands and app types support non-interactive mode:
 
-| Command       | Non-interactive flag   | Required args                                  |
-|---------------|------------------------|------------------------------------------------|
-| `init`        | `--non-interactive`    | name, optional: `--packages`, `--domain`, etc. |
-| `project`     | `--non-interactive`    | name, `--apps`, `--app-names`                  |
-| `app`         | `--non-interactive`    | name, `--type`                                 |
-| `create`      | `--non-interactive`    | name (others inferred)                          |
-| `service`     | (no prompts)           | name                                           |
-| `module`      | (no prompts)           | name                                           |
-| `ui`          | (no prompts)           | name                                           |
-| `component`   | (no prompts)           | name, `--package`                              |
-| `package`     | (no prompts)           | name, `--type`                                 |
-| `cli`         | (no prompts)           | `add-command`/`add-service` + name, `--app`, `--description` |
+| Command     | Non-interactive flag | Required args                                                |
+| ----------- | -------------------- | ------------------------------------------------------------ |
+| `init`      | `--non-interactive`  | name, optional: `--packages`, `--domain`, etc.               |
+| `project`   | `--non-interactive`  | name, `--apps`, `--app-names`                                |
+| `app`       | `--non-interactive`  | name, `--type`                                               |
+| `create`    | `--non-interactive`  | name (others inferred)                                       |
+| `service`   | (no prompts)         | name                                                         |
+| `module`    | (no prompts)         | name                                                         |
+| `ui`        | (no prompts)         | name                                                         |
+| `component` | (no prompts)         | name, `--package`                                            |
+| `package`   | (no prompts)         | name, `--type`                                               |
+| `cli`       | (no prompts)         | `add-command`/`add-service` + name, `--app`, `--description` |
 
-| App type       | `argsForNonInteractive` support |
-|----------------|----------------------------------|
-| frontend-vite  | Yes — `--template react-ts`      |
-| frontend-nextjs| Yes — full flags                 |
-| frontend-tanstack | Yes — no `--interactive`      |
-| slide-deck     | Yes — `--template vanilla-ts`    |
-| documentation  | Yes — `--template starlight --install --no-git` |
-| backend, cli, mcp-server | Inherently non-interactive (stub-based) |
+| App type                 | `argsForNonInteractive` support                 |
+| ------------------------ | ----------------------------------------------- |
+| frontend-vite            | Yes — `--template react-ts`                     |
+| frontend-nextjs          | Yes — full flags                                |
+| frontend-tanstack        | Yes — no `--interactive`                        |
+| slide-deck               | Yes — `--template vanilla-ts`                   |
+| documentation            | Yes — `--template starlight --install --no-git` |
+| backend, cli, mcp-server | Inherently non-interactive (stub-based)         |
 
 ---
 

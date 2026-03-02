@@ -1,0 +1,161 @@
+---
+description: File structure to be used in this project
+globs:
+alwaysApply: true
+---
+
+# Project File Structure.
+
+This project is a monorepo setup that was scaffolded using the `scaffold` command. You can access all of these scaffold commands using an MCP server that exposes the needed scaffolding tools. When using the scaffold tool consistently, the project file structure will remain intact.
+
+## Project Structure Overview:
+
+0. **Rules (`/.cursor/rules`)**
+
+- this is your memory. With every task I give you, all these rules are added to the context
+- you have to edit these rules, to keep track of the progress of the project
+- when `@rules` is used as a reference, we refer to this directory
+
+1. **Applications (`/apps`)**
+
+   - contains packages per app that was scaffolded in the project
+   - every app name is prefixed by the type of app: frontend, backend, cli, mcp, slides, docs
+
+2. **Shared Packages (`/packages`)**
+
+   2.1 Services:
+
+- `svc-config`: Configuration service
+- `svc-*`: Custom service that was scaffolded specifically for this project
+- all `svc-` prefixed packages are purposed to be used only in the backend (by backend application or other services) (or by a CLI app). So never add a `ui-` prefixed package as dependency to a `svc-` prefixed package!
+
+  2.2 Shared Logic:
+
+- `domain`: Shared business logic and types
+
+  2.3 UI Related:
+
+- `ui`: Core UI components using shadcn (`@workspace/ui`). Add new ShadCN components in this package using `bunx shadcn@latest add [shadcn-component-name]`
+- `ui-lib`: Custom UI components library (`@workspace/ui-lib` dependent on `@workspace/ui`)
+- `ui-*`: Custom UI Components library that was scaffolded specifically for this project (always dependent on both `@workspace/ui` and `@workspace/ui-lib`)
+- all `ui-` prefixed packages are purposed to be used only in the frontend (by frontend applications or other ui packages). So never add a `svc-` prefixed package as dependency to a `ui-` prefixed package!
+
+  2.4 Shared Configuration:
+
+- `typescript-config`: Shared TypeScript configurations
+
+  2.5 Core Utilities:
+
+- `core-utils`: Formatting (`toPascalCase`, `toKebabCase`), entity formatting (`formatEntityName`, `formatProject`, etc.), validation (`validateProjectName`, `validateAppName`, etc.), and app resolution (`ensureProjectRoot`, `resolveAppByPrefix`). Import from `@workspace/core-utils` in CLI commands and app-types.
+
+  2.6 E2E Testing:
+
+- `core-e2e`: Shared E2E types (`Scenario`, `Validator`, etc.) and validators (`pathExists`, `buildSucceeds`, etc.) for scaffold CLI scenarios. Import from `@workspace/core-e2e` in app-type E2E scenarios.
+
+  2.7 App-type Packages:
+
+- `app-cli`: CLI app-type scaffolding (config, expansion commands, stubs, e2e scenarios). Import from `@workspace/app-cli` and `@workspace/app-cli/e2e/scenarios`. Use `createCliAppType({ createGeneratePhase, deps })` in the registry.
+
+3. **UI Components (`/packages/ui-lib/src/components`)**
+
+- contains directory per component
+- every component is strictly presentational
+- business logic and presentation (styling) is separated by providing a custom hook that implements all of the logic
+- every component has a storybook file for all of the stories needed to showcase and document the component and its use
+- hook and presentational component can be combined in a wrapper component
+- hook and presentation component share the same type interfaces
+
+4. **Modules**
+
+- 2 separate (loosely coupled) packages are setup when scaffolfing a module: a service package and a ui package.
+- they are not dependent on each other!
+- they only loosely share types by both depending on the domain!
+- they will be tied together in an application, by providing a backend implementation (using the module service package) to the context provider for the ui components
+
+## Scaffold CLI Package Modules (Extensibility)
+
+Core package types (domain, svc-config, ui, ui-lib) are workspace packages under `packages/pkg-*` (e.g. `pkg-domain`, `pkg-svc-config`, `pkg-ui`, `pkg-ui-lib`). These provide scaffolding for commonly used monorepo packages shared across applications. Service packages (svc-prisma, svc-workos, etc.) remain under `apps/cli-scaffold/src/packages/` for separate organization.
+
+Each package module provides:
+
+- **PackageConfig**: `getMerge`, `getDependencies`, `getDevDependencies`, `getMkdirPaths`, `getScripts`, `stubsDir`
+- **stubs/**: Mustache-templated source files
+
+To add a new **core** package type (part of monorepo init, e.g. domain, ui, ui-lib, svc-config):
+
+1. Create `packages/pkg-{id}/` with `src/index.ts` exporting a `PackageConfig` (use `createPackageConfig` from `@workspace/core-pkg-types`)
+2. Create `packages/pkg-{id}/stubs/` with `.stub` files
+3. Register in `apps/cli-scaffold/src/packages/registry.ts`
+4. Optionally add to `OPTIONAL_PACKAGE_IDS` for project create prompts
+
+To add a new **service** package type (e.g. svc-prisma, svc-workos, svc-elysia-api):
+
+1. Create `apps/cli-scaffold/src/packages/{id}/index.ts` exporting a `PackageConfig`
+2. Create `apps/cli-scaffold/src/packages/{id}/stubs/` with `.stub` files
+3. Register in `apps/cli-scaffold/src/packages/registry.ts`
+
+This mirrors the TanStack Create add-on philosophy: frameworks/libraries are modular and composable.
+
+## Scaffolding Tool Commands
+
+- **mcp_scaffold_testme**
+
+  - Generates test scaffolding based on a message
+  - Can optionally add various app types to be tested
+  - Parameters:
+    - Message to process
+    - Optional list of apps (frontend-nextjs, frontend-vite, cli, backend)
+    - Working directory
+
+- **mcp_scaffold_project**
+
+  - Creates a new project with specified structure
+  - Parameters:
+    - Project name
+    - Template type (analysis or no-analysis)
+    - List of apps to include (frontend-nextjs, frontend-vite, cli, backend)
+    - Working directory
+
+- **mcp_scaffold_service**
+
+  - Adds a new service package to the project
+  - Parameters:
+    - Service name
+    - Working directory
+
+- **mcp_scaffold_ui**
+
+  - Creates a new UI package in the project
+  - Parameters:
+    - UI package name
+    - Working directory
+
+- **mcp_scaffold_app**
+
+  - Adds a new application to the project
+  - Parameters:
+    - App name
+    - App type (frontend-nextjs, frontend-vite, cli, backend, mcp-server, slide-deck, docs)
+    - Working directory
+
+- **mcp_scaffold_component**
+
+  - Adds a new component to an existing UI package
+  - Parameters:
+    - Component name
+    - UI package name to add the component to
+    - Working directory
+
+- **mcp_scaffold_module**
+
+  - Creates a new module (generates both service and UI packages)
+  - Parameters:
+    - Module name
+    - Working directory
+
+- **mcp_scaffold_package**
+  - Adds a new package to the project
+  - Parameters:
+    - Package name
+    - Package type (ui or service)
+    - Working directory

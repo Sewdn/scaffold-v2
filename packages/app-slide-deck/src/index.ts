@@ -4,7 +4,7 @@
  * Scripts phase only (no stubs) — Vite + Reveal.js.
  */
 
-import { getScriptSteps } from './config.js';
+import { getScriptSteps } from "./config.js";
 
 /**
  * Create the slide-deck app type config.
@@ -12,13 +12,13 @@ import { getScriptSteps } from './config.js';
  */
 export function createSlideDeckAppType() {
   const slideDeck = {
-    id: 'slide-deck',
-    description: 'Reveal.js presentation',
-    dirPrefix: 'slides',
-    defaultAppName: 'slides',
+    id: "slide-deck",
+    description: "Reveal.js presentation",
+    dirPrefix: "slides",
+    defaultAppName: "slides",
     phases: [
       {
-        type: 'scripts' as const,
+        type: "scripts" as const,
         getSteps: () => getScriptSteps(),
       },
     ],

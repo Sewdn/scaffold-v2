@@ -6,19 +6,19 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-job](add-job.md) | Add a cron job with schedule | `src/jobs/<name>.ts` |
-| [add-task](add-task.md) | Add a task script | `src/tasks/<name>.ts` |
+| Command                 | Description                  | Spec                  |
+| ----------------------- | ---------------------------- | --------------------- |
+| [add-job](add-job.md)   | Add a cron job with schedule | `src/jobs/<name>.ts`  |
+| [add-task](add-task.md) | Add a task script            | `src/tasks/<name>.ts` |
 
 ## Job Execution: Local vs Deployed
 
 Use **Effect Cron** ([docs](https://effect.website/docs/scheduling/cron/)) for all cron schedule definition, parsing, and validation. Jobs run in one of two modes:
 
-| Mode | Trigger | Use case |
-|------|---------|----------|
-| **Local** | In-process via `Effect.repeat(task, Schedule.cron(cron))` | Long-lived worker; single instance; dev or self-hosted |
-| **Deployed** | External scheduler invokes `bun run src/tasks/<name>.ts` | Railway cron, GitHub Actions, system crontab; serverless/event-driven |
+| Mode         | Trigger                                                   | Use case                                                              |
+| ------------ | --------------------------------------------------------- | --------------------------------------------------------------------- |
+| **Local**    | In-process via `Effect.repeat(task, Schedule.cron(cron))` | Long-lived worker; single instance; dev or self-hosted                |
+| **Deployed** | External scheduler invokes `bun run src/tasks/<name>.ts`  | Railway cron, GitHub Actions, system crontab; serverless/event-driven |
 
 Registry: `src/jobs/jobs.config.ts` (or similar) lists jobs; each entry specifies `local` or `deployed` and the cron expression. Deployed jobs also appear in `railway.json` / `.github/workflows`.
 

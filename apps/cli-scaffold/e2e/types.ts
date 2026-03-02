@@ -11,4 +11,4 @@ export type {
   ValidationContext,
   ValidationResult,
   Validator,
-} from '@workspace/core-e2e';
+} from "@workspace/core-e2e";

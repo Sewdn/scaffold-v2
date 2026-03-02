@@ -11,29 +11,37 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
     "scaffold": "bun run apps/cli-scaffold/src/index.ts",
     "test": "bun test",
     "test:e2e": "bun test apps/cli-scaffold/e2e/",
     "e2e:report": "bun run apps/cli-scaffold/e2e/report-viewer.ts",
     "e2e:report:scenario": "bun run apps/cli-scaffold/e2e/report-viewer.ts",
+    "skills:link": "node apps/cli-scaffold/scripts/write-skills-symlinks.mjs",
     "docs": "bun run --filter=@scaffold-v2/docs-docs dev",
     "docs:build": "cd apps/cli-scaffold && bun run generate:docs-data && cd ../.. && bun run build --filter=@scaffold-v2/docs-docs",
     "landing": "bun run --filter=frontend-landing dev"
   },
+  "dependencies": {
+    "mustache": "^4.2.0"
+  },
   "devDependencies": {
     "@types/mustache": "^4.2.6",
-    "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
-    "prettier": "^3.5.1",
-    "turbo": "^2.4.2",
-    "typescript": "^5.8.2"
+    "oxfmt": "^0.36.0",
+    "oxlint": "^1.51.0",
+    "turbo": "^2.8.12",
+    "typescript": "^5.9.3"
   },
-  "packageManager": "bun@1.2.2",
+  "overrides": {
+    "oxfmt": "^0.36.0",
+    "oxlint": "^1.51.0",
+    "turbo": "^2.8.12",
+    "typescript": "^5.9.3"
+  },
   "engines": {
     "node": ">=20"
   },
-  "dependencies": {
-    "mustache": "^4.2.0"
-  }
+  "packageManager": "bun@1.2.2"
 }

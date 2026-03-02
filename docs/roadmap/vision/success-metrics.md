@@ -1,13 +1,13 @@
 # Success Metrics
 
-| Metric | Target |
-|--------|--------|
-| Expansion commands implemented | 60+ |
-| App types with expansion | 20+ |
-| Service packages with expansion | 17+ |
-| E2E scenarios for expansion | 15+ |
-| Determinism | Same command → identical output |
-| AI agent token reduction | Measurable via fewer structural prompts |
+| Metric                          | Target                                  |
+| ------------------------------- | --------------------------------------- |
+| Expansion commands implemented  | 60+                                     |
+| App types with expansion        | 20+                                     |
+| Service packages with expansion | 17+                                     |
+| E2E scenarios for expansion     | 15+                                     |
+| Determinism                     | Same command → identical output         |
+| AI agent token reduction        | Measurable via fewer structural prompts |
 
 ## Technology Alignment
 

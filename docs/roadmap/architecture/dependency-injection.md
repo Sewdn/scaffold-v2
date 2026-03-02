@@ -5,7 +5,9 @@
 ```ts
 export function createUserService(deps?: { logger?: Logger }) {
   return {
-    addUser: (user: User) => { /* ... */ },
+    addUser: (user: User) => {
+      /* ... */
+    },
     // ...
   };
 }

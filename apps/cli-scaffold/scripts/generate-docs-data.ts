@@ -7,20 +7,17 @@
  * Run before docs build: bun run scripts/generate-docs-data.ts
  */
 
-import { writeFileSync, mkdirSync } from 'fs';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
-import {
-  getAllAppTypeIds,
-  getAppTypeConfig,
-} from '../src/app-types/registry.js';
-import { getCliExpansionCommands } from '@workspace/app-cli';
+import { writeFileSync, mkdirSync } from "fs";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+import { getAllAppTypeIds, getAppTypeConfig } from "../src/app-types/registry.js";
+import { getCliExpansionCommands } from "@workspace/app-cli";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = join(__dirname, '..', '..', '..');
-const DOCS_ROOT = join(REPO_ROOT, 'apps', 'docs-docs', 'src');
-const GENERATED_DIR = join(DOCS_ROOT, 'generated');
-const APP_TYPES_CONTENT_DIR = join(DOCS_ROOT, 'content', 'docs', 'reference', 'app-types');
+const REPO_ROOT = join(__dirname, "..", "..", "..");
+const DOCS_ROOT = join(REPO_ROOT, "apps", "docs-docs", "src");
+const GENERATED_DIR = join(DOCS_ROOT, "generated");
+const APP_TYPES_CONTENT_DIR = join(DOCS_ROOT, "content", "docs", "reference", "app-types");
 
 export interface AppTypeDocEntry {
   id: string;
@@ -41,14 +38,14 @@ function getPackageName(appTypeId: string): string {
 
 function formatTitle(id: string): string {
   const titles: Record<string, string> = {
-    cli: 'CLI',
-    backend: 'Backend',
-    'frontend-nextjs': 'Frontend (Next.js)',
-    'frontend-vite': 'Frontend (Vite)',
-    'frontend-tanstack': 'Frontend (TanStack)',
-    'mcp-server': 'MCP Server',
-    'slide-deck': 'Slide Deck',
-    documentation: 'Documentation',
+    cli: "CLI",
+    backend: "Backend",
+    "frontend-nextjs": "Frontend (Next.js)",
+    "frontend-vite": "Frontend (Vite)",
+    "frontend-tanstack": "Frontend (TanStack)",
+    "mcp-server": "MCP Server",
+    "slide-deck": "Slide Deck",
+    documentation: "Documentation",
   };
   return titles[id] ?? id;
 }
@@ -94,7 +91,7 @@ function collectDocsData(): ScaffoldDocsData {
     if (!config) {
       throw new Error(`App type config not found: ${id}`);
     }
-    const expansionCommands = id === 'cli' ? getCliExpansionCommands() : [];
+    const expansionCommands = id === "cli" ? getCliExpansionCommands() : [];
     return {
       id: config.id,
       description: config.description,
@@ -114,19 +111,16 @@ const data = collectDocsData();
 
 // Write JSON
 mkdirSync(GENERATED_DIR, { recursive: true });
-const jsonPath = join(GENERATED_DIR, 'scaffold-data.json');
-writeFileSync(jsonPath, JSON.stringify(data, null, 2), 'utf-8');
+const jsonPath = join(GENERATED_DIR, "scaffold-data.json");
+writeFileSync(jsonPath, JSON.stringify(data, null, 2), "utf-8");
 console.log(`Generated ${jsonPath}`);
 
 // Write per-app-type pages and overview
 mkdirSync(APP_TYPES_CONTENT_DIR, { recursive: true });
 
 const tableRows = data.appTypes
-  .map(
-    (e) =>
-      `| [${formatTitle(e.id)}](./${e.id}) | \`${e.dirPrefix}\` | ${e.description} |`,
-  )
-  .join('\n');
+  .map((e) => `| [${formatTitle(e.id)}](./${e.id}) | \`${e.dirPrefix}\` | ${e.description} |`)
+  .join("\n");
 
 const overviewContent = `---
 title: App Types
@@ -157,11 +151,11 @@ The app type registry is extensible. New types can be added by:
 Each phase can run scripts (bun, bunx, npx, shell) or generate stubs.
 `;
 
-writeFileSync(join(APP_TYPES_CONTENT_DIR, 'index.md'), overviewContent, 'utf-8');
-console.log(`Generated ${join(APP_TYPES_CONTENT_DIR, 'index.md')}`);
+writeFileSync(join(APP_TYPES_CONTENT_DIR, "index.md"), overviewContent, "utf-8");
+console.log(`Generated ${join(APP_TYPES_CONTENT_DIR, "index.md")}`);
 
 for (const entry of data.appTypes) {
   const pagePath = join(APP_TYPES_CONTENT_DIR, `${entry.id}.md`);
-  writeFileSync(pagePath, renderAppTypePage(entry), 'utf-8');
+  writeFileSync(pagePath, renderAppTypePage(entry), "utf-8");
   console.log(`Generated ${pagePath}`);
 }

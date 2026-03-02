@@ -3,7 +3,7 @@
  * Scripts phase only (bun create next-app); no stubs.
  */
 
-import { getScriptSteps } from './config.js';
+import { getScriptSteps } from "./config.js";
 
 /** Options for createFrontendNextjsAppType factory (reserved for future use) */
 export interface CreateFrontendNextjsAppTypeOptions {
@@ -16,14 +16,14 @@ export interface CreateFrontendNextjsAppTypeOptions {
  */
 export function createFrontendNextjsAppType(_opts?: CreateFrontendNextjsAppTypeOptions) {
   const frontendNextjs = {
-    id: 'frontend-nextjs',
-    description: 'Next.js frontend application',
-    dirPrefix: 'frontend',
-    defaultAppName: 'web',
+    id: "frontend-nextjs",
+    description: "Next.js frontend application",
+    dirPrefix: "frontend",
+    defaultAppName: "web",
     isReactFrontend: true,
     phases: [
       {
-        type: 'scripts' as const,
+        type: "scripts" as const,
         getSteps: getScriptSteps,
       },
     ],

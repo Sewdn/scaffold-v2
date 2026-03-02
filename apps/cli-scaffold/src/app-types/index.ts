@@ -4,4 +4,4 @@ export {
   hasGeneratePhase,
   getStubsDir,
   isReactFrontend,
-} from './registry.js';
+} from "./registry.js";

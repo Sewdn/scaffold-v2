@@ -3,15 +3,15 @@
  * Exports a factory to create the backend app type config.
  */
 
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
-import { createGeneratePhase, type AppTypeDepsOptions } from '@workspace/core-app-types';
-import { getPackageMerge, BACKEND_APP_MKDIR_PATHS } from './config.js';
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+import { createGeneratePhase, type AppTypeDepsOptions } from "@workspace/core-app-types";
+import { getPackageMerge, BACKEND_APP_MKDIR_PATHS } from "./config.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const STUBS_DIR = join(__dirname, '..', 'stubs');
+const STUBS_DIR = join(__dirname, "..", "stubs");
 
-export { getPackageMerge, BACKEND_APP_SCRIPTS, BACKEND_APP_MKDIR_PATHS } from './config.js';
+export { getPackageMerge, BACKEND_APP_SCRIPTS, BACKEND_APP_MKDIR_PATHS } from "./config.js";
 
 /**
  * Create the backend app type config.
@@ -26,10 +26,10 @@ export function createBackendAppType(opts: AppTypeDepsOptions) {
   });
 
   const backend = {
-    id: 'backend',
-    description: 'Backend API (Elysia.js)',
-    dirPrefix: 'backend',
-    defaultAppName: 'api',
+    id: "backend",
+    description: "Backend API (Elysia.js)",
+    dirPrefix: "backend",
+    defaultAppName: "api",
     phases: [phase],
   };
 

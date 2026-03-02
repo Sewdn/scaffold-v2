@@ -5,7 +5,7 @@
 
 /** Minimal script step shape (matches CommandStep from cli-scaffold) */
 interface ScriptStep {
-  type: 'bun';
+  type: "bun";
   command: string;
   args?: string[];
   argsForNonInteractive?: string[];
@@ -17,17 +17,17 @@ interface ScriptStep {
 export function getScriptSteps(): ScriptStep[] {
   return [
     {
-      type: 'bun',
-      command: 'create',
-      args: ['vite@latest', '{{appDir}}', '--interactive'],
-      argsForNonInteractive: ['vite@latest', '{{appDir}}', '--template', 'vanilla-ts'],
+      type: "bun",
+      command: "create",
+      args: ["vite@latest", "{{appDir}}", "--interactive"],
+      argsForNonInteractive: ["vite@latest", "{{appDir}}", "--template", "vanilla-ts"],
       interactive: true,
     },
     {
-      type: 'bun',
-      command: 'add',
-      args: ['reveal.js'],
-      cwd: '{{appDir}}',
+      type: "bun",
+      command: "add",
+      args: ["reveal.js"],
+      cwd: "{{appDir}}",
     },
   ];
 }

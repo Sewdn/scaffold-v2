@@ -6,14 +6,14 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-component](add-component.md) | Add a new component | `src/components/<Name>/` |
-| [add-hook](add-hook.md) | Add a hook for existing component | `src/components/<Name>/use<Name>.ts` |
-| [add-story](add-story.md) | Add Storybook story for component | `src/components/<Name>/<Name>.stories.tsx` |
-| [add-variant](add-variant.md) | Add a variant to component | Extend component props (cva) |
-| [add-composable](add-composable.md) | Add a shared hook | `src/hooks/<name>.ts` |
-| [add-wrapper](add-wrapper.md) | Add container (hook + presentational) | `src/components/<Name>/<Name>Container.tsx` |
+| Command                             | Description                           | Spec                                        |
+| ----------------------------------- | ------------------------------------- | ------------------------------------------- |
+| [add-component](add-component.md)   | Add a new component                   | `src/components/<Name>/`                    |
+| [add-hook](add-hook.md)             | Add a hook for existing component     | `src/components/<Name>/use<Name>.ts`        |
+| [add-story](add-story.md)           | Add Storybook story for component     | `src/components/<Name>/<Name>.stories.tsx`  |
+| [add-variant](add-variant.md)       | Add a variant to component            | Extend component props (cva)                |
+| [add-composable](add-composable.md) | Add a shared hook                     | `src/hooks/<name>.ts`                       |
+| [add-wrapper](add-wrapper.md)       | Add container (hook + presentational) | `src/components/<Name>/<Name>Container.tsx` |
 
 ## Technology Stack & Patterns
 

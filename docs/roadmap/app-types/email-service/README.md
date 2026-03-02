@@ -6,11 +6,11 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-template](add-template.md) | Add an email template | `src/templates/<name>.ts` |
-| [add-handler](add-handler.md) | Add a send handler (e.g. welcome, reset) | `src/handlers/<name>.ts` |
-| [add-transport](add-transport.md) | Add a transport config | `src/transports/<name>.ts` |
+| Command                           | Description                              | Spec                       |
+| --------------------------------- | ---------------------------------------- | -------------------------- |
+| [add-template](add-template.md)   | Add an email template                    | `src/templates/<name>.ts`  |
+| [add-handler](add-handler.md)     | Add a send handler (e.g. welcome, reset) | `src/handlers/<name>.ts`   |
+| [add-transport](add-transport.md) | Add a transport config                   | `src/transports/<name>.ts` |
 
 ## Underlying Technology
 

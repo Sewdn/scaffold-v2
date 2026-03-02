@@ -6,11 +6,11 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-router](add-router.md) | Add a tRPC router | `src/routers/<name>.ts` |
-| [add-procedure](add-procedure.md) | Add a procedure (query/mutation) | `src/procedures/<name>.ts` |
-| [add-middleware](add-middleware.md) | Add tRPC middleware | `src/middleware/<name>.ts` |
+| Command                             | Description                      | Spec                       |
+| ----------------------------------- | -------------------------------- | -------------------------- |
+| [add-router](add-router.md)         | Add a tRPC router                | `src/routers/<name>.ts`    |
+| [add-procedure](add-procedure.md)   | Add a procedure (query/mutation) | `src/procedures/<name>.ts` |
+| [add-middleware](add-middleware.md) | Add tRPC middleware              | `src/middleware/<name>.ts` |
 
 ## Underlying Technology
 

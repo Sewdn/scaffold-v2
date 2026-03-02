@@ -1,19 +1,16 @@
-import { existsSync } from 'fs';
-import { join } from 'path';
-import {
-  generateFromStubs,
-  resolvePackageStubsDir,
-} from '../services/generator.js';
+import { existsSync } from "fs";
+import { join } from "path";
+import { generateFromStubs, resolvePackageStubsDir } from "../services/generator.js";
 import {
   getPackageConfig,
   OPTIONAL_PACKAGE_IDS,
   type OptionalPackage,
-} from '../packages/registry.js';
-import { Effect } from 'effect';
-import type { CommandStep } from '../types/template.js';
-import { runSteps } from '../orchestrator.js';
-import { getPackageInitStepsFromConfig } from './init-steps.js';
-import type { PackageContext } from '@workspace/core-pkg-types';
+} from "../packages/registry.js";
+import { Effect } from "effect";
+import type { CommandStep } from "../types/template.js";
+import { runSteps } from "../orchestrator.js";
+import { getPackageInitStepsFromConfig } from "./init-steps.js";
+import type { PackageContext } from "@workspace/core-pkg-types";
 
 export const OPTIONAL_PACKAGES = OPTIONAL_PACKAGE_IDS;
 export type { OptionalPackage };
@@ -34,7 +31,7 @@ export function getOptionalPackageSteps(
 ): CommandStep[] {
   if (selected.length === 0) return [];
 
-  const hasDomain = selected.includes('domain');
+  const hasDomain = selected.includes("domain");
   const steps: CommandStep[] = [];
 
   for (const pkg of selected) {
@@ -65,18 +62,18 @@ export async function ensureUIPackagesExist(
   projectDir: string,
   projectName: string,
 ): Promise<void> {
-  const needsUi = !existsSync(join(projectDir, 'packages/ui', 'package.json'));
-  const needsUiLib = !existsSync(join(projectDir, 'packages/ui-lib', 'package.json'));
+  const needsUi = !existsSync(join(projectDir, "packages/ui", "package.json"));
+  const needsUiLib = !existsSync(join(projectDir, "packages/ui-lib", "package.json"));
   if (!needsUi && !needsUiLib) return;
 
   const toCreate: OptionalPackage[] = [];
-  if (needsUi) toCreate.push('ui');
-  if (needsUiLib) toCreate.push('ui-lib');
+  if (needsUi) toCreate.push("ui");
+  if (needsUiLib) toCreate.push("ui-lib");
 
   const steps = getOptionalPackageSteps(projectName, toCreate);
   if (steps.length === 0) return;
 
-  const parentDir = join(projectDir, '..');
+  const parentDir = join(projectDir, "..");
   await Effect.runPromise(
     runSteps(steps, {
       cwd: parentDir,
@@ -92,8 +89,8 @@ export async function ensureUIPackagesExist(
  */
 export function hasUIPackages(projectDir: string): boolean {
   return (
-    existsSync(join(projectDir, 'packages/ui', 'package.json')) &&
-    existsSync(join(projectDir, 'packages/ui-lib', 'package.json'))
+    existsSync(join(projectDir, "packages/ui", "package.json")) &&
+    existsSync(join(projectDir, "packages/ui-lib", "package.json"))
   );
 }
 
@@ -106,18 +103,18 @@ export async function scaffoldOptionalPackageFiles(
   selected: readonly OptionalPackage[],
   projectName?: string,
 ): Promise<void> {
-  const pkgName = projectName ? `@${projectName}` : '@workspace';
+  const pkgName = projectName ? `@${projectName}` : "@workspace";
   const projectRoot = projectDir;
-  const hasDomain = selected.includes('domain');
+  const hasDomain = selected.includes("domain");
 
   for (const pkg of selected) {
     const config = getPackageConfig(pkg);
     if (!config) continue;
 
-    const packageDir = join(projectDir, 'packages', pkg);
+    const packageDir = join(projectDir, "packages", pkg);
     const packageName = `${pkgName}/${pkg}`;
     const ctx = {
-      projectName: projectName ?? 'workspace',
+      projectName: projectName ?? "workspace",
       packageName,
       hasDomain,
     };

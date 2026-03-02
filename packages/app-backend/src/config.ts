@@ -5,11 +5,11 @@
 
 /** Scripts written to scaffolded backend app package.json */
 export const BACKEND_APP_SCRIPTS = {
-  start: 'bun run src/index.ts',
+  start: "bun run src/index.ts",
 } as const;
 
 /** Directory structure for scaffolded backend apps */
-export const BACKEND_APP_MKDIR_PATHS = ['src'] as const;
+export const BACKEND_APP_MKDIR_PATHS = ["src"] as const;
 
 export interface PackageMergeContext {
   projectName: string;

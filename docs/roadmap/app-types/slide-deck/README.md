@@ -6,11 +6,11 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-slide](add-slide.md) | Add a slide section | `slides/<name>.html` or `index.html` |
-| [add-section](add-section.md) | Add a vertical section (group of slides) | `slides/<name>/` |
-| [add-fragment](add-fragment.md) | Add a fragment template for incremental reveals | `slides/fragments/<name>.html` |
+| Command                         | Description                                     | Spec                                 |
+| ------------------------------- | ----------------------------------------------- | ------------------------------------ |
+| [add-slide](add-slide.md)       | Add a slide section                             | `slides/<name>.html` or `index.html` |
+| [add-section](add-section.md)   | Add a vertical section (group of slides)        | `slides/<name>/`                     |
+| [add-fragment](add-fragment.md) | Add a fragment template for incremental reveals | `slides/fragments/<name>.html`       |
 
 ## Underlying Technology
 

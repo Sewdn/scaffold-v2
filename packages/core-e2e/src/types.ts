@@ -5,15 +5,15 @@
 
 /** Scaffold subcommand: project | init | app | service | ui | component | module | package | cli */
 export type ScaffoldCommand =
-  | 'project'
-  | 'init'
-  | 'app'
-  | 'service'
-  | 'ui'
-  | 'component'
-  | 'module'
-  | 'package'
-  | 'cli';
+  | "project"
+  | "init"
+  | "app"
+  | "service"
+  | "ui"
+  | "component"
+  | "module"
+  | "package"
+  | "cli";
 
 /** A single scaffold command step. Args are passed to the subcommand (e.g. ["my-app", "--type", "frontend-vite"]). */
 export interface ScaffoldStep {
@@ -35,7 +35,7 @@ export interface ValidationResult {
 
 /** A validation that runs synchronously. */
 export interface SyncValidator {
-  readonly type: 'sync';
+  readonly type: "sync";
   readonly id: string;
   readonly description: string;
   run(ctx: ValidationContext): ValidationResult;
@@ -43,7 +43,7 @@ export interface SyncValidator {
 
 /** A validation that runs asynchronously (e.g. build, dev server). */
 export interface AsyncValidator {
-  readonly type: 'async';
+  readonly type: "async";
   readonly id: string;
   readonly description: string;
   run(ctx: ValidationContext): Promise<ValidationResult>;

@@ -1,0 +1,1 @@
+../../../packages/app-documentation/SKILL.md

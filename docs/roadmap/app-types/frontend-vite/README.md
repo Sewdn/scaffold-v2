@@ -6,13 +6,13 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-page](add-page.md) | Add a page component and route entry | `src/pages/<Name>.tsx`, routes config |
-| [add-layout](add-layout.md) | Add a layout wrapper component | `src/layouts/<Name>.tsx` |
-| [add-route](add-route.md) | Add a route with path + component | Routes config |
-| [add-component](add-component.md) | Add a component in `components/` | `src/components/<Name>/` |
-| [add-hook](add-hook.md) | Add a custom hook in `hooks/` | `src/hooks/use<Name>.ts` |
+| Command                           | Description                          | Spec                                  |
+| --------------------------------- | ------------------------------------ | ------------------------------------- |
+| [add-page](add-page.md)           | Add a page component and route entry | `src/pages/<Name>.tsx`, routes config |
+| [add-layout](add-layout.md)       | Add a layout wrapper component       | `src/layouts/<Name>.tsx`              |
+| [add-route](add-route.md)         | Add a route with path + component    | Routes config                         |
+| [add-component](add-component.md) | Add a component in `components/`     | `src/components/<Name>/`              |
+| [add-hook](add-hook.md)           | Add a custom hook in `hooks/`        | `src/hooks/use<Name>.ts`              |
 
 ## Underlying Technology
 

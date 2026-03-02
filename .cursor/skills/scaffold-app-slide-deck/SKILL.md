@@ -1,0 +1,1 @@
+../../../packages/app-slide-deck/SKILL.md

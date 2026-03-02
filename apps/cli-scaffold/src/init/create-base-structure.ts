@@ -1,14 +1,14 @@
-import { join } from 'path';
-import { Effect } from 'effect';
-import type { CommandStep } from '../types/template.js';
-import { runSteps } from '../orchestrator.js';
-import { getBaseInitSteps, SCRIPTS_DIR } from './init-steps.js';
+import { join } from "path";
+import { Effect } from "effect";
+import type { CommandStep } from "../types/template.js";
+import { runSteps } from "../orchestrator.js";
+import { getBaseInitSteps, SCRIPTS_DIR } from "./init-steps.js";
 import {
   getOptionalPackageSteps,
   scaffoldOptionalPackageFiles,
   type InitOptions,
   type OptionalPackage,
-} from './optional-packages.js';
+} from "./optional-packages.js";
 
 export interface CreateBaseStructureOptions extends InitOptions {
   optionalPackages?: readonly OptionalPackage[];
@@ -17,38 +17,57 @@ export interface CreateBaseStructureOptions extends InitOptions {
 }
 
 /**
- * Creates minimal base monorepo structure: root package, turbo, typescript-config, eslint-config.
+ * Creates minimal base monorepo structure: root package, turbo, typescript-config, oxc (oxlint + oxfmt).
  * Optionally adds domain, svc-config, ui, ui-lib when selected via optionalPackages.
  */
 export async function createBaseStructure(options: CreateBaseStructureOptions): Promise<void> {
   const { projectName, projectDir, optionalPackages = [], verbose = true } = options;
-  const parentDir = join(projectDir, '..');
+  const parentDir = join(projectDir, "..");
 
   const allSteps: CommandStep[] = [
     ...getBaseInitSteps(projectName),
-    { type: 'shell', command: 'mkdir -p packages/typescript-config', cwd: '{{projectName}}' },
+    { type: "shell", command: "mkdir -p packages/typescript-config", cwd: "{{projectName}}" },
     {
-      type: 'exec',
-      command: 'node',
+      type: "exec",
+      command: "node",
       args: [`${SCRIPTS_DIR}/write-typescript-config.mjs`],
-      cwd: '{{projectName}}/packages/typescript-config',
-    },
-    { type: 'shell', command: 'mkdir -p packages/eslint-config', cwd: '{{projectName}}' },
-    {
-      type: 'exec',
-      command: 'node',
-      args: [`${SCRIPTS_DIR}/write-eslint-config.mjs`],
-      cwd: '{{projectName}}/packages/eslint-config',
+      cwd: "{{projectName}}/packages/typescript-config",
     },
     {
-      type: 'bun',
-      command: 'add',
-      args: [
-        '-d',
-        '@workspace/typescript-config@workspace:*',
-        '@workspace/eslint-config@workspace:*',
-      ],
-      cwd: '{{projectName}}',
+      type: "exec",
+      command: "node",
+      args: [`${SCRIPTS_DIR}/write-oxc-config.mjs`],
+      cwd: "{{projectName}}",
+    },
+    {
+      type: "exec",
+      command: "node",
+      args: [`${SCRIPTS_DIR}/write-vscode-settings.mjs`],
+      cwd: "{{projectName}}",
+    },
+    {
+      type: "exec",
+      command: "node",
+      args: [`${SCRIPTS_DIR}/write-cursor-hooks.mjs`],
+      cwd: "{{projectName}}",
+    },
+    {
+      type: "exec",
+      command: "node",
+      args: [`${SCRIPTS_DIR}/write-agents-and-rules.mjs`],
+      cwd: "{{projectName}}",
+    },
+    {
+      type: "exec",
+      command: "node",
+      args: [`${SCRIPTS_DIR}/write-dora-setup.mjs`],
+      cwd: "{{projectName}}",
+    },
+    {
+      type: "bun",
+      command: "add",
+      args: ["-d", "@workspace/typescript-config@workspace:*"],
+      cwd: "{{projectName}}",
     },
     ...getOptionalPackageSteps(projectName, optionalPackages),
   ];

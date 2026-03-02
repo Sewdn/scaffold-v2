@@ -8,15 +8,15 @@ This folder contains the vision, architecture, and detailed roadmap for expandin
 
 ## Granular Structure
 
-| Folder | Purpose |
-|--------|---------|
-| [vision/](vision/) | Strategic context, principles, expansion philosophy |
-| [architecture/](architecture/) | Registry pattern, stubs, naming, DI, validation |
-| [app-types/](app-types/) | One folder per app type, one file per expansion command |
-| [services/](services/) | One folder per service, one file per expansion command |
-| [ui-domain/](ui-domain/) | UI and ui-lib package expansions |
-| [verticals/](verticals/) | Industry templates (SaaS, e-commerce, CMS, etc.) |
-| [implementation/](implementation/) | Phasing, priorities, first sprint |
+| Folder                             | Purpose                                                 |
+| ---------------------------------- | ------------------------------------------------------- |
+| [vision/](vision/)                 | Strategic context, principles, expansion philosophy     |
+| [architecture/](architecture/)     | Registry pattern, stubs, naming, DI, validation         |
+| [app-types/](app-types/)           | One folder per app type, one file per expansion command |
+| [services/](services/)             | One folder per service, one file per expansion command  |
+| [ui-domain/](ui-domain/)           | UI and ui-lib package expansions                        |
+| [verticals/](verticals/)           | Industry templates (SaaS, e-commerce, CMS, etc.)        |
+| [implementation/](implementation/) | Phasing, priorities, first sprint                       |
 
 ## Quick Stats (Target)
 
@@ -39,11 +39,11 @@ The scaffolding tool doesn't just create structure—it **injects deterministic 
 
 ## Current Implementation Status
 
-| Area | Implemented | Planned |
-|------|-------------|---------|
-| CLI expansion | `add-command`, `add-service` | — |
-| Backend expansion | — | `add-route`, `add-middleware`, `add-plugin` |
-| Frontend expansion | — | `add-page`, `add-layout`, `add-component` |
-| MCP expansion | — | `add-tool`, `add-resource`, `add-prompt` |
-| Service expansion | — | `svc-prisma add-model`, `svc-auth add-provider`, etc. |
-| Vertical presets | — | `--vertical saas`, `--vertical ecommerce`, etc. |
+| Area               | Implemented                  | Planned                                               |
+| ------------------ | ---------------------------- | ----------------------------------------------------- |
+| CLI expansion      | `add-command`, `add-service` | —                                                     |
+| Backend expansion  | —                            | `add-route`, `add-middleware`, `add-plugin`           |
+| Frontend expansion | —                            | `add-page`, `add-layout`, `add-component`             |
+| MCP expansion      | —                            | `add-tool`, `add-resource`, `add-prompt`              |
+| Service expansion  | —                            | `svc-prisma add-model`, `svc-auth add-provider`, etc. |
+| Vertical presets   | —                            | `--vertical saas`, `--vertical ecommerce`, etc.       |

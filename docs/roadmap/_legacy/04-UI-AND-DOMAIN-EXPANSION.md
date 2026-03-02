@@ -10,12 +10,12 @@ The UI package provides Shadcn-based primitives. Expansion focuses on adding Sha
 
 ### Expansion Commands
 
-| Command | Description | Implementation |
-|---------|-------------|----------------|
-| `add-shadcn-component` | Add Shadcn component(s) | Delegates to `bunx shadcn@latest add [component]` in `packages/ui` |
-| `add-theme-variant` | Add theme variant (brand, accent) | Extend CSS variables in `globals.css` or `tailwind.config` |
-| `init-shadcn` | Initialize Shadcn | Run Shadcn init, create `components.json` |
-| `add-base-color` | Change base color (slate, zinc, etc.) | Update `components.json` |
+| Command                | Description                           | Implementation                                                     |
+| ---------------------- | ------------------------------------- | ------------------------------------------------------------------ |
+| `add-shadcn-component` | Add Shadcn component(s)               | Delegates to `bunx shadcn@latest add [component]` in `packages/ui` |
+| `add-theme-variant`    | Add theme variant (brand, accent)     | Extend CSS variables in `globals.css` or `tailwind.config`         |
+| `init-shadcn`          | Initialize Shadcn                     | Run Shadcn init, create `components.json`                          |
+| `add-base-color`       | Change base color (slate, zinc, etc.) | Update `components.json`                                           |
 
 ### Command Structure
 
@@ -37,14 +37,14 @@ The UI-lib package contains custom components. Per project rules: every componen
 
 ### Expansion Commands
 
-| Command | Description | Injection Target |
-|---------|-------------|------------------|
-| `add-component` | Add a new component | `src/components/<Name>/<Name>.tsx`, `index.ts` |
-| `add-hook` | Add a hook for existing component | `src/components/<Name>/use<Name>.ts` |
-| `add-story` | Add Storybook story for component | `src/components/<Name>/<Name>.stories.tsx` |
-| `add-variant` | Add a variant to component | Extend component props (cva, etc.) |
-| `add-composable` | Add a shared hook | `src/hooks/<name>.ts` |
-| `add-wrapper` | Add container (hook + presentational) | `src/components/<Name>/<Name>Container.tsx` |
+| Command          | Description                           | Injection Target                               |
+| ---------------- | ------------------------------------- | ---------------------------------------------- |
+| `add-component`  | Add a new component                   | `src/components/<Name>/<Name>.tsx`, `index.ts` |
+| `add-hook`       | Add a hook for existing component     | `src/components/<Name>/use<Name>.ts`           |
+| `add-story`      | Add Storybook story for component     | `src/components/<Name>/<Name>.stories.tsx`     |
+| `add-variant`    | Add a variant to component            | Extend component props (cva, etc.)             |
+| `add-composable` | Add a shared hook                     | `src/hooks/<name>.ts`                          |
+| `add-wrapper`    | Add container (hook + presentational) | `src/components/<Name>/<Name>Container.tsx`    |
 
 ### Command Structure
 
@@ -74,13 +74,13 @@ The domain package holds shared business logic, entities, value objects, and eve
 
 ### Expansion Commands
 
-| Command | Description | Injection Target |
-|---------|-------------|------------------|
-| `add-entity` | Add a domain entity (aggregate root) | `src/entities/<name>.ts` |
-| `add-value-object` | Add an immutable value object | `src/value-objects/<name>.ts` |
-| `add-event` | Add a domain event type | `src/events/<name>.ts` |
-| `add-repository-interface` | Add a repository interface | `src/repositories/<name>-repository.ts` |
-| `add-type` | Add a shared type/interface | `src/types/<name>.ts` |
+| Command                    | Description                          | Injection Target                        |
+| -------------------------- | ------------------------------------ | --------------------------------------- |
+| `add-entity`               | Add a domain entity (aggregate root) | `src/entities/<name>.ts`                |
+| `add-value-object`         | Add an immutable value object        | `src/value-objects/<name>.ts`           |
+| `add-event`                | Add a domain event type              | `src/events/<name>.ts`                  |
+| `add-repository-interface` | Add a repository interface           | `src/repositories/<name>-repository.ts` |
+| `add-type`                 | Add a shared type/interface          | `src/types/<name>.ts`                   |
 
 ### Command Structure
 
@@ -95,6 +95,7 @@ scaffold domain add-type <name>
 ### Stub Patterns
 
 **Entity:**
+
 ```ts
 export interface {{EntityName}} {
   id: string;
@@ -103,12 +104,14 @@ export interface {{EntityName}} {
 ```
 
 **Value Object:**
+
 ```ts
 export const {{ValueObjectName}} = (value: string) => ({ value });
 export type {{ValueObjectName}} = ReturnType<typeof {{ValueObjectName}}>;
 ```
 
 **Event:**
+
 ```ts
 export interface {{EventName}}Event {
   type: '{{event-name}}';
@@ -126,6 +129,7 @@ export interface {{EventName}}Event {
 ## 4. Integration with Modules
 
 When scaffolding a **module** (e.g. `scaffold module users`), the system creates:
+
 - `svc-users` (service package)
 - `ui-users` (UI package)
 
@@ -135,10 +139,10 @@ Expansion commands for `svc-*` and `ui-*` apply to these module packages. The sa
 
 ## 5. Naming Conventions
 
-| Artifact | File | Export |
-|----------|------|--------|
-| Component | `Button.tsx` | `Button` |
-| Hook | `useButton.ts` | `useButton` |
-| Entity | `user.ts` | `User` |
-| Value Object | `email.ts` | `Email`, `createEmail` |
-| Event | `user-created.ts` | `UserCreatedEvent` |
+| Artifact     | File              | Export                 |
+| ------------ | ----------------- | ---------------------- |
+| Component    | `Button.tsx`      | `Button`               |
+| Hook         | `useButton.ts`    | `useButton`            |
+| Entity       | `user.ts`         | `User`                 |
+| Value Object | `email.ts`        | `Email`, `createEmail` |
+| Event        | `user-created.ts` | `UserCreatedEvent`     |

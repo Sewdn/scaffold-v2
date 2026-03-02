@@ -21,12 +21,12 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-content-type](add-content-type.md) | Content model (fields, status, versioning) | svc-content, prisma |
-| [add-taxonomy](add-taxonomy.md) | Taxonomy (hierarchical or flat, relations) | svc-taxonomy, prisma |
-| [add-media-preset](add-media-preset.md) | Image/video presets (sizes, formats, CDN) | svc-media |
-| [add-webhook](add-webhook.md) | Publish/update webhooks for headless consumers | svc-content |
+| Command                                 | Description                                    | Spec                 |
+| --------------------------------------- | ---------------------------------------------- | -------------------- |
+| [add-content-type](add-content-type.md) | Content model (fields, status, versioning)     | svc-content, prisma  |
+| [add-taxonomy](add-taxonomy.md)         | Taxonomy (hierarchical or flat, relations)     | svc-taxonomy, prisma |
+| [add-media-preset](add-media-preset.md) | Image/video presets (sizes, formats, CDN)      | svc-media            |
+| [add-webhook](add-webhook.md)           | Publish/update webhooks for headless consumers | svc-content          |
 
 ## Technology & Patterns
 

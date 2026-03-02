@@ -18,9 +18,9 @@ const TechnologyOverview = ({ className }: TechnologyOverviewProps) => {
             <span className="text-gradient-indigo">Batteries included</span>
           </h2>
           <p className="mt-6 md:mt-8 text-base md:text-lg lg:text-xl text-muted-foreground [text-wrap:balance]">
-            The scaffolding tool orchestrates and integrates a curated set of
-            technologies — from core runtimes to UI libraries, backend frameworks
-            to protocols. Add your logos to see them come alive.
+            The scaffolding tool orchestrates and integrates a curated set of technologies — from
+            core runtimes to UI libraries, backend frameworks to protocols. Add your logos to see
+            them come alive.
           </p>
         </div>
         <div className="mt-10 md:mt-12 lg:mt-16">

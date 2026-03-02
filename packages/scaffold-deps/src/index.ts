@@ -12,35 +12,41 @@ export const wsRef = (projectName: string, pkg: string) => `@${projectName}/${pk
 
 // ─── Version constants (single source of truth) ─────────────────────────────
 const V = {
-  typescript: 'typescript@^5.9.3',
-  eslint: 'eslint@^9',
-  bunTypes: 'bun-types@latest',
-  effect: 'effect@^3.19.19',
-  dotenv: 'dotenv@^16.4.5',
-  dotenvCli: 'dotenv-cli@^10.0.0',
-  postcss: 'postcss@^8.5.3',
-  tailwindcss: 'tailwindcss@^3.4.14',
-  cva: 'class-variance-authority@^0.7.1',
-  clsx: 'clsx@^2.1.1',
-  lucide: 'lucide-react@^0.486.0',
-  nextThemes: 'next-themes@^0.4.6',
-  react: 'react@^19.1.0',
-  reactDom: 'react-dom@^19.1.0',
-  typesReact: '@types/react@^19',
-  typesReactDom: '@types/react-dom@^19',
-  tailwindMerge: 'tailwind-merge@^3.1.0',
-  tailwindAnimate: 'tailwindcss-animate@^1.0.7',
-  elysia: 'elysia@^1.2.9',
-  elysiaSwagger: '@elysiajs/swagger@^1.2.0',
-  elysiaCors: '@elysiajs/cors@^1.2.0',
-  commander: 'commander@^14.0.3',
-  mcpSdk: '@modelcontextprotocol/sdk@^1.9.0',
-  prismaClient: '@prisma/client@^7.2.0',
-  prisma: 'prisma@^7.2.0',
+  typescript: "typescript@^5.9.3",
+  turbo: "turbo@^2.8.12",
+  oxlint: "oxlint@^1.51.0",
+  oxfmt: "oxfmt@^0.36.0",
+  bunTypes: "bun-types@latest",
+  effect: "effect@^3.19.19",
+  dotenv: "dotenv@^16.4.5",
+  dotenvCli: "dotenv-cli@^10.0.0",
+  postcss: "postcss@^8.5.3",
+  tailwindcss: "tailwindcss@^3.4.14",
+  cva: "class-variance-authority@^0.7.1",
+  clsx: "clsx@^2.1.1",
+  lucide: "lucide-react@^0.486.0",
+  nextThemes: "next-themes@^0.4.6",
+  react: "react@^19.1.0",
+  reactDom: "react-dom@^19.1.0",
+  typesReact: "@types/react@^19",
+  typesReactDom: "@types/react-dom@^19",
+  tailwindMerge: "tailwind-merge@^3.1.0",
+  tailwindAnimate: "tailwindcss-animate@^1.0.7",
+  elysia: "elysia@^1.2.9",
+  elysiaSwagger: "@elysiajs/swagger@^1.2.0",
+  elysiaCors: "@elysiajs/cors@^1.2.0",
+  commander: "commander@^14.0.3",
+  mcpSdk: "@modelcontextprotocol/sdk@^1.9.0",
+  prismaClient: "@prisma/client@^7.2.0",
+  prisma: "prisma@^7.2.0",
+  scipTypescript: "@sourcegraph/scip-typescript@^0.4.0",
 } as const;
 
 /** Single dep constants for direct use (e.g. in app-types) */
 export const DEP_TYPESCRIPT = V.typescript;
+export const DEP_TURBO = V.turbo;
+export const DEP_OXLINT = V.oxlint;
+export const DEP_OXFMT = V.oxfmt;
 export const DEP_BUN_TYPES = V.bunTypes;
 export const DEP_EFFECT = V.effect;
 export const DEP_DOTENV = V.dotenv;
@@ -64,14 +70,9 @@ export interface DepProfile {
   readonly devDependencies?: readonly string[];
 }
 
-/** Base tooling: eslint-config, typescript-config, typescript, eslint */
+/** Base tooling: typescript-config, typescript, oxlint, oxfmt */
 export const profileBase: DepProfile = {
-  devDependencies: [
-    '@workspace/eslint-config@workspace:*',
-    '@workspace/typescript-config@workspace:*',
-    V.typescript,
-    V.eslint,
-  ],
+  devDependencies: ["@workspace/typescript-config@workspace:*", V.typescript, V.oxlint, V.oxfmt],
 };
 
 /** Bun type definitions (for TS-only packages without build) */
@@ -113,8 +114,8 @@ function mergeArrays<T>(...arrs: (readonly T[] | undefined)[]): T[] {
  */
 export function composeProfiles(...profiles: DepProfile[]): DepProfile {
   return {
-    dependencies: mergeArrays(...profiles.map(p => p.dependencies)),
-    devDependencies: mergeArrays(...profiles.map(p => p.devDependencies)),
+    dependencies: mergeArrays(...profiles.map((p) => p.dependencies)),
+    devDependencies: mergeArrays(...profiles.map((p) => p.devDependencies)),
   };
 }
 
@@ -140,6 +141,23 @@ export const BASE_DEV_DEPS_WITH_BUN = getDevDependencies(composedBaseWithBun);
 
 /** Base only (svc-config, ui-lib, svc-prisma, dynamic packages) */
 export const BASE_DEV_DEPS = getDevDependencies(profileBase);
+
+/** Root monorepo tooling: turbo, typescript, oxlint, oxfmt, scip-typescript (for dora) */
+export const ROOT_DEV_DEPS = [
+  V.turbo,
+  V.typescript,
+  V.oxlint,
+  V.oxfmt,
+  V.scipTypescript,
+];
+
+/** Root package.json overrides to enforce OXC/turbo/typescript versions across monorepo */
+export const ROOT_OVERRIDES: Record<string, string> = Object.fromEntries(
+  [V.oxlint, V.oxfmt, V.turbo, V.typescript].map((spec) => {
+    const [name, version] = spec.split("@");
+    return [name, version ?? ""];
+  }),
+);
 
 /** React + Shadcn (shared by ui, ui-lib) */
 const composedUi = composeProfiles(profileReact, profileShadcn);

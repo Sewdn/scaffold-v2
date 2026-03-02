@@ -6,11 +6,11 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-channel](add-channel.md) | Add a channel/room handler | `src/channels/<name>.ts` |
-| [add-handler](add-handler.md) | Add a message handler | `src/handlers/<name>.ts` |
-| [add-middleware](add-middleware.md) | Add connection middleware | `src/middleware/<name>.ts` |
+| Command                             | Description                | Spec                       |
+| ----------------------------------- | -------------------------- | -------------------------- |
+| [add-channel](add-channel.md)       | Add a channel/room handler | `src/channels/<name>.ts`   |
+| [add-handler](add-handler.md)       | Add a message handler      | `src/handlers/<name>.ts`   |
+| [add-middleware](add-middleware.md) | Add connection middleware  | `src/middleware/<name>.ts` |
 
 ## Underlying Technology
 

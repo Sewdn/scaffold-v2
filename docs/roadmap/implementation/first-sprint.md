@@ -16,27 +16,27 @@ A focused 2-week sprint to deliver core expansion value.
 
 ### Days 1–2: Backend
 
-| Task | Effort | Notes |
-|------|--------|-------|
-| `backend add-route` | M | Route plugin, registry patch |
-| `backend add-service` | S | Package dep + import in app |
+| Task                  | Effort | Notes                        |
+| --------------------- | ------ | ---------------------------- |
+| `backend add-route`   | M      | Route plugin, registry patch |
+| `backend add-service` | S      | Package dep + import in app  |
 
 **Deliverables:** Stubs, registry logic, tests for both commands.
 
 ### Days 3–4: Frontend
 
-| Task | Effort | Notes |
-|------|--------|-------|
-| `frontend add-page` | M | File-based routing (Next.js + Vite) |
-| `frontend add-provider` | S | Context + provider component |
+| Task                    | Effort | Notes                               |
+| ----------------------- | ------ | ----------------------------------- |
+| `frontend add-page`     | M      | File-based routing (Next.js + Vite) |
+| `frontend add-provider` | S      | Context + provider component        |
 
 **Deliverables:** Stubs for both app types, tests.
 
 ### Day 5: svc-prisma
 
-| Task | Effort | Notes |
-|------|--------|-------|
-| `svc-prisma add-model` | M | Prisma schema + migration |
+| Task                   | Effort | Notes                     |
+| ---------------------- | ------ | ------------------------- |
+| `svc-prisma add-model` | M      | Prisma schema + migration |
 
 **Deliverables:** Schema patch, migration generation, tests.
 
@@ -46,27 +46,27 @@ A focused 2-week sprint to deliver core expansion value.
 
 ### Days 1–2: Domain
 
-| Task | Effort | Notes |
-|------|--------|-------|
-| `domain add-entity` | M | Entity + barrel export |
-| `domain add-value-object` | S | Value object + barrel |
+| Task                      | Effort | Notes                  |
+| ------------------------- | ------ | ---------------------- |
+| `domain add-entity`       | M      | Entity + barrel export |
+| `domain add-value-object` | S      | Value object + barrel  |
 
 **Deliverables:** Stubs, barrel exports, tests.
 
 ### Days 3–4: Integration & Polish
 
-| Task | Notes |
-|------|-------|
-| E2E tests | Full flow: project create → add backend → add route → add model |
-| Co-generation | Ensure add-route + add-model work together |
-| Docs | Update README, patterns doc |
+| Task          | Notes                                                           |
+| ------------- | --------------------------------------------------------------- |
+| E2E tests     | Full flow: project create → add backend → add route → add model |
+| Co-generation | Ensure add-route + add-model work together                      |
+| Docs          | Update README, patterns doc                                     |
 
 ### Day 5: Buffer & Cleanup
 
-| Task | Notes |
-|------|-------|
-| Fix issues | Address any bugs from tests |
-| Code review | Ensure patterns are consistent |
+| Task          | Notes                                |
+| ------------- | ------------------------------------ |
+| Fix issues    | Address any bugs from tests          |
+| Code review   | Ensure patterns are consistent       |
 | Documentation | Finalize patterns and update roadmap |
 
 ---

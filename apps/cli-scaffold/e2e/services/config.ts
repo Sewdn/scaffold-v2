@@ -4,14 +4,13 @@
  * Workspace base is always derived from monorepo root (cwd-independent).
  */
 
-import { Context, Effect, Layer } from 'effect';
-import { join, dirname } from 'path';
-import { tmpdir } from 'os';
-import { fileURLToPath } from 'url';
+import { Context, Layer } from "effect";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const monorepoRoot = join(__dirname, '..', '..', '..', '..');
+const monorepoRoot = join(__dirname, "..", "..", "..", "..");
 
 export interface E2EConfig {
   readonly monorepoRoot: string;
@@ -22,13 +21,13 @@ export interface E2EConfig {
   readonly keepTempOnExit: boolean;
 }
 
-export const E2EConfig = Context.GenericTag<E2EConfig>('E2EConfig');
+export const E2EConfig = Context.GenericTag<E2EConfig>("E2EConfig");
 
 export const E2EConfigLive = Layer.succeed(E2EConfig, {
   monorepoRoot,
-  scaffoldCliPath: join(monorepoRoot, 'apps', 'cli-scaffold', 'src', 'index.ts'),
+  scaffoldCliPath: join(monorepoRoot, "apps", "cli-scaffold", "src", "index.ts"),
   workspaceBaseDir:
-    process.env['SCAFFOLD_E2E_WORKSPACE_DIR'] ?? join(monorepoRoot, '.e2e-workspace'),
-  tempDirPrefix: 'scaffold-e2e-',
-  keepTempOnExit: process.env['SCAFFOLD_E2E_KEEP_TEMP'] === '1',
+    process.env["SCAFFOLD_E2E_WORKSPACE_DIR"] ?? join(monorepoRoot, ".e2e-workspace"),
+  tempDirPrefix: "scaffold-e2e-",
+  keepTempOnExit: process.env["SCAFFOLD_E2E_KEEP_TEMP"] === "1",
 } as E2EConfig);

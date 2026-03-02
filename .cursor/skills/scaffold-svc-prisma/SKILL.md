@@ -1,0 +1,1 @@
+../../../apps/cli-scaffold/src/packages/svc-prisma/SKILL.md

@@ -6,12 +6,12 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-transport](add-transport.md) | Add a log transport | `src/transports/<name>.ts` |
-| [add-formatter](add-formatter.md) | Add a formatter | `src/formatters/<name>.ts` |
-| [add-context-enricher](add-context-enricher.md) | Add context enricher | `src/enrichers/<name>.ts` |
-| [add-sink](add-sink.md) | Add a log sink | `src/sinks/<name>.ts` |
+| Command                                         | Description          | Spec                       |
+| ----------------------------------------------- | -------------------- | -------------------------- |
+| [add-transport](add-transport.md)               | Add a log transport  | `src/transports/<name>.ts` |
+| [add-formatter](add-formatter.md)               | Add a formatter      | `src/formatters/<name>.ts` |
+| [add-context-enricher](add-context-enricher.md) | Add context enricher | `src/enrichers/<name>.ts`  |
+| [add-sink](add-sink.md)                         | Add a log sink       | `src/sinks/<name>.ts`      |
 
 ## Underlying Technology
 

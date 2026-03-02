@@ -6,12 +6,12 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-bucket](add-bucket.md) | Add a bucket config | `src/buckets/<name>.ts` |
+| Command                                           | Description             | Spec                     |
+| ------------------------------------------------- | ----------------------- | ------------------------ |
+| [add-bucket](add-bucket.md)                       | Add a bucket config     | `src/buckets/<name>.ts`  |
 | [add-presigned-handler](add-presigned-handler.md) | Add presigned URL route | `src/handlers/<name>.ts` |
-| [add-upload-policy](add-upload-policy.md) | Add an upload policy | `src/policies/<name>.ts` |
-| [add-lifecycle-rule](add-lifecycle-rule.md) | Add a lifecycle rule | Config |
+| [add-upload-policy](add-upload-policy.md)         | Add an upload policy    | `src/policies/<name>.ts` |
+| [add-lifecycle-rule](add-lifecycle-rule.md)       | Add a lifecycle rule    | Config                   |
 
 ## Underlying Technology
 

@@ -1,8 +1,5 @@
-/**
- * Command template schema for cascadable command orchestration.
- * CommandStep and CommandStepType come from core-app-types.
- */
-export type { CommandStep, CommandStepType } from '@workspace/core-app-types';
+import type { CommandStep, CommandStepType } from "@workspace/core-app-types";
+export type { CommandStep, CommandStepType };
 
 export interface CommandTemplate {
   id: string;

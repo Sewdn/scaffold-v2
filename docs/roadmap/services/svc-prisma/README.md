@@ -6,13 +6,13 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-model](add-model.md) | Add a Prisma model | `prisma/schema.prisma` |
-| [add-migration](add-migration.md) | Create migration from schema diff | `prisma/migrations/` |
-| [add-seed](add-seed.md) | Add seed data for a model | `prisma/seed.ts` |
-| [add-enum](add-enum.md) | Add a Prisma enum | `prisma/schema.prisma` |
-| [add-relation](add-relation.md) | Add relation fields to existing models | `prisma/schema.prisma` |
+| Command                           | Description                            | Spec                   |
+| --------------------------------- | -------------------------------------- | ---------------------- |
+| [add-model](add-model.md)         | Add a Prisma model                     | `prisma/schema.prisma` |
+| [add-migration](add-migration.md) | Create migration from schema diff      | `prisma/migrations/`   |
+| [add-seed](add-seed.md)           | Add seed data for a model              | `prisma/seed.ts`       |
+| [add-enum](add-enum.md)           | Add a Prisma enum                      | `prisma/schema.prisma` |
+| [add-relation](add-relation.md)   | Add relation fields to existing models | `prisma/schema.prisma` |
 
 ## Underlying Technology
 

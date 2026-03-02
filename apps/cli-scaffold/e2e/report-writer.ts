@@ -2,16 +2,16 @@
  * Writes structured E2E run reports to disk.
  */
 
-import { mkdirSync, writeFileSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
-import type { RunResult } from './run-scenario.js';
-import type { Scenario } from './types.js';
-import type { E2EReport } from './report-types.js';
+import { mkdirSync, writeFileSync } from "fs";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+import type { RunResult } from "./run-scenario.js";
+import type { Scenario } from "./types.js";
+import type { E2EReport } from "./report-types.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const REPORTS_DIR = join(__dirname, '..', '.e2e-reports');
+const REPORTS_DIR = join(__dirname, "..", ".e2e-reports");
 
 function ensureReportsDir(): string {
   mkdirSync(REPORTS_DIR, { recursive: true });
@@ -42,13 +42,13 @@ export function buildReport(
     return {
       scenarioId: r.scenarioId,
       description: scenario?.description ?? r.scenarioId,
-      status: (r.allPassed ? 'pass' : 'fail') as const,
+      status: (r.allPassed ? "pass" : "fail") as const,
       durationMs: r.durationMs,
       validationResults: r.validationResults,
     };
   });
 
-  const passed = scenariosOut.filter((s) => s.status === 'pass').length;
+  const passed = scenariosOut.filter((s) => s.status === "pass").length;
   const totalDurationMs = scenariosOut.reduce((sum, s) => sum + s.durationMs, 0);
 
   return {
@@ -67,13 +67,13 @@ export function buildReport(
  */
 export function writeReport(report: E2EReport): { timestampedPath: string; latestPath: string } {
   ensureReportsDir();
-  const ts = report.timestamp.replace(/[:.]/g, '-').slice(0, 19);
+  const ts = report.timestamp.replace(/[:.]/g, "-").slice(0, 19);
   const timestampedPath = join(REPORTS_DIR, `run-${ts}.json`);
-  const latestPath = join(REPORTS_DIR, 'run-latest.json');
+  const latestPath = join(REPORTS_DIR, "run-latest.json");
 
   const json = JSON.stringify(report, null, 2);
-  writeFileSync(timestampedPath, json, 'utf-8');
-  writeFileSync(latestPath, json, 'utf-8');
+  writeFileSync(timestampedPath, json, "utf-8");
+  writeFileSync(latestPath, json, "utf-8");
 
   return { timestampedPath, latestPath };
 }

@@ -6,12 +6,12 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-key-pattern](add-key-pattern.md) | Add a key pattern + TTL config | `src/patterns/<name>.ts` |
-| [add-invalidation-rule](add-invalidation-rule.md) | Add cache invalidation rule | `src/invalidation/<name>.ts` |
-| [add-session-store](add-session-store.md) | Add Redis session store | `src/session/<name>.ts` |
-| [add-rate-limiter](add-rate-limiter.md) | Add a rate limiter config | `src/limiters/<name>.ts` |
+| Command                                           | Description                    | Spec                         |
+| ------------------------------------------------- | ------------------------------ | ---------------------------- |
+| [add-key-pattern](add-key-pattern.md)             | Add a key pattern + TTL config | `src/patterns/<name>.ts`     |
+| [add-invalidation-rule](add-invalidation-rule.md) | Add cache invalidation rule    | `src/invalidation/<name>.ts` |
+| [add-session-store](add-session-store.md)         | Add Redis session store        | `src/session/<name>.ts`      |
+| [add-rate-limiter](add-rate-limiter.md)           | Add a rate limiter config      | `src/limiters/<name>.ts`     |
 
 ## Underlying Technology
 

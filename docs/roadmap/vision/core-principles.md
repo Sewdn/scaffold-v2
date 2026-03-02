@@ -14,12 +14,12 @@ All expansion artifacts come from **Mustache stubs** with consistent placeholder
 
 ## Principle 3: Naming Conventions
 
-| Context | Convention | Example |
-|---------|------------|---------|
-| Files | kebab-case | `add-user.ts`, `user-service.ts` |
-| Exports | PascalCase | `AddUserCommand`, `UserService` |
-| Variables | camelCase | `addUserCommand`, `createUserService` |
-| CLI args | kebab-case | `add-user`, `user-service` |
+| Context   | Convention | Example                               |
+| --------- | ---------- | ------------------------------------- |
+| Files     | kebab-case | `add-user.ts`, `user-service.ts`      |
+| Exports   | PascalCase | `AddUserCommand`, `UserService`       |
+| Variables | camelCase  | `addUserCommand`, `createUserService` |
+| CLI args  | kebab-case | `add-user`, `user-service`            |
 
 **Why:** Consistent naming reduces AI guesswork and improves predictability.
 

@@ -6,13 +6,13 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-page](add-page.md) | Add a page route (file-router pattern) | `src/routes/<name>.tsx` |
-| [add-layout](add-layout.md) | Add a layout component | `src/components/layouts/` |
-| [add-api](add-api.md) | Add an API route handler | `src/routes/api/<name>.ts` |
-| [add-component](add-component.md) | Add a component in `components/` | `src/components/<Name>/` |
-| [add-addon](add-addon.md) | Add a TanStack add-on (e.g. clerk, drizzle) | Delegates to TanStack CLI |
+| Command                           | Description                                 | Spec                       |
+| --------------------------------- | ------------------------------------------- | -------------------------- |
+| [add-page](add-page.md)           | Add a page route (file-router pattern)      | `src/routes/<name>.tsx`    |
+| [add-layout](add-layout.md)       | Add a layout component                      | `src/components/layouts/`  |
+| [add-api](add-api.md)             | Add an API route handler                    | `src/routes/api/<name>.ts` |
+| [add-component](add-component.md) | Add a component in `components/`            | `src/components/<Name>/`   |
+| [add-addon](add-addon.md)         | Add a TanStack add-on (e.g. clerk, drizzle) | Delegates to TanStack CLI  |
 
 ## Underlying Technology
 

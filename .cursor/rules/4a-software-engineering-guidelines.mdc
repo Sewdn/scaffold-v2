@@ -1,0 +1,729 @@
+---
+description: Software Engineering guidelines
+globs:
+alwaysApply: true
+---
+
+# Software Engineering guidelines
+
+## Your Competences
+
+- You are an expert programmer / software engineer with senior knowledge of (but not limited to):
+  - TypeScript / JavaScript
+  - Functional Programming
+  - React
+  - nextjs
+  - tailwind
+  - shadcn
+- You apply best practices in software engineering, are pragmatic and not puristic, and know when to introduce the proper design patterns when the occasion presents itself.
+- You keep your code modular, readable and maintainable. That means to you apply at least following best practices:
+  - separation of concerns
+  - dont repeat yourself (DRY)
+  - keep it simple stupid (KISS)
+
+## Best Practices
+
+### Separation of Concerns
+
+#### Container vs. Presentational Components
+
+**Container Components:**
+
+- Manage state and data fetching
+- Connect to contexts and services
+- Handle business logic
+- Pass data and callbacks to presentational components
+
+```typescript
+// Container component example
+export function DocumentGridContainer() {
+  // State management
+  const { documents, removeDocument } = useDocuments();
+  const { filterState, toggleLabelFilter } = useDocumentFilterState();
+
+  // Derived state
+  const { filteredDocuments } = useFilteredDocuments(
+    documents,
+    filterState.searchQuery,
+    filterState.selectedLabels,
+    filterState.selectedTypes
+  );
+
+  return (
+    <DocumentGrid
+      documents={documents}
+      filteredDocuments={filteredDocuments}
+      onRemoveDocument={removeDocument}
+      onToggleLabel={toggleLabelFilter}
+      // ...other props
+    />
+  );
+}
+```
+
+**Presentational Components:**
+
+- Focus on UI rendering
+- Receive data and callbacks via props
+- Remain stateless when possible (except for UI state)
+- Don't directly access contexts or services
+
+```typescript
+// Presentational component example
+export function DocumentCard({
+  document,
+  onRemoveDocument,
+  onAddLabel,
+}: // ...other props
+DocumentCardProps) {
+  return (
+    <Card>
+      <CardTitle>{document.title}</CardTitle>
+      <CardContent>{document.summary}</CardContent>
+      <CardFooter>
+        <Button onClick={() => onRemoveDocument(document.id)}>Remove</Button>
+      </CardFooter>
+    </Card>
+  );
+}
+```
+
+#### Business Logic in Custom Hooks
+
+Extract complex business logic into custom hooks:
+
+```typescript
+// Custom hook example
+export function useDocumentSorting(documents: Document[]) {
+  const [sortOrder, setSortOrder] = useLocalStorage<'asc' | 'desc'>(SORT_ORDER_STORAGE_KEY, 'asc');
+
+  const sortedDocuments = useMemo(() => {
+    return [...documents].sort((a, b) => {
+      return sortOrder === 'asc' ? a.index - b.index : b.index - a.index;
+    });
+  }, [documents, sortOrder]);
+
+  const toggleSortOrder = () => {
+    setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+  };
+
+  return {
+    sortOrder,
+    sortedDocuments,
+    toggleSortOrder,
+  };
+}
+```
+
+#### Context for Backend Integration
+
+Create contexts with interchangeable backends:
+
+```typescript
+// Context with backend interface
+export interface DocumentBackend {
+  getDocuments(): Promise<Document[]>;
+  createDocument(document: Omit<Document, "id">): Promise<Document>;
+  // ...other methods
+}
+
+// Context provider
+export function DocumentProvider({
+  children,
+  backend,
+  initialDocuments = [],
+}: DocumentProviderProps) {
+  const documentBackend = backend || new LocalStorageDocumentBackend(initialDocuments);
+
+  // Context implementation
+  // ...
+
+  return (
+    <DocumentContext.Provider value={contextValue}>
+      {children}
+    </DocumentContext.Provider>
+  );
+}
+
+// Usage with different backends
+// Local storage backend
+<DocumentProvider backend={new LocalStorageDocumentBackend(initialData)}>
+  <App />
+</DocumentProvider>
+
+// API backend
+<DocumentProvider backend={new RestApiDocumentBackend(apiUrl, apiKey)}>
+  <App />
+</DocumentProvider>
+```
+
+### DRY (Don't Repeat Yourself)
+
+#### Composition Over Configuration
+
+Build small, focused components that can be composed together:
+
+```typescript
+// Base component with composition
+export function BaseTimelineCard({ children, className, ...props }) {
+  return (
+    <div className={cn("timeline-card", className)} {...props}>
+      {children}
+    </div>
+  );
+}
+
+// Specialized components through composition
+export function EmailTimelineCard(props) {
+  return (
+    <BaseTimelineCard {...props}>
+      <EmailContent document={props.document} />
+    </BaseTimelineCard>
+  );
+}
+
+export function ThreadTimelineCard(props) {
+  return (
+    <BaseTimelineCard {...props}>
+      <ThreadContent document={props.document} />
+    </BaseTimelineCard>
+  );
+}
+```
+
+#### Utility Functions and Helpers
+
+Extract reusable logic into utility functions:
+
+```typescript
+// Utility function example
+export const formatDate = (dateString: string): string => {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  return format(date, 'MMM d, yyyy');
+};
+
+export const formatCurrency = (amount: number, currency = 'USD'): string => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: currency,
+  }).format(amount);
+};
+```
+
+#### Functional Programming Patterns
+
+Use functional programming patterns for data transformations:
+
+```typescript
+// Functional programming example
+const filteredDocuments = useMemo(() => {
+  return documents
+    .filter(doc => matchesSearchQuery(doc, searchQuery))
+    .filter(doc => matchesLabels(doc, selectedLabels))
+    .filter(doc => matchesTypes(doc, selectedTypes))
+    .sort((a, b) => sortByDate(a, b, sortOrder));
+}, [documents, searchQuery, selectedLabels, selectedTypes, sortOrder]);
+```
+
+### Readability and Maintainability
+
+#### Single Responsibility Principle
+
+Each component should do one thing well:
+
+```typescript
+// Bad: Component doing too much
+function DocumentCard({ document }) {
+  // State for editing
+  // State for labels
+  // State for viewing
+  // Multiple rendering conditions
+  // Complex UI with many sections
+}
+
+// Good: Split into focused components
+function DocumentCard({ document, onEdit }) {
+  return (
+    <Card>
+      <CardHeader document={document} />
+      <CardContent document={document} />
+      <CardLabels document={document} />
+      <CardFooter document={document} onEdit={onEdit} />
+    </Card>
+  );
+}
+```
+
+#### Consistent Component Structure
+
+Maintain a consistent structure within components:
+
+```typescript
+export function ComponentName({
+  // Props in alphabetical order or grouped by importance
+  requiredProp,
+  optionalProp = defaultValue,
+}: ComponentNameProps) {
+  // 1. Hooks (useState, useEffect, etc.)
+  const [state, setState] = useState(initialState);
+
+  // 2. Custom hooks
+  const { data } = useCustomHook();
+
+  // 3. Derived state / memoized values
+  const derivedValue = useMemo(() => {
+    // Computation
+  }, [dependencies]);
+
+  // 4. Effect hooks
+  useEffect(() => {
+    // Side effects
+  }, [dependencies]);
+
+  // 5. Event handlers
+  const handleEvent = () => {
+    // Event handling logic
+  };
+
+  // 6. Helper functions specific to this component
+  const helperFunction = () => {
+    // Helper logic
+  };
+
+  // 7. Conditional rendering logic
+  if (condition) {
+    return <AlternateView />;
+  }
+
+  // 8. Main render
+  return <div>{/* JSX structure */}</div>;
+}
+```
+
+#### Modular Code Organization
+
+Group related components and logic:
+
+```plaintext
+components/document-grid/
+├── DocumentGrid.tsx             # Main component
+├── DocumentGridContainer.tsx    # Container component
+├── DocumentGridFooter.tsx       # Footer component
+├── actions/                     # Action-related components
+│   ├── PdfExportButton.tsx
+│   └── ReorderingSnackbar.tsx
+├── cards/                       # Card components
+│   ├── DocumentCard.tsx
+│   ├── EmailCard.tsx
+│   └── shared/                  # Shared card components
+│       ├── CardTitle.tsx
+│       └── CardActions.tsx
+├── filters/                     # Filter-related components
+│   ├── DocumentFilters.tsx
+│   └── ActiveFilters.tsx
+└── list/                        # List-related components
+    ├── DocumentList.tsx
+    └── SortableDocumentCard.tsx
+```
+
+### State Management
+
+#### Local Component State
+
+Use `useState` for component-specific UI state:
+
+```typescript
+function ExpandableSection() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div>
+      <button onClick={() => setIsExpanded(!isExpanded)}>
+        {isExpanded ? "Collapse" : "Expand"}
+      </button>
+      {isExpanded && <div>Expanded content</div>}
+    </div>
+  );
+}
+```
+
+#### Derived State with useMemo
+
+Use `useMemo` for derived state, and avoid overuse of state to avoid unnecessary recalculations:
+
+```typescript
+const filteredDocuments = useMemo(() => {
+  return documents.filter(doc => {
+    const matchesSearch = !searchQuery || doc.title.includes(searchQuery);
+    const matchesLabels =
+      !selectedLabels.length || doc.labels.some(label => selectedLabels.includes(label));
+    return matchesSearch && matchesLabels;
+  });
+}, [documents, searchQuery, selectedLabels]);
+```
+
+#### Context for Global State
+
+Use Context API for global state that needs to be accessed by multiple components:
+
+```typescript
+// Create context
+const DocumentContext = createContext<DocumentContextType | undefined>(
+  undefined
+);
+
+// Provider component
+export function DocumentProvider({ children, backend }) {
+  // State and methods
+  const [documents, setDocuments] = useState<Document[]>([]);
+
+  // Context value
+  const contextValue = {
+    documents,
+    addDocument,
+    removeDocument,
+    // ...other methods
+  };
+
+  return (
+    <DocumentContext.Provider value={contextValue}>
+      {children}
+    </DocumentContext.Provider>
+  );
+}
+
+// Custom hook for using the context
+export function useDocuments() {
+  const context = useContext(DocumentContext);
+  if (context === undefined) {
+    throw new Error("useDocuments must be used within a DocumentProvider");
+  }
+  return context;
+}
+```
+
+#### Persistent State
+
+Use `localStorage` or other persistence mechanisms for state that should survive page refreshes:
+
+```typescript
+export function useFilterState() {
+  const [filterState, setFilterState] = useLocalStorage<FilterState>(
+    'filter-state-key',
+    DEFAULT_FILTER_STATE
+  );
+
+  // Rest of the hook
+}
+```
+
+### Component Props and TypeScript
+
+#### Prop Types
+
+Define clear interfaces for component props:
+
+```typescript
+// Define in types/component-props.ts
+export interface DocumentCardProps {
+  document: Document;
+  onRemoveDocument: (id: string) => void;
+  onAddLabel: (id: string, label: string) => void;
+  isSelected?: boolean;
+}
+
+// Use in component
+export function DocumentCard({
+  document,
+  onRemoveDocument,
+  onAddLabel,
+  isSelected = false,
+}: DocumentCardProps) {
+  // Component implementation
+}
+```
+
+#### Prop Grouping
+
+Group related props into logical interfaces:
+
+```typescript
+// Base props
+export interface DocumentActionHandlers {
+  onRemoveDocument: (id: string) => void;
+  onAddLabel: (id: string, label: string) => void;
+}
+
+// Extended props
+export interface DocumentCardProps extends DocumentActionHandlers {
+  document: Document;
+  isSelected?: boolean;
+}
+```
+
+### Styling and UI
+
+#### Utility-First CSS with Tailwind
+
+Use Tailwind CSS for styling:
+
+```typescriptreact
+<div className="flex items-center justify-between p-4 bg-white rounded-lg shadow">
+  <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
+  <Button className="bg-blue-500 hover:bg-blue-600 text-white">
+    Action
+  </Button>
+</div>
+```
+
+#### Conditional Classes
+
+Use utility functions for conditional classes:
+
+```typescriptreact
+import { cn } from "@/lib/utils";
+
+<div
+  className={cn(
+    "base-class",
+    isActive && "active-class",
+    variant === "primary" ? "primary-class" : "secondary-class"
+  )}
+>
+  Content
+</div>
+```
+
+#### Component Variants
+
+Use component variants for different styles:
+
+```typescriptreact
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "default" | "outline" | "ghost";
+  size?: "sm" | "md" | "lg";
+}
+
+export function Button({
+  variant = "default",
+  size = "md",
+  className,
+  ...props
+}: ButtonProps) {
+  return (
+    <button
+      className={cn(
+        "button-base",
+        variant === "default" && "bg-primary text-white",
+        variant === "outline" && "border border-primary text-primary",
+        variant === "ghost" && "text-primary hover:bg-primary/10",
+        size === "sm" && "text-sm py-1 px-2",
+        size === "md" && "py-2 px-4",
+        size === "lg" && "text-lg py-3 px-6",
+        className
+      )}
+      {...props}
+    />
+  );
+}
+```
+
+### Performance Optimization
+
+#### Memoization
+
+Use `useMemo` and `useCallback` to prevent unnecessary recalculations and re-renders:
+
+```typescript
+// Memoize expensive calculations
+const sortedDocuments = useMemo(() => {
+  return [...documents].sort((a, b) => a.index - b.index);
+}, [documents]);
+
+// Memoize callbacks to prevent unnecessary re-renders
+const handleRemove = useCallback(
+  (id: string) => {
+    removeDocument(id);
+  },
+  [removeDocument]
+);
+```
+
+#### React.memo for Components
+
+Use `React.memo` for components that render often but with the same props:
+
+```typescript
+const MemoizedComponent = React.memo(function Component(props) {
+  // Component implementation
+});
+```
+
+### Animation and Transitions
+
+#### Framer Motion for Animations
+
+Use Framer Motion for animations:
+
+```typescriptreact
+import { motion } from 'framer-motion';
+
+// Simple animation
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  exit={{ opacity: 0 }}
+  transition={{ duration: 0.3 }}
+>
+  Content
+</motion.div>
+
+// Animation variants
+const variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+  exit: { opacity: 0 }
+};
+
+<motion.div
+  variants={variants}
+  initial="hidden"
+  animate="visible"
+  exit="exit"
+>
+  Content
+</motion.div>
+```
+
+#### Animate Presence for Exit Animations
+
+Use AnimatePresence for exit animations:
+
+```typescriptreact
+import { AnimatePresence, motion } from 'framer-motion';
+
+function List({ items }) {
+  return (
+    <AnimatePresence mode="popLayout">
+      {items.map(item => (
+        <motion.div
+          key={item.id}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
+          layout
+        >
+          {item.content}
+        </motion.div>
+      ))}
+    </AnimatePresence>
+  );
+}
+```
+
+### Error Handling
+
+#### Error Boundaries
+
+Use error boundaries to catch and handle errors:
+
+```typescriptreact
+import { ErrorBoundary } from 'react-error-boundary';
+
+function ErrorFallback({ error, resetErrorBoundary }) {
+  return (
+    <div role="alert">
+      <p>Something went wrong:</p>
+      <pre>{error.message}</pre>
+      <button onClick={resetErrorBoundary}>Try again</button>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <ErrorBoundary
+      FallbackComponent={ErrorFallback}
+      onReset={() => {
+        // Reset the state of your app
+      }}
+    >
+      <YourComponent />
+    </ErrorBoundary>
+  );
+}
+```
+
+#### Try-Catch in Async Functions
+
+Use try-catch blocks in async functions:
+
+```typescript
+async function fetchData() {
+  try {
+    const response = await fetch('/api/data');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    // Handle error appropriately
+    throw error; // Re-throw if needed
+  }
+}
+```
+
+### Testing
+
+#### Component Testing
+
+Test components with React Testing Library:
+
+```typescript
+import { render, screen, fireEvent } from "@testing-library/react";
+import { Button } from "./Button";
+
+describe("Button", () => {
+  it("renders correctly", () => {
+    render(<Button>Click me</Button>);
+    expect(screen.getByRole("button")).toHaveTextContent("Click me");
+  });
+
+  it("calls onClick when clicked", () => {
+    const handleClick = jest.fn();
+    render(<Button onClick={handleClick}>Click me</Button>);
+    fireEvent.click(screen.getByRole("button"));
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+});
+```
+
+#### Hook Testing
+
+Test custom hooks with React Hooks Testing Library:
+
+```typescript
+import { renderHook, act } from '@testing-library/react-hooks';
+import { useCounter } from './useCounter';
+
+describe('useCounter', () => {
+  it('should increment counter', () => {
+    const { result } = renderHook(() => useCounter());
+
+    act(() => {
+      result.current.increment();
+    });
+
+    expect(result.current.count).toBe(1);
+  });
+});
+```
+
+### Conclusion
+
+These guidelines represent our collective experience and best practices for React and Next.js development. By following these principles, we can ensure that our codebase remains maintainable, scalable, and consistent.
+
+Remember that these guidelines are not rigid rules but rather a framework to help make decisions. Use your judgment and adapt these practices to the specific needs of your project.

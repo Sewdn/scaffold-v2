@@ -18,36 +18,23 @@ export interface FrontendTanstackContext {
 export function getScriptSteps(ctx: FrontendTanstackContext) {
   return [
     {
-      type: 'shell' as const,
-      command: 'mkdir -p {{appDir}}',
-      cwd: '',
+      type: "shell" as const,
+      command: "mkdir -p {{appDir}}",
+      cwd: "",
     },
     {
-      type: 'bunx' as const,
-      command: '@tanstack/cli',
-      args: [
-        'create',
-        '{{appName}}',
-        '--target-dir',
-        '{{appDir}}',
-        '--no-git',
-        '--interactive',
-      ],
-      argsForNonInteractive: [
-        'create',
-        '{{appName}}',
-        '--target-dir',
-        '{{appDir}}',
-        '--no-git',
-      ],
-      cwd: '',
+      type: "bunx" as const,
+      command: "@tanstack/cli",
+      args: ["create", "{{appName}}", "--target-dir", "{{appDir}}", "--no-git", "--interactive"],
+      argsForNonInteractive: ["create", "{{appName}}", "--target-dir", "{{appDir}}", "--no-git"],
+      cwd: "",
       interactive: true,
     },
     {
-      type: 'exec' as const,
-      command: 'node',
-      args: ['{{patchScriptPath}}', '@{{projectName}}/{{appName}}'],
-      cwd: '{{appDir}}',
+      type: "exec" as const,
+      command: "node",
+      args: ["{{patchScriptPath}}", "@{{projectName}}/{{appName}}"],
+      cwd: "{{appDir}}",
     },
   ];
 }

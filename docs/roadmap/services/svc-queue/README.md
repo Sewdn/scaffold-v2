@@ -6,12 +6,12 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-job](add-job.md) | Add a job handler | `src/jobs/<name>.ts` |
-| [add-worker](add-worker.md) | Add a worker process | `src/workers/<name>.ts` |
-| [add-retry-policy](add-retry-policy.md) | Add a retry policy | `src/policies/<name>.ts` |
-| [add-scheduler](add-scheduler.md) | Add a scheduled job | `src/schedulers/<name>.ts` |
+| Command                                 | Description          | Spec                       |
+| --------------------------------------- | -------------------- | -------------------------- |
+| [add-job](add-job.md)                   | Add a job handler    | `src/jobs/<name>.ts`       |
+| [add-worker](add-worker.md)             | Add a worker process | `src/workers/<name>.ts`    |
+| [add-retry-policy](add-retry-policy.md) | Add a retry policy   | `src/policies/<name>.ts`   |
+| [add-scheduler](add-scheduler.md)       | Add a scheduled job  | `src/schedulers/<name>.ts` |
 
 ## Underlying Technology
 

@@ -1,23 +1,12 @@
 {
   "name": "@scaffold-v2/ui",
-  "module": "./src/index.ts",
-  "type": "module",
   "private": true,
-  "devDependencies": {
-    "@types/bun": "latest",
-    "@workspace/eslint-config": "workspace:*",
-    "@workspace/typescript-config": "workspace:*",
-    "eslint": "^9",
-    "postcss": "^8.5.3",
-    "tailwindcss": "^3.4.14"
-  },
-  "peerDependencies": {
-    "typescript": "^5.8.2"
-  },
+  "type": "module",
+  "module": "./src/index.ts",
   "types": "./src/index.ts",
   "scripts": {
     "build": "tsc",
-    "lint": "eslint . --max-warnings 0",
+    "lint": "oxlint --deny-warnings",
     "storybook": "storybook dev -p 6006"
   },
   "dependencies": {
@@ -29,5 +18,15 @@
     "react-dom": "^19.1.0",
     "tailwind-merge": "^3.1.0",
     "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@workspace/typescript-config": "workspace:*",
+    "oxlint": "^0.16",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.14"
+  },
+  "peerDependencies": {
+    "typescript": "^5.8.2"
   }
 }

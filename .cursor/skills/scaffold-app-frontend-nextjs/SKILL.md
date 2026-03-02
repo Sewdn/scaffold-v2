@@ -1,0 +1,1 @@
+../../../packages/app-frontend-nextjs/SKILL.md

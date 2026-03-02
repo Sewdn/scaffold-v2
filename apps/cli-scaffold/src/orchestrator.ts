@@ -1,11 +1,11 @@
-import { spawn } from 'child_process';
-import { Effect, Data, pipe } from 'effect';
-import type { CommandStep, TemplateContext } from './types/template.js';
+import { spawn } from "child_process";
+import { Effect, Data, pipe } from "effect";
+import type { CommandStep, TemplateContext } from "./types/template.js";
 
 /**
  * Error when a command execution fails.
  */
-export class CommandExecutionError extends Data.TaggedError('CommandExecutionError')<{
+export class CommandExecutionError extends Data.TaggedError("CommandExecutionError")<{
   readonly command: string;
   readonly args: readonly string[];
   readonly exitCode: number | null;
@@ -55,23 +55,29 @@ function resolveCommand(
   const subArgs = substituteInArgs(args, ctx);
 
   switch (step.type) {
-    case 'bun':
-      return { cmd: 'bun', args: [step.command, ...subArgs] };
-    case 'pnpm':
-      return { cmd: 'pnpm', args: [step.command, ...subArgs] };
-    case 'bunx':
-      return { cmd: 'bun', args: ['x', step.command, ...subArgs] };
-    case 'npx':
-      return { cmd: 'npx', args: [step.command, ...subArgs] };
-    case 'exec':
+    case "bun":
+      return { cmd: "bun", args: [step.command, ...subArgs] };
+    case "pnpm":
+      return { cmd: "pnpm", args: [step.command, ...subArgs] };
+    case "bunx":
+      return { cmd: "bun", args: ["x", step.command, ...subArgs] };
+    case "npx":
+      return { cmd: "npx", args: [step.command, ...subArgs] };
+    case "exec":
       return {
-        cmd: step.command === 'node' && typeof (globalThis as { Bun?: unknown }).Bun !== 'undefined' ? 'bun' : step.command,
+        cmd:
+          step.command === "node" && typeof (globalThis as { Bun?: unknown }).Bun !== "undefined"
+            ? "bun"
+            : step.command,
         args: subArgs,
       };
-    case 'shell':
+    case "shell":
       return {
-        cmd: process.platform === 'win32' ? 'cmd' : '/bin/sh',
-        args: process.platform === 'win32' ? ['/c', substituteVars(step.command, ctx)] : ['-c', substituteVars(step.command, ctx)],
+        cmd: process.platform === "win32" ? "cmd" : "/bin/sh",
+        args:
+          process.platform === "win32"
+            ? ["/c", substituteVars(step.command, ctx)]
+            : ["-c", substituteVars(step.command, ctx)],
       };
     default:
       return { cmd: step.command, args: subArgs };
@@ -103,21 +109,23 @@ function runStep(
     }
 
     if (verbose || isInteractive) {
-      console.log(`  $ ${cmd} ${args.join(' ')}`);
+      console.log(`  $ ${cmd} ${args.join(" ")}`);
     }
 
     const proc = spawn(cmd, args, {
       cwd: stepCwd,
-      stdio: verbose || isInteractive ? 'inherit' : 'pipe',
+      stdio: verbose || isInteractive ? "inherit" : "pipe",
       shell: false,
     });
 
-    let stderr = '';
+    let stderr = "";
     if (!verbose && proc.stderr) {
-      proc.stderr.on('data', (d) => { stderr += d.toString(); });
+      proc.stderr.on("data", (d) => {
+        stderr += d.toString();
+      });
     }
 
-    proc.on('close', (code, signal) => {
+    proc.on("close", (code, signal) => {
       if (code === 0) {
         resume(Effect.succeed(undefined));
       } else if (step.optional) {
@@ -137,7 +145,7 @@ function runStep(
       }
     });
 
-    proc.on('error', (err) => {
+    proc.on("error", (err) => {
       resume(
         Effect.fail(
           new CommandExecutionError({

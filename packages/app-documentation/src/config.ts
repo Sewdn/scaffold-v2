@@ -4,7 +4,7 @@
 
 /** Build script steps for create astro starlight */
 export function getScriptSteps(): Array<{
-  type: 'bun';
+  type: "bun";
   command: string;
   args: string[];
   argsForNonInteractive?: string[];
@@ -12,16 +12,16 @@ export function getScriptSteps(): Array<{
 }> {
   return [
     {
-      type: 'bun',
-      command: 'create',
-      args: ['astro@latest', '{{appDir}}'],
+      type: "bun",
+      command: "create",
+      args: ["astro@latest", "{{appDir}}"],
       argsForNonInteractive: [
-        'astro@latest',
-        '{{appDir}}',
-        '--template',
-        'starlight',
-        '--install',
-        '--no-git',
+        "astro@latest",
+        "{{appDir}}",
+        "--template",
+        "starlight",
+        "--install",
+        "--no-git",
       ],
       interactive: true,
     },

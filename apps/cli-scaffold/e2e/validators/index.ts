@@ -10,4 +10,4 @@ export {
   hasScript,
   lintSucceeds,
   pathExists,
-} from '@workspace/core-e2e';
+} from "@workspace/core-e2e";

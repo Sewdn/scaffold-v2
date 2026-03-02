@@ -6,12 +6,12 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-connection](add-connection.md) | Add an SSO connection | `src/connections/<name>.ts` |
-| [add-directory-sync](add-directory-sync.md) | Add directory sync config | `src/directory/<name>.ts` |
-| [add-webhook](add-webhook.md) | Add a webhook handler | `src/webhooks/<name>.ts` |
-| [add-sso-provider](add-sso-provider.md) | Add an SSO provider | `src/providers/<name>.ts` |
+| Command                                     | Description               | Spec                        |
+| ------------------------------------------- | ------------------------- | --------------------------- |
+| [add-connection](add-connection.md)         | Add an SSO connection     | `src/connections/<name>.ts` |
+| [add-directory-sync](add-directory-sync.md) | Add directory sync config | `src/directory/<name>.ts`   |
+| [add-webhook](add-webhook.md)               | Add a webhook handler     | `src/webhooks/<name>.ts`    |
+| [add-sso-provider](add-sso-provider.md)     | Add an SSO provider       | `src/providers/<name>.ts`   |
 
 ## Underlying Technology
 

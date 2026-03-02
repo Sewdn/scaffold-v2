@@ -4,7 +4,7 @@
  * Scripts phase only (no stubs) — uses bunx @tanstack/cli and patchScriptPath.
  */
 
-import { getScriptSteps } from './config.js';
+import { getScriptSteps } from "./config.js";
 
 /**
  * Create the frontend-tanstack app type config.
@@ -12,14 +12,14 @@ import { getScriptSteps } from './config.js';
  */
 export function createFrontendTanstackAppType() {
   const frontendTanstack = {
-    id: 'frontend-tanstack',
-    description: 'TanStack Start (full-stack React)',
-    dirPrefix: 'frontend',
-    defaultAppName: 'web',
+    id: "frontend-tanstack",
+    description: "TanStack Start (full-stack React)",
+    dirPrefix: "frontend",
+    defaultAppName: "web",
     isReactFrontend: true,
     phases: [
       {
-        type: 'scripts' as const,
+        type: "scripts" as const,
         getSteps: getScriptSteps,
       },
     ],

@@ -4,9 +4,9 @@ UI packages (`ui`, `ui-lib`) and domain package expansion. Domain is also listed
 
 ## Packages
 
-| Package | Status | Expansion Commands |
-|---------|--------|--------------------|
-| [ui](ui/) | Planned | add-shadcn-component, add-theme-variant, init-shadcn, add-base-color |
+| Package           | Status  | Expansion Commands                                                              |
+| ----------------- | ------- | ------------------------------------------------------------------------------- |
+| [ui](ui/)         | Planned | add-shadcn-component, add-theme-variant, init-shadcn, add-base-color            |
 | [ui-lib](ui-lib/) | Partial | add-component ✅, add-hook, add-story, add-variant, add-composable, add-wrapper |
 
 ## Technology Stack & Patterns

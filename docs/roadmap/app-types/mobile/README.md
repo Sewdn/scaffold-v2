@@ -6,11 +6,11 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-screen](add-screen.md) | Add a screen/route | `src/screens/<Name>.tsx` |
-| [add-plugin](add-plugin.md) | Add a Capacitor plugin config | `capacitor.config.ts` |
-| [add-component](add-component.md) | Add a component | `src/components/<Name>/` |
+| Command                           | Description                   | Spec                     |
+| --------------------------------- | ----------------------------- | ------------------------ |
+| [add-screen](add-screen.md)       | Add a screen/route            | `src/screens/<Name>.tsx` |
+| [add-plugin](add-plugin.md)       | Add a Capacitor plugin config | `capacitor.config.ts`    |
+| [add-component](add-component.md) | Add a component               | `src/components/<Name>/` |
 
 ## Underlying Technology
 

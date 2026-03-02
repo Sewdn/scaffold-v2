@@ -13,11 +13,11 @@ bun run scaffold project <name> [options]
 
 ### Options
 
-| Flag | Description |
-|------|-------------|
-| `--apps <types...>` | Comma-separated app types to add (e.g. `frontend-vite,backend`) |
+| Flag                     | Description                                                       |
+| ------------------------ | ----------------------------------------------------------------- |
+| `--apps <types...>`      | Comma-separated app types to add (e.g. `frontend-vite,backend`)   |
 | `--app-names <names...>` | Names for each app (e.g. `web,api`). Must match order of `--apps` |
-| `--non-interactive` | Skip prompts; required for CI/AI agents |
+| `--non-interactive`      | Skip prompts; required for CI/AI agents                           |
 
 ### Examples
 
@@ -42,10 +42,10 @@ bun run scaffold init <name> [options]
 
 ### Options
 
-| Flag | Description |
-|------|-------------|
+| Flag                  | Description                                                      |
+| --------------------- | ---------------------------------------------------------------- |
 | `--packages <ids...>` | Optional packages to add: `domain`, `svc-config`, `ui`, `ui-lib` |
-| `--non-interactive` | Skip prompts |
+| `--non-interactive`   | Skip prompts                                                     |
 
 ### Examples
 
@@ -64,5 +64,5 @@ bun run scaffold init my-app --packages ui,ui-lib --non-interactive
 
 - `package.json` with Turborepo scripts (`build`, `lint`, `dev`)
 - `turbo.json` for task orchestration
-- `packages/typescript-config` and `packages/eslint-config`
+- `packages/typescript-config`
 - Optional: `packages/domain`, `packages/svc-config`, `packages/ui`, `packages/ui-lib`

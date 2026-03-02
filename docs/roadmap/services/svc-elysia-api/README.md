@@ -6,13 +6,13 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-route](add-route.md) | Add a route | `src/routes/<name>.ts` |
-| [add-resource](add-resource.md) | Add CRUD routes + service + types for entity | `src/resources/<name>/` |
-| [add-middleware](add-middleware.md) | Add middleware | `src/middleware/<name>.ts` |
-| [add-guard](add-guard.md) | Add a guard | `src/guards/<name>.ts` |
-| [add-plugin](add-plugin.md) | Add an Elysia plugin | `src/plugins/<name>.ts` |
+| Command                             | Description                                  | Spec                       |
+| ----------------------------------- | -------------------------------------------- | -------------------------- |
+| [add-route](add-route.md)           | Add a route                                  | `src/routes/<name>.ts`     |
+| [add-resource](add-resource.md)     | Add CRUD routes + service + types for entity | `src/resources/<name>/`    |
+| [add-middleware](add-middleware.md) | Add middleware                               | `src/middleware/<name>.ts` |
+| [add-guard](add-guard.md)           | Add a guard                                  | `src/guards/<name>.ts`     |
+| [add-plugin](add-plugin.md)         | Add an Elysia plugin                         | `src/plugins/<name>.ts`    |
 
 ## Underlying Technology
 

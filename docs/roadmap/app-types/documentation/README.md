@@ -6,11 +6,11 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-page](add-page.md) | Add a page in `src/content/docs/` | `src/content/docs/<name>.md` |
-| [add-sidebar](add-sidebar.md) | Add a sidebar group in config | `astro.config.mjs` |
-| [add-component](add-component.md) | Add a custom component | `src/components/<Name>.astro` |
+| Command                           | Description                       | Spec                          |
+| --------------------------------- | --------------------------------- | ----------------------------- |
+| [add-page](add-page.md)           | Add a page in `src/content/docs/` | `src/content/docs/<name>.md`  |
+| [add-sidebar](add-sidebar.md)     | Add a sidebar group in config     | `astro.config.mjs`            |
+| [add-component](add-component.md) | Add a custom component            | `src/components/<Name>.astro` |
 
 ## Underlying Technology
 

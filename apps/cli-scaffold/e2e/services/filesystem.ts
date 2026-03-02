@@ -2,17 +2,17 @@
  * FileSystem service for temp dir creation and removal.
  */
 
-import { mkdtempSync, mkdirSync, rmSync, existsSync } from 'fs';
-import { join } from 'path';
-import { Context, Effect, Layer } from 'effect';
-import { E2EConfig } from './config.js';
+import { mkdtempSync, mkdirSync, rmSync, existsSync } from "fs";
+import { join } from "path";
+import { Context, Effect, Layer } from "effect";
+import { E2EConfig } from "./config.js";
 
 export interface FileSystem {
   readonly createTempDir: () => string;
   readonly removeTempDir: (dir: string) => Effect.Effect<void>;
 }
 
-export const FileSystem = Context.GenericTag<FileSystem>('FileSystem');
+export const FileSystem = Context.GenericTag<FileSystem>("FileSystem");
 
 export const FileSystemLive = Layer.effect(
   FileSystem,

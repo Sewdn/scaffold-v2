@@ -7,6 +7,7 @@ Expansion commands patch **registry/index files**, not the main entry point. The
 ## Implementation
 
 1. **Base scaffold** creates a registry file with a stable **insert marker**:
+
    ```ts
    // Commands registered below (scaffold cli add-command)
    ```

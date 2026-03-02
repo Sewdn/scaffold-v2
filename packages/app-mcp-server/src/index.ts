@@ -3,15 +3,15 @@
  * Exports a factory to create the MCP server app type config.
  */
 
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
-import { createGeneratePhase, type AppTypeDepsOptions } from '@workspace/core-app-types';
-import { getPackageMerge, MCP_APP_MKDIR_PATHS } from './config.js';
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+import { createGeneratePhase, type AppTypeDepsOptions } from "@workspace/core-app-types";
+import { getPackageMerge, MCP_APP_MKDIR_PATHS } from "./config.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const STUBS_DIR = join(__dirname, '..', 'stubs');
+const STUBS_DIR = join(__dirname, "..", "stubs");
 
-export { getPackageMerge, MCP_APP_SCRIPTS, MCP_APP_MKDIR_PATHS } from './config.js';
+export { getPackageMerge, MCP_APP_SCRIPTS, MCP_APP_MKDIR_PATHS } from "./config.js";
 
 /**
  * Create the MCP server app type config.
@@ -26,10 +26,10 @@ export function createMcpServerAppType(opts: AppTypeDepsOptions) {
   });
 
   const mcpServer = {
-    id: 'mcp-server',
-    description: 'Model Context Protocol server',
-    dirPrefix: 'mcp',
-    defaultAppName: 'mcp',
+    id: "mcp-server",
+    description: "Model Context Protocol server",
+    dirPrefix: "mcp",
+    defaultAppName: "mcp",
     phases: [phase],
   };
 

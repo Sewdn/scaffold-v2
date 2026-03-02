@@ -6,16 +6,12 @@ interface CardAnimatedBorderProps {
   innerClassName?: string;
 }
 
-const CardAnimatedBorder = ({
-  children,
-  className,
-  innerClassName,
-}: CardAnimatedBorderProps) => {
+const CardAnimatedBorder = ({ children, className, innerClassName }: CardAnimatedBorderProps) => {
   return (
     <div
       className={cn(
         "relative m-4 overflow-hidden rounded-xl border border-slate-800 p-[1px] backdrop-blur-3xl",
-        className
+        className,
       )}
     >
       <span
@@ -25,7 +21,7 @@ const CardAnimatedBorder = ({
       <div
         className={cn(
           "relative z-10 inline-flex h-full w-full justify-center rounded-[calc(0.75rem-1px)] bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl",
-          innerClassName
+          innerClassName,
         )}
       >
         {children}

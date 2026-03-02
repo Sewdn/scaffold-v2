@@ -6,13 +6,13 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-provider](add-provider.md) | Add an auth provider | `src/providers/<name>.ts` |
-| [add-strategy](add-strategy.md) | Add an auth strategy | `src/strategies/<name>.ts` |
-| [add-guard](add-guard.md) | Add a guard (e.g. role check) | `src/guards/<name>.ts` |
-| [add-session-store](add-session-store.md) | Add a session store impl | `src/session/<name>.ts` |
-| [add-role](add-role.md) | Add a role definition | `src/roles/<name>.ts` |
+| Command                                   | Description                   | Spec                       |
+| ----------------------------------------- | ----------------------------- | -------------------------- |
+| [add-provider](add-provider.md)           | Add an auth provider          | `src/providers/<name>.ts`  |
+| [add-strategy](add-strategy.md)           | Add an auth strategy          | `src/strategies/<name>.ts` |
+| [add-guard](add-guard.md)                 | Add a guard (e.g. role check) | `src/guards/<name>.ts`     |
+| [add-session-store](add-session-store.md) | Add a session store impl      | `src/session/<name>.ts`    |
+| [add-role](add-role.md)                   | Add a role definition         | `src/roles/<name>.ts`      |
 
 ## Underlying Technology
 

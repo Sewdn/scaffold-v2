@@ -1,0 +1,72 @@
+---
+description: tech stack to be used in this project
+globs:
+alwaysApply: true
+---
+
+# Tech Stack: Scaffolded Application
+
+This is a guideline. Only when applicable for this project use preferred technology description as described below
+
+## Core Infrastructure
+
+- **Monorepo Structure**: Using Turborepo for managing a multi-package architecture
+- **Package Manager**: Bun (v1.2.2)
+- **Node.js**: Version 20+
+- **TypeScript**: For type safety across the entire codebase
+
+## Frontend
+
+- **Framework option 1**: Next.js 15+ with React 19
+- **Framework option 2**: ViteJS with React 19
+- **UI Components**: Custom UI library built on top of Shadcn primitives (using Radix)
+- **Styling**: Tailwind CSS with custom configuration
+- **State Management**: Combination of React Query for server state, React Context for dataprovider, useLocalStorage for persisted state, React hooks for local state
+- **Form Handling**: React Hook Form with Zod for validation
+
+## Backend
+
+- **Runtime**: Bun
+- **API Framework**: Elysia.js (lightweight, type-safe HTTP framework)
+- **Architecture**: Service-oriented with microservices approach
+- **API Documentation**: Swagger via @elysiajs/swagger
+
+## Data Layer
+
+- **Database**: MongoDB with replica set configuration. using Prisma as ORM
+- **Search**: Elasticsearch
+- **Caching**: Redis
+- **Data Access**: Custom service packages for data operations
+
+## AI/ML Components
+
+- **AI Services**: Custom AI implementation with specialized services
+- **Memory/Sequential Processing**: Custom AI processing servers
+
+## Authentication
+
+- **Auth Provider**: WorkOS integration for authentication
+- **Token Handling**: JWT (via jose library)
+
+## DevOps
+
+- **Containerization**: Docker with docker-compose
+- **CI Pipeline**: Likely using Turbo for build optimization
+- **Deployment**: Railway.app (based on configuration files)
+
+## Testing & Quality
+
+- **Testing Framework**: Vitest with browser capabilities
+- **Component Testing**: Storybook for UI component development
+- **Linting**: ESLint with custom configuration
+- **Formatting**: Prettier
+
+## Notable Libraries
+
+- **UI Components**: Shadcn, Framer Motion, Lucide React
+- **Date Handling**: date-fns (/fp)
+- **Functional Programming**: ramda (/fp)
+- **API Communication**: @elysiajs/eden for type-safe API clients
+- **Markdown**: React Markdown with remark-gfm
+
+The application follows a modern, functional approach with a strong emphasis on type safety, component reusability, and service-oriented architecture.

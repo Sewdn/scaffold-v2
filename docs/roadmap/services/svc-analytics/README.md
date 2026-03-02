@@ -6,12 +6,12 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-event-schema](add-event-schema.md) | Add an event schema | `src/events/<name>.ts` |
-| [add-funnel](add-funnel.md) | Add a funnel definition | `src/funnels/<name>.ts` |
-| [add-dashboard-widget](add-dashboard-widget.md) | Add a dashboard widget | `src/widgets/<name>.ts` |
-| [add-export-pipeline](add-export-pipeline.md) | Add an export pipeline | `src/exports/<name>.ts` |
+| Command                                         | Description             | Spec                    |
+| ----------------------------------------------- | ----------------------- | ----------------------- |
+| [add-event-schema](add-event-schema.md)         | Add an event schema     | `src/events/<name>.ts`  |
+| [add-funnel](add-funnel.md)                     | Add a funnel definition | `src/funnels/<name>.ts` |
+| [add-dashboard-widget](add-dashboard-widget.md) | Add a dashboard widget  | `src/widgets/<name>.ts` |
+| [add-export-pipeline](add-export-pipeline.md)   | Add an export pipeline  | `src/exports/<name>.ts` |
 
 ## Underlying Technology
 

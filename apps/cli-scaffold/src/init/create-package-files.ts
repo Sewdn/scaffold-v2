@@ -1,13 +1,13 @@
-import { existsSync } from 'fs';
-import { writeFile } from 'fs/promises';
-import { join } from 'path';
-import { Effect } from 'effect';
-import { runSteps } from '../orchestrator.js';
-import { getPackageInitSteps } from './init-steps.js';
-import { BASE_DEV_DEPS, DEP_EFFECT, wsRef } from '@workspace/scaffold-deps';
+import { existsSync } from "fs";
+import { writeFile } from "fs/promises";
+import { join } from "path";
+import { Effect } from "effect";
+import { runSteps } from "../orchestrator.js";
+import { getPackageInitSteps } from "./init-steps.js";
+import { BASE_DEV_DEPS, DEP_EFFECT, wsRef } from "@workspace/scaffold-deps";
 
 function packageExists(projectDir: string, pkgPath: string): boolean {
-  return existsSync(join(projectDir, pkgPath, 'package.json'));
+  return existsSync(join(projectDir, pkgPath, "package.json"));
 }
 
 /**
@@ -23,11 +23,11 @@ export async function createServicePackage(
   const pkgName = `@${projectName}/svc-${serviceName}`;
 
   const deps: string[] = [DEP_EFFECT];
-  if (packageExists(projectDir, 'packages/domain')) {
-    deps.push(wsRef(projectName, 'domain'));
+  if (packageExists(projectDir, "packages/domain")) {
+    deps.push(wsRef(projectName, "domain"));
   }
-  if (packageExists(projectDir, 'packages/svc-config')) {
-    deps.push(wsRef(projectName, 'svc-config'));
+  if (packageExists(projectDir, "packages/svc-config")) {
+    deps.push(wsRef(projectName, "svc-config"));
   }
 
   const steps = getPackageInitSteps({
@@ -45,7 +45,7 @@ export async function createServicePackage(
     }),
   );
 
-  await writeFile(join(projectDir, pkgDir, 'src', 'index.ts'), 'export {};\n');
+  await writeFile(join(projectDir, pkgDir, "src", "index.ts"), "export {};\n");
 }
 
 /**
@@ -61,14 +61,14 @@ export async function createUIPackage(
   const pkgName = `@${projectName}/ui-${uiName}`;
 
   const deps: string[] = [DEP_EFFECT];
-  if (packageExists(projectDir, 'packages/ui')) {
-    deps.push(wsRef(projectName, 'ui'));
+  if (packageExists(projectDir, "packages/ui")) {
+    deps.push(wsRef(projectName, "ui"));
   }
-  if (packageExists(projectDir, 'packages/ui-lib')) {
-    deps.push(wsRef(projectName, 'ui-lib'));
+  if (packageExists(projectDir, "packages/ui-lib")) {
+    deps.push(wsRef(projectName, "ui-lib"));
   }
-  if (packageExists(projectDir, 'packages/domain')) {
-    deps.push(wsRef(projectName, 'domain'));
+  if (packageExists(projectDir, "packages/domain")) {
+    deps.push(wsRef(projectName, "domain"));
   }
 
   const steps = getPackageInitSteps({
@@ -86,5 +86,5 @@ export async function createUIPackage(
     }),
   );
 
-  await writeFile(join(projectDir, pkgDir, 'src', 'index.ts'), 'export {};\n');
+  await writeFile(join(projectDir, pkgDir, "src", "index.ts"), "export {};\n");
 }

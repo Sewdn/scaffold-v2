@@ -23,10 +23,10 @@ Proposed
 
 ## Local vs Deployed
 
-| Mode | Flag | Trigger |
-|------|------|---------|
-| **Local** | `--local` (default) | `Effect.repeat(task, Schedule.cron(cron))` in long-lived process |
-| **Deployed** | `--deployed` | External scheduler runs `bun run src/tasks/<name>.ts` |
+| Mode         | Flag                | Trigger                                                          |
+| ------------ | ------------------- | ---------------------------------------------------------------- |
+| **Local**    | `--local` (default) | `Effect.repeat(task, Schedule.cron(cron))` in long-lived process |
+| **Deployed** | `--deployed`        | External scheduler runs `bun run src/tasks/<name>.ts`            |
 
 Append to job registry; deployed jobs also added to `railway.json` or `.github/workflows`.
 

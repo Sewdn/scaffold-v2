@@ -12,4 +12,4 @@ export type {
   Validator,
   SyncValidator,
   AsyncValidator,
-} from '../types.js';
+} from "../types.js";

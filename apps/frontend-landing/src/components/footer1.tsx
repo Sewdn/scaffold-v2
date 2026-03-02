@@ -45,9 +45,7 @@ const Footer1 = ({
   className,
 }: Footer1Props) => {
   return (
-    <section
-      className={cn("py-16 md:py-24 lg:py-36", "section-elysia-slate", className)}
-    >
+    <section className={cn("py-16 md:py-24 lg:py-36", "section-elysia-slate", className)}>
       <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <footer>
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center md:gap-8">
@@ -68,13 +66,12 @@ const Footer1 = ({
           <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {sections.map((section, sectionIdx) => (
               <div key={sectionIdx}>
-                <h3 className="mb-4 font-bold text-foreground text-base md:text-lg">{section.title}</h3>
+                <h3 className="mb-4 font-bold text-foreground text-base md:text-lg">
+                  {section.title}
+                </h3>
                 <ul className="space-y-4 text-muted-foreground">
                   {section.links.map((link, linkIdx) => (
-                    <li
-                      key={linkIdx}
-                      className="font-medium hover:text-primary transition-colors"
-                    >
+                    <li key={linkIdx} className="font-medium hover:text-primary transition-colors">
                       <a href={link.href}>{link.name}</a>
                     </li>
                   ))}

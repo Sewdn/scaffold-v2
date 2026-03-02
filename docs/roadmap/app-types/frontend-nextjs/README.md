@@ -6,14 +6,14 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-page](add-page.md) | Add a page route under `app/` | `app/<name>/page.tsx` |
-| [add-layout](add-layout.md) | Add a layout component | `app/<name>/layout.tsx` |
-| [add-route](add-route.md) | Add a route group with page + optional layout | `app/<name>/` |
-| [add-api](add-api.md) | Add an API route handler | `app/api/<name>/route.ts` |
-| [add-component](add-component.md) | Add a component in `components/` | `components/<Name>/` |
-| [add-middleware](add-middleware.md) | Add middleware logic (e.g. auth) | `middleware.ts` or `middleware/<name>.ts` |
+| Command                             | Description                                   | Spec                                      |
+| ----------------------------------- | --------------------------------------------- | ----------------------------------------- |
+| [add-page](add-page.md)             | Add a page route under `app/`                 | `app/<name>/page.tsx`                     |
+| [add-layout](add-layout.md)         | Add a layout component                        | `app/<name>/layout.tsx`                   |
+| [add-route](add-route.md)           | Add a route group with page + optional layout | `app/<name>/`                             |
+| [add-api](add-api.md)               | Add an API route handler                      | `app/api/<name>/route.ts`                 |
+| [add-component](add-component.md)   | Add a component in `components/`              | `components/<Name>/`                      |
+| [add-middleware](add-middleware.md) | Add middleware logic (e.g. auth)              | `middleware.ts` or `middleware/<name>.ts` |
 
 ## Underlying Technology
 

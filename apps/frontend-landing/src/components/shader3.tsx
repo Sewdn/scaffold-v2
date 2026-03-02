@@ -12,11 +12,7 @@ interface ShaderPlaneProps {
   uniforms: { [key: string]: { value: unknown } };
 }
 
-const ShaderPlane = ({
-  vertexShader,
-  fragmentShader,
-  uniforms,
-}: ShaderPlaneProps) => {
+const ShaderPlane = ({ vertexShader, fragmentShader, uniforms }: ShaderPlaneProps) => {
   const meshRef = useRef<THREE.Mesh>(null);
   const { size } = useThree();
   const mousePos = useRef({ x: 0, y: 0 });
@@ -39,16 +35,9 @@ const ShaderPlane = ({
       material.uniforms.u_resolution.value.set(size.width, size.height, 1.0);
 
       const lerpFactor = 0.025;
-      mousePos.current.x +=
-        (targetPos.current.x - mousePos.current.x) * lerpFactor;
-      mousePos.current.y +=
-        (targetPos.current.y - mousePos.current.y) * lerpFactor;
-      material.uniforms.u_mouse.value.set(
-        mousePos.current.x,
-        mousePos.current.y,
-        0.0,
-        0.0,
-      );
+      mousePos.current.x += (targetPos.current.x - mousePos.current.x) * lerpFactor;
+      mousePos.current.y += (targetPos.current.y - mousePos.current.y) * lerpFactor;
+      material.uniforms.u_mouse.value.set(mousePos.current.x, mousePos.current.y, 0.0, 0.0);
     }
   });
 

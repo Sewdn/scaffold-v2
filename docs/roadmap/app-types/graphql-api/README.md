@@ -6,12 +6,12 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-type](add-type.md) | Add a GraphQL type | `src/schema/types/<name>.ts` |
-| [add-resolver](add-resolver.md) | Add a resolver (query/mutation) | `src/resolvers/<name>.ts` |
-| [add-schema](add-schema.md) | Add a schema module | `src/schema/<name>.ts` |
-| [add-datasource](add-datasource.md) | Add a data source | `src/datasources/<name>.ts` |
+| Command                             | Description                     | Spec                         |
+| ----------------------------------- | ------------------------------- | ---------------------------- |
+| [add-type](add-type.md)             | Add a GraphQL type              | `src/schema/types/<name>.ts` |
+| [add-resolver](add-resolver.md)     | Add a resolver (query/mutation) | `src/resolvers/<name>.ts`    |
+| [add-schema](add-schema.md)         | Add a schema module             | `src/schema/<name>.ts`       |
+| [add-datasource](add-datasource.md) | Add a data source               | `src/datasources/<name>.ts`  |
 
 ## Underlying Technology
 

@@ -6,10 +6,10 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-env-var](add-env-var.md) | Add an environment variable definition | `src/env/<name>.ts` or config |
-| [add-config-section](add-config-section.md) | Add a config section | `src/config/<name>.ts` |
+| Command                                     | Description                            | Spec                          |
+| ------------------------------------------- | -------------------------------------- | ----------------------------- |
+| [add-env-var](add-env-var.md)               | Add an environment variable definition | `src/env/<name>.ts` or config |
+| [add-config-section](add-config-section.md) | Add a config section                   | `src/config/<name>.ts`        |
 
 ## Underlying Technology
 

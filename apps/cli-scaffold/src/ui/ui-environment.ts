@@ -1,5 +1,5 @@
-import { intro, log, outro, spinner } from '@clack/prompts';
-import chalk from 'chalk';
+import { intro, log, outro, spinner } from "@clack/prompts";
+import chalk from "chalk";
 
 export interface UIEnvironment {
   intro: (message: string) => void;

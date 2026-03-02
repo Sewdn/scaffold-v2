@@ -3,7 +3,7 @@
  */
 
 /** Command step type for script phases (bun create, bunx, etc.) */
-export type CommandStepType = 'bun' | 'pnpm' | 'bunx' | 'npx' | 'shell' | 'exec';
+export type CommandStepType = "bun" | "pnpm" | "bunx" | "npx" | "shell" | "exec";
 
 /** A single command step in a scripts phase */
 export interface CommandStep {
@@ -30,7 +30,7 @@ export interface AppTypeContext {
 
 /** Phase that creates a folder with package.json, dependencies, and source files from stubs */
 export interface GeneratePhase {
-  type: 'generate';
+  type: "generate";
   stubsDir: string;
   getMerge: (ctx: AppTypeContext) => Record<string, unknown>;
   getDependencies: (ctx: AppTypeContext) => string[];
@@ -39,7 +39,7 @@ export interface GeneratePhase {
 
 /** Phase that runs initialization commands (e.g. bun create, bunx) */
 export interface ScriptsPhase {
-  type: 'scripts';
+  type: "scripts";
   getSteps: (ctx: AppTypeContext) => CommandStep[];
 }
 

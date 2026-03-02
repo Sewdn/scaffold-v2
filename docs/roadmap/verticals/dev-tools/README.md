@@ -21,12 +21,12 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-endpoint-group](add-endpoint-group.md) | API group (routes, OpenAPI tags) | backend, svc-api-spec |
-| [add-api-key-scope](add-api-key-scope.md) | API key scope (permissions, rate limits) | svc-auth |
-| [add-docs-section](add-docs-section.md) | Docs section (guide + code samples) | documentation |
-| [add-playground-example](add-playground-example.md) | Playground example (request/response) | frontend |
+| Command                                             | Description                              | Spec                  |
+| --------------------------------------------------- | ---------------------------------------- | --------------------- |
+| [add-endpoint-group](add-endpoint-group.md)         | API group (routes, OpenAPI tags)         | backend, svc-api-spec |
+| [add-api-key-scope](add-api-key-scope.md)           | API key scope (permissions, rate limits) | svc-auth              |
+| [add-docs-section](add-docs-section.md)             | Docs section (guide + code samples)      | documentation         |
+| [add-playground-example](add-playground-example.md) | Playground example (request/response)    | frontend              |
 
 ## Technology & Patterns
 

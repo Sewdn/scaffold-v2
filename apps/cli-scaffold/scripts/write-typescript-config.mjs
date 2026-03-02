@@ -2,21 +2,21 @@
 /**
  * Creates typescript-config package (package.json + base.json) in cwd.
  */
-import { writeFileSync, mkdirSync } from 'fs';
-import { resolve } from 'path';
+import { writeFileSync, mkdirSync } from "fs";
+import { resolve } from "path";
 
 const cwd = process.cwd();
 
 const pkg = {
-  name: '@workspace/typescript-config',
-  version: '0.0.1',
+  name: "@workspace/typescript-config",
+  version: "0.0.1",
   private: true,
-  files: ['base.json', 'bun.json', 'nextjs.json', 'react-library.json'],
+  files: ["base.json", "bun.json", "nextjs.json", "react-library.json"],
 };
 
 const baseTsconfig = {
-  $schema: 'https://json.schemastore.org/tsconfig',
-  display: 'Default',
+  $schema: "https://json.schemastore.org/tsconfig",
+  display: "Default",
   compilerOptions: {
     composite: false,
     declaration: true,
@@ -25,7 +25,7 @@ const baseTsconfig = {
     forceConsistentCasingInFileNames: true,
     inlineSources: false,
     isolatedModules: true,
-    moduleResolution: 'node',
+    moduleResolution: "node",
     noUnusedLocals: false,
     noUnusedParameters: false,
     preserveWatchOutput: true,
@@ -33,9 +33,9 @@ const baseTsconfig = {
     strict: true,
     strictNullChecks: true,
   },
-  exclude: ['node_modules'],
+  exclude: ["node_modules"],
 };
 
 mkdirSync(cwd, { recursive: true });
-writeFileSync(resolve(cwd, 'package.json'), JSON.stringify(pkg, null, 2));
-writeFileSync(resolve(cwd, 'base.json'), JSON.stringify(baseTsconfig, null, 2));
+writeFileSync(resolve(cwd, "package.json"), JSON.stringify(pkg, null, 2));
+writeFileSync(resolve(cwd, "base.json"), JSON.stringify(baseTsconfig, null, 2));

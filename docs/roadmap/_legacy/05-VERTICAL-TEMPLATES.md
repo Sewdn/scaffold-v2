@@ -24,12 +24,12 @@ This document describes **vertical presets** — pre-configured combinations of 
 
 ### Vertical Expansion Commands
 
-| Command | Description |
-|---------|-------------|
-| `add-tenant` | Multi-tenant org + RBAC (org model, membership, roles) |
-| `add-plan` | Subscription tier (plan model, Stripe product/price, feature flags) |
-| `add-invite-flow` | Invite users to org (invite model, email, accept flow) |
-| `add-usage-meter` | Usage-based billing (meter model, events, aggregation) |
+| Command           | Description                                                         |
+| ----------------- | ------------------------------------------------------------------- |
+| `add-tenant`      | Multi-tenant org + RBAC (org model, membership, roles)              |
+| `add-plan`        | Subscription tier (plan model, Stripe product/price, feature flags) |
+| `add-invite-flow` | Invite users to org (invite model, email, accept flow)              |
+| `add-usage-meter` | Usage-based billing (meter model, events, aggregation)              |
 
 ---
 
@@ -54,12 +54,12 @@ This document describes **vertical presets** — pre-configured combinations of 
 
 ### Vertical Expansion Commands
 
-| Command | Description |
-|---------|-------------|
-| `add-product-type` | Product schema (SKU, variants, attributes, pricing) |
-| `add-shipping-method` | Shipping rules (zones, rates, carriers) |
-| `add-payment-provider` | Payment gateway (Stripe, PayPal) |
-| `add-inventory-tracking` | Stock, reservations, low-stock alerts |
+| Command                  | Description                                         |
+| ------------------------ | --------------------------------------------------- |
+| `add-product-type`       | Product schema (SKU, variants, attributes, pricing) |
+| `add-shipping-method`    | Shipping rules (zones, rates, carriers)             |
+| `add-payment-provider`   | Payment gateway (Stripe, PayPal)                    |
+| `add-inventory-tracking` | Stock, reservations, low-stock alerts               |
 
 ---
 
@@ -84,12 +84,12 @@ This document describes **vertical presets** — pre-configured combinations of 
 
 ### Vertical Expansion Commands
 
-| Command | Description |
-|---------|-------------|
-| `add-content-type` | Content model (fields, status, versioning) |
-| `add-taxonomy` | Taxonomy (hierarchical or flat, relations) |
-| `add-media-preset` | Image/video presets (sizes, formats, CDN) |
-| `add-webhook` | Publish/update webhooks for headless consumers |
+| Command            | Description                                    |
+| ------------------ | ---------------------------------------------- |
+| `add-content-type` | Content model (fields, status, versioning)     |
+| `add-taxonomy`     | Taxonomy (hierarchical or flat, relations)     |
+| `add-media-preset` | Image/video presets (sizes, formats, CDN)      |
+| `add-webhook`      | Publish/update webhooks for headless consumers |
 
 ---
 
@@ -115,12 +115,12 @@ This document describes **vertical presets** — pre-configured combinations of 
 
 ### Vertical Expansion Commands
 
-| Command | Description |
-|---------|-------------|
-| `add-report` | Report definition (query, filters, export formats) |
-| `add-workflow` | Workflow (steps, approvals, notifications) |
-| `add-admin-page` | CRUD page for an entity (list, form, actions) |
-| `add-audit-scope` | Audit scope (entity + events to log) |
+| Command           | Description                                        |
+| ----------------- | -------------------------------------------------- |
+| `add-report`      | Report definition (query, filters, export formats) |
+| `add-workflow`    | Workflow (steps, approvals, notifications)         |
+| `add-admin-page`  | CRUD page for an entity (list, form, actions)      |
+| `add-audit-scope` | Audit scope (entity + events to log)               |
 
 ---
 
@@ -145,12 +145,12 @@ This document describes **vertical presets** — pre-configured combinations of 
 
 ### Vertical Expansion Commands
 
-| Command | Description |
-|---------|-------------|
-| `add-endpoint-group` | API group (routes, OpenAPI tags) |
-| `add-api-key-scope` | API key scope (permissions, rate limits) |
-| `add-docs-section` | Docs section (guide + code samples) |
-| `add-playground-example` | Playground example (request/response) |
+| Command                  | Description                              |
+| ------------------------ | ---------------------------------------- |
+| `add-endpoint-group`     | API group (routes, OpenAPI tags)         |
+| `add-api-key-scope`      | API key scope (permissions, rate limits) |
+| `add-docs-section`       | Docs section (guide + code samples)      |
+| `add-playground-example` | Playground example (request/response)    |
 
 ---
 
@@ -174,25 +174,25 @@ This document describes **vertical presets** — pre-configured combinations of 
 
 ### Vertical Expansion Commands
 
-| Command | Description |
-|---------|-------------|
-| `add-source` | Ingest source (connector, schema, validation) |
-| `add-transform` | Transform job (input/output schema, logic) |
-| `add-destination` | Export destination (S3, warehouse, webhook) |
-| `add-schedule` | Cron/schedule for pipeline runs |
+| Command           | Description                                   |
+| ----------------- | --------------------------------------------- |
+| `add-source`      | Ingest source (connector, schema, validation) |
+| `add-transform`   | Transform job (input/output schema, logic)    |
+| `add-destination` | Export destination (S3, warehouse, webhook)   |
+| `add-schedule`    | Cron/schedule for pipeline runs               |
 
 ---
 
 ## Summary Matrix
 
-| Vertical | Frontend | Backend | CLI | Docs | MCP | Key Packages | Expansion Focus |
-|----------|----------|---------|-----|------|-----|--------------|-----------------|
-| SaaS | ✓ | ✓ | — | — | — | auth, payments, prisma | tenants, plans, invites |
-| E-commerce | ✓ | ✓ | opt | — | — | catalog, cart, checkout | product types, shipping, payments |
-| CMS | ✓ | ✓ | — | opt | — | content, media, taxonomy | content types, taxonomies |
-| Internal tools | ✓ | ✓ | ✓ | — | — | auth, audit, reports, workflow | reports, workflows, admin pages |
-| Dev tools | ✓ | ✓ | — | ✓ | opt | api-spec, auth | endpoints, docs, playground |
-| Data pipeline | opt | ✓ | ✓ | — | — | ingest, transform, export | sources, transforms, destinations |
+| Vertical       | Frontend | Backend | CLI | Docs | MCP | Key Packages                   | Expansion Focus                   |
+| -------------- | -------- | ------- | --- | ---- | --- | ------------------------------ | --------------------------------- |
+| SaaS           | ✓        | ✓       | —   | —    | —   | auth, payments, prisma         | tenants, plans, invites           |
+| E-commerce     | ✓        | ✓       | opt | —    | —   | catalog, cart, checkout        | product types, shipping, payments |
+| CMS            | ✓        | ✓       | —   | opt  | —   | content, media, taxonomy       | content types, taxonomies         |
+| Internal tools | ✓        | ✓       | ✓   | —    | —   | auth, audit, reports, workflow | reports, workflows, admin pages   |
+| Dev tools      | ✓        | ✓       | —   | ✓    | opt | api-spec, auth                 | endpoints, docs, playground       |
+| Data pipeline  | opt      | ✓       | ✓   | —    | —   | ingest, transform, export      | sources, transforms, destinations |
 
 ---
 

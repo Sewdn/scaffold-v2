@@ -12,7 +12,7 @@ This document elaborates on the pitch from `pitch.md`, grounded in the conversat
 - **Core insight**: LLMs are trained on massive open-source codebases. The most powerful way to steer them is **definition by example**, not natural-language instructions in agent/skill files
 - **Why scaffolding matters**: Boilerplate with correctly applied patterns is more efficient than long declarative prompts — it reduces token consumption and gives clear direction
 - **Batteries included**: Patterns like Effect, dependency injection, service layers are embedded so users don’t have to know them upfront
-- **Positioning**: Not a replacement for Turborepo/Nx or create-* tools — it **orchestrates** them within one consistent architectural philosophy
+- **Positioning**: Not a replacement for Turborepo/Nx or create-\* tools — it **orchestrates** them within one consistent architectural philosophy
 - **Business model**: Open core — framework free, premium add-ons (e.g. advanced UI libraries) installable via CLI
 - **Tone**: Visionary, high-level, for “vibe coders” who hit a ceiling because they lack architectural depth
 
@@ -174,24 +174,24 @@ Community-first. Composable. Extensible.
 
 ## 9. Key Differentiators (vs. Existing Copy)
 
-| Previous (Technical) | New (Pitch-Aligned) |
-|---------------------|---------------------|
-| "Command-orchestration CLI for TypeScript monorepos" | "Architectural gravity for AI" |
-| "Layered approach: stubs + commands" | "Architecture is the new prompt" |
-| "Built for productivity" | "Built for agentic coding" |
-| "90% faster setup" | "Deterministic output. Less prompting." |
-| "8+ app types" | "SPAs, APIs, CLIs, MCP servers — one philosophy" |
+| Previous (Technical)                                 | New (Pitch-Aligned)                              |
+| ---------------------------------------------------- | ------------------------------------------------ |
+| "Command-orchestration CLI for TypeScript monorepos" | "Architectural gravity for AI"                   |
+| "Layered approach: stubs + commands"                 | "Architecture is the new prompt"                 |
+| "Built for productivity"                             | "Built for agentic coding"                       |
+| "90% faster setup"                                   | "Deterministic output. Less prompting."          |
+| "8+ app types"                                       | "SPAs, APIs, CLIs, MCP servers — one philosophy" |
 
 ---
 
 ## 10. Landing Page Section Mapping
 
-| Section | Content Source |
-|---------|----------------|
-| Hero | Headline + Subheadline + Core message (condensed) |
-| Feature 1 | "Architecture is the new prompt" + solution overview |
-| Feature 2 (optional) | Problem → Insight (condensed) |
-| Stats | AI-agent focus, app types, one-command setup |
-| Philosophy | "Architecture is the new prompt" block |
-| CTA | "Start scaffolding today" + Get Started |
-| Footer | "Architectural gravity for AI" or "Stop prompting. Start scaffolding." |
+| Section              | Content Source                                                         |
+| -------------------- | ---------------------------------------------------------------------- |
+| Hero                 | Headline + Subheadline + Core message (condensed)                      |
+| Feature 1            | "Architecture is the new prompt" + solution overview                   |
+| Feature 2 (optional) | Problem → Insight (condensed)                                          |
+| Stats                | AI-agent focus, app types, one-command setup                           |
+| Philosophy           | "Architecture is the new prompt" block                                 |
+| CTA                  | "Start scaffolding today" + Get Started                                |
+| Footer               | "Architectural gravity for AI" or "Stop prompting. Start scaffolding." |

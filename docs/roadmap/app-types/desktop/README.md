@@ -6,11 +6,11 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
+| Command                       | Description                        | Spec                               |
+| ----------------------------- | ---------------------------------- | ---------------------------------- |
 | [add-command](add-command.md) | Add a Tauri command (Rust backend) | `src-tauri/src/commands/<name>.rs` |
-| [add-window](add-window.md) | Add a window config | `src-tauri/tauri.conf.json` |
-| [add-plugin](add-plugin.md) | Add a Tauri plugin | `src-tauri/plugins/` |
+| [add-window](add-window.md)   | Add a window config                | `src-tauri/tauri.conf.json`        |
+| [add-plugin](add-plugin.md)   | Add a Tauri plugin                 | `src-tauri/plugins/`               |
 
 ## Underlying Technology
 

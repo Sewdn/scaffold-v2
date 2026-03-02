@@ -5,7 +5,7 @@
 export interface ScenarioReportEntry {
   readonly scenarioId: string;
   readonly description: string;
-  readonly status: 'pass' | 'fail';
+  readonly status: "pass" | "fail";
   readonly durationMs: number;
   readonly validationResults: readonly {
     readonly passed: boolean;

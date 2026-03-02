@@ -14,8 +14,8 @@ export function deepMerge(
     if (
       baseVal != null &&
       overrideVal != null &&
-      typeof baseVal === 'object' &&
-      typeof overrideVal === 'object' &&
+      typeof baseVal === "object" &&
+      typeof overrideVal === "object" &&
       !Array.isArray(baseVal) &&
       !Array.isArray(overrideVal)
     ) {

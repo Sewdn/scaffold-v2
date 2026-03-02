@@ -1,0 +1,1 @@
+../../../packages/pkg-domain/SKILL.md

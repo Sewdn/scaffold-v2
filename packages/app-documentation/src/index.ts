@@ -3,7 +3,7 @@
  * Scripts phase only (no stubs). Exports a factory to create the documentation app type config.
  */
 
-import { getScriptSteps } from './config.js';
+import { getScriptSteps } from "./config.js";
 
 /**
  * Create the documentation app type config.
@@ -11,13 +11,13 @@ import { getScriptSteps } from './config.js';
  */
 export function createDocumentationAppType() {
   const documentation = {
-    id: 'documentation',
-    description: 'Starlight/Astro documentation',
-    dirPrefix: 'docs',
-    defaultAppName: 'docs',
+    id: "documentation",
+    description: "Starlight/Astro documentation",
+    dirPrefix: "docs",
+    defaultAppName: "docs",
     phases: [
       {
-        type: 'scripts',
+        type: "scripts",
         getSteps: () => getScriptSteps(),
       },
     ],

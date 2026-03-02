@@ -1,8 +1,7 @@
-import { existsSync, readdirSync, readFileSync } from 'fs';
-import { mkdir } from 'fs/promises';
-import { join, dirname } from 'path';
-import { renderTemplate } from '@workspace/core-utils';
-import type { AppTypeContext } from '@workspace/core-app-types';
+import { existsSync, readdirSync, readFileSync } from "fs";
+import { mkdir } from "fs/promises";
+import { join, dirname } from "path";
+import { renderTemplate } from "@workspace/core-utils";
 
 /**
  * Resolve stubs directory: project override (stubs/app-types/{id}) or module's built-in stubsDir.
@@ -13,7 +12,7 @@ export function resolveAppTypeStubsDir(
   projectRoot?: string,
 ): string {
   if (projectRoot) {
-    const override = join(projectRoot, 'stubs', 'app-types', appTypeId);
+    const override = join(projectRoot, "stubs", "app-types", appTypeId);
     if (existsSync(override)) return override;
   }
   return moduleStubsDir;
@@ -28,7 +27,7 @@ export function resolvePackageStubsDir(
   projectRoot?: string,
 ): string {
   if (projectRoot) {
-    const override = join(projectRoot, 'stubs', 'packages', packageType);
+    const override = join(projectRoot, "stubs", "packages", packageType);
     if (existsSync(override)) return override;
   }
   return moduleStubsDir;
@@ -41,13 +40,13 @@ export function resolvePackageStubsDir(
 export function discoverStubFiles(baseDir: string): string[] {
   const result: string[] = [];
 
-  function walk(dir: string, prefix = ''): void {
+  function walk(dir: string, prefix = ""): void {
     const entries = readdirSync(dir, { withFileTypes: true });
     for (const entry of entries) {
       const rel = prefix ? `${prefix}/${entry.name}` : entry.name;
       if (entry.isDirectory()) {
         walk(join(dir, entry.name), rel);
-      } else if (entry.name.endsWith('.stub')) {
+      } else if (entry.name.endsWith(".stub")) {
         result.push(rel);
       }
     }
@@ -61,7 +60,7 @@ export function discoverStubFiles(baseDir: string): string[] {
  * Get output path from stub path (strip .stub extension).
  */
 export function stubPathToOutputPath(stubPath: string): string {
-  return stubPath.replace(/\.stub$/, '');
+  return stubPath.replace(/\.stub$/, "");
 }
 
 /**
@@ -77,10 +76,10 @@ export async function generateFromStubs(
 
   const view = { ...context };
 
-  const { writeFile } = await import('fs/promises');
+  const { writeFile } = await import("fs/promises");
   for (const stubRel of stubFiles) {
     const stubFullPath = join(stubsDir, stubRel);
-    const template = readFileSync(stubFullPath, 'utf-8');
+    const template = readFileSync(stubFullPath, "utf-8");
     const rendered = renderTemplate(template, view);
     const outputRel = stubPathToOutputPath(stubRel);
     const outputPath = join(outputDir, outputRel);

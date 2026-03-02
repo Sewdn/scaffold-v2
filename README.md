@@ -27,16 +27,16 @@ The CLI uses the [Effect](https://effect.website/) TypeScript library for orches
 
 This section documents the stable CLI API for AI agents to scaffold projects without generating code manually.
 
-| Command | Description | Key Args/Flags |
-|---------|-------------|----------------|
-| `scaffold project <name>` | Create monorepo + optionally add apps | `--apps`, `--app-names`, `--non-interactive` |
-| `scaffold init <name>` | Initialize base monorepo structure only | |
-| `scaffold app <name> --type <type>` | Add application to existing project | `--type`: see below |
-| `scaffold service <name>` | Add service package | |
-| `scaffold ui <name>` | Add UI package | |
-| `scaffold component <name> --package <pkg>` | Add component to UI package | |
-| `scaffold module <name>` | Add module (service + UI packages) | |
-| `scaffold package <name> --type <ui\|service>` | Add generic package | |
+| Command                                        | Description                             | Key Args/Flags                               |
+| ---------------------------------------------- | --------------------------------------- | -------------------------------------------- |
+| `scaffold project <name>`                      | Create monorepo + optionally add apps   | `--apps`, `--app-names`, `--non-interactive` |
+| `scaffold init <name>`                         | Initialize base monorepo structure only |                                              |
+| `scaffold app <name> --type <type>`            | Add application to existing project     | `--type`: see below                          |
+| `scaffold service <name>`                      | Add service package                     |                                              |
+| `scaffold ui <name>`                           | Add UI package                          |                                              |
+| `scaffold component <name> --package <pkg>`    | Add component to UI package             |                                              |
+| `scaffold module <name>`                       | Add module (service + UI packages)      |                                              |
+| `scaffold package <name> --type <ui\|service>` | Add generic package                     |                                              |
 
 ### Supported Application Types
 

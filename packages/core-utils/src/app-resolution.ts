@@ -4,17 +4,17 @@
  * Prefix is the directory prefix (e.g. "cli" for cli-*, "backend" for backend-*).
  */
 
-import { existsSync, readdirSync } from 'fs';
-import { resolve } from 'path';
+import { existsSync, readdirSync } from "fs";
+import { resolve } from "path";
 
 /**
  * Ensure the given directory is a project root (has package.json).
  * Exits with code 1 if not.
  */
 export function ensureProjectRoot(projectDir: string): void {
-  const rootPkgPath = resolve(projectDir, 'package.json');
+  const rootPkgPath = resolve(projectDir, "package.json");
   if (!existsSync(rootPkgPath)) {
-    console.error('Error: Not in a project root. Run scaffold create or scaffold init first.');
+    console.error("Error: Not in a project root. Run scaffold create or scaffold init first.");
     process.exit(1);
   }
 }
@@ -23,7 +23,7 @@ export function ensureProjectRoot(projectDir: string): void {
  * Normalize prefix for directory matching: "cli" -> "cli-", "backend" -> "backend-"
  */
 function appPrefix(prefix: string): string {
-  return prefix.endsWith('-') ? prefix : `${prefix}-`;
+  return prefix.endsWith("-") ? prefix : `${prefix}-`;
 }
 
 /**
@@ -34,7 +34,7 @@ function appPrefix(prefix: string): string {
  */
 export function findAppsByPrefix(projectDir: string, prefix: string): string[] {
   const p = appPrefix(prefix);
-  const appsDir = resolve(projectDir, 'apps');
+  const appsDir = resolve(projectDir, "apps");
   if (!existsSync(appsDir)) return [];
   const entries = readdirSync(appsDir, { withFileTypes: true });
   return entries
@@ -65,7 +65,7 @@ export function resolveAppByPrefix(
   projectDir: string,
   prefix: string,
   appName?: string,
-  options?: ResolveAppOptions
+  options?: ResolveAppOptions,
 ): string {
   const p = appPrefix(prefix);
   const apps = findAppsByPrefix(projectDir, prefix);
@@ -73,7 +73,7 @@ export function resolveAppByPrefix(
   if (apps.length === 0) {
     console.error(
       options?.noAppsMessage ??
-        `Error: No ${prefix} apps found in this project. Add one with: scaffold app --type ${prefix} <name>`
+        `Error: No ${prefix} apps found in this project. Add one with: scaffold app --type ${prefix} <name>`,
     );
     process.exit(1);
   }
@@ -81,7 +81,7 @@ export function resolveAppByPrefix(
   if (appName) {
     const full = appName.startsWith(p) ? appName : `${p}${appName}`;
     if (!apps.includes(full)) {
-      console.error(`Error: ${prefix} app "${full}" not found. Available: ${apps.join(', ')}`);
+      console.error(`Error: ${prefix} app "${full}" not found. Available: ${apps.join(", ")}`);
       process.exit(1);
     }
     return full;
@@ -93,7 +93,7 @@ export function resolveAppByPrefix(
 
   console.error(
     options?.multipleAppsMessage ??
-      `Error: Multiple ${prefix} apps found. Specify one with --app: ${apps.join(', ')}`
+      `Error: Multiple ${prefix} apps found. Specify one with --app: ${apps.join(", ")}`,
   );
   process.exit(1);
 }

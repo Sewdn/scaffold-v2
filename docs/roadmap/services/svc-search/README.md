@@ -6,12 +6,12 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-index](add-index.md) | Add an index definition | `src/indexes/<name>.ts` |
-| [add-mapping](add-mapping.md) | Add field mapping for index | Index config |
-| [add-synonym-set](add-synonym-set.md) | Add synonym set | `src/synonyms/<name>.ts` |
-| [add-search-route](add-search-route.md) | Add a search API route | `src/routes/<name>.ts` |
+| Command                                 | Description                 | Spec                     |
+| --------------------------------------- | --------------------------- | ------------------------ |
+| [add-index](add-index.md)               | Add an index definition     | `src/indexes/<name>.ts`  |
+| [add-mapping](add-mapping.md)           | Add field mapping for index | Index config             |
+| [add-synonym-set](add-synonym-set.md)   | Add synonym set             | `src/synonyms/<name>.ts` |
+| [add-search-route](add-search-route.md) | Add a search API route      | `src/routes/<name>.ts`   |
 
 ## Underlying Technology
 

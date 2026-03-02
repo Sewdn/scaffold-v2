@@ -2,14 +2,20 @@
   "name": "@scaffold-v2/cli-scaffold",
   "version": "2.1.0",
   "description": "Command-orchestration CLI for TypeScript monorepos",
-  "type": "module",
+  "keywords": [
+    "cli",
+    "effect",
+    "monorepo",
+    "scaffold"
+  ],
   "bin": {
     "scaffold": "./bin/run.js"
   },
+  "type": "module",
   "scripts": {
     "generate:docs-data": "bun run scripts/generate-docs-data.ts",
     "build": "tsc -b",
-    "lint": "eslint .",
+    "lint": "oxlint",
     "scaffold": "bun run src/index.ts",
     "link-global": "bash bin/link-global.sh",
     "test": "bun test",
@@ -18,43 +24,37 @@
     "e2e:report:scenario": "bun run e2e/report-viewer.ts"
   },
   "dependencies": {
+    "@clack/prompts": "^1.0.1",
+    "@workspace/app-backend": "workspace:*",
+    "@workspace/app-cli": "workspace:*",
+    "@workspace/app-documentation": "workspace:*",
+    "@workspace/app-frontend-nextjs": "workspace:*",
+    "@workspace/app-frontend-tanstack": "workspace:*",
+    "@workspace/app-frontend-vite": "workspace:*",
+    "@workspace/app-mcp-server": "workspace:*",
+    "@workspace/app-slide-deck": "workspace:*",
+    "@workspace/core-app-types": "workspace:*",
     "@workspace/core-pkg-types": "workspace:*",
+    "@workspace/core-utils": "workspace:*",
     "@workspace/pkg-domain": "workspace:*",
     "@workspace/pkg-svc-config": "workspace:*",
     "@workspace/pkg-ui": "workspace:*",
     "@workspace/pkg-ui-lib": "workspace:*",
     "@workspace/scaffold-deps": "workspace:*",
-    "@workspace/app-backend": "workspace:*",
-    "@workspace/app-frontend-tanstack": "workspace:*",
-    "@workspace/app-frontend-vite": "workspace:*",
-    "@workspace/app-frontend-nextjs": "workspace:*",
-    "@workspace/app-cli": "workspace:*",
-    "@workspace/app-documentation": "workspace:*",
-    "@workspace/app-mcp-server": "workspace:*",
-    "@workspace/app-slide-deck": "workspace:*",
-    "@workspace/core-app-types": "workspace:*",
-    "@workspace/core-utils": "workspace:*",
-    "@clack/prompts": "^1.0.1",
     "chalk": "^5.6.2",
     "commander": "^14.0.3",
     "effect": "^3.19.19"
   },
   "devDependencies": {
-    "@workspace/core-e2e": "workspace:*",
     "@types/bun": "latest",
     "@types/node": "^20.11.0",
-    "@workspace/eslint-config": "workspace:*",
+    "@workspace/core-e2e": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "cli-table3": "^0.6.5",
+    "oxlint": "^0.16",
     "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=20"
-  },
-  "keywords": [
-    "scaffold",
-    "cli",
-    "monorepo",
-    "effect"
-  ]
+  }
 }

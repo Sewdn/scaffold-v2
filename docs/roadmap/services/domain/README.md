@@ -6,17 +6,17 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-entity](add-entity.md) | Add a domain entity (aggregate root) | `src/entities/<name>.ts` |
-| [add-value-object](add-value-object.md) | Add an immutable value object | `src/value-objects/<name>.ts` |
-| [add-event](add-event.md) | Add a domain event type | `src/events/<name>.ts` |
-| [add-repository-interface](add-repository-interface.md) | Add a repository interface for an entity | `src/repositories/<name>-repository.ts` |
-| [add-type](add-type.md) | Add a shared type/interface (DTO, API type) | `src/types/<name>.ts` |
+| Command                                                 | Description                                 | Spec                                    |
+| ------------------------------------------------------- | ------------------------------------------- | --------------------------------------- |
+| [add-entity](add-entity.md)                             | Add a domain entity (aggregate root)        | `src/entities/<name>.ts`                |
+| [add-value-object](add-value-object.md)                 | Add an immutable value object               | `src/value-objects/<name>.ts`           |
+| [add-event](add-event.md)                               | Add a domain event type                     | `src/events/<name>.ts`                  |
+| [add-repository-interface](add-repository-interface.md) | Add a repository interface for an entity    | `src/repositories/<name>-repository.ts` |
+| [add-type](add-type.md)                                 | Add a shared type/interface (DTO, API type) | `src/types/<name>.ts`                   |
 
 ## Underlying Technology
 
-Domain-Driven Design (DDD): entities, value objects, aggregates, domain events. Pure TypeScript types and interfaces. Shared across svc-* and ui-* packages; no runtime framework dependency.
+Domain-Driven Design (DDD): entities, value objects, aggregates, domain events. Pure TypeScript types and interfaces. Shared across svc-_ and ui-_ packages; no runtime framework dependency.
 
 ## Best Practices & Engineering Patterns
 

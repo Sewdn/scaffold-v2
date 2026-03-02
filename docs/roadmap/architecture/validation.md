@@ -8,14 +8,14 @@
 
 ## Post-Expansion Validators
 
-| Validator | Purpose |
-|-----------|---------|
-| `pathExists(path)` | Target file/dir exists |
-| `fileContains(path, s)` | Registry contains expected import |
-| `hasScript(name)` | package.json has build/lint scripts |
-| `buildSucceeds()` | `bun run build` exits 0 |
-| `lintSucceeds()` | `bun run lint` exits 0 |
-| `cliHelpShowsCommands(appDir, commands)` | CLI `--help` lists added commands |
+| Validator                                | Purpose                             |
+| ---------------------------------------- | ----------------------------------- |
+| `pathExists(path)`                       | Target file/dir exists              |
+| `fileContains(path, s)`                  | Registry contains expected import   |
+| `hasScript(name)`                        | package.json has build/lint scripts |
+| `buildSucceeds()`                        | `bun run build` exits 0             |
+| `lintSucceeds()`                         | `bun run lint` exits 0              |
+| `cliHelpShowsCommands(appDir, commands)` | CLI `--help` lists added commands   |
 
 ## When to Run
 

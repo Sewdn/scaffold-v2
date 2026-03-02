@@ -6,12 +6,12 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-channel](add-channel.md) | Add a notification channel | `src/channels/<name>.ts` |
-| [add-template](add-template.md) | Add a notification template | `src/templates/<name>.ts` |
-| [add-preference-group](add-preference-group.md) | Add user preference group | `src/preferences/<name>.ts` |
-| [add-delivery-rule](add-delivery-rule.md) | Add a delivery rule | `src/rules/<name>.ts` |
+| Command                                         | Description                 | Spec                        |
+| ----------------------------------------------- | --------------------------- | --------------------------- |
+| [add-channel](add-channel.md)                   | Add a notification channel  | `src/channels/<name>.ts`    |
+| [add-template](add-template.md)                 | Add a notification template | `src/templates/<name>.ts`   |
+| [add-preference-group](add-preference-group.md) | Add user preference group   | `src/preferences/<name>.ts` |
+| [add-delivery-rule](add-delivery-rule.md)       | Add a delivery rule         | `src/rules/<name>.ts`       |
 
 ## Underlying Technology
 

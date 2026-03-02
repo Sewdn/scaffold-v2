@@ -33,14 +33,14 @@ Scaffolded projects are validated using Turborepo:
 
 ## Scenario catalog (selected)
 
-| ID | Description |
-|----|-------------|
-| `minimal-project` | Base monorepo, no apps |
-| `backend-only` | Project with backend app |
-| `init-with-optional-packages` | Init with domain, svc-config |
-| `service-package` | Init + add service |
-| `ui-package` | Init + add UI package |
-| `module-creation` | Init + add module |
-| `component-in-ui-lib` | Init with ui, ui-lib + add component |
+| ID                            | Description                          |
+| ----------------------------- | ------------------------------------ |
+| `minimal-project`             | Base monorepo, no apps               |
+| `backend-only`                | Project with backend app             |
+| `init-with-optional-packages` | Init with domain, svc-config         |
+| `service-package`             | Init + add service                   |
+| `ui-package`                  | Init + add UI package                |
+| `module-creation`             | Init + add module                    |
+| `component-in-ui-lib`         | Init with ui, ui-lib + add component |
 
 See `apps/cli-scaffold/e2e/SCENARIOS.md` for the full catalog and implementation status.

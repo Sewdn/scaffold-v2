@@ -13,6 +13,7 @@ Expansion commands patch **registry/index files**, not the main entry point. The
 ### Implementation
 
 1. **Base scaffold** creates a registry file with a stable **insert marker**:
+
    ```ts
    // Commands registered below (scaffold cli add-command)
    ```
@@ -72,12 +73,12 @@ packages/<package-id>/stubs/
 
 ## 3. Naming Conventions
 
-| Context | Convention | Example |
-|---------|------------|---------|
-| File names | kebab-case | `add-user.ts`, `user-service.ts` |
-| Exported types/classes | PascalCase | `AddUserCommand`, `UserService` |
-| Variables, functions | camelCase | `addUserCommand`, `createUserService` |
-| CLI args | kebab-case | `add-user`, `user-service` |
+| Context                | Convention | Example                               |
+| ---------------------- | ---------- | ------------------------------------- |
+| File names             | kebab-case | `add-user.ts`, `user-service.ts`      |
+| Exported types/classes | PascalCase | `AddUserCommand`, `UserService`       |
+| Variables, functions   | camelCase  | `addUserCommand`, `createUserService` |
+| CLI args               | kebab-case | `add-user`, `user-service`            |
 
 ### Entity Formatting
 
@@ -94,7 +95,9 @@ packages/<package-id>/stubs/
 ```ts
 export function createUserService(deps?: { logger?: Logger }) {
   return {
-    addUser: (user: User) => { /* ... */ },
+    addUser: (user: User) => {
+      /* ... */
+    },
     // ...
   };
 }
@@ -145,14 +148,14 @@ When expansion A logically depends on B, the CLI can run B first or prompt the u
 
 ### Post-Expansion Validators
 
-| Validator | Purpose |
-|-----------|---------|
-| `pathExists(path)` | Target file/dir exists |
-| `fileContains(path, s)` | Registry contains expected import |
-| `hasScript(name)` | package.json has build/lint scripts |
-| `buildSucceeds()` | `bun run build` exits 0 |
-| `lintSucceeds()` | `bun run lint` exits 0 |
-| `cliHelpShowsCommands(appDir, commands)` | CLI `--help` lists added commands |
+| Validator                                | Purpose                             |
+| ---------------------------------------- | ----------------------------------- |
+| `pathExists(path)`                       | Target file/dir exists              |
+| `fileContains(path, s)`                  | Registry contains expected import   |
+| `hasScript(name)`                        | package.json has build/lint scripts |
+| `buildSucceeds()`                        | `bun run build` exits 0             |
+| `lintSucceeds()`                         | `bun run lint` exits 0              |
+| `cliHelpShowsCommands(appDir, commands)` | CLI `--help` lists added commands   |
 
 ### When to Run
 

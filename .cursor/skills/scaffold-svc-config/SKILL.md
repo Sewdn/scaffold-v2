@@ -1,0 +1,1 @@
+../../../packages/pkg-svc-config/SKILL.md

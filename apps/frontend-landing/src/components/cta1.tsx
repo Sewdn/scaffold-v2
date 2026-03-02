@@ -20,16 +20,18 @@ const Cta1 = ({ className }: Cta1Props) => {
                 <Sparkles className="size-4" strokeWidth={1.5} />
               </span>
               <h4 className="text-xl md:text-2xl font-bold text-foreground [text-wrap:balance]">
-                Shape the environment it{" "}
-                <span className="text-gradient-indigo">learns from</span>
+                Shape the environment it <span className="text-gradient-indigo">learns from</span>
               </h4>
             </div>
             <p className="text-muted-foreground text-sm md:text-base [text-wrap:balance]">
-              You don&apos;t fight your AI. Scaffold an opinionated monorepo with
-              deterministic patterns, Effect-driven composition, and a batteries-included
-              setup — so coding agents follow the rails by design.
+              You don&apos;t fight your AI. Scaffold an opinionated monorepo with deterministic
+              patterns, Effect-driven composition, and a batteries-included setup — so coding agents
+              follow the rails by design.
             </p>
-            <Button className="mt-8 bg-accent-secondary hover:opacity-90 text-primary-foreground border-0" asChild>
+            <Button
+              className="mt-8 bg-accent-secondary hover:opacity-90 text-primary-foreground border-0"
+              asChild
+            >
               <a href="#">
                 Get Started <ArrowRight className="ml-2 size-4" />
               </a>

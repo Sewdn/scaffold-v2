@@ -22,12 +22,12 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-report](add-report.md) | Report definition (query, filters, export formats) | svc-reports |
-| [add-workflow](add-workflow.md) | Workflow (steps, approvals, notifications) | svc-workflow |
-| [add-admin-page](add-admin-page.md) | CRUD page for an entity (list, form, actions) | frontend, backend |
-| [add-audit-scope](add-audit-scope.md) | Audit scope (entity + events to log) | svc-audit |
+| Command                               | Description                                        | Spec              |
+| ------------------------------------- | -------------------------------------------------- | ----------------- |
+| [add-report](add-report.md)           | Report definition (query, filters, export formats) | svc-reports       |
+| [add-workflow](add-workflow.md)       | Workflow (steps, approvals, notifications)         | svc-workflow      |
+| [add-admin-page](add-admin-page.md)   | CRUD page for an entity (list, form, actions)      | frontend, backend |
+| [add-audit-scope](add-audit-scope.md) | Audit scope (entity + events to log)               | svc-audit         |
 
 ## Technology & Patterns
 

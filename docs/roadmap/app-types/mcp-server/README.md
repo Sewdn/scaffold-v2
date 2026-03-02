@@ -6,11 +6,11 @@
 
 ## Expansion Commands
 
-| Command | Description | Spec |
-|---------|-------------|------|
-| [add-tool](add-tool.md) | Add a tool definition and register in server | `src/tools/<name>.ts`, tools registry |
-| [add-resource](add-resource.md) | Add a resource template | `src/resources/<name>.ts` |
-| [add-prompt](add-prompt.md) | Add a prompt template | `src/prompts/<name>.ts` |
+| Command                         | Description                                  | Spec                                  |
+| ------------------------------- | -------------------------------------------- | ------------------------------------- |
+| [add-tool](add-tool.md)         | Add a tool definition and register in server | `src/tools/<name>.ts`, tools registry |
+| [add-resource](add-resource.md) | Add a resource template                      | `src/resources/<name>.ts`             |
+| [add-prompt](add-prompt.md)     | Add a prompt template                        | `src/prompts/<name>.ts`               |
 
 ## Underlying Technology
 

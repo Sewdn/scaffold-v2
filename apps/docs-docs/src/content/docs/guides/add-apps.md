@@ -13,18 +13,18 @@ bun run scaffold app <name> --type <type> [options]
 
 ### Required arguments
 
-| Argument | Description |
-|----------|-------------|
-| `name` | App name (e.g. `web`, `api`, `docs`) |
+| Argument        | Description                                       |
+| --------------- | ------------------------------------------------- |
+| `name`          | App name (e.g. `web`, `api`, `docs`)              |
 | `--type <type>` | App type — see [App Types](/reference/app-types/) |
 
 ### Options
 
-| Flag | Description |
-|------|-------------|
-| `--with-ui` | Include UI and UI-lib packages (React frontends only) |
-| `--no-with-ui` | Do not include UI packages |
-| `--non-interactive` | Skip prompts; required for CI/AI agents |
+| Flag                | Description                                           |
+| ------------------- | ----------------------------------------------------- |
+| `--with-ui`         | Include UI and UI-lib packages (React frontends only) |
+| `--no-with-ui`      | Do not include UI packages                            |
+| `--non-interactive` | Skip prompts; required for CI/AI agents               |
 
 ### Examples
 

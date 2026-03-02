@@ -1,4 +1,4 @@
-import { getAllAppTypeIds, getAppTypeConfig } from './app-types/registry.js';
+import { getAllAppTypeIds, getAppTypeConfig } from "./app-types/registry.js";
 
 /** App type ids derived from app-types registry */
 export const APP_TYPES = getAllAppTypeIds() as readonly string[];

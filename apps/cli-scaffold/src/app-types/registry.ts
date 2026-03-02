@@ -1,9 +1,9 @@
-import type { AppTypeConfig, GeneratePhase } from '@workspace/core-app-types';
+import type { AppTypeConfig, GeneratePhase } from "@workspace/core-app-types";
 
 export type { GeneratePhase };
-import { createCliAppType } from '@workspace/app-cli';
-import { createBackendAppType } from '@workspace/app-backend';
-import { createMcpServerAppType } from '@workspace/app-mcp-server';
+import { createCliAppType } from "@workspace/app-cli";
+import { createBackendAppType } from "@workspace/app-backend";
+import { createMcpServerAppType } from "@workspace/app-mcp-server";
 import {
   DEP_ELYSIA,
   DEP_ELYSIA_SWAGGER,
@@ -11,12 +11,12 @@ import {
   DEP_EFFECT,
   DEP_COMMANDER,
   DEP_MCP_SDK,
-} from '@workspace/scaffold-deps';
-import { createFrontendNextjsAppType } from '@workspace/app-frontend-nextjs';
-import { createFrontendViteAppType } from '@workspace/app-frontend-vite';
-import { createFrontendTanstackAppType } from '@workspace/app-frontend-tanstack';
-import { createDocumentationAppType } from '@workspace/app-documentation';
-import { createSlideDeckAppType } from '@workspace/app-slide-deck';
+} from "@workspace/scaffold-deps";
+import { createFrontendNextjsAppType } from "@workspace/app-frontend-nextjs";
+import { createFrontendViteAppType } from "@workspace/app-frontend-vite";
+import { createFrontendTanstackAppType } from "@workspace/app-frontend-tanstack";
+import { createDocumentationAppType } from "@workspace/app-documentation";
+import { createSlideDeckAppType } from "@workspace/app-slide-deck";
 
 const { cli } = createCliAppType({
   deps: [DEP_COMMANDER, DEP_EFFECT],
@@ -47,9 +47,7 @@ const ALL_APP_TYPES = [
   documentation,
 ] as AppTypeConfig[];
 
-const REGISTRY = new Map<string, AppTypeConfig>(
-  ALL_APP_TYPES.map((c) => [c.id, c]),
-);
+const REGISTRY = new Map<string, AppTypeConfig>(ALL_APP_TYPES.map((c) => [c.id, c]));
 
 /**
  * Get app type config by id.
@@ -69,16 +67,14 @@ export function getAllAppTypeIds(): string[] {
  * Check if app type has any generate phase (creates folder + stubs).
  */
 export function hasGeneratePhase(config: AppTypeConfig): boolean {
-  return config.phases.some((p) => p.type === 'generate');
+  return config.phases.some((p) => p.type === "generate");
 }
 
 /**
  * Get the first generate phase's stubsDir, or undefined.
  */
 export function getStubsDir(config: AppTypeConfig): string | undefined {
-  const phase = config.phases.find((p) => p.type === 'generate') as
-    | GeneratePhase
-    | undefined;
+  const phase = config.phases.find((p) => p.type === "generate") as GeneratePhase | undefined;
   return phase?.stubsDir;
 }
 

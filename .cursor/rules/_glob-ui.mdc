@@ -1,0 +1,25 @@
+---
+description:
+Globs: packages/ui-*/**
+---
+
+# UI Development Guidelines
+
+## ShadCN Primitives
+
+- Utilize the complete ShadCN component library.
+- Before adding a new component, check if it exists in the UI package.
+- If unavailable, add new ShadCN components using: `bunx shadcn@latest add [component-name]` in the `packages/ui` directory.
+- Always import ShadCN components from `@workspace/ui`, e.g., `import { Button } from @workspace/ui/components/button`.
+
+## Development Guidelines for new components
+
+- first assess complexity of the component you want to build
+- depending on the complexity apply the correct set of best practices
+- follow the provided example implementation (scaffolded), to implement the new component. Only keep those files that are appropraite for the chosen complexity
+
+### Component Complexity
+
+1. **Simple Presentational Component**: No state, no logic, only purely presentational component
+2. **Complex Component with lots of logic or complex state**: Use a combination of container component, hook, utils, and presentational component.
+3. **Complex Component with Data Fetching**: On top of (2), also implement a context provider for data management, and use hooks to bind to this context.

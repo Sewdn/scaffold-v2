@@ -47,12 +47,19 @@ const Feature1 = ({
               </p>
             )}
             <div className="flex w-full flex-col justify-center gap-2 sm:flex-row lg:justify-start">
-              <Button asChild className="bg-accent-secondary hover:opacity-90 text-primary-foreground border-0">
+              <Button
+                asChild
+                className="bg-accent-secondary hover:opacity-90 text-primary-foreground border-0"
+              >
                 <a href={buttonPrimary.href} target="_blank" rel="noreferrer">
                   {buttonPrimary.text}
                 </a>
               </Button>
-              <Button variant="outline" asChild className="border-border text-muted-foreground hover:bg-muted">
+              <Button
+                variant="outline"
+                asChild
+                className="border-border text-muted-foreground hover:bg-muted"
+              >
                 <a href={buttonSecondary.href} target="_blank" rel="noreferrer">
                   {buttonSecondary.text}
                 </a>

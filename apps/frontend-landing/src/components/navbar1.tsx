@@ -19,13 +19,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 
 interface MenuItem {
   title: string;
@@ -90,8 +84,7 @@ const Navbar1 = ({
         },
         {
           title: "Support",
-          description:
-            "Get in touch with our support team or visit our community forums",
+          description: "Get in touch with our support team or visit our community forums",
           icon: <Zap className="size-5 shrink-0" />,
           url: "#",
         },
@@ -143,27 +136,26 @@ const Navbar1 = ({
   className,
 }: Navbar1Props) => {
   return (
-    <section className={cn("py-3 md:py-4 bg-background/95 backdrop-blur-sm border-b border-border", className)}>
+    <section
+      className={cn(
+        "py-3 md:py-4 bg-background/95 backdrop-blur-sm border-b border-border",
+        className,
+      )}
+    >
       <div className="container px-4 sm:px-6 lg:px-8">
         {/* Desktop Menu */}
         <nav className="hidden items-center justify-between lg:flex">
           <div className="flex items-center gap-6">
             {/* Logo */}
             <a href={logo.url} className="flex items-center gap-2">
-              <img
-                src={logo.src}
-                className="max-h-8 logo-theme-aware"
-                alt={logo.alt}
-              />
+              <img src={logo.src} className="max-h-8 logo-theme-aware" alt={logo.alt} />
               <span className="text-base md:text-lg font-semibold tracking-tighter text-foreground">
                 {logo.title}
               </span>
             </a>
             <div className="flex items-center">
               <NavigationMenu>
-                <NavigationMenuList>
-                  {menu.map((item) => renderMenuItem(item))}
-                </NavigationMenuList>
+                <NavigationMenuList>{menu.map((item) => renderMenuItem(item))}</NavigationMenuList>
               </NavigationMenu>
             </div>
           </div>
@@ -182,11 +174,7 @@ const Navbar1 = ({
           <div className="flex items-center justify-between">
             {/* Logo */}
             <a href={logo.url} className="flex items-center gap-2">
-              <img
-                src={logo.src}
-                className="max-h-8 logo-theme-aware"
-                alt={logo.alt}
-              />
+              <img src={logo.src} className="max-h-8 logo-theme-aware" alt={logo.alt} />
             </a>
             <Sheet>
               <SheetTrigger asChild>
@@ -198,20 +186,12 @@ const Navbar1 = ({
                 <SheetHeader>
                   <SheetTitle>
                     <a href={logo.url} className="flex items-center gap-2">
-                      <img
-                        src={logo.src}
-                        className="max-h-8 logo-theme-aware"
-                        alt={logo.alt}
-                      />
+                      <img src={logo.src} className="max-h-8 logo-theme-aware" alt={logo.alt} />
                     </a>
                   </SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-6 p-4">
-                  <Accordion
-                    type="single"
-                    collapsible
-                    className="flex w-full flex-col gap-4"
-                  >
+                  <Accordion type="single" collapsible className="flex w-full flex-col gap-4">
                     {menu.map((item) => renderMobileMenuItem(item))}
                   </Accordion>
 
@@ -294,9 +274,7 @@ const SubMenuLink = ({ item }: { item: MenuItem }) => {
       <div>
         <div className="text-sm font-semibold">{item.title}</div>
         {item.description && (
-          <p className="text-sm leading-snug text-muted-foreground">
-            {item.description}
-          </p>
+          <p className="text-sm leading-snug text-muted-foreground">{item.description}</p>
         )}
       </div>
     </a>

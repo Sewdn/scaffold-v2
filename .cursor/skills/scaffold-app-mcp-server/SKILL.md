@@ -1,0 +1,1 @@
+../../../packages/app-mcp-server/SKILL.md
