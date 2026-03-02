@@ -13,6 +13,7 @@ Use this skill when you need to add a **CLI application** (e.g. `cli-tools`, `cl
 ## Commands
 
 **CLI** (from project root):
+
 ```bash
 bunx scaffold app <name> --type cli
 # Example: bunx scaffold app tools --type cli → apps/cli-tools
@@ -25,3 +26,4 @@ bunx scaffold app <name> --type cli
 - `apps/cli-<name>/` with Commander, Effect, and default hello command
 - `bin/run.js` entry point, `bun link` for global install
 - `src/commands/` and `src/services/` structure
+  .
