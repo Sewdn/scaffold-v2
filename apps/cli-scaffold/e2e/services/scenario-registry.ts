@@ -1,5 +1,6 @@
 /**
  * ScenarioRegistry service. Provides scenario loading and registration.
+ * Supports distributed app-type scenarios (each app-type exports its own scenarios).
  */
 
 import { Context, Effect, Layer } from 'effect';
@@ -12,8 +13,8 @@ export interface ScenarioRegistry {
 
 export const ScenarioRegistry = Context.GenericTag<ScenarioRegistry>('ScenarioRegistry');
 
-/** Scenario module loaders - add imports here when creating new scenarios */
-const SCENARIO_LOADERS = [
+/** Core scenario loaders (single scenario per module) */
+const CORE_SCENARIO_LOADERS = [
   () => import('../scenarios/01-minimal-project.js'),
   () => import('../scenarios/02-backend-only.js'),
   () => import('../scenarios/03-init-with-optional-packages.js'),
@@ -21,7 +22,6 @@ const SCENARIO_LOADERS = [
   () => import('../scenarios/05-ui-package.js'),
   () => import('../scenarios/06-module-creation.js'),
   () => import('../scenarios/07-component-in-ui-lib.js'),
-  () => import('../scenarios/08-backend-plus-cli.js'),
   () => import('../scenarios/09-backend-plus-mcp.js'),
   () => import('../scenarios/10-slide-deck-app.js'),
   () => import('../scenarios/11-documentation-app.js'),
@@ -31,8 +31,23 @@ const SCENARIO_LOADERS = [
   () => import('../scenarios/15-frontend-vite.js'),
   () => import('../scenarios/16-frontend-nextjs.js'),
   () => import('../scenarios/17-frontend-tanstack.js'),
-  () => import('../scenarios/18-cli-expansion.js'),
 ];
+
+/** App-type scenario modules (export scenarios array) - add when extracting app-types to packages */
+const APP_TYPE_SCENARIO_LOADERS: Array<() => Promise<{ scenarios?: readonly Scenario[] }>> = [
+  () => import('@workspace/app-cli/e2e/scenarios'),
+];
+
+function collectScenarios(m: unknown): Scenario[] {
+  const mod = m as { scenario?: Scenario; scenarios?: readonly Scenario[] };
+  if (mod.scenarios && Array.isArray(mod.scenarios)) {
+    return [...mod.scenarios];
+  }
+  if (mod.scenario) {
+    return [mod.scenario];
+  }
+  return [];
+}
 
 const createScenarioRegistry = (): ScenarioRegistry => {
   let scenarios: Scenario[] = [];
@@ -42,10 +57,13 @@ const createScenarioRegistry = (): ScenarioRegistry => {
     loadAll: () =>
       Effect.promise(async () => {
         const loaded: Scenario[] = [];
-        for (const loader of SCENARIO_LOADERS) {
+        for (const loader of CORE_SCENARIO_LOADERS) {
           const m = await loader();
-          const s = (m as { scenario?: Scenario }).scenario;
-          if (s) loaded.push(s);
+          loaded.push(...collectScenarios(m));
+        }
+        for (const loader of APP_TYPE_SCENARIO_LOADERS) {
+          const m = await loader();
+          loaded.push(...collectScenarios(m));
         }
         scenarios = loaded;
       }),

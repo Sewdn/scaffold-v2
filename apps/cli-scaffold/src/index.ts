@@ -12,7 +12,7 @@ import { uiCommand } from './commands/ui.js';
 import { componentCommand } from './commands/component.js';
 import { moduleCommand } from './commands/module.js';
 import { packageCommand } from './commands/package.js';
-import { cliCommand } from './commands/cli.js';
+import { cliCommand } from '@workspace/app-cli';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);

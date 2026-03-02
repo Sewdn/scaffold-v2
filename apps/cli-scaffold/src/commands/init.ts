@@ -5,8 +5,7 @@ import { intro, outro } from '@clack/prompts';
 import chalk from 'chalk';
 import { createBaseStructure } from '../init/create-base-structure.js';
 import { runSteps } from '../orchestrator.js';
-import { validateProjectName } from '../utils/validation.js';
-import { formatEntityName } from '../utils/entity-formatting.js';
+import { formatEntityName, validateProjectName } from '@workspace/core-utils';
 import {
   OPTIONAL_PACKAGES,
   type OptionalPackage,

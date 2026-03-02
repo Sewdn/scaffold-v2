@@ -8,8 +8,7 @@ import { createBaseStructure } from '../init/create-base-structure.js';
 import { runSteps } from '../orchestrator.js';
 import { getAppInitSteps, SCRIPTS_DIR } from '../init/init-steps.js';
 import { createAppEntryFiles } from '../init/create-app-files.js';
-import { validateProjectName, validateAppName } from '../utils/validation.js';
-import { formatEntityName } from '../utils/entity-formatting.js';
+import { formatEntityName, validateAppName, validateProjectName } from '@workspace/core-utils';
 import { APP_TYPE_PREFIX, type AppType } from '../registry.js';
 import {
   getAppTypeConfig,
@@ -180,6 +179,7 @@ export const createCommand = new Command('create')
             const steps = getAppInitSteps({
               appDir,
               appName: dirName,
+              appBaseName: appName,
               appType,
               projectName,
             });

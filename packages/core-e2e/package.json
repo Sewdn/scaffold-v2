@@ -1,0 +1,16 @@
+{
+  "name": "@workspace/core-e2e",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "types": "./src/index.ts",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^20.11.0",
+    "@workspace/typescript-config": "workspace:*",
+    "typescript": "^5.8.2"
+  }
+}

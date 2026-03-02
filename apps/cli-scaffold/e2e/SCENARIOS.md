@@ -249,33 +249,6 @@ When implementing a scenario, copy this template:
 
 ---
 
-### 8. backend-plus-cli
-
-**Status:** Implemented  
-**Complexity:** 3  
-**Description:** Project with backend and CLI apps.
-
-#### Steps
-
-1. `scaffold project e2e-bc --apps backend,cli --app-names api,tools --non-interactive`
-
-#### Validations
-
-- [x] Path: `apps/backend-api`
-- [x] Path: `apps/cli-tools`
-- [x] Path: `apps/backend-api/package.json`
-- [x] Path: `apps/cli-tools/package.json`
-- [x] Script: `build`
-- [x] Build succeeds (Turbo)
-- [x] Lint succeeds (Turbo)
-- [x] Dev runtime starts (Turbo dev, brief timeout)
-
-#### Implementation Notes
-
-- Scenario file: `scenarios/08-backend-plus-cli.ts`
-
----
-
 ### 9. backend-plus-mcp
 
 **Status:** Implemented  
@@ -517,15 +490,45 @@ When implementing a scenario, copy this template:
 
 ---
 
-### 18. cli-expansion
+### CLI app-type scenarios (`@workspace/app-cli`)
+
+Scenarios for CLI scaffolding live in `packages/app-cli/src/e2e/scenarios/` (import from `@workspace/app-cli/e2e/scenarios`).
+
+### cli-basic
 
 **Status:** Implemented  
-**Complexity:** 3  
-**Description:** Project with CLI app, then expand with commands and services via `scaffold cli add-command` and `scaffold cli add-service`. Validates that the CLI runs and all added commands appear in help.
+**Complexity:** 2  
+**Description:** CLI app with default example command (hello) and service (example-service).
 
 #### Steps
 
-1. `scaffold project e2e-cli-expand --apps cli --app-names tools --non-interactive`
+1. `scaffold project e2e-cli-basic --apps cli --app-names tools --non-interactive`
+
+#### Validations
+
+- [x] Path: `apps/cli-tools`
+- [x] Path: `apps/cli-tools/src/commands/hello.ts`
+- [x] Path: `apps/cli-tools/src/services/example-service.ts`
+- [x] Path: `apps/cli-tools/src/commands/index.ts`
+- [x] Script: `build`
+- [x] Build succeeds (Turbo)
+- [x] Lint succeeds (Turbo)
+- [x] CLI help shows command: `hello`
+
+#### Implementation Notes
+
+- Scenario file: `packages/app-cli/src/e2e/scenarios/cli-basic.ts`
+- Tests default scaffolding (no `--no-example-*` flags)
+
+### cli-expansion
+
+**Status:** Implemented  
+**Complexity:** 3  
+**Description:** CLI app without default examples, then expand with `add-command` and `add-service`.
+
+#### Steps
+
+1. `scaffold project e2e-cli-expand --apps cli --app-names tools --non-interactive --no-example-command --no-example-service`
 2. `scaffold cli add-command add-user --description "Add a new user"`
 3. `scaffold cli add-command list-items --description "List all items"`
 4. `scaffold cli add-service user-service`
@@ -544,8 +547,8 @@ When implementing a scenario, copy this template:
 
 #### Implementation Notes
 
-- Scenario file: `scenarios/18-cli-expansion.ts`
-- Uses `cliHelpShowsCommands` validator to run `bun run src/index.ts --help` and assert command names appear in output
+- Scenario file: `packages/app-cli/src/e2e/scenarios/cli-expansion.ts`
+- Uses `--no-example-command` and `--no-example-service` for a minimal base before expansion
 
 ---
 

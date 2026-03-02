@@ -1,7 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from 'fs';
 import { mkdir } from 'fs/promises';
 import { join, dirname } from 'path';
-import Mustache from 'mustache';
+import { renderTemplate } from '@workspace/core-utils';
 import type { AppTypeContext } from '../app-types/types.js';
 
 /**
@@ -55,13 +55,6 @@ export function discoverStubFiles(baseDir: string): string[] {
 
   walk(baseDir);
   return result;
-}
-
-/**
- * Render a stub file with Mustache using the given context.
- */
-export function renderTemplate(template: string, context: Record<string, unknown>): string {
-  return Mustache.render(template, context);
 }
 
 /**

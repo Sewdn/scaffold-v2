@@ -1,0 +1,24 @@
+#!/usr/bin/env bun
+import { readFileSync } from "fs";
+import { join } from "path";
+import { Command } from "commander";
+import { Effect } from "effect";
+import { registerCommands } from "./commands/index.js";
+
+const pkg = JSON.parse(readFileSync(join(process.cwd(), "package.json"), "utf-8")) as { version?: string };
+
+const program = new Command();
+
+program
+  .name("{{appName}}")
+  .description("CLI application")
+  .version(pkg.version ?? "0.0.0");
+
+registerCommands(program);
+
+Effect.runPromise(
+  Effect.promise(() => program.parseAsync(process.argv)),
+).catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

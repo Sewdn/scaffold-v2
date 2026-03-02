@@ -7,8 +7,7 @@ import chalk from 'chalk';
 import { createBaseStructure } from '../init/create-base-structure.js';
 import { runSteps } from '../orchestrator.js';
 import { getAppInitSteps, SCRIPTS_DIR } from '../init/init-steps.js';
-import { validateProjectName, validateAppName } from '../utils/validation.js';
-import { formatEntityName } from '../utils/entity-formatting.js';
+import { formatEntityName, validateAppName, validateProjectName } from '@workspace/core-utils';
 import { APP_TYPE_PREFIX, type AppType } from '../registry.js';
 import {
   getAppTypeConfig,
@@ -21,7 +20,8 @@ import {
   hasUIPackages,
   type OptionalPackage,
 } from '../init/optional-packages.js';
-import { promptOptionalPackages } from '../ui/ui-prompts.js';
+import { scaffoldCliExampleDefaults } from '@workspace/app-cli';
+import { promptProjectName, promptOptionalPackages } from '../ui/ui-prompts.js';
 
 
 function parseOptionalPackages(
@@ -56,6 +56,8 @@ export const projectCommand = new Command('project')
   .option('--ui', 'Include ui package (Shadcn base)')
   .option('--ui-lib', 'Include ui-lib package')
   .option('--non-interactive', 'Run without prompts', false)
+  .option('--no-example-command', 'Skip scaffolding example command (CLI apps only)')
+  .option('--no-example-service', 'Skip scaffolding example service (CLI apps only)')
   .action(async (name: string | undefined, options: {
     apps?: string[];
     appNames?: string[];
@@ -65,13 +67,18 @@ export const projectCommand = new Command('project')
     ui?: boolean;
     uiLib?: boolean;
     nonInteractive?: boolean;
+    exampleCommand?: boolean;
+    exampleService?: boolean;
   }) => {
-    if (!name) {
+    let projectName: string;
+    if (name) {
+      projectName = formatEntityName(validateProjectName(name), 'project');
+    } else if (options.nonInteractive) {
       console.error('Error: Project name is required.');
       process.exit(1);
+    } else {
+      projectName = await promptProjectName();
     }
-
-    const projectName = formatEntityName(validateProjectName(name), 'project');
     const projectDir = resolve(process.cwd(), projectName);
 
     if (existsSync(projectDir)) {
@@ -146,6 +153,7 @@ export const projectCommand = new Command('project')
             const steps = getAppInitSteps({
               appDir,
               appName: dirName,
+              appBaseName: appName,
               appType,
               projectName,
             });
@@ -206,6 +214,13 @@ export const projectCommand = new Command('project')
             appType,
             appDir: resolve(projectDir, appDir),
             projectRoot: projectDir,
+          });
+        }
+
+        if (appType === 'cli') {
+          await scaffoldCliExampleDefaults(projectDir, dirName, {
+            skipCommand: options.exampleCommand === false,
+            skipService: options.exampleService === false,
           });
         }
       }

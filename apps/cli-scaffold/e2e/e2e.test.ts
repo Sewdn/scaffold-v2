@@ -5,6 +5,9 @@
  * Run with: bun test
  */
 
+import { readdirSync, rmSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import { describe, test, expect, afterAll } from 'bun:test';
 import { Effect, Metric, pipe } from 'effect';
 import { E2ELiveLayer } from './layers.js';
@@ -65,6 +68,19 @@ describe('Scaffold E2E', () => {
       const { timestampedPath, latestPath } = writeReport(report);
       console.log(`\nE2E report written: ${latestPath}`);
       console.log(`  (timestamped: ${timestampedPath})`);
+    }
+    // Clean up any leftover temp dirs (e.g. from timeout/interrupt)
+    const monorepoRoot = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
+    const workspaceDir = join(monorepoRoot, '.e2e-workspace');
+    try {
+      const entries = readdirSync(workspaceDir, { withFileTypes: true });
+      for (const e of entries) {
+        if (e.isDirectory() && e.name.startsWith('scaffold-e2e-')) {
+          rmSync(join(workspaceDir, e.name), { recursive: true, force: true });
+        }
+      }
+    } catch {
+      /* workspace dir may not exist */
     }
   });
 });

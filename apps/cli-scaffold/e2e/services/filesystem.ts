@@ -2,7 +2,7 @@
  * FileSystem service for temp dir creation and removal.
  */
 
-import { mkdtempSync, rmSync, existsSync } from 'fs';
+import { mkdtempSync, mkdirSync, rmSync, existsSync } from 'fs';
 import { join } from 'path';
 import { Context, Effect, Layer } from 'effect';
 import { E2EConfig } from './config.js';
@@ -19,7 +19,12 @@ export const FileSystemLive = Layer.effect(
   Effect.gen(function* () {
     const config = yield* E2EConfig;
     return {
-      createTempDir: () => mkdtempSync(join(config.workspaceBaseDir, config.tempDirPrefix)),
+      createTempDir: () => {
+        if (!existsSync(config.workspaceBaseDir)) {
+          mkdirSync(config.workspaceBaseDir, { recursive: true });
+        }
+        return mkdtempSync(join(config.workspaceBaseDir, config.tempDirPrefix));
+      },
       removeTempDir: (dir: string) =>
         Effect.sync(() => {
           if (!config.keepTempOnExit && existsSync(dir)) {

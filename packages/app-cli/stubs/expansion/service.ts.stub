@@ -1,0 +1,27 @@
+import { Context, Effect, Layer } from "effect";
+
+/**
+ * {{serviceExportName}} — Service layer for CLI commands.
+ * Use create{{serviceExportName}}() for direct factory, or {{serviceExportName}}Live for Effect Context/DI.
+ */
+export class {{serviceExportName}} extends Context.Tag("{{serviceExportName}}")<
+  {{serviceExportName}},
+  {
+    // TODO: add service methods, e.g. doSomething: () => Effect.Effect<void>;
+  }
+>() {}
+
+export const {{serviceExportName}}Live = Layer.effect(
+  {{serviceExportName}},
+  Effect.sync(() => ({
+    // TODO: implement service methods
+  })),
+);
+
+export function create{{serviceExportName}}() {
+  return {
+    // TODO: implement — allows direct use without Layer
+  };
+}
+
+export type {{serviceExportName}}Api = ReturnType<typeof create{{serviceExportName}}>;

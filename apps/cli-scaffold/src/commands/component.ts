@@ -1,8 +1,7 @@
 import { Command } from 'commander';
 import { resolve } from 'path';
 import { existsSync } from 'fs';
-import { validateComponentName } from '../utils/validation.js';
-import { formatEntityName } from '../utils/entity-formatting.js';
+import { formatEntityName, validateComponentName } from '@workspace/core-utils';
 
 export const componentCommand = new Command('component')
   .description('Add a component to a UI package')

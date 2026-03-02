@@ -183,10 +183,11 @@ export function getPackageInitStepsFromConfig(
 export function getAppInitSteps(options: {
   appDir: string;
   appName: string;
+  appBaseName?: string;
   appType: string;
   projectName: string;
 }): CommandStep[] {
-  const { appDir, appName, appType, projectName } = options;
+  const { appDir, appName, appBaseName, appType, projectName } = options;
   const config = getAppTypeConfig(appType);
   if (!config || !hasGeneratePhase(config)) return [];
 
@@ -195,7 +196,7 @@ export function getAppInitSteps(options: {
     | undefined;
   if (!phase) return [];
 
-  const ctx = { projectName, appName, appDir };
+  const ctx = { projectName, appName, appBaseName: appBaseName ?? appName, appDir };
   const pkgName = `@${projectName}/${appName}`;
   const merge = phase.getMerge(ctx);
   const deps = phase.getDependencies(ctx);

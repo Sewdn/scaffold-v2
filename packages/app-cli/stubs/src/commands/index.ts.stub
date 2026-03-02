@@ -7,4 +7,3 @@ import type { Command } from "commander";
 export function registerCommands(program: Command): void {
   // Commands registered below (scaffold cli add-command)
 }
-

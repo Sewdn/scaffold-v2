@@ -8,15 +8,14 @@
  */
 
 /** Workspace ref for a project package */
-export const wsRef = (projectName: string, pkg: string) =>
-  `@${projectName}/${pkg}@workspace:*`;
+export const wsRef = (projectName: string, pkg: string) => `@${projectName}/${pkg}@workspace:*`;
 
 // ─── Version constants (single source of truth) ─────────────────────────────
 const V = {
-  typescript: 'typescript@^5.8.2',
+  typescript: 'typescript@^5.9.3',
   eslint: 'eslint@^9',
   bunTypes: 'bun-types@latest',
-  effect: 'effect@^3.11.0',
+  effect: 'effect@^3.19.19',
   dotenv: 'dotenv@^16.4.5',
   dotenvCli: 'dotenv-cli@^10.0.0',
   postcss: 'postcss@^8.5.3',
@@ -34,7 +33,7 @@ const V = {
   elysia: 'elysia@^1.2.9',
   elysiaSwagger: '@elysiajs/swagger@^1.2.0',
   elysiaCors: '@elysiajs/cors@^1.2.0',
-  commander: 'commander@^12.1.0',
+  commander: 'commander@^14.0.3',
   mcpSdk: '@modelcontextprotocol/sdk@^1.9.0',
   prismaClient: '@prisma/client@^7.2.0',
   prisma: 'prisma@^7.2.0',
@@ -87,14 +86,7 @@ export const profileReact: DepProfile = {
 
 /** Shadcn primitives: cva, clsx, lucide, next-themes, tailwind-merge, tailwindcss-animate */
 export const profileShadcn: DepProfile = {
-  dependencies: [
-    V.cva,
-    V.clsx,
-    V.lucide,
-    V.nextThemes,
-    V.tailwindMerge,
-    V.tailwindAnimate,
-  ],
+  dependencies: [V.cva, V.clsx, V.lucide, V.nextThemes, V.tailwindMerge, V.tailwindAnimate],
 };
 
 // ─── Compose: merge profiles into a single DepProfile ───────────────────────
@@ -121,8 +113,8 @@ function mergeArrays<T>(...arrs: (readonly T[] | undefined)[]): T[] {
  */
 export function composeProfiles(...profiles: DepProfile[]): DepProfile {
   return {
-    dependencies: mergeArrays(...profiles.map((p) => p.dependencies)),
-    devDependencies: mergeArrays(...profiles.map((p) => p.devDependencies)),
+    dependencies: mergeArrays(...profiles.map(p => p.dependencies)),
+    devDependencies: mergeArrays(...profiles.map(p => p.devDependencies)),
   };
 }
 

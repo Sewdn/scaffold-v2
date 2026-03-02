@@ -11,11 +11,11 @@ import {
   OPTIONAL_PACKAGES,
   type OptionalPackage,
 } from '../init/optional-packages.js';
-import { formatEntityName } from '../utils/entity-formatting.js';
 import {
-  validateProjectName,
+  formatEntityName,
   validateAppName,
-} from '../utils/validation.js';
+  validateProjectName,
+} from '@workspace/core-utils';
 import type { AppType } from '../registry.js';
 import { APP_TYPES, APP_TYPE_PREFIX } from '../registry.js';
 import { getAppTypeConfig } from '../app-types/registry.js';
@@ -123,7 +123,7 @@ export async function promptApps(): Promise<Array<{ type: AppType; name: string 
     'frontend-nextjs': 'web',
     'frontend-vite': 'web',
     'frontend-tanstack': 'web',
-    cli: 'cli',
+    cli: 'tools',
     backend: 'api',
     'mcp-server': 'mcp',
     'slide-deck': 'slides',
@@ -133,8 +133,13 @@ export async function promptApps(): Promise<Array<{ type: AppType; name: string 
   const result: Array<{ type: AppType; name: string }> = [];
   for (const appType of types) {
     const defaultName = defaultAppNames[appType];
+    const prefix = APP_TYPE_PREFIX[appType];
+    const hint =
+      appType === 'cli'
+        ? ` (will be prefixed with ${prefix}-, e.g. ${prefix}-myapp)`
+        : ` (will be prefixed with ${prefix}-)`;
     const name = await text({
-      message: `Name for ${appType} app?`,
+      message: `Name for ${appType} app?${hint}`,
       defaultValue: defaultName,
       validate: (v) => {
         if (!v?.trim()) return 'Please enter a name';
@@ -202,4 +207,46 @@ export async function promptAppType(): Promise<AppType> {
   }
 
   return value as AppType;
+}
+
+const defaultAppNames: Record<AppType, string> = {
+  'frontend-nextjs': 'web',
+  'frontend-vite': 'web',
+  'frontend-tanstack': 'web',
+  cli: 'tools',
+  backend: 'api',
+  'mcp-server': 'mcp',
+  'slide-deck': 'slides',
+  documentation: 'docs',
+};
+
+/**
+ * Prompt for app name with optional prefix hint (e.g. for CLI: "will be prefixed with cli-").
+ */
+export async function promptAppName(
+  appType: AppType,
+  defaultValue?: string,
+): Promise<string> {
+  const defaultName = defaultValue ?? defaultAppNames[appType];
+  const prefix = APP_TYPE_PREFIX[appType];
+  const hint =
+    appType === 'cli'
+      ? ` (will be prefixed with ${prefix}-, e.g. ${prefix}-myapp)`
+      : ` (will be prefixed with ${prefix}-)`;
+
+  const value = await text({
+    message: `Name for ${appType} app?${hint}`,
+    defaultValue: defaultName,
+    validate: (v) => {
+      if (!v?.trim()) return 'Please enter a name';
+      return validateAppForPrompt(v.trim());
+    },
+  });
+
+  if (isCancel(value)) {
+    cancel('Operation cancelled.');
+    process.exit(0);
+  }
+
+  return formatEntityName(value.trim(), 'app');
 }

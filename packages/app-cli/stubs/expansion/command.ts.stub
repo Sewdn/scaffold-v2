@@ -1,0 +1,25 @@
+import { Command } from "commander";
+import { Effect } from "effect";
+import chalk from "chalk";
+import { outro } from "@clack/prompts";
+import Table from "cli-table3";
+
+/**
+ * {{commandDescription}}
+ * Example uses chalk (colors), @clack/prompts (outro), cli-table3 (tables).
+ */
+export const {{commandClass}} = new Command("{{commandName}}")
+  .description("{{commandDescription}}")
+  .action(async () => {
+    await Effect.runPromise(
+      Effect.sync(() => {
+        const table = new Table({ head: [chalk.cyan("Key"), chalk.cyan("Value")] });
+        table.push(
+          ["Command", "{{commandName}}"],
+          ["Status", chalk.green("Ready")],
+        );
+        console.log(table.toString());
+        outro(chalk.green("{{commandDescription}} — done."));
+      }),
+    );
+  });

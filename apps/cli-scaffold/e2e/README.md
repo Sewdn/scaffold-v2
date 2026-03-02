@@ -48,10 +48,30 @@ bun run e2e:report:scenario minimal-project
 bun run e2e/report-viewer.ts .e2e-reports/run-latest.json -- --scenario backend-only
 ```
 
+## Distributed App-Type Scenarios
+
+App-types can provide their own E2E scenarios, validators, and types for self-containment and future package extraction. The scenario registry loads from:
+
+- **Core scenarios**: `e2e/scenarios/` — shared scenarios (project, init, backend, frontend, etc.)
+- **App-type scenarios**: `@workspace/app-cli/e2e/scenarios` — app-type packages export scenarios
+
+Each app-type package exports a `scenarios` array. Example: `@workspace/app-cli` contains CLI scenarios. To add scenarios for a new app-type:
+
+1. Create `packages/app-<type>/src/e2e/scenarios/` with scenario files
+2. Export `scenarios: readonly Scenario[]` from `scenarios/index.ts`
+3. Add the package export and register in `e2e/services/scenario-registry.ts`:
+
+```ts
+const APP_TYPE_SCENARIO_LOADERS = [
+  () => import('@workspace/app-cli/e2e/scenarios'),
+  // () => import('@workspace/app-<your-type>/e2e/scenarios'),
+];
+```
+
 ## Adding a Scenario
 
 0. **Check [SCENARIOS.md](./SCENARIOS.md)** for the scenario spec and copy the Steps/Validations template.
-1. **Create a scenario file** in `e2e/scenarios/` (e.g. `my-scenario.ts`):
+1. **Create a scenario file** — in `e2e/scenarios/` for core scenarios, or in `packages/app-<type>/src/e2e/scenarios/` for app-type packages:
 
 ```ts
 import { pathExists, hasScript, buildSucceeds } from '../validators/index.js';
@@ -93,8 +113,6 @@ const SCENARIO_LOADERS = [
 ## Configuration
 
 - **Scenario filter**: Set `SCAFFOLD_E2E_SCENARIO=frontend-vite` to run only scenarios whose id matches (e.g. `frontend-vite`, `backend-only`). Useful for iterating on a single scenario.
-- **Workspace base**: Scaffolded projects are created in a temp dir under `os.tmpdir()` (e.g. `/tmp` or `/var/folders/...`) and **removed after each scenario**. Set `SCAFFOLD_E2E_WORKSPACE_DIR` to use a different base (e.g. `/tmp/scaffold-e2e` or `~/tmp/scaffold-e2e`).
+- **Workspace base**: Scaffolded projects are created in `<monorepo-root>/.e2e-workspace/` (cwd-independent). Temp dirs are **always removed after each scenario**, even when tests fail. Set `SCAFFOLD_E2E_WORKSPACE_DIR` to override (e.g. `/tmp/scaffold-e2e`).
 - **Keep on failure**: Set `SCAFFOLD_E2E_KEEP_TEMP=1` to retain temp dirs for debugging.
 - **Reports**: Written to `apps/cli-scaffold/.e2e-reports/`; ignored via root `.gitignore`.
-
-**Note:** The folders `e2e-frontend-test`, `e2e-nextjs-test`, etc. in the project root are from **manual** `scaffold project` runs (which create projects in the current directory). The automated E2E suite uses temp dirs and cleans up. To remove leftover manual test projects: `rm -rf e2e-*-test`.

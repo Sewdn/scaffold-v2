@@ -5,8 +5,7 @@ import { Effect } from 'effect';
 import { createServicePackage } from '../init/create-package-files.js';
 import { createUIPackage } from '../init/create-package-files.js';
 import { runSteps } from '../orchestrator.js';
-import { validateModuleName } from '../utils/validation.js';
-import { formatEntityName } from '../utils/entity-formatting.js';
+import { formatEntityName, validateModuleName } from '@workspace/core-utils';
 
 export const moduleCommand = new Command('module')
   .description('Add a module (service + UI packages)')

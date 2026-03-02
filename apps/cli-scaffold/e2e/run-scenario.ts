@@ -57,42 +57,47 @@ export function runScenario(
     const projectName = getProjectName(scenario.steps);
     let projectDir = tempDir;
 
-    for (const step of scenario.steps) {
-      yield* pipe(
-        runner.runStep(
-          step,
-          step.command === 'project' || step.command === 'init' ? tempDir : projectDir,
-        ),
-        Effect.tap(() => Effect.log(`  ✓ ${step.command} ${step.args.join(' ')}`)),
-      );
+    const result = yield* Effect.ensuring(
+      Effect.gen(function* () {
+        for (const step of scenario.steps) {
+          yield* pipe(
+            runner.runStep(
+              step,
+              step.command === 'project' || step.command === 'init' ? tempDir : projectDir,
+            ),
+            Effect.tap(() => Effect.log(`  ✓ ${step.command} ${step.args.join(' ')}`)),
+          );
 
-      if (step.command === 'project' || step.command === 'init') {
-        projectDir = join(tempDir, projectName);
-      }
-    }
+          if (step.command === 'project' || step.command === 'init') {
+            projectDir = join(tempDir, projectName);
+          }
+        }
 
-    const ctx = { projectDir, projectName };
-    const validationResults = yield* validator.run(scenario.validators, ctx);
-    const allPassed = validationResults.every((r) => r.passed);
+        const ctx = { projectDir, projectName };
+        const validationResults = yield* validator.run(scenario.validators, ctx);
+        const allPassed = validationResults.every((r) => r.passed);
 
-    yield* fs.removeTempDir(tempDir);
+        if (allPassed) {
+          yield* Metric.increment(scenarioSuccessMetric);
+        } else {
+          yield* Metric.increment(scenarioFailureMetric);
+          const failed = validationResults.filter((r) => !r.passed);
+          yield* Effect.log(`  ✗ Validations failed: ${failed.map((f) => f.message).join('; ')}`);
+        }
 
-    if (allPassed) {
-      yield* Metric.increment(scenarioSuccessMetric);
-    } else {
-      yield* Metric.increment(scenarioFailureMetric);
-      const failed = validationResults.filter((r) => !r.passed);
-      yield* Effect.log(`  ✗ Validations failed: ${failed.map((f) => f.message).join('; ')}`);
-    }
+        return {
+          scenarioId: scenario.id,
+          projectDir,
+          projectName,
+          validationResults,
+          allPassed,
+          durationMs: 0,
+        } as RunResult;
+      }),
+      fs.removeTempDir(tempDir),
+    );
 
-    return {
-      scenarioId: scenario.id,
-      projectDir,
-      projectName,
-      validationResults,
-      allPassed,
-      durationMs: 0,
-    } as RunResult;
+    return result;
   });
 
   return pipe(

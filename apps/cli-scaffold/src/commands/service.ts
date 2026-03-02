@@ -4,8 +4,7 @@ import { existsSync, readFileSync } from 'fs';
 import { Effect } from 'effect';
 import { createServicePackage } from '../init/create-package-files.js';
 import { runSteps } from '../orchestrator.js';
-import { validateServiceName } from '../utils/validation.js';
-import { formatEntityName } from '../utils/entity-formatting.js';
+import { formatEntityName, validateServiceName } from '@workspace/core-utils';
 
 export const serviceCommand = new Command('service')
   .description('Add a service package')

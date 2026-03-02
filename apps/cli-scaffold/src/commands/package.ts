@@ -5,8 +5,7 @@ import { Effect } from 'effect';
 import { createServicePackage } from '../init/create-package-files.js';
 import { createUIPackage } from '../init/create-package-files.js';
 import { runSteps } from '../orchestrator.js';
-import { validatePackageName } from '../utils/validation.js';
-import { formatEntityName } from '../utils/entity-formatting.js';
+import { formatEntityName, validatePackageName } from '@workspace/core-utils';
 
 export const packageCommand = new Command('package')
   .description('Add a generic package')

@@ -1,7 +1,5 @@
 /**
- * CLI expansion scenario: project with CLI app, then add commands and services.
- * Validates that scaffold cli add-command and add-service work, and that the
- * scaffolded CLI runs with all added commands visible in help.
+ * CLI expansion: project with CLI app (no defaults), then add commands and services.
  */
 
 import {
@@ -10,12 +8,12 @@ import {
   buildSucceeds,
   lintSucceeds,
   cliHelpShowsCommands,
-} from '../validators/index.js';
-import type { Scenario } from '../types.js';
+} from '@workspace/core-e2e';
+import type { Scenario } from '@workspace/core-e2e';
 
 export const scenario: Scenario = {
   id: 'cli-expansion',
-  description: 'CLI app with expanded commands and services',
+  description: 'CLI app with add-command and add-service (no default examples)',
   steps: [
     {
       command: 'project',
@@ -26,6 +24,8 @@ export const scenario: Scenario = {
         '--app-names',
         'tools',
         '--non-interactive',
+        '--no-example-command',
+        '--no-example-service',
       ],
     },
     {

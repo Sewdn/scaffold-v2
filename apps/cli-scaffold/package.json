@@ -18,17 +18,21 @@
     "e2e:report:scenario": "bun run e2e/report-viewer.ts"
   },
   "dependencies": {
+    "@workspace/app-cli": "workspace:*",
+    "@workspace/core-utils": "workspace:*",
     "@clack/prompts": "^1.0.1",
     "chalk": "^5.6.2",
-    "commander": "^12.1.0",
-    "effect": "^3.11.0"
+    "commander": "^14.0.3",
+    "effect": "^3.19.19"
   },
   "devDependencies": {
+    "@workspace/core-e2e": "workspace:*",
+    "@types/bun": "latest",
     "@types/node": "^20.11.0",
     "@workspace/eslint-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
     "cli-table3": "^0.6.5",
-    "typescript": "^5.8.2"
+    "typescript": "^5.9.3"
   },
   "engines": {
     "node": ">=20"

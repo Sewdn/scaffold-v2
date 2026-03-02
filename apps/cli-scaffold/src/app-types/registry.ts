@@ -1,14 +1,22 @@
 import type { AppTypeConfig, GeneratePhase } from './types.js';
 
 export type { GeneratePhase };
+import type { CreateCliAppTypeOptions } from '@workspace/app-cli';
+import { createCliAppType } from '@workspace/app-cli';
+import { createGeneratePhase } from './defaults.js';
+import { DEP_COMMANDER, DEP_EFFECT } from '../packages/dependencies.js';
 import { backend } from './backend/index.js';
-import { cli } from './cli/index.js';
 import { mcpServer } from './mcp-server/index.js';
 import { frontendNextjs } from './frontend-nextjs/index.js';
 import { frontendVite } from './frontend-vite/index.js';
 import { frontendTanstack } from './frontend-tanstack/index.js';
 import { slideDeck } from './slide-deck/index.js';
 import { documentation } from './documentation/index.js';
+
+const { cli } = createCliAppType({
+  createGeneratePhase: createGeneratePhase as CreateCliAppTypeOptions['createGeneratePhase'],
+  deps: [DEP_COMMANDER, DEP_EFFECT],
+});
 
 const ALL_APP_TYPES: AppTypeConfig[] = [
   frontendNextjs,
