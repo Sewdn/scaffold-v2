@@ -1,11 +1,17 @@
-import type { PackageConfig } from './types.js';
-import { domain } from './domain/index.js';
-import { svcConfig } from './svc-config/index.js';
-import { ui } from './ui/index.js';
-import { uiLib } from './ui-lib/index.js';
+import type { PackageConfig } from '@workspace/core-pkg-types';
+import { domainPackageConfig } from '@workspace/pkg-domain';
+import { svcConfigPackageConfig } from '@workspace/pkg-svc-config';
+import { uiPackageConfig } from '@workspace/pkg-ui';
+import { uiLibPackageConfig } from '@workspace/pkg-ui-lib';
 import { svcPrisma } from './svc-prisma/index.js';
 
-const ALL_PACKAGES: PackageConfig[] = [domain, svcConfig, ui, uiLib, svcPrisma];
+const ALL_PACKAGES: PackageConfig[] = [
+  domainPackageConfig,
+  svcConfigPackageConfig,
+  uiPackageConfig,
+  uiLibPackageConfig,
+  svcPrisma,
+];
 
 const REGISTRY = new Map<string, PackageConfig>(
   ALL_PACKAGES.map((c) => [c.id, c]),

@@ -2,7 +2,7 @@ import { existsSync, readdirSync, readFileSync } from 'fs';
 import { mkdir } from 'fs/promises';
 import { join, dirname } from 'path';
 import { renderTemplate } from '@workspace/core-utils';
-import type { AppTypeContext } from '../app-types/types.js';
+import type { AppTypeContext } from '@workspace/core-app-types';
 
 /**
  * Resolve stubs directory: project override (stubs/app-types/{id}) or module's built-in stubsDir.

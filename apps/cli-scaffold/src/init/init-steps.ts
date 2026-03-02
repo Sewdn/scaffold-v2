@@ -6,7 +6,7 @@ import {
   hasGeneratePhase,
   type GeneratePhase,
 } from '../app-types/registry.js';
-import { BASE_DEV_DEPS } from '../packages/dependencies.js';
+import { BASE_DEV_DEPS } from '@workspace/scaffold-deps';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 export const SCRIPTS_DIR = join(__dirname, '../../scripts');
@@ -118,8 +118,8 @@ export function getPackageInitSteps(options: {
  * Uses config for directory setup, merge, dependencies, and scripts.
  */
 export function getPackageInitStepsFromConfig(
-  config: import('../packages/types.js').PackageConfig,
-  ctx: import('../packages/types.js').PackageContext,
+  config: import('@workspace/core-pkg-types').PackageConfig,
+  ctx: import('@workspace/core-pkg-types').PackageContext,
 ): CommandStep[] {
   const merge = config.getMerge(ctx);
   const scripts = config.getScripts?.(ctx) ?? {

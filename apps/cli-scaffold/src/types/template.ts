@@ -1,20 +1,8 @@
 /**
  * Command template schema for cascadable command orchestration.
+ * CommandStep and CommandStepType come from core-app-types.
  */
-
-export type CommandStepType = 'bun' | 'pnpm' | 'bunx' | 'npx' | 'shell' | 'exec';
-
-export interface CommandStep {
-  type: CommandStepType;
-  command: string;
-  args?: string[];
-  /** Use when running in non-interactive mode (e.g. --non-interactive) instead of args */
-  argsForNonInteractive?: string[];
-  cwd?: string;
-  optional?: boolean;
-  /** When true, subprocess uses stdio: 'inherit' so it can show prompts and receive input */
-  interactive?: boolean;
-}
+export type { CommandStep, CommandStepType } from '@workspace/core-app-types';
 
 export interface CommandTemplate {
   id: string;

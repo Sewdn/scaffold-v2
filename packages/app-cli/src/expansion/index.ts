@@ -15,3 +15,31 @@ export const cliCommand = new Command('cli')
   .description('Expand scaffolded CLI applications with commands and services')
   .addCommand(addCommandSub)
   .addCommand(addServiceSub);
+
+/** Metadata for docs generation. Extracted from Commander commands. */
+export interface ExpansionCommandMeta {
+  name: string;
+  description: string;
+  usage: string;
+}
+
+/**
+ * Expansion command metadata for docs generation.
+ * Derives from cliCommand subcommands.
+ */
+export function getCliExpansionCommands(): ExpansionCommandMeta[] {
+  const cmdObj = cliCommand as unknown as { commands?: readonly Command[] };
+  const subs = cmdObj.commands ?? [];
+  return subs.map((cmd) => {
+    const name = typeof cmd.name === 'function' ? cmd.name() : (cmd as { _name?: string })._name ?? '';
+    const desc =
+      typeof cmd.description === 'function'
+        ? cmd.description()
+        : (cmd as { _description?: string })._description ?? '';
+    return {
+      name,
+      description: desc,
+      usage: `scaffold cli ${name} [options]`,
+    };
+  });
+}

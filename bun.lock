@@ -24,11 +24,25 @@
       },
       "dependencies": {
         "@clack/prompts": "^1.0.1",
+        "@workspace/app-backend": "workspace:*",
         "@workspace/app-cli": "workspace:*",
+        "@workspace/app-documentation": "workspace:*",
+        "@workspace/app-frontend-nextjs": "workspace:*",
+        "@workspace/app-frontend-tanstack": "workspace:*",
+        "@workspace/app-frontend-vite": "workspace:*",
+        "@workspace/app-mcp-server": "workspace:*",
+        "@workspace/app-slide-deck": "workspace:*",
+        "@workspace/core-app-types": "workspace:*",
+        "@workspace/core-pkg-types": "workspace:*",
         "@workspace/core-utils": "workspace:*",
+        "@workspace/pkg-domain": "workspace:*",
+        "@workspace/pkg-svc-config": "workspace:*",
+        "@workspace/pkg-ui": "workspace:*",
+        "@workspace/pkg-ui-lib": "workspace:*",
+        "@workspace/scaffold-deps": "workspace:*",
         "chalk": "^5.6.2",
-        "commander": "^12.1.0",
-        "effect": "^3.11.0",
+        "commander": "^14.0.3",
+        "effect": "^3.19.19",
       },
       "devDependencies": {
         "@types/bun": "latest",
@@ -37,7 +51,7 @@
         "@workspace/eslint-config": "workspace:*",
         "@workspace/typescript-config": "workspace:*",
         "cli-table3": "^0.6.5",
-        "typescript": "^5.8.2",
+        "typescript": "^5.9.3",
       },
     },
     "apps/docs-docs": {
@@ -88,18 +102,111 @@
         "vite": "^7.3.1",
       },
     },
-    "packages/app-cli": {
-      "name": "@workspace/app-cli",
+    "packages/app-backend": {
+      "name": "@workspace/app-backend",
       "version": "0.0.1",
       "dependencies": {
+        "@workspace/core-app-types": "workspace:*",
         "@workspace/core-utils": "workspace:*",
-        "commander": "^12.1.0",
-        "effect": "^3.11.0",
-        "mustache": "^4.2.0",
       },
       "devDependencies": {
         "@types/node": "^20.11.0",
         "@workspace/core-e2e": "workspace:*",
+        "@workspace/typescript-config": "workspace:*",
+        "typescript": "^5.8.2",
+      },
+    },
+    "packages/app-cli": {
+      "name": "@workspace/app-cli",
+      "version": "0.0.1",
+      "dependencies": {
+        "@workspace/core-app-types": "workspace:*",
+        "@workspace/core-utils": "workspace:*",
+        "commander": "^14.0.3",
+        "effect": "^3.11.0",
+      },
+      "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@workspace/core-e2e": "workspace:*",
+        "@workspace/typescript-config": "workspace:*",
+        "typescript": "^5.8.2",
+      },
+    },
+    "packages/app-documentation": {
+      "name": "@workspace/app-documentation",
+      "version": "0.0.1",
+      "dependencies": {
+        "@workspace/core-utils": "workspace:*",
+      },
+      "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@workspace/core-e2e": "workspace:*",
+        "@workspace/typescript-config": "workspace:*",
+        "typescript": "^5.8.2",
+      },
+    },
+    "packages/app-frontend-nextjs": {
+      "name": "@workspace/app-frontend-nextjs",
+      "version": "0.0.1",
+      "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@workspace/core-e2e": "workspace:*",
+        "@workspace/typescript-config": "workspace:*",
+        "typescript": "^5.8.2",
+      },
+    },
+    "packages/app-frontend-tanstack": {
+      "name": "@workspace/app-frontend-tanstack",
+      "version": "0.0.1",
+      "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@workspace/core-e2e": "workspace:*",
+        "@workspace/typescript-config": "workspace:*",
+        "typescript": "^5.8.2",
+      },
+    },
+    "packages/app-frontend-vite": {
+      "name": "@workspace/app-frontend-vite",
+      "version": "0.0.1",
+      "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@workspace/core-e2e": "workspace:*",
+        "@workspace/typescript-config": "workspace:*",
+        "typescript": "^5.8.2",
+      },
+    },
+    "packages/app-mcp-server": {
+      "name": "@workspace/app-mcp-server",
+      "version": "0.0.1",
+      "dependencies": {
+        "@workspace/core-app-types": "workspace:*",
+        "@workspace/core-utils": "workspace:*",
+      },
+      "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@workspace/core-e2e": "workspace:*",
+        "@workspace/typescript-config": "workspace:*",
+        "typescript": "^5.8.2",
+      },
+    },
+    "packages/app-slide-deck": {
+      "name": "@workspace/app-slide-deck",
+      "version": "0.0.1",
+      "dependencies": {
+        "@workspace/core-utils": "workspace:*",
+      },
+      "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@workspace/core-e2e": "workspace:*",
+        "@workspace/typescript-config": "workspace:*",
+        "typescript": "^5.8.2",
+      },
+    },
+    "packages/core-app-types": {
+      "name": "@workspace/core-app-types",
+      "version": "0.0.1",
+      "devDependencies": {
+        "@types/node": "^20.11.0",
         "@workspace/typescript-config": "workspace:*",
         "typescript": "^5.8.2",
       },
@@ -114,9 +221,21 @@
         "typescript": "^5.8.2",
       },
     },
+    "packages/core-pkg-types": {
+      "name": "@workspace/core-pkg-types",
+      "version": "0.0.1",
+      "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@workspace/typescript-config": "workspace:*",
+        "typescript": "^5.8.2",
+      },
+    },
     "packages/core-utils": {
       "name": "@workspace/core-utils",
       "version": "0.0.1",
+      "dependencies": {
+        "mustache": "^4.2.0",
+      },
       "devDependencies": {
         "@types/node": "^20.11.0",
         "@workspace/typescript-config": "workspace:*",
@@ -142,6 +261,67 @@
         "globals": "^15.12.0",
         "typescript": "^5.3.3",
         "typescript-eslint": "^8.15.0",
+      },
+    },
+    "packages/pkg-domain": {
+      "name": "@workspace/pkg-domain",
+      "version": "0.0.1",
+      "dependencies": {
+        "@workspace/core-pkg-types": "workspace:*",
+        "@workspace/scaffold-deps": "workspace:*",
+      },
+      "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@workspace/typescript-config": "workspace:*",
+        "typescript": "^5.8.2",
+      },
+    },
+    "packages/pkg-svc-config": {
+      "name": "@workspace/pkg-svc-config",
+      "version": "0.0.1",
+      "dependencies": {
+        "@workspace/core-pkg-types": "workspace:*",
+        "@workspace/scaffold-deps": "workspace:*",
+      },
+      "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@workspace/typescript-config": "workspace:*",
+        "typescript": "^5.8.2",
+      },
+    },
+    "packages/pkg-ui": {
+      "name": "@workspace/pkg-ui",
+      "version": "0.0.1",
+      "dependencies": {
+        "@workspace/core-pkg-types": "workspace:*",
+        "@workspace/scaffold-deps": "workspace:*",
+      },
+      "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@workspace/typescript-config": "workspace:*",
+        "typescript": "^5.8.2",
+      },
+    },
+    "packages/pkg-ui-lib": {
+      "name": "@workspace/pkg-ui-lib",
+      "version": "0.0.1",
+      "dependencies": {
+        "@workspace/core-pkg-types": "workspace:*",
+        "@workspace/scaffold-deps": "workspace:*",
+      },
+      "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@workspace/typescript-config": "workspace:*",
+        "typescript": "^5.8.2",
+      },
+    },
+    "packages/scaffold-deps": {
+      "name": "@workspace/scaffold-deps",
+      "version": "0.0.1",
+      "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@workspace/typescript-config": "workspace:*",
+        "typescript": "^5.8.2",
       },
     },
     "packages/typescript-config": {
@@ -833,13 +1013,41 @@
 
     "@webgpu/types": ["@webgpu/types@0.1.69", "", {}, "sha512-RPmm6kgRbI8e98zSD3RVACvnuktIja5+yLgDAkTmxLr90BEwdTXRQWNLF3ETTTyH/8mKhznZuN5AveXYFEsMGQ=="],
 
+    "@workspace/app-backend": ["@workspace/app-backend@workspace:packages/app-backend"],
+
     "@workspace/app-cli": ["@workspace/app-cli@workspace:packages/app-cli"],
 
+    "@workspace/app-documentation": ["@workspace/app-documentation@workspace:packages/app-documentation"],
+
+    "@workspace/app-frontend-nextjs": ["@workspace/app-frontend-nextjs@workspace:packages/app-frontend-nextjs"],
+
+    "@workspace/app-frontend-tanstack": ["@workspace/app-frontend-tanstack@workspace:packages/app-frontend-tanstack"],
+
+    "@workspace/app-frontend-vite": ["@workspace/app-frontend-vite@workspace:packages/app-frontend-vite"],
+
+    "@workspace/app-mcp-server": ["@workspace/app-mcp-server@workspace:packages/app-mcp-server"],
+
+    "@workspace/app-slide-deck": ["@workspace/app-slide-deck@workspace:packages/app-slide-deck"],
+
+    "@workspace/core-app-types": ["@workspace/core-app-types@workspace:packages/core-app-types"],
+
     "@workspace/core-e2e": ["@workspace/core-e2e@workspace:packages/core-e2e"],
+
+    "@workspace/core-pkg-types": ["@workspace/core-pkg-types@workspace:packages/core-pkg-types"],
 
     "@workspace/core-utils": ["@workspace/core-utils@workspace:packages/core-utils"],
 
     "@workspace/eslint-config": ["@workspace/eslint-config@workspace:packages/eslint-config"],
+
+    "@workspace/pkg-domain": ["@workspace/pkg-domain@workspace:packages/pkg-domain"],
+
+    "@workspace/pkg-svc-config": ["@workspace/pkg-svc-config@workspace:packages/pkg-svc-config"],
+
+    "@workspace/pkg-ui": ["@workspace/pkg-ui@workspace:packages/pkg-ui"],
+
+    "@workspace/pkg-ui-lib": ["@workspace/pkg-ui-lib@workspace:packages/pkg-ui-lib"],
+
+    "@workspace/scaffold-deps": ["@workspace/scaffold-deps@workspace:packages/scaffold-deps"],
 
     "@workspace/typescript-config": ["@workspace/typescript-config@workspace:packages/typescript-config"],
 
@@ -1003,7 +1211,7 @@
 
     "comma-separated-tokens": ["comma-separated-tokens@2.0.3", "", {}, "sha512-Fu4hJdvzeylCfQPp9SGWidpzrMs7tTrlu6Vb8XGaRGck8QSNZJJp538Wrb60Lax4fPwR64ViY468OIUTbRlGZg=="],
 
-    "commander": ["commander@12.1.0", "", {}, "sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA=="],
+    "commander": ["commander@14.0.3", "", {}, "sha512-H+y0Jo/T1RZ9qPP4Eh1pkcQcLRglraJaSLoyOtHxu6AapkjWVCy2Sit1QQ4x3Dng8qDlSsZEet7g5Pq06MvTgw=="],
 
     "common-ancestor-path": ["common-ancestor-path@1.0.1", "", {}, "sha512-L3sHRo1pXXEqX8VU28kfgUY+YGsk09hPqZiZmLacNib6XNTCM8ubYeT7ryXQw8asB1sKgcU5lkB7ONug08aB8w=="],
 
@@ -2512,8 +2720,6 @@
     "restore-cursor/onetime": ["onetime@7.0.0", "", { "dependencies": { "mimic-function": "^5.0.0" } }, "sha512-VXJjc87FScF88uafS3JllDgvAm+c/Slfz06lorj2uAY34rlUu0Nt+v8wreiImcrgAjjIHp1rXpTDlLOGw29WwQ=="],
 
     "router/path-to-regexp": ["path-to-regexp@8.3.0", "", {}, "sha512-7jdwVIRtsP8MYpdXSwOS0YdD0Du+qOoF/AEPIt88PcCFrZCzx41oxku1jD88hZBwbNUIEfpqvuhjFaMAqMTWnA=="],
-
-    "shadcn/commander": ["commander@14.0.3", "", {}, "sha512-H+y0Jo/T1RZ9qPP4Eh1pkcQcLRglraJaSLoyOtHxu6AapkjWVCy2Sit1QQ4x3Dng8qDlSsZEet7g5Pq06MvTgw=="],
 
     "shadcn/postcss-selector-parser": ["postcss-selector-parser@7.1.1", "", { "dependencies": { "cssesc": "^3.0.0", "util-deprecate": "^1.0.2" } }, "sha512-orRsuYpJVw8LdAwqqLykBj9ecS5/cRHlI5+nvTo8LcCKmzDmqVORXtOIYEEQuL9D4BxtA1lm5isAqzQZCoQ6Eg=="],
 

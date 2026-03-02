@@ -1,24 +1,42 @@
-import type { AppTypeConfig, GeneratePhase } from './types.js';
+import type { AppTypeConfig, GeneratePhase } from '@workspace/core-app-types';
 
 export type { GeneratePhase };
-import type { CreateCliAppTypeOptions } from '@workspace/app-cli';
 import { createCliAppType } from '@workspace/app-cli';
-import { createGeneratePhase } from './defaults.js';
-import { DEP_COMMANDER, DEP_EFFECT } from '../packages/dependencies.js';
-import { backend } from './backend/index.js';
-import { mcpServer } from './mcp-server/index.js';
-import { frontendNextjs } from './frontend-nextjs/index.js';
-import { frontendVite } from './frontend-vite/index.js';
-import { frontendTanstack } from './frontend-tanstack/index.js';
-import { slideDeck } from './slide-deck/index.js';
-import { documentation } from './documentation/index.js';
+import { createBackendAppType } from '@workspace/app-backend';
+import { createMcpServerAppType } from '@workspace/app-mcp-server';
+import {
+  DEP_ELYSIA,
+  DEP_ELYSIA_SWAGGER,
+  DEP_ELYSIA_CORS,
+  DEP_EFFECT,
+  DEP_COMMANDER,
+  DEP_MCP_SDK,
+} from '@workspace/scaffold-deps';
+import { createFrontendNextjsAppType } from '@workspace/app-frontend-nextjs';
+import { createFrontendViteAppType } from '@workspace/app-frontend-vite';
+import { createFrontendTanstackAppType } from '@workspace/app-frontend-tanstack';
+import { createDocumentationAppType } from '@workspace/app-documentation';
+import { createSlideDeckAppType } from '@workspace/app-slide-deck';
 
 const { cli } = createCliAppType({
-  createGeneratePhase: createGeneratePhase as CreateCliAppTypeOptions['createGeneratePhase'],
   deps: [DEP_COMMANDER, DEP_EFFECT],
 });
 
-const ALL_APP_TYPES: AppTypeConfig[] = [
+const { backend } = createBackendAppType({
+  deps: [DEP_ELYSIA, DEP_ELYSIA_SWAGGER, DEP_ELYSIA_CORS, DEP_EFFECT],
+});
+
+const { mcpServer } = createMcpServerAppType({
+  deps: [DEP_MCP_SDK, DEP_EFFECT],
+});
+
+const { frontendNextjs } = createFrontendNextjsAppType();
+const { frontendVite } = createFrontendViteAppType();
+const { frontendTanstack } = createFrontendTanstackAppType();
+const { documentation } = createDocumentationAppType();
+const { slideDeck } = createSlideDeckAppType();
+
+const ALL_APP_TYPES = [
   frontendNextjs,
   frontendVite,
   frontendTanstack,
@@ -27,7 +45,7 @@ const ALL_APP_TYPES: AppTypeConfig[] = [
   mcpServer,
   slideDeck,
   documentation,
-];
+] as AppTypeConfig[];
 
 const REGISTRY = new Map<string, AppTypeConfig>(
   ALL_APP_TYPES.map((c) => [c.id, c]),

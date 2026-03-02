@@ -3,8 +3,10 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "predev": "bun run ../cli-scaffold/scripts/generate-docs-data.ts",
     "dev": "astro dev",
     "start": "astro dev",
+    "prebuild": "bun run ../cli-scaffold/scripts/generate-docs-data.ts",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"

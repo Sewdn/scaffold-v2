@@ -4,7 +4,7 @@ import { join } from 'path';
 import { Effect } from 'effect';
 import { runSteps } from '../orchestrator.js';
 import { getPackageInitSteps } from './init-steps.js';
-import { BASE_DEV_DEPS, DEP_EFFECT, wsRef } from '../packages/dependencies.js';
+import { BASE_DEV_DEPS, DEP_EFFECT, wsRef } from '@workspace/scaffold-deps';
 
 function packageExists(projectDir: string, pkgPath: string): boolean {
   return existsSync(join(projectDir, pkgPath, 'package.json'));

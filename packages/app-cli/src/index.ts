@@ -7,6 +7,7 @@ import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
 import { cliCommand } from './expansion/index.js';
 import { scaffoldCliExampleDefaults } from './scaffold-defaults.js';
+import { createGeneratePhase, type AppTypeDepsOptions } from '@workspace/core-app-types';
 import {
   getPackageMerge,
   CLI_APP_MKDIR_PATHS,
@@ -18,7 +19,7 @@ const STUBS_DIR = join(__dirname, '..', 'stubs');
 
 export type { ScaffoldCliDefaultsOptions } from './scaffold-defaults.js';
 export { scaffoldCliExampleDefaults } from './scaffold-defaults.js';
-export { cliCommand } from './expansion/index.js';
+export { cliCommand, getCliExpansionCommands } from './expansion/index.js';
 export {
   CLI_APP_SCRIPTS,
   CLI_APP_UI_DEPENDENCIES,
@@ -29,31 +30,12 @@ export {
 export { executeAddCommand } from './expansion/add-command.js';
 export { executeAddService } from './expansion/add-service.js';
 
-/** Options for createCliAppType factory */
-export interface CreateCliAppTypeOptions {
-  /** createGeneratePhase from app-types/defaults — accepts GeneratePhaseInput */
-  createGeneratePhase: (input: {
-    stubsDir: string;
-    getMerge?: (ctx: unknown) => Record<string, unknown>;
-    getDependencies: () => string[];
-    getMkdirPaths?: () => string[];
-  }) => {
-    type: 'generate';
-    stubsDir: string;
-    getMerge: (ctx: unknown) => Record<string, unknown>;
-    getDependencies: (ctx: unknown) => string[];
-    getMkdirPaths: (ctx: unknown) => string[];
-  };
-  /** Dependency strings, e.g. [DEP_COMMANDER, DEP_EFFECT] */
-  deps: readonly string[];
-}
-
 /**
  * Create the CLI app type config, expansion command, and scaffold defaults.
  * Called by cli-scaffold app-types registry.
  */
-export function createCliAppType(opts: CreateCliAppTypeOptions) {
-  const phase = opts.createGeneratePhase({
+export function createCliAppType(opts: AppTypeDepsOptions) {
+  const phase = createGeneratePhase({
     stubsDir: STUBS_DIR,
     getMerge: (ctx) => getPackageMerge(ctx as Parameters<typeof getPackageMerge>[0]),
     getDependencies: () => [...opts.deps, ...CLI_APP_UI_DEPENDENCIES],
@@ -63,6 +45,7 @@ export function createCliAppType(opts: CreateCliAppTypeOptions) {
   const cli = {
     id: 'cli',
     description: 'Command-line interface (Effect + Commander)',
+    dirPrefix: 'cli',
     phases: [phase],
   };
 

@@ -1,6 +1,6 @@
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-import { createPackageConfig } from '../defaults.js';
+import { createPackageConfig } from '@workspace/core-pkg-types';
 import {
   BASE_DEV_DEPS,
   DEP_EFFECT,
@@ -8,7 +8,7 @@ import {
   DEP_PRISMA,
   DEP_DOTENV_CLI,
   wsRef,
-} from '../dependencies.js';
+} from '@workspace/scaffold-deps';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 

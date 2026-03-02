@@ -40,6 +40,16 @@ export async function createBaseStructure(options: CreateBaseStructureOptions): 
       args: [`${SCRIPTS_DIR}/write-eslint-config.mjs`],
       cwd: '{{projectName}}/packages/eslint-config',
     },
+    {
+      type: 'bun',
+      command: 'add',
+      args: [
+        '-d',
+        '@workspace/typescript-config@workspace:*',
+        '@workspace/eslint-config@workspace:*',
+      ],
+      cwd: '{{projectName}}',
+    },
     ...getOptionalPackageSteps(projectName, optionalPackages),
   ];
 

@@ -16,26 +16,27 @@ export const ScenarioRegistry = Context.GenericTag<ScenarioRegistry>('ScenarioRe
 /** Core scenario loaders (single scenario per module) */
 const CORE_SCENARIO_LOADERS = [
   () => import('../scenarios/01-minimal-project.js'),
-  () => import('../scenarios/02-backend-only.js'),
   () => import('../scenarios/03-init-with-optional-packages.js'),
   () => import('../scenarios/04-service-package.js'),
   () => import('../scenarios/05-ui-package.js'),
   () => import('../scenarios/06-module-creation.js'),
   () => import('../scenarios/07-component-in-ui-lib.js'),
   () => import('../scenarios/09-backend-plus-mcp.js'),
-  () => import('../scenarios/10-slide-deck-app.js'),
-  () => import('../scenarios/11-documentation-app.js'),
   () => import('../scenarios/12-full-packages-stack.js'),
   () => import('../scenarios/13-incremental-full-stack.js'),
   () => import('../scenarios/14-package-generic.js'),
-  () => import('../scenarios/15-frontend-vite.js'),
-  () => import('../scenarios/16-frontend-nextjs.js'),
-  () => import('../scenarios/17-frontend-tanstack.js'),
 ];
 
 /** App-type scenario modules (export scenarios array) - add when extracting app-types to packages */
 const APP_TYPE_SCENARIO_LOADERS: Array<() => Promise<{ scenarios?: readonly Scenario[] }>> = [
   () => import('@workspace/app-cli/e2e/scenarios'),
+  () => import('@workspace/app-backend/e2e/scenarios'),
+  () => import('@workspace/app-documentation/e2e/scenarios'),
+  () => import('@workspace/app-mcp-server/e2e/scenarios'),
+  () => import('@workspace/app-frontend-nextjs/e2e/scenarios'),
+  () => import('@workspace/app-frontend-vite/e2e/scenarios'),
+  () => import('@workspace/app-frontend-tanstack/e2e/scenarios'),
+  () => import('@workspace/app-slide-deck/e2e/scenarios'),
 ];
 
 function collectScenarios(m: unknown): Scenario[] {

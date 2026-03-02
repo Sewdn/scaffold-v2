@@ -13,7 +13,7 @@ import { Effect } from 'effect';
 import type { CommandStep } from '../types/template.js';
 import { runSteps } from '../orchestrator.js';
 import { getPackageInitStepsFromConfig } from './init-steps.js';
-import type { PackageContext } from '../packages/types.js';
+import type { PackageContext } from '@workspace/core-pkg-types';
 
 export const OPTIONAL_PACKAGES = OPTIONAL_PACKAGE_IDS;
 export type { OptionalPackage };

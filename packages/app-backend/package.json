@@ -1,0 +1,21 @@
+{
+  "name": "@workspace/app-backend",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./e2e/scenarios": "./src/e2e/scenarios/index.ts"
+  },
+  "types": "./src/index.ts",
+  "dependencies": {
+    "@workspace/core-app-types": "workspace:*",
+    "@workspace/core-utils": "workspace:*"
+  },
+  "devDependencies": {
+    "@workspace/core-e2e": "workspace:*",
+    "@types/node": "^20.11.0",
+    "@workspace/typescript-config": "workspace:*",
+    "typescript": "^5.8.2"
+  }
+}
