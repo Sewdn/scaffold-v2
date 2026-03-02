@@ -46,6 +46,7 @@ export function createCliAppType(opts: AppTypeDepsOptions) {
     id: 'cli',
     description: 'Command-line interface (Effect + Commander)',
     dirPrefix: 'cli',
+    defaultAppName: 'tools',
     phases: [phase],
   };
 

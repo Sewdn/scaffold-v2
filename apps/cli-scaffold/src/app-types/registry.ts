@@ -88,3 +88,11 @@ export function getStubsDir(config: AppTypeConfig): string | undefined {
 export function isReactFrontend(id: string): boolean {
   return REGISTRY.get(id)?.isReactFrontend === true;
 }
+
+/**
+ * Get default app name for an app type (e.g. "web", "api", "tools").
+ * Falls back to app type id when not configured.
+ */
+export function getDefaultAppName(id: string): string {
+  return REGISTRY.get(id)?.defaultAppName ?? id;
+}

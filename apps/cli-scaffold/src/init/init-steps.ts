@@ -76,7 +76,7 @@ export function getPackageInitSteps(options: {
     type: 'module',
     module: './src/index.ts',
     types: './src/index.ts',
-    scripts: { build: 'tsc', dev: 'tsc --watch', lint: 'eslint .', ...scripts },
+    scripts: { build: 'tsc', lint: 'eslint .', ...scripts },
   };
   const dirs = mkdirPaths.map((p) => `${packageDir}/${p}`).join(' ');
 
@@ -124,7 +124,6 @@ export function getPackageInitStepsFromConfig(
   const merge = config.getMerge(ctx);
   const scripts = config.getScripts?.(ctx) ?? {
     build: 'tsc',
-    dev: 'tsc --watch',
     lint: 'eslint .',
   };
   const fullMerge = { ...merge, scripts };

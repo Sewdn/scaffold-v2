@@ -29,6 +29,7 @@ export function createMcpServerAppType(opts: AppTypeDepsOptions) {
     id: 'mcp-server',
     description: 'Model Context Protocol server',
     dirPrefix: 'mcp',
+    defaultAppName: 'mcp',
     phases: [phase],
   };
 

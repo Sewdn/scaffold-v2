@@ -11,6 +11,7 @@ import { formatEntityName, validateAppName, validateProjectName } from '@workspa
 import { APP_TYPE_PREFIX, type AppType } from '../registry.js';
 import {
   getAppTypeConfig,
+  getDefaultAppName,
   hasGeneratePhase,
   isReactFrontend,
 } from '../app-types/registry.js';
@@ -21,7 +22,11 @@ import {
   type OptionalPackage,
 } from '../init/optional-packages.js';
 import { scaffoldCliExampleDefaults } from '@workspace/app-cli';
-import { promptProjectName, promptOptionalPackages } from '../ui/ui-prompts.js';
+import {
+  promptProjectName,
+  promptOptionalPackages,
+  promptApps,
+} from '../ui/ui-prompts.js';
 
 
 function parseOptionalPackages(
@@ -97,6 +102,24 @@ export const projectCommand = new Command('project')
       optionalPackages = await promptOptionalPackages();
     }
 
+    let apps: string[] = (options.apps ?? []).flatMap((a) => (typeof a === 'string' ? a.split(',') : [a])).map((s) => s.trim()).filter(Boolean);
+    let appNames: string[] = (options.appNames ?? []).flatMap((a) => (typeof a === 'string' ? a.split(',') : [a])).map((s) => s.trim());
+
+    if (apps.length === 0 && !options.nonInteractive) {
+      const selectedApps = await promptApps();
+      apps = selectedApps.map((a) => a.type);
+      appNames = selectedApps.map((a) => a.name);
+    }
+
+    if (apps.length > 0 && appNames.length !== apps.length) {
+      console.error('Error: --app-names must have same count as --apps.');
+      process.exit(1);
+    }
+
+    if (apps.length > 0 && appNames.length === 0) {
+      appNames = apps.map((t) => getDefaultAppName(t));
+    }
+
     console.log(`\nCreating monorepo at ${projectDir}\n`);
     await createBaseStructure({ projectName, projectDir, optionalPackages });
 
@@ -108,16 +131,7 @@ export const projectCommand = new Command('project')
       process.exit(1);
     });
 
-    const apps = (options.apps ?? []).flatMap((a) => (typeof a === 'string' ? a.split(',') : [a]));
-    const appNamesRaw = options.appNames ?? [];
-    const appNames = appNamesRaw.flatMap((a) => (typeof a === 'string' ? a.split(',') : [a])).map((s) => s.trim());
-
     if (apps.length > 0) {
-      if (appNames.length !== apps.length) {
-        console.error('Error: --app-names must have same count as --apps.');
-        process.exit(1);
-      }
-
       for (let i = 0; i < apps.length; i++) {
         const appType = apps[i].trim() as AppType;
         const appName = formatEntityName(validateAppName(appNames[i]), 'app');

@@ -15,6 +15,7 @@ export function createSlideDeckAppType() {
     id: 'slide-deck',
     description: 'Reveal.js presentation',
     dirPrefix: 'slides',
+    defaultAppName: 'slides',
     phases: [
       {
         type: 'scripts' as const,

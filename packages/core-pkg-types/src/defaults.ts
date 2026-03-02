@@ -8,10 +8,9 @@ export const DEFAULT_PACKAGE_MERGE: Record<string, unknown> = {
   types: './src/index.ts',
 };
 
-/** Default scripts for TypeScript packages */
+/** Default scripts for TypeScript packages (no dev — run with Bun, build for compile) */
 export const DEFAULT_PACKAGE_SCRIPTS: Record<string, string> = {
   build: 'tsc',
-  dev: 'tsc --watch',
   lint: 'eslint .',
 };
 

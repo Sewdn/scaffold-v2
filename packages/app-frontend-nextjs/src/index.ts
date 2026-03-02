@@ -19,6 +19,7 @@ export function createFrontendNextjsAppType(_opts?: CreateFrontendNextjsAppTypeO
     id: 'frontend-nextjs',
     description: 'Next.js frontend application',
     dirPrefix: 'frontend',
+    defaultAppName: 'web',
     isReactFrontend: true,
     phases: [
       {

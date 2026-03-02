@@ -18,7 +18,7 @@ import {
 } from '@workspace/core-utils';
 import type { AppType } from '../registry.js';
 import { APP_TYPES, APP_TYPE_PREFIX } from '../registry.js';
-import { getAppTypeConfig } from '../app-types/registry.js';
+import { getAppTypeConfig, getDefaultAppName } from '../app-types/registry.js';
 import { getPackageConfig } from '../packages/registry.js';
 
 let hasShownMultiselectHelp = false;
@@ -119,20 +119,9 @@ export async function promptApps(): Promise<Array<{ type: AppType; name: string 
   const types = selected as AppType[];
   if (types.length === 0) return [];
 
-  const defaultAppNames: Record<AppType, string> = {
-    'frontend-nextjs': 'web',
-    'frontend-vite': 'web',
-    'frontend-tanstack': 'web',
-    cli: 'tools',
-    backend: 'api',
-    'mcp-server': 'mcp',
-    'slide-deck': 'slides',
-    documentation: 'docs',
-  };
-
   const result: Array<{ type: AppType; name: string }> = [];
   for (const appType of types) {
-    const defaultName = defaultAppNames[appType];
+    const defaultName = getDefaultAppName(appType);
     const prefix = APP_TYPE_PREFIX[appType];
     const hint =
       appType === 'cli'
@@ -209,17 +198,6 @@ export async function promptAppType(): Promise<AppType> {
   return value as AppType;
 }
 
-const defaultAppNames: Record<AppType, string> = {
-  'frontend-nextjs': 'web',
-  'frontend-vite': 'web',
-  'frontend-tanstack': 'web',
-  cli: 'tools',
-  backend: 'api',
-  'mcp-server': 'mcp',
-  'slide-deck': 'slides',
-  documentation: 'docs',
-};
-
 /**
  * Prompt for app name with optional prefix hint (e.g. for CLI: "will be prefixed with cli-").
  */
@@ -227,7 +205,7 @@ export async function promptAppName(
   appType: AppType,
   defaultValue?: string,
 ): Promise<string> {
-  const defaultName = defaultValue ?? defaultAppNames[appType];
+  const defaultName = defaultValue ?? getDefaultAppName(appType);
   const prefix = APP_TYPE_PREFIX[appType];
   const hint =
     appType === 'cli'

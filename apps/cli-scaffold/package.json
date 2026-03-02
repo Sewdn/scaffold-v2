@@ -9,7 +9,6 @@
   "scripts": {
     "generate:docs-data": "bun run scripts/generate-docs-data.ts",
     "build": "tsc -b",
-    "dev": "bun run --watch src/index.ts",
     "lint": "eslint .",
     "scaffold": "bun run src/index.ts",
     "link-global": "bash bin/link-global.sh",

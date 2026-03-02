@@ -29,6 +29,7 @@ export function createBackendAppType(opts: AppTypeDepsOptions) {
     id: 'backend',
     description: 'Backend API (Elysia.js)',
     dirPrefix: 'backend',
+    defaultAppName: 'api',
     phases: [phase],
   };
 

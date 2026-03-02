@@ -15,6 +15,7 @@ export function createFrontendTanstackAppType() {
     id: 'frontend-tanstack',
     description: 'TanStack Start (full-stack React)',
     dirPrefix: 'frontend',
+    defaultAppName: 'web',
     isReactFrontend: true,
     phases: [
       {

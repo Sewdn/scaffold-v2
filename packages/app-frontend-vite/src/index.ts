@@ -15,6 +15,7 @@ export function createFrontendViteAppType() {
     id: 'frontend-vite',
     description: 'Vite frontend application',
     dirPrefix: 'frontend',
+    defaultAppName: 'web',
     isReactFrontend: true,
     phases: [
       {

@@ -56,6 +56,8 @@ export interface AppTypeConfig {
   description: string;
   /** Directory prefix for app folder (e.g. "frontend" → apps/frontend-* ) */
   dirPrefix: string;
+  /** Default app name when none provided (e.g. "web", "api", "tools") */
+  defaultAppName: string;
   isReactFrontend?: boolean;
   phases: AppTypePhase[];
 }

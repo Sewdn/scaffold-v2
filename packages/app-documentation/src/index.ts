@@ -14,6 +14,7 @@ export function createDocumentationAppType() {
     id: 'documentation',
     description: 'Starlight/Astro documentation',
     dirPrefix: 'docs',
+    defaultAppName: 'docs',
     phases: [
       {
         type: 'scripts',
