@@ -21,7 +21,7 @@ export function getBaseInitSteps(_projectName: string): CommandStep[] {
       format: "oxfmt",
       "format:check": "oxfmt --check",
       storybook: "turbo storybook",
-      "dora:index": "bunx @butttons/dora index",
+      "dora:index": "dora index",
     },
     packageManager: "bun@1.2.2",
     engines: { node: ">=20" },
@@ -51,13 +51,7 @@ export function getBaseInitSteps(_projectName: string): CommandStep[] {
     {
       type: "exec",
       command: "node",
-      args: [`${SCRIPTS_DIR}/write-turbo.mjs`],
-      cwd: "{{projectName}}",
-    },
-    {
-      type: "exec",
-      command: "node",
-      args: [`${SCRIPTS_DIR}/write-tsconfig.mjs`],
+      args: [`${SCRIPTS_DIR}/generate-base-from-stubs.mjs`, "{{projectName}}"],
       cwd: "{{projectName}}",
     },
   ];

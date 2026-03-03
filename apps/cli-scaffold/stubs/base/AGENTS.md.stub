@@ -1,0 +1,8 @@
+# Agent Instructions
+
+Keep instructions minimal here—this file is added to every session's context.
+
+- Use **skills** for specific tasks. Check `.cursor/skills/` or run `npx playbook list` to discover skills.
+- Follow the project structure in `.cursor/rules/`.
+- Prefer functional programming. In React, use functions instead of classes.
+- When scaffolding, use the MCP scaffold tools or `bunx scaffold` CLI—see scaffold-* skills.

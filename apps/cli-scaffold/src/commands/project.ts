@@ -261,6 +261,26 @@ export const projectCommand = new Command("project")
         });
       }
 
+      // Dora init and index after entire project is set up; then configure skills
+      console.log("\nInitializing Dora...\n");
+      await Effect.runPromise(
+        runSteps(
+          [
+            { type: "shell", command: "dora init && dora index", cwd: "", optional: true },
+            {
+              type: "exec",
+              command: "node",
+              args: [`${SCRIPTS_DIR}/write-dora-setup.mjs`, "--post-init"],
+              cwd: "",
+              optional: true,
+            },
+          ],
+          { cwd: projectDir, verbose: true },
+        ),
+      ).catch(() => {
+        console.warn("Dora setup skipped or failed. Run 'dora init && dora index' manually.");
+      });
+
       outro(chalk.green(`Monorepo created in ${projectName}/`));
       if (apps.length > 0) {
         console.log(

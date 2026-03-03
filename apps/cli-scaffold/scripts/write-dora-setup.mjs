@@ -3,14 +3,13 @@
  * Sets up Dora (AI File Explorer) for newly scaffolded projects.
  * See: https://github.com/butttons/dora | https://github.com/butttons/dora/blob/main/AGENTS.README.md
  *
- * - Runs dora init + index (best effort; may fail if dora/scip-typescript not available)
- * - Creates .cursor/commands/ for dora exploration (Cursor)
- * - Adds dora rules to .cursor/rules
- * - Symlinks dora skill to .cursor/skills/dora and .claude/skills/dora
- * - Appends dora snippet to AGENTS.md and CLAUDE.md
- * - Creates .claude/settings.json for Claude Code (permissions, auto-indexing hooks)
+ * Uses global `dora` CLI. Checks if installed; if not, installs via curl (macOS/Linux).
  *
- * Prerequisite: @sourcegraph/scip-typescript as devDep (for TypeScript indexing).
+ * --post-init: Run after `dora init` (patches config, symlinks skills, appends snippet).
+ *   Call this at the end of project scaffolding, after `dora init && dora index`.
+ *
+ * Without --post-init:
+ *   Creates .cursor/commands/, .cursor/rules, .claude/settings.json, .gitignore.
  */
 import {
   mkdirSync,
@@ -20,15 +19,75 @@ import {
   writeFileSync,
   appendFileSync,
   unlinkSync,
+  chmodSync,
 } from "fs";
 import { resolve, relative } from "path";
 import { spawnSync } from "child_process";
+import { tmpdir } from "os";
 
 const cwd = process.cwd();
+const isPostInit = process.argv.includes("--post-init");
 
 function run(cmd, args, opts = {}) {
   const r = spawnSync(cmd, args, { cwd, stdio: "pipe", encoding: "utf8", ...opts });
   return { ok: r.status === 0, stderr: r.stderr || "", stdout: r.stdout || "" };
+}
+
+function doraExists() {
+  const r = run("dora", ["--version"]);
+  return r.ok;
+}
+
+function getDoraInstallUrl() {
+  const plat = process.platform;
+  const arch = process.arch;
+  const base = "https://github.com/butttons/dora/releases/latest/download";
+  if (plat === "darwin") return `${base}/dora-darwin-${arch === "arm64" ? "arm64" : "x64"}`;
+  if (plat === "linux" && arch === "x64") return `${base}/dora-linux-x64`;
+  return null;
+}
+
+function installDoraGlobally() {
+  const url = getDoraInstallUrl();
+  if (!url) {
+    console.warn(
+      "[write-dora-setup] Auto-install not supported on this platform. Install manually:\n" +
+        "  Windows: Download dora-windows-x64.exe from https://github.com/butttons/dora/releases\n" +
+        "  Other: See https://github.com/butttons/dora#installation",
+    );
+    return false;
+  }
+  const tmp = resolve(tmpdir(), "dora-install-" + Date.now());
+  const r = spawnSync("curl", ["-fsSL", url, "-o", tmp], { stdio: "pipe", encoding: "utf8" });
+  if (!r.ok) {
+    console.warn("[write-dora-setup] Failed to download dora:", r.stderr || r.stdout);
+    return false;
+  }
+  chmodSync(tmp, 0o755);
+  const dest = "/usr/local/bin/dora";
+  const mv = spawnSync("sudo", ["mv", tmp, dest], { stdio: "inherit" });
+  if (!mv.ok) {
+    console.warn("[write-dora-setup] Failed to move dora to", dest, "- may need sudo");
+    return false;
+  }
+  console.log("[write-dora-setup] Dora installed to", dest);
+  return true;
+}
+
+function ensureDoraInstalled() {
+  if (doraExists()) return true;
+  console.warn("[write-dora-setup] Dora not found. Attempting to install globally...");
+  if (installDoraGlobally()) return true;
+  console.warn(
+    "[write-dora-setup] Install manually:\n" +
+      "  # macOS (ARM64)\n" +
+      "  curl -L https://github.com/butttons/dora/releases/latest/download/dora-darwin-arm64 -o dora && chmod +x dora && sudo mv dora /usr/local/bin/\n" +
+      "  # macOS (Intel)\n" +
+      "  curl -L https://github.com/butttons/dora/releases/latest/download/dora-darwin-x64 -o dora && chmod +x dora && sudo mv dora /usr/local/bin/\n" +
+      "  # Linux\n" +
+      "  curl -L https://github.com/butttons/dora/releases/latest/download/dora-linux-x64 -o dora && chmod +x dora && sudo mv dora /usr/local/bin/",
+  );
+  return false;
 }
 
 function ensureGitignore() {
@@ -176,7 +235,7 @@ function createClaudeSettings() {
       {
         type: "command",
         command:
-          "bunx @butttons/dora status 2>/dev/null && (bunx @butttons/dora index > /tmp/dora-index.log 2>&1 &) || echo 'dora not initialized. Run: bunx @butttons/dora init && bun run dora:index'",
+          "dora status 2>/dev/null && (dora index > /tmp/dora-index.log 2>&1 &) || echo 'dora not initialized. Run: dora init && dora index'",
       },
     ],
   };
@@ -184,7 +243,7 @@ function createClaudeSettings() {
     hooks: [
       {
         type: "command",
-        command: "(bunx @butttons/dora index > /tmp/dora-index.log 2>&1 &) || true",
+        command: "(dora index > /tmp/dora-index.log 2>&1 &) || true",
       },
     ],
   };
@@ -234,32 +293,27 @@ function appendSnippetToClaude() {
 
 // ─── Main ───────────────────────────────────────────────────────────────────
 
-ensureGitignore();
-
-const initResult = run("bun", ["x", "@butttons/dora", "init"]);
-if (!initResult.ok) {
-  console.warn("[write-dora-setup] dora init failed:", initResult.stderr || initResult.stdout);
-  console.warn("[write-dora-setup] Install dora: bun install -g @butttons/dora");
-  console.warn("[write-dora-setup] Skipping dora setup. You can run 'dora init && dora index' later.");
+if (!ensureDoraInstalled()) {
+  ensureGitignore();
   createCursorCommands();
   createDoraRule();
   createClaudeSettings();
+  console.warn("[write-dora-setup] Dora config created. Install dora and run 'dora init && dora index' to complete setup.");
   process.exit(0);
 }
 
-patchDoraConfig();
-
-const indexResult = run("bun", ["x", "@butttons/dora", "index"]);
-if (!indexResult.ok) {
-  console.warn("[write-dora-setup] dora index failed (may need @sourcegraph/scip-typescript):", indexResult.stderr?.slice(0, 200));
-}
-
+ensureGitignore();
 createCursorCommands();
 createDoraRule();
 createClaudeSettings();
-setupDoraSkill();
-setupClaudeDoraSkill();
-appendSnippetToAgents();
-appendSnippetToClaude();
 
-console.log("[write-dora-setup] Dora setup complete. Use dora for code exploration (Cursor + Claude Code).");
+if (isPostInit) {
+  patchDoraConfig();
+  setupDoraSkill();
+  setupClaudeDoraSkill();
+  appendSnippetToAgents();
+  appendSnippetToClaude();
+  console.log("[write-dora-setup] Dora skills and snippets configured.");
+} else {
+  console.log("[write-dora-setup] Dora config created. Run 'dora init && dora index' after project setup to complete.");
+}

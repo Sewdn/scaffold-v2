@@ -26,37 +26,6 @@ export async function createBaseStructure(options: CreateBaseStructureOptions): 
 
   const allSteps: CommandStep[] = [
     ...getBaseInitSteps(projectName),
-    { type: "shell", command: "mkdir -p packages/typescript-config", cwd: "{{projectName}}" },
-    {
-      type: "exec",
-      command: "node",
-      args: [`${SCRIPTS_DIR}/write-typescript-config.mjs`],
-      cwd: "{{projectName}}/packages/typescript-config",
-    },
-    {
-      type: "exec",
-      command: "node",
-      args: [`${SCRIPTS_DIR}/write-oxc-config.mjs`],
-      cwd: "{{projectName}}",
-    },
-    {
-      type: "exec",
-      command: "node",
-      args: [`${SCRIPTS_DIR}/write-vscode-settings.mjs`],
-      cwd: "{{projectName}}",
-    },
-    {
-      type: "exec",
-      command: "node",
-      args: [`${SCRIPTS_DIR}/write-cursor-hooks.mjs`],
-      cwd: "{{projectName}}",
-    },
-    {
-      type: "exec",
-      command: "node",
-      args: [`${SCRIPTS_DIR}/write-agents-and-rules.mjs`],
-      cwd: "{{projectName}}",
-    },
     {
       type: "exec",
       command: "node",
