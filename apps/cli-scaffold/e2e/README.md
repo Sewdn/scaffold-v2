@@ -6,6 +6,16 @@ End-to-end tests for the scaffold CLI. Uses **Effect** for dependency injection,
 
 For a full list of planned and implemented scenarios with validation criteria, see [SCENARIOS.md](./SCENARIOS.md).
 
+## Agent Instruction Benchmarks
+
+Markdown-based benchmark tasks for AI agents: [benchmarks/](./benchmarks/README.md). Each file contains instructions an agent follows to scaffold projects, add apps, implement logic, and wire integrations. Used to:
+
+- Validate the scaffolding tool across different setups
+- Test different app types, service packages, and integrations
+- Benchmark AI models on scaffolding and implementation tasks
+
+See [benchmarks/README.md](./benchmarks/README.md) for structure and [benchmarks/tasks/INDEX.md](./benchmarks/tasks/INDEX.md) for the task catalog.
+
 ## Architecture
 
 - **Effect services** (DI): `E2EConfig`, `FileSystem`, `ScaffoldRunner`, `ValidatorExecutor`, `ScenarioRegistry`
