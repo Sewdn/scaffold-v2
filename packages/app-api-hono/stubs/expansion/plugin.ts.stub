@@ -1,0 +1,12 @@
+import type { Context } from "hono";
+
+/**
+ * {{pluginName}} plugin.
+ * Mount with: app.use({{pluginName}}Plugin)
+ */
+export function {{pluginName}}Plugin() {
+  return async (c: Context, next: () => Promise<void>) => {
+    c.set("{{camelName}}", "{{pluginName}}");
+    await next();
+  };
+}

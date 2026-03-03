@@ -1,0 +1,10 @@
+import type { Context, Next } from "hono";
+
+/**
+ * {{middlewareName}} middleware.
+ * Mount with: app.use({{middlewareName}}Middleware)
+ */
+export async function {{middlewareName}}Middleware(c: Context, next: Next) {
+  c.set("{{camelName}}", "{{middlewareName}}");
+  await next();
+}

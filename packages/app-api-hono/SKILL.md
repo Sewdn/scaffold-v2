@@ -30,16 +30,25 @@ scaffold app <name> --type api-hono
 # Example: scaffold app api --type api-hono → apps/api-hono-api
 ```
 
-**Expansion commands** (from project root, after app exists):
+**Expansion commands** (from project root, after app exists). Same CLI API as api-elysia and api-fastify; only implementation differs per framework:
+
+| Command | Effect | Functionality added |
+|---------|--------|----------------------|
+| `add-crud-routes <name>` | Adds CRUD routes + handlers for one entity | `src/routes/<name>.ts`, `src/handlers/<name>.ts` — GET / (paged), GET /:id, POST /, PUT /:id, DELETE /:id. Registers in `src/index.ts`. |
+| `add-middleware <name>` | Adds request-scoped middleware | `src/middleware/<name>.ts` — runs before handlers; use for auth, logging, etc. Registers in app chain. |
+| `add-plugin <name>` | Adds a custom Hono plugin | `src/plugins/<name>.ts` — extends app via `app.use()`. Registers in app chain. |
+| `add-handler <name>` | Adds a handler file (no routes) | `src/handlers/<name>.ts` — plain async handler; wire manually in route plugins. |
+
 ```bash
-scaffold api-hono add-route <name> [-a <app>] [-p <path>]
+scaffold api-hono add-crud-routes <name> [-a <app>] [-p <path>]
 scaffold api-hono add-middleware <name> [-a <app>]
+scaffold api-hono add-plugin <name> [-a <app>]
 scaffold api-hono add-handler <name> [-a <app>]
-# Example: scaffold api-hono add-route users
+# Example: scaffold api-hono add-crud-routes users
 # Example: scaffold api-hono add-middleware auth -a api-hono-api
 ```
 
-**Expansion details:** Use context7 MCP (`/honojs/hono`) with queries like "Hono middleware", "Hono routes", "Hono handlers".
+**Expansion details:** Use context7 MCP (`/honojs/hono`) with queries like "Hono middleware", "Hono route", "Hono handlers".
 
 ## What It Creates
 

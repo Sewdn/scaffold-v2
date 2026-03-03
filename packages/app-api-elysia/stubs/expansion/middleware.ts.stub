@@ -1,0 +1,38 @@
+/**
+ * {{middlewareName}} middleware — derives request-scoped values for downstream handlers.
+ *
+ * PATTERN: Middleware runs before handlers, derives values via Elysia derive().
+ * - Use Effect for async logic (e.g. validate JWT, load user)
+ * - Derive values that handlers can access via context
+ * - Chain with .use() before routes
+ *
+ * WHAT TO CHANGE:
+ * - Replace userId extraction with real auth (JWT, API key, session)
+ * - Add requestId from plugin's derive if tracing is needed
+ * - Return 401/403 via set.status and throw/halt for unauthorized
+ */
+
+import { Elysia } from "elysia";
+import { Effect } from "effect";
+
+// ─── Derived context type (handlers receive this) ───────────────────────────
+export interface {{middlewareName}}Context {
+  {{camelName}}: string;
+}
+
+/**
+ * {{middlewareName}} middleware. Mount with: app.use({{middlewareName}}Middleware)
+ * Order: register before routes so handlers can access derived values.
+ */
+export const {{middlewareName}}Middleware = new Elysia("{{middlewareName}}").derive(
+  async ({ request, set }) => {
+    // TODO: Replace with real auth — e.g. validate Bearer token, load user from DB
+    const authHeader = request.headers.get("authorization");
+    const {{camelName}} =
+      authHeader?.startsWith("Bearer ") ? authHeader.slice(7) : "anonymous";
+
+    return {
+      {{camelName}},
+    } as {{middlewareName}}Context;
+  },
+);

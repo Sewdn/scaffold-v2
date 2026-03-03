@@ -6,6 +6,7 @@
 /** Scripts written to scaffolded API Hono app package.json */
 export const API_HONO_APP_SCRIPTS = {
   start: "bun run src/index.ts",
+  test: "bun test",
 } as const;
 
 /** Directory structure for scaffolded API Hono apps */

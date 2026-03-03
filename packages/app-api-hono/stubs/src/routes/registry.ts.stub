@@ -1,0 +1,5 @@
+import type { Hono } from "hono";
+
+export const crudRoutes: { path: string; routes: Hono }[] = [
+  // @scaffold-api:crud-entries
+];

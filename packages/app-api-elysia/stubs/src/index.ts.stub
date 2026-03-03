@@ -1,14 +1,18 @@
 import { Elysia } from "elysia";
 import { cors } from "@elysiajs/cors";
 import { swagger } from "@elysiajs/swagger";
+import { crudRoutes } from "./routes/registry.js";
 
 const port = Number(process.env.PORT) || 3000;
-const app = new Elysia()
-  .use(cors())
-  .use(swagger())
-  // Middleware registered below (scaffold api-elysia add-middleware)
-  // Plugins registered below (scaffold api-elysia add-plugin)
-  // CRUD routes registered below (scaffold api-elysia add-crud-routes)
+const app = crudRoutes
+  .reduce(
+    (acc, route) => acc.use(route as any),
+    new Elysia()
+      .use(cors())
+      .use(swagger())
+      // @scaffold-api:middleware
+      // @scaffold-api:plugins
+  )
   .get("/", () => "Hello {{{appName}}}!")
   .get("/health", () => ({ status: "ok" }))
   .listen(port);

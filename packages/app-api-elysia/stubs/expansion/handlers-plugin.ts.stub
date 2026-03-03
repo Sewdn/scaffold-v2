@@ -1,0 +1,27 @@
+/**
+ * {{routeName}} handlers plugin — provides CRUD handler functions via Elysia context.
+ *
+ * PATTERN: Use .decorate() to inject handlers as a dependency. Route plugins
+ * depend on this plugin and call handler functions from context.
+ *
+ * Mount: app.use(handlers{{pascalName}}Plugin) or use from a route plugin.
+ * Access: { {{routeName}}Handlers } in route handlers.
+ */
+
+import { Elysia } from "elysia";
+import {
+  list{{pascalName}}Handler,
+  get{{pascalName}}ByIdHandler,
+  create{{pascalName}}Handler,
+  update{{pascalName}}Handler,
+  delete{{pascalName}}Handler,
+} from "../handlers/{{routeName}}.js";
+
+export const handlers{{pascalName}}Plugin = new Elysia({ name: "handlers-{{routeName}}" })
+  .decorate("{{routeName}}Handlers", {
+    list: list{{pascalName}}Handler,
+    getById: get{{pascalName}}ByIdHandler,
+    create: create{{pascalName}}Handler,
+    update: update{{pascalName}}Handler,
+    delete: delete{{pascalName}}Handler,
+  });

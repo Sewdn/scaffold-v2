@@ -1,10 +1,13 @@
 /**
  * E2E test types for scaffold CLI scenarios.
  * Each scenario defines a sequence of scaffold commands and validation criteria.
+ *
+ * ScaffoldCommand is extensible: core defines BaseScaffoldCommand. App-type packages
+ * (e.g. app-api, app-cli) define their own command types and extend via union.
  */
 
-/** Scaffold subcommand: project | init | app | service | ui | component | module | package | cli */
-export type ScaffoldCommand =
+/** Core scaffold subcommands. App-type packages add their own (e.g. api-elysia, api-hono). */
+export type BaseScaffoldCommand =
   | "project"
   | "init"
   | "app"
@@ -15,9 +18,12 @@ export type ScaffoldCommand =
   | "package"
   | "cli";
 
+/** Scaffold command: base commands or app-type-specific (e.g. api-elysia). Use string for extensibility. */
+export type ScaffoldCommand = BaseScaffoldCommand | string;
+
 /** A single scaffold command step. Args are passed to the subcommand (e.g. ["my-app", "--type", "frontend-vite"]). */
 export interface ScaffoldStep {
-  readonly command: ScaffoldCommand;
+  readonly command: string;
   readonly args: readonly string[];
 }
 

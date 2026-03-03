@@ -1,0 +1,9 @@
+{
+  "extends": "{{tsconfigExtends}}",
+  "compilerOptions": {
+    "outDir": "{{outDir}}",
+    "rootDir": "{{rootDir}}"
+  },
+  "include": ["{{rootDir}}/**/*"],
+  "exclude": ["node_modules", "{{outDir}}"]
+}

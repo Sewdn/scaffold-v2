@@ -1,0 +1,43 @@
+/**
+ * Shared types and utilities for CRUD handlers and routes.
+ *
+ * NAMING: This file is created once when the first CRUD entity is added.
+ * Entity-specific handlers (e.g. users.ts, posts.ts) import from here.
+ *
+ * WHAT TO CHANGE:
+ * - Add domain-specific errors (e.g. ValidationError, ConflictError)
+ * - Extend toHttpStatus for your error types
+ * - Add shared request/response schemas if needed
+ */
+
+import { Schema, Data } from "effect";
+
+// ─── Pagination defaults (used by route layers) ────────────────────────────
+export const DEFAULT_PAGE = 1;
+export const DEFAULT_LIMIT = 10;
+export const MAX_LIMIT = 100;
+
+// ─── Paged list schema factory ────────────────────────────────────────────
+/** Create a paged list schema for a given item type. Use in list handlers. */
+export const createPagedListSchema = <I, A>(itemSchema: Schema.Schema<I, A>) =>
+  Schema.Struct({
+    items: Schema.Array(itemSchema),
+    total: Schema.Number,
+    page: Schema.Number,
+    limit: Schema.Number,
+    totalPages: Schema.Number,
+  });
+
+// ─── Errors ────────────────────────────────────────────────────────────────
+export class NotFoundError extends Data.TaggedError("NotFoundError")<{
+  readonly resource: string;
+  readonly id: string;
+}> {}
+
+// ─── Error → HTTP status mapping ───────────────────────────────────────────
+/** Map Effect errors to HTTP status codes. Use in route layers. */
+export const toHttpStatus = (error: unknown): number => {
+  if (error instanceof NotFoundError) return 404;
+  if (error instanceof Error && error.name === "ParseError") return 422;
+  return 500;
+};

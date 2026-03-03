@@ -1,0 +1,112 @@
+/**
+ * {{routeName}} CRUD handlers — thin HTTP boundary, delegates to service layer.
+ *
+ * NAMING: src/handlers/{{routeName}}.ts — one file per entity, next to common.ts.
+ * Import shared types from ./common.js.
+ *
+ * PATTERN: Handlers use Effect.runPromise at the boundary.
+ * - list: paged listing with page, limit query params
+ * - getById: fetch one by id
+ * - create: validate body, persist
+ * - update: validate body + params, persist
+ * - delete: remove by id
+ *
+ * WHAT TO CHANGE:
+ * - Replace ItemSchema with your domain types (from domain or svc-* package)
+ * - Replace service calls with actual DB/svc-* logic
+ * - Add Schema.decodeUnknown for request validation
+ */
+
+import { Effect, Schema } from "effect";
+import { createPagedListSchema, NotFoundError } from "./common.js";
+
+// ─── Domain types (replace with your domain) ─────────────────────────────────
+const ItemSchema = Schema.Struct({
+  id: Schema.String,
+  name: Schema.String,
+});
+type Item = Schema.Schema.Type<typeof ItemSchema>;
+
+const CreateBodySchema = Schema.Struct({
+  name: Schema.String,
+});
+type CreateBody = Schema.Schema.Type<typeof CreateBodySchema>;
+
+const UpdateBodySchema = Schema.Struct({
+  name: Schema.optional(Schema.String),
+});
+type UpdateBody = Schema.Schema.Type<typeof UpdateBodySchema>;
+
+// ─── Paged list (uses shared factory) ──────────────────────────────────────
+const PagedListSchema = createPagedListSchema(ItemSchema);
+type PagedList = Schema.Schema.Type<typeof PagedListSchema>;
+
+// ─── Service layer (move to svc-* package) ─────────────────────────────────
+const MOCK_ITEMS: Item[] = [
+  { id: "1", name: "Item 1" },
+  { id: "2", name: "Item 2" },
+  { id: "3", name: "Item 3" },
+];
+
+const listService = (page: number, limit: number) =>
+  Effect.succeed({
+    items: MOCK_ITEMS.slice((page - 1) * limit, page * limit),
+    total: MOCK_ITEMS.length,
+    page,
+    limit,
+    totalPages: Math.ceil(MOCK_ITEMS.length / limit) || 1,
+  });
+
+const getByIdService = (id: string) => {
+  const item = MOCK_ITEMS.find((i) => i.id === id);
+  return item
+    ? Effect.succeed(item)
+    : Effect.fail(new NotFoundError({ resource: "{{routeName}}", id }));
+};
+
+const createService = (body: CreateBody) =>
+  Effect.succeed({
+    id: String(MOCK_ITEMS.length + 1),
+    name: body.name,
+  } as Item);
+
+const updateService = (id: string, body: UpdateBody) => {
+  const item = MOCK_ITEMS.find((i) => i.id === id);
+  return item
+    ? Effect.succeed({ ...item, ...body } as Item)
+    : Effect.fail(new NotFoundError({ resource: "{{routeName}}", id }));
+};
+
+const deleteService = (id: string) => {
+  const item = MOCK_ITEMS.find((i) => i.id === id);
+  return item
+    ? Effect.succeed({ deleted: true, id })
+    : Effect.fail(new NotFoundError({ resource: "{{routeName}}", id }));
+};
+
+// ─── Handlers ───────────────────────────────────────────────────────────────
+export async function list{{pascalName}}Handler(
+  page: number,
+  limit: number,
+): Promise<PagedList> {
+  return Effect.runPromise(listService(page, limit));
+}
+
+export async function get{{pascalName}}ByIdHandler(id: string): Promise<Item> {
+  return Effect.runPromise(getByIdService(id));
+}
+
+export async function create{{pascalName}}Handler(body: CreateBody): Promise<Item> {
+  return Effect.runPromise(createService(body));
+}
+
+export async function update{{pascalName}}Handler(
+  id: string,
+  body: UpdateBody,
+): Promise<Item> {
+  return Effect.runPromise(updateService(id, body));
+}
+
+export async function delete{{pascalName}}Handler(id: string): Promise<{ deleted: boolean; id: string }> {
+  return Effect.runPromise(deleteService(id));
+}

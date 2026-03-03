@@ -1,0 +1,5 @@
+import type { FastifyPluginAsync } from "fastify";
+
+export const crudRoutes: { path: string; plugin: FastifyPluginAsync }[] = [
+  // @scaffold-api:crud-entries
+];

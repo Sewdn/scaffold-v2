@@ -1,9 +1,14 @@
 import { Hono } from "hono";
+import { crudRoutes } from "./routes/registry.js";
 
 const port = Number(process.env.PORT) || 3000;
-const app = new Hono()
-  // Middleware registered below (scaffold api-hono add-middleware)
-  // Routes registered below (scaffold api-hono add-route)
+const app = new Hono();
+// @scaffold-api:plugins
+// @scaffold-api:middleware
+for (const { path, routes } of crudRoutes) {
+  app.route(path, routes);
+}
+app
   .get("/", (c) => c.text(`Hello {{{appName}}}!`))
   .get("/health", (c) => c.json({ status: "ok" }));
 

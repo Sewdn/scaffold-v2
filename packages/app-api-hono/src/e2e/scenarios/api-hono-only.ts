@@ -2,23 +2,11 @@
  * API Hono-only scenario: project with Hono API app.
  */
 
-import { pathExists, hasScript, buildSucceeds } from "@workspace/core-e2e";
-import type { Scenario } from "@workspace/core-e2e";
+import { createBaseApiScenario } from "@workspace/app-api/e2e";
 
-export const scenario: Scenario = {
+export const scenario = createBaseApiScenario({
   id: "api-hono-only",
   description: "Project with API (Hono) app only",
-  steps: [
-    {
-      command: "project",
-      args: ["e2e-api-hono", "--apps", "api-hono", "--app-names", "api", "--non-interactive"],
-    },
-  ],
-  validators: [
-    pathExists("package.json"),
-    pathExists("apps/api-hono-api"),
-    pathExists("apps/api-hono-api/package.json"),
-    hasScript("build"),
-    buildSucceeds(),
-  ],
-};
+  apiType: "api-hono",
+  projectName: "e2e-api-hono",
+});

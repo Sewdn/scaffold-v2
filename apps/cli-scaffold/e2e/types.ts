@@ -4,6 +4,7 @@
  */
 export type {
   AsyncValidator,
+  BaseScaffoldCommand,
   ScaffoldCommand,
   Scenario,
   ScaffoldStep,

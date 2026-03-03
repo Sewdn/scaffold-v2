@@ -1,10 +1,14 @@
 import Fastify from "fastify";
+import { crudRoutes } from "./routes/registry.js";
 
 const port = Number(process.env.PORT) || 3000;
 const fastify = Fastify({ logger: true });
 
-// Plugins registered below (scaffold api-fastify add-plugin)
-// Routes registered below (scaffold api-fastify add-route)
+// @scaffold-api:plugins
+// @scaffold-api:middleware
+for (const { path, plugin } of crudRoutes) {
+  fastify.register(plugin, { prefix: path });
+}
 fastify.get("/", async () => `Hello {{{appName}}}!`);
 fastify.get("/health", async () => ({ status: "ok" }));
 

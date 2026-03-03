@@ -1,0 +1,4 @@
+/** CRUD route plugins. Each has its own prefix (e.g. /users, /posts). */
+export const crudRoutes = [
+  // @scaffold-api:crud-entries
+];

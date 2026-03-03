@@ -6,8 +6,8 @@
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { createGeneratePhase, type AppTypeDepsOptions } from "@workspace/core-app-types";
+import { getApiGeneratePhaseOptions } from "@workspace/app-api";
 import { getPackageMerge, API_HONO_APP_MKDIR_PATHS } from "./config.js";
-import { apiHonoCommand } from "./expansion/index.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const STUBS_DIR = join(__dirname, "..", "stubs");
@@ -21,6 +21,7 @@ export { apiHonoCommand, getApiHonoExpansionCommands } from "./expansion/index.j
  */
 export function createApiHonoAppType(opts: AppTypeDepsOptions) {
   const phase = createGeneratePhase({
+    ...getApiGeneratePhaseOptions(),
     stubsDir: STUBS_DIR,
     getMerge: (ctx) => getPackageMerge(ctx as Parameters<typeof getPackageMerge>[0]),
     getDependencies: () => [...opts.deps],

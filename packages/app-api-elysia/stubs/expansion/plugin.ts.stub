@@ -1,0 +1,37 @@
+/**
+ * {{pluginName}} plugin — adds request-scoped or app-level capabilities.
+ *
+ * PATTERN: Plugin extends Elysia with state (app-level) or derive (request-scoped).
+ * - Use state() for app-level config/caches
+ * - Use derive() for request-scoped values (e.g. requestId for tracing)
+ * - Use onRequest/onResponse for cross-cutting logic
+ *
+ * WHAT TO CHANGE:
+ * - Replace with your plugin logic (metrics, logging, rate limiting)
+ * - Add state() for app-level config if needed
+ * - Use derive() for values handlers need (requestId, logger, etc.)
+ */
+
+import { Elysia } from "elysia";
+import { randomUUID } from "node:crypto";
+
+// ─── Derived context type (handlers receive this) ───────────────────────────
+export interface {{pluginName}}Context {
+  {{camelName}}: string;
+}
+
+/**
+ * {{pluginName}} plugin. Mount with: app.use({{pluginName}}Plugin)
+ * Order: register before middleware and routes.
+ */
+export const {{pluginName}}Plugin = new Elysia("{{pluginName}}").derive(
+  async ({ request }) => {
+    // Request-scoped value — e.g. for tracing, logging
+    const {{camelName}} =
+      request.headers.get("x-request-id") ?? randomUUID();
+
+    return {
+      {{camelName}},
+    } as {{pluginName}}Context;
+  },
+);

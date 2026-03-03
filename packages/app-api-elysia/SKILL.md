@@ -34,11 +34,11 @@ scaffold app <name> --type api-elysia
 
 ---
 
-**Expansion commands** (from project root, after app exists):
+**Expansion commands** (from project root, after app exists). Same CLI API as api-fastify and api-hono; only implementation differs per framework:
 
 | Command | Effect | Functionality added |
 |---------|--------|----------------------|
-| `add-crud-routes <name>` | Adds CRUD routes + handlers for one entity | `src/routes/<name>.ts`, `src/handlers/<name>.ts` — GET / (paged), GET /:id, POST /, PUT /:id, DELETE /:id. Registers in `src/index.ts`. |
+| `add-crud-routes <name>` | Adds CRUD routes + handlers for one entity | `src/routes/<name>.ts`, `src/handlers/<name>.ts`, `src/plugins/handlers-<name>.ts` — route plugin uses handler plugin via `.use()`; handlers injected via context. GET / (paged), GET /:id, POST /, PUT /:id, DELETE /:id. Wired in `src/routes/registry.ts`. |
 | `add-middleware <name>` | Adds request-scoped middleware | `src/middleware/<name>.ts` — runs before handlers; use for auth, logging, etc. Registers in app chain. |
 | `add-plugin <name>` | Adds a custom Elysia plugin | `src/plugins/<name>.ts` — extends app via `derive`, `state`, lifecycle hooks. Registers in app chain. |
 | `add-handler <name>` | Adds a handler file (no routes) | `src/handlers/<name>.ts` — plain async handler; wire manually in route plugins. |

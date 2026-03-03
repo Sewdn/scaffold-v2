@@ -7,7 +7,8 @@ import type { ScaffoldStep } from "../types.js";
 import { ScaffoldExecutionError } from "../errors.js";
 import { E2EConfig } from "./config.js";
 
-const NON_INTERACTIVE_COMMANDS: ScaffoldStep["command"][] = ["project", "init", "app"];
+/** Commands that get --non-interactive appended when not present. API expansion commands don't support it. */
+const NON_INTERACTIVE_COMMANDS: string[] = ["project", "init", "app"];
 
 export interface ScaffoldRunner {
   readonly runStep: (

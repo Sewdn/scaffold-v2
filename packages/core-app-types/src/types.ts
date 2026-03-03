@@ -35,6 +35,15 @@ export interface GeneratePhase {
   getMerge: (ctx: AppTypeContext) => Record<string, unknown>;
   getDependencies: (ctx: AppTypeContext) => string[];
   getMkdirPaths: (ctx: AppTypeContext) => string[];
+  /** Dev dependencies (e.g. bun-types for API apps). If omitted, CLI uses BASE_DEV_DEPS. */
+  getDevDependencies?: (ctx: AppTypeContext) => string[];
+  /** Tsconfig extends path (e.g. bun.json for API apps). If omitted, uses base.json. */
+  tsconfigExtends?: string;
+  /**
+   * Path to tsconfig.json.stub. When set, stub is rendered instead of generating tsconfig.
+   * app-api provides a default; framework-specific packages (api-elysia, etc.) may override.
+   */
+  tsconfigStubPath?: string;
 }
 
 /** Phase that runs initialization commands (e.g. bun create, bunx) */

@@ -1,0 +1,9 @@
+import type { FastifyInstance } from "fastify";
+
+/**
+ * {{pluginName}} plugin.
+ * Mount with: fastify.register({{pluginName}}Plugin)
+ */
+export async function {{pluginName}}Plugin(fastify: FastifyInstance) {
+  fastify.decorate("{{camelName}}", "{{pluginName}}");
+}

@@ -8,6 +8,12 @@ export interface GeneratePhaseInput extends Pick<GeneratePhase, "stubsDir" | "ge
   getMerge?: (ctx: AppTypeContext) => Record<string, unknown>;
   /** Override mkdir paths (default: ['src']) */
   getMkdirPaths?: (ctx: AppTypeContext) => string[];
+  /** Dev dependencies (e.g. bun-types for API apps). If omitted, CLI uses BASE_DEV_DEPS. */
+  getDevDependencies?: (ctx: AppTypeContext) => string[];
+  /** Tsconfig extends path (e.g. bun.json for API apps). If omitted, uses base.json. */
+  tsconfigExtends?: string;
+  /** Path to tsconfig.json.stub. When set, stub is rendered instead of generating tsconfig. */
+  tsconfigStubPath?: string;
 }
 
 /**
@@ -22,5 +28,8 @@ export function createGeneratePhase(input: GeneratePhaseInput): GeneratePhase {
       deepMerge({ ...DEFAULT_APP_MERGE }, (input.getMerge?.(ctx) ?? {}) as Record<string, unknown>),
     getDependencies: input.getDependencies,
     getMkdirPaths: input.getMkdirPaths ?? (() => DEFAULT_APP_MKDIR_PATHS),
+    getDevDependencies: input.getDevDependencies,
+    tsconfigExtends: input.tsconfigExtends,
+    tsconfigStubPath: input.tsconfigStubPath,
   };
 }

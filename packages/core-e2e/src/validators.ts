@@ -151,6 +151,38 @@ export function cliHelpShowsCommands(
   };
 }
 
+/** Run `bun test` in the project (or subdir) and assert success. */
+export function testsSucceeds(subdir?: string): AsyncValidator {
+  const id = subdir ? `tests-succeeds:${subdir}` : "tests-succeeds";
+  const desc = subdir
+    ? `bun test (from ${subdir}) succeeds`
+    : "bun test succeeds";
+
+  return {
+    type: "async",
+    id,
+    description: desc,
+    async run(ctx) {
+      const cwd = subdir ? join(ctx.projectDir, subdir) : ctx.projectDir;
+      const pkgPath = join(cwd, "package.json");
+      if (!existsSync(pkgPath)) return pass("No package.json, skipping tests");
+      const pkg = JSON.parse(readFileSync(pkgPath, "utf-8")) as { scripts?: Record<string, string> };
+      if (!pkg?.scripts?.test) return pass("No test script, skipping tests");
+
+      const proc = Bun.spawn(["bun", "run", "test"], {
+        cwd,
+        stdin: "ignore",
+        stdout: "pipe",
+        stderr: "pipe",
+      });
+      const exit = await proc.exited;
+      if (exit === 0) return pass("Tests succeeded");
+      const stderr = await new Response(proc.stderr).text();
+      return fail(`Tests failed (exit ${exit}): ${stderr.slice(0, 300)}`);
+    },
+  };
+}
+
 /** Run `bun run dev`, wait briefly, then kill. Pass if it stays up; fail if it exits/crashes before timeout.
  * @param timeoutMs - How long to wait before considering the server "up"
  * @param subdir - Optional subdir (e.g. "apps/frontend-web") to run dev from; uses app script directly, avoiding Turbo. Use for Next.js when root turbo dev is flaky.
@@ -192,3 +224,4 @@ export function devStarts(timeoutMs = 5000, subdir?: string): AsyncValidator {
     },
   };
 }
+

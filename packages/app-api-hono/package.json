@@ -9,13 +9,16 @@
     "./e2e/scenarios": "./src/e2e/scenarios/index.ts"
   },
   "dependencies": {
+    "@workspace/app-api": "workspace:*",
     "@workspace/core-app-types": "workspace:*",
-    "@workspace/core-utils": "workspace:*"
+    "@workspace/core-utils": "workspace:*",
+    "commander": "^14.0.3"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
     "@workspace/core-e2e": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
+    "bun-types": "latest",
     "typescript": "^5.8.2"
   }
 }

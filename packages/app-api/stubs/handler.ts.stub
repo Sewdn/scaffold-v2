@@ -1,0 +1,40 @@
+/**
+ * {{handlerName}} handler — thin HTTP boundary, delegates to service layer.
+ *
+ * PATTERN: Handler receives request data, uses Effect.runPromise at the boundary.
+ * - Define response schema with Effect Schema for type-safe responses
+ * - Delegate business logic to a service (create svc-* package or inline)
+ * - Map Effect failures to HTTP status via catchTag
+ *
+ * WHAT TO CHANGE:
+ * - Replace ItemSchema / Item with your domain types (from domain or svc-* package)
+ * - Replace getItemsService with your actual service call
+ * - Add request validation (body, query, params) using Schema.decodeUnknown
+ */
+
+import { Effect, Schema } from "effect";
+
+// ─── Response schema (replace with your domain types) ───────────────────────
+const ItemSchema = Schema.Struct({
+  id: Schema.String,
+  name: Schema.String,
+});
+type Item = Schema.Schema.Type<typeof ItemSchema>;
+
+const ListResponseSchema = Schema.Struct({
+  items: Schema.Array(ItemSchema),
+});
+type ListResponse = Schema.Schema.Type<typeof ListResponseSchema>;
+
+// ─── Service layer (move to svc-* package when ready) ───────────────────────
+const getItemsService = Effect.succeed([
+  { id: "1", name: "Example item 1" },
+  { id: "2", name: "Example item 2" },
+] as Item[]);
+
+// ─── Handler ───────────────────────────────────────────────────────────────
+export async function {{handlerName}}Handler(): Promise<ListResponse> {
+  return Effect.runPromise(
+    getItemsService.pipe(Effect.map((items) => ({ items }))),
+  );
+}

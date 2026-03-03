@@ -1,0 +1,24 @@
+{
+  "name": "@workspace/app-api",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./e2e": "./src/e2e/index.ts"
+  },
+  "dependencies": {
+    "@workspace/core-utils": "workspace:*",
+    "@workspace/scaffold-deps": "workspace:*",
+    "commander": "^14.0.3"
+  },
+  "devDependencies": {
+    "@workspace/core-app-types": "workspace:*",
+    "@workspace/core-e2e": "workspace:*",
+    "@types/node": "^20.11.0",
+    "@workspace/typescript-config": "workspace:*",
+    "bun-types": "latest",
+    "typescript": "^5.8.2"
+  }
+}

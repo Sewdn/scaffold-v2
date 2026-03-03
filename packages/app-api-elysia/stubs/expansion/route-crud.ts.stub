@@ -1,0 +1,71 @@
+/**
+ * {{routeName}} CRUD routes — full CRUD + paged listing for a single entity.
+ *
+ * PATTERN: Route plugin depends on handler plugin via .use(). Handlers are
+ * injected via context ({{routeName}}Handlers) — no direct handler imports.
+ * - GET /?page=1&limit=10 — paged list
+ * - GET /:id — get by id
+ * - POST / — create
+ * - PUT /:id — update
+ * - DELETE /:id — delete
+ *
+ * WHAT TO CHANGE:
+ * - Add body validation for POST/PUT using Schema.decodeUnknown
+ * - Add query validation for page/limit (min, max)
+ * - Add error mapping for your domain errors
+ */
+
+import { Elysia } from "elysia";
+import {
+  DEFAULT_PAGE,
+  DEFAULT_LIMIT,
+  MAX_LIMIT,
+  NotFoundError,
+  toHttpStatus,
+} from "../handlers/common.js";
+import { handlers{{pascalName}}Plugin } from "../plugins/handlers-{{routeName}}.js";
+
+/**
+ * {{routeName}} CRUD routes. Mount with: app.use({{routeName}}Routes)
+ * Prefix: /{{path}} — e.g. GET /{{path}}, GET /{{path}}/:id, POST /{{path}}, etc.
+ * Depends on handlers{{pascalName}}Plugin for handler functions.
+ */
+export const {{routeName}}Routes = new Elysia({ prefix: "/{{path}}" })
+  .use(handlers{{pascalName}}Plugin)
+  // GET / — paged list (?page=1&limit=10)
+  .get("/", async ({ query, {{routeName}}Handlers }) => {
+    const page = Math.max(1, Number(query.page) || DEFAULT_PAGE);
+    const limit = Math.min(MAX_LIMIT, Math.max(1, Number(query.limit) || DEFAULT_LIMIT));
+    return {{routeName}}Handlers.list(page, limit);
+  })
+  // GET /:id — get by id
+  .get("/:id", async ({ params, set, {{routeName}}Handlers }) => {
+    try {
+      return await {{routeName}}Handlers.getById(params.id);
+    } catch (err) {
+      set.status = toHttpStatus(err);
+      return { error: (err as NotFoundError)._tag, id: params.id };
+    }
+  })
+  // POST / — create
+  .post("/", async ({ body, {{routeName}}Handlers }) => {
+    return {{routeName}}Handlers.create(body as { name: string });
+  })
+  // PUT /:id — update
+  .put("/:id", async ({ params, body, set, {{routeName}}Handlers }) => {
+    try {
+      return await {{routeName}}Handlers.update(params.id, body as { name?: string });
+    } catch (err) {
+      set.status = toHttpStatus(err);
+      return { error: (err as NotFoundError)._tag, id: params.id };
+    }
+  })
+  // DELETE /:id — delete
+  .delete("/:id", async ({ params, set, {{routeName}}Handlers }) => {
+    try {
+      return await {{routeName}}Handlers.delete(params.id);
+    } catch (err) {
+      set.status = toHttpStatus(err);
+      return { error: (err as NotFoundError)._tag, id: params.id };
+    }
+  });

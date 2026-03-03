@@ -18,6 +18,7 @@ export function getBaseInitSteps(_projectName: string): CommandStep[] {
       build: "turbo build",
       dev: "turbo dev",
       lint: "turbo lint",
+      test: "turbo test",
       format: "oxfmt",
       "format:check": "oxfmt --check",
       storybook: "turbo storybook",
@@ -208,6 +209,10 @@ export function getAppInitSteps(options: {
   const pkgName = `@${projectName}/${appName}`;
   const merge = phase.getMerge(ctx);
   const deps = phase.getDependencies(ctx);
+  const devDeps = phase.getDevDependencies?.(ctx) ?? BASE_DEV_DEPS;
+  const tsconfigExtends =
+    phase.tsconfigExtends ?? "@workspace/typescript-config/base.json";
+  const tsconfigStubPath = phase.tsconfigStubPath;
   const mkdirPaths = phase
     .getMkdirPaths(ctx)
     .map((p) => `${appDir}/${p}`)
@@ -223,11 +228,19 @@ export function getAppInitSteps(options: {
       cwd: appDir,
     },
     { type: "bun", command: "add", args: deps, cwd: appDir },
-    { type: "bun", command: "add", args: ["-d", ...BASE_DEV_DEPS], cwd: appDir },
+    { type: "bun", command: "add", args: ["-d", ...devDeps], cwd: appDir },
     {
       type: "exec",
       command: "node",
-      args: [`${SCRIPTS_DIR}/write-tsconfig.mjs`],
+      args: tsconfigStubPath
+        ? [
+            `${SCRIPTS_DIR}/write-tsconfig.mjs`,
+            "--from-stub",
+            tsconfigStubPath,
+            "--extends",
+            tsconfigExtends,
+          ]
+        : [`${SCRIPTS_DIR}/write-tsconfig.mjs`, "--extends", tsconfigExtends],
       cwd: appDir,
     },
     {

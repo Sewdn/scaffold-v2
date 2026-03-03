@@ -1,0 +1,63 @@
+import type { FastifyInstance } from "fastify";
+import {
+  DEFAULT_PAGE,
+  DEFAULT_LIMIT,
+  MAX_LIMIT,
+  toHttpStatus,
+} from "../handlers/common.js";
+import {
+  list{{pascalName}}Handler,
+  get{{pascalName}}ByIdHandler,
+  create{{pascalName}}Handler,
+  update{{pascalName}}Handler,
+  delete{{pascalName}}Handler,
+} from "../handlers/{{routeName}}.js";
+
+/**
+ * {{routeName}} CRUD routes. Mount with: fastify.register({{routeName}}Routes, { prefix: "/{{path}}" })
+ */
+export async function {{routeName}}Routes(fastify: FastifyInstance) {
+  // GET / — paged list (?page=1&limit=10)
+  fastify.get<{ Querystring: { page?: string; limit?: string } }>(
+    "/",
+    async (req) => {
+      const page = Math.max(1, Number(req.query.page) || DEFAULT_PAGE);
+      const limit = Math.min(MAX_LIMIT, Math.max(1, Number(req.query.limit) || DEFAULT_LIMIT));
+      return list{{pascalName}}Handler(page, limit);
+    },
+  );
+  // GET /:id — get by id
+  fastify.get<{ Params: { id: string } }>("/:id", async (req, reply) => {
+    try {
+      return await get{{pascalName}}ByIdHandler(req.params.id);
+    } catch (err) {
+      reply.status(toHttpStatus(err));
+      return { error: "NotFoundError", id: req.params.id };
+    }
+  });
+  // POST / — create
+  fastify.post<{ Body: { name: string } }>("/", async (req) => {
+    return create{{pascalName}}Handler(req.body);
+  });
+  // PUT /:id — update
+  fastify.put<{ Params: { id: string }; Body: { name?: string } }>(
+    "/:id",
+    async (req, reply) => {
+      try {
+        return await update{{pascalName}}Handler(req.params.id, req.body);
+      } catch (err) {
+        reply.status(toHttpStatus(err));
+        return { error: "NotFoundError", id: req.params.id };
+      }
+    },
+  );
+  // DELETE /:id — delete
+  fastify.delete<{ Params: { id: string } }>("/:id", async (req, reply) => {
+    try {
+      return await delete{{pascalName}}Handler(req.params.id);
+    } catch (err) {
+      reply.status(toHttpStatus(err));
+      return { error: "NotFoundError", id: req.params.id };
+    }
+  });
+}

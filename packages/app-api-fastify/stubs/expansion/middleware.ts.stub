@@ -1,0 +1,12 @@
+import type { FastifyRequest, FastifyReply } from "fastify";
+
+/**
+ * {{middlewareName}} middleware.
+ * Mount with: fastify.addHook("preHandler", {{middlewareName}}Middleware)
+ */
+export async function {{middlewareName}}Middleware(
+  request: FastifyRequest,
+  reply: FastifyReply,
+) {
+  (request as FastifyRequest & { {{camelName}}?: string }).{{camelName}} = "{{middlewareName}}";
+}

@@ -99,10 +99,28 @@
         "vite": "^7.3.1",
       },
     },
+    "packages/app-api": {
+      "name": "@workspace/app-api",
+      "version": "0.0.1",
+      "dependencies": {
+        "@workspace/core-utils": "workspace:*",
+        "@workspace/scaffold-deps": "workspace:*",
+        "commander": "^14.0.3",
+      },
+      "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@workspace/core-app-types": "workspace:*",
+        "@workspace/core-e2e": "workspace:*",
+        "@workspace/typescript-config": "workspace:*",
+        "bun-types": "latest",
+        "typescript": "^5.8.2",
+      },
+    },
     "packages/app-api-elysia": {
       "name": "@workspace/app-api-elysia",
       "version": "0.0.1",
       "dependencies": {
+        "@workspace/app-api": "workspace:*",
         "@workspace/core-app-types": "workspace:*",
         "@workspace/core-utils": "workspace:*",
         "commander": "^14.0.3",
@@ -111,6 +129,7 @@
         "@types/node": "^20.11.0",
         "@workspace/core-e2e": "workspace:*",
         "@workspace/typescript-config": "workspace:*",
+        "bun-types": "latest",
         "typescript": "^5.8.2",
       },
     },
@@ -118,6 +137,7 @@
       "name": "@workspace/app-api-fastify",
       "version": "0.0.1",
       "dependencies": {
+        "@workspace/app-api": "workspace:*",
         "@workspace/core-app-types": "workspace:*",
         "@workspace/core-utils": "workspace:*",
         "commander": "^14.0.3",
@@ -126,6 +146,7 @@
         "@types/node": "^20.11.0",
         "@workspace/core-e2e": "workspace:*",
         "@workspace/typescript-config": "workspace:*",
+        "bun-types": "latest",
         "typescript": "^5.8.2",
       },
     },
@@ -133,6 +154,7 @@
       "name": "@workspace/app-api-hono",
       "version": "0.0.1",
       "dependencies": {
+        "@workspace/app-api": "workspace:*",
         "@workspace/core-app-types": "workspace:*",
         "@workspace/core-utils": "workspace:*",
         "commander": "^14.0.3",
@@ -141,6 +163,7 @@
         "@types/node": "^20.11.0",
         "@workspace/core-e2e": "workspace:*",
         "@workspace/typescript-config": "workspace:*",
+        "bun-types": "latest",
         "typescript": "^5.8.2",
       },
     },
@@ -1041,6 +1064,8 @@
     "@vitejs/plugin-react": ["@vitejs/plugin-react@5.1.4", "", { "dependencies": { "@babel/core": "^7.29.0", "@babel/plugin-transform-react-jsx-self": "^7.27.1", "@babel/plugin-transform-react-jsx-source": "^7.27.1", "@rolldown/pluginutils": "1.0.0-rc.3", "@types/babel__core": "^7.20.5", "react-refresh": "^0.18.0" }, "peerDependencies": { "vite": "^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0" } }, "sha512-VIcFLdRi/VYRU8OL/puL7QXMYafHmqOnwTZY50U1JPlCNj30PxCMx65c494b1K9be9hX83KVt0+gTEwTWLqToA=="],
 
     "@webgpu/types": ["@webgpu/types@0.1.69", "", {}, "sha512-RPmm6kgRbI8e98zSD3RVACvnuktIja5+yLgDAkTmxLr90BEwdTXRQWNLF3ETTTyH/8mKhznZuN5AveXYFEsMGQ=="],
+
+    "@workspace/app-api": ["@workspace/app-api@workspace:packages/app-api"],
 
     "@workspace/app-api-elysia": ["@workspace/app-api-elysia@workspace:packages/app-api-elysia"],
 
