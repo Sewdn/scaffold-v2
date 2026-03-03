@@ -6,19 +6,29 @@ globs: ["**/apps/frontend-*/**", "**/app-frontend-tanstack/**"]
 
 # Scaffold Frontend (TanStack) App
 
+## High-Level Goal
+
+Add a **TanStack Start** frontend to the monorepo with fully type-safe routing and built-in caching. Use when you need a TanStack-first React app.
+
+## Application Type
+
+A **frontend** built with **TanStack Start** and **TanStack Router**: type-safe routing, file-based routing, React, Tailwind.
+
+**IDs:** App type `frontend-tanstack`; app name pattern `frontend-<name>` (e.g. `frontend-app`).
+
+**Documentation:** [tanstack.com/router](https://tanstack.com/router) — TanStack Router docs. Use **context7** MCP with library ID `/tanstack/router` for up-to-date docs and code examples.
+
 ## When to Use
 
 Use this skill when you need to add a **TanStack Start frontend** (TanStack Router, React).
 
 ## Commands
 
-**CLI** (from project root):
+**Create app** (from project root):
 ```bash
-bunx scaffold app <name> --type frontend-tanstack
-# Example: bunx scaffold app app --type frontend-tanstack → apps/frontend-app
+scaffold app <name> --type frontend-tanstack
+# Example: scaffold app app --type frontend-tanstack → apps/frontend-app
 ```
-
-**MCP**: `mcp_scaffold_app` with app name, type `frontend-tanstack`.
 
 ## What It Creates
 

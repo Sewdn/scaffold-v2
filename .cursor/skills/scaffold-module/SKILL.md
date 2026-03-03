@@ -6,19 +6,9 @@ globs: ["**/packages/svc-*/**", "**/packages/ui-*/**"]
 
 # Scaffold Module
 
-## When to Use
+## High-Level Goal
 
-Use this skill when you need to add a **module**—a feature unit with both a service package and a UI package, loosely coupled via domain types.
-
-## Commands
-
-**CLI** (from project root):
-```bash
-bunx scaffold module <name>
-# Example: bunx scaffold module auth → packages/svc-auth + packages/ui-auth
-```
-
-**MCP**: `mcp_scaffold_module` with module name.
+Add a **module**—a full-stack feature unit with both a service package and a UI package, loosely coupled via domain types. Use when you need a feature that spans backend and frontend.
 
 ## What It Creates
 
@@ -26,3 +16,17 @@ bunx scaffold module <name>
 - `packages/ui-<name>/` – UI components
 - Both depend on `domain` for shared types
 - Tie together in app via backend impl + context provider
+
+**Documentation:** Use **context7** MCP with `/shadcn-ui/ui` for UI components, `/prisma/docs` for service/DB patterns, `/websites/react_dev` for React context providers.
+
+## When to Use
+
+Use this skill when you need to add a **module**—a feature unit with both service and UI packages.
+
+## Commands
+
+**Create module** (from project root):
+```bash
+scaffold module <name>
+# Example: scaffold module auth → packages/svc-auth + packages/ui-auth
+```

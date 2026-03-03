@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@workspace/core-app-types": "workspace:*",
-    "@workspace/core-utils": "workspace:*"
+    "@workspace/core-utils": "workspace:*",
+    "commander": "^14.0.3"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",

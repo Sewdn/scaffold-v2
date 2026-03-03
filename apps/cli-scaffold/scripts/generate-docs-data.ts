@@ -12,6 +12,9 @@ import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { getAllAppTypeIds, getAppTypeConfig } from "../src/app-types/registry.js";
 import { getCliExpansionCommands } from "@workspace/app-cli";
+import { getApiElysiaExpansionCommands } from "@workspace/app-api-elysia";
+import { getApiHonoExpansionCommands } from "@workspace/app-api-hono";
+import { getApiFastifyExpansionCommands } from "@workspace/app-api-fastify";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = join(__dirname, "..", "..", "..");
@@ -93,7 +96,16 @@ function collectDocsData(): ScaffoldDocsData {
     if (!config) {
       throw new Error(`App type config not found: ${id}`);
     }
-    const expansionCommands = id === "cli" ? getCliExpansionCommands() : [];
+    const expansionCommands =
+      id === "cli"
+        ? getCliExpansionCommands()
+        : id === "api-elysia"
+          ? getApiElysiaExpansionCommands()
+          : id === "api-hono"
+            ? getApiHonoExpansionCommands()
+            : id === "api-fastify"
+              ? getApiFastifyExpansionCommands()
+              : [];
     return {
       id: config.id,
       description: config.description,

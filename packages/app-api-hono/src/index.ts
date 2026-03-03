@@ -1,17 +1,19 @@
 /**
  * @workspace/app-api-hono — API app-type scaffolding (Hono) for the scaffold CLI.
- * Exports a factory to create the api-hono app type config.
+ * Exports a factory to create the api-hono app type config and expansion commands.
  */
 
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { createGeneratePhase, type AppTypeDepsOptions } from "@workspace/core-app-types";
 import { getPackageMerge, API_HONO_APP_MKDIR_PATHS } from "./config.js";
+import { apiHonoCommand } from "./expansion/index.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const STUBS_DIR = join(__dirname, "..", "stubs");
 
 export { getPackageMerge, API_HONO_APP_SCRIPTS, API_HONO_APP_MKDIR_PATHS } from "./config.js";
+export { apiHonoCommand, getApiHonoExpansionCommands } from "./expansion/index.js";
 
 /**
  * Create the api-hono app type config.

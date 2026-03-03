@@ -6,6 +6,9 @@ const port = Number(process.env.PORT) || 3000;
 const app = new Elysia()
   .use(cors())
   .use(swagger())
+  // Middleware registered below (scaffold api-elysia add-middleware)
+  // Plugins registered below (scaffold api-elysia add-plugin)
+  // CRUD routes registered below (scaffold api-elysia add-crud-routes)
   .get("/", () => "Hello {{{appName}}}!")
   .get("/health", () => ({ status: "ok" }))
   .listen(port);

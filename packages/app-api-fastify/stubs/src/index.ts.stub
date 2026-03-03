@@ -3,6 +3,8 @@ import Fastify from "fastify";
 const port = Number(process.env.PORT) || 3000;
 const fastify = Fastify({ logger: true });
 
+// Plugins registered below (scaffold api-fastify add-plugin)
+// Routes registered below (scaffold api-fastify add-route)
 fastify.get("/", async () => `Hello {{{appName}}}!`);
 fastify.get("/health", async () => ({ status: "ok" }));
 

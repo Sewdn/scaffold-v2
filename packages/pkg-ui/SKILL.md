@@ -6,19 +6,29 @@ globs: ["**/packages/ui-*/**", "**/pkg-ui/**"]
 
 # Scaffold UI Package
 
+## High-Level Goal
+
+Add a **custom UI package** to the monorepo—a component library built on shadcn and ui-lib. Use when you need project-specific UI components (e.g. `ui-dashboard`, `ui-forms`).
+
+## Package Type
+
+A **UI package** built with **React**, **shadcn/ui**, and **@workspace/ui-lib**. Depends on both `@workspace/ui` and `@workspace/ui-lib`. Never add `svc-*` packages as dependencies.
+
+**IDs:** Package type `ui`; package name pattern `ui-<name>`.
+
+**Documentation:** [ui.shadcn.com](https://ui.shadcn.com) — shadcn/ui docs. Use **context7** MCP with library ID `/shadcn-ui/ui` for up-to-date docs and code examples.
+
 ## When to Use
 
-Use this skill when you need to add a **custom UI package** (e.g. `ui-dashboard`, `ui-forms`)—component libraries built on `@workspace/ui` and `@workspace/ui-lib`.
+Use this skill when you need to add a **custom UI package** (e.g. `ui-dashboard`, `ui-forms`).
 
 ## Commands
 
-**CLI** (from project root):
+**Create package** (from project root):
 ```bash
-bunx scaffold package <name> --type=ui
-# Example: bunx scaffold package ui-dashboard --type=ui
+scaffold package <name> --type=ui
+# Example: scaffold package ui-dashboard --type=ui
 ```
-
-**MCP**: `mcp_scaffold_ui` with UI package name.
 
 ## What It Creates
 

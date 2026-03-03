@@ -6,18 +6,28 @@ globs: ["**/packages/domain/**", "**/pkg-domain/**"]
 
 # Scaffold Domain Package
 
+## High-Level Goal
+
+Add a **domain** package—shared business logic and types used across apps and packages. Use when you need a single source of truth for entities and value objects.
+
+## Package Type
+
+A **domain** package: TypeScript types and pure logic only. No UI or backend dependencies. Consumed by both `svc-*` and `ui-*` packages.
+
+**IDs:** Package type `domain`; package name `domain`.
+
+**Documentation:** Domain packages are framework-agnostic. Use **context7** MCP with library ID `/websites/react_dev` or `/prisma/docs` for related patterns (React types, Prisma models).
+
 ## When to Use
 
-Use this skill when you need to add or scaffold a **domain** package—shared business logic and types used across apps and packages.
+Use this skill when you need to add or scaffold a **domain** package.
 
 ## Commands
 
-**CLI** (from project root):
+**Create package** (from project root):
 ```bash
-bunx scaffold package domain [--type=domain]
+scaffold package domain [--type=domain]
 ```
-
-**MCP**: `mcp_scaffold_package` with package name `domain`, type `service` (domain is a shared logic package).
 
 ## What It Creates
 

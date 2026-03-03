@@ -8,7 +8,7 @@
 
 | Command                             | Description                                 | Spec                                    |
 | ----------------------------------- | ------------------------------------------- | --------------------------------------- |
-| [add-route](add-route.md)           | Add a route plugin                          | `src/routes/<name>.ts`, routes registry |
+| [add-crud-routes](add-crud-routes.md) | Add CRUD routes + handlers for an entity | `src/routes/<name>.ts`, `src/handlers/<name>.ts` |
 | [add-middleware](add-middleware.md) | Add middleware and register in app chain    | `src/middleware/<name>.ts`              |
 | [add-plugin](add-plugin.md)         | Add a custom Elysia plugin                  | `src/plugins/<name>.ts`                 |
 | [add-handler](add-handler.md)       | Add a single handler file for a route group | `src/handlers/<name>.ts`                |

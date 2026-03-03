@@ -2,6 +2,8 @@ import { Hono } from "hono";
 
 const port = Number(process.env.PORT) || 3000;
 const app = new Hono()
+  // Middleware registered below (scaffold api-hono add-middleware)
+  // Routes registered below (scaffold api-hono add-route)
   .get("/", (c) => c.text(`Hello {{{appName}}}!`))
   .get("/health", (c) => c.json({ status: "ok" }));
 

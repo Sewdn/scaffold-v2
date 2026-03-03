@@ -13,6 +13,9 @@ import { componentCommand } from "./commands/component.js";
 import { moduleCommand } from "./commands/module.js";
 import { packageCommand } from "./commands/package.js";
 import { cliCommand } from "@workspace/app-cli";
+import { apiElysiaCommand } from "@workspace/app-api-elysia";
+import { apiHonoCommand } from "@workspace/app-api-hono";
+import { apiFastifyCommand } from "@workspace/app-api-fastify";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
@@ -35,5 +38,8 @@ program.addCommand(componentCommand);
 program.addCommand(moduleCommand);
 program.addCommand(packageCommand);
 program.addCommand(cliCommand);
+program.addCommand(apiElysiaCommand);
+program.addCommand(apiHonoCommand);
+program.addCommand(apiFastifyCommand);
 
 program.parse();

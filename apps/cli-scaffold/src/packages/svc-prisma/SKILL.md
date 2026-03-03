@@ -6,19 +6,29 @@ globs: ["**/packages/svc-prisma/**", "**/svc-prisma/**"]
 
 # Scaffold svc-prisma Package
 
+## High-Level Goal
+
+Add a **Prisma data service**—ORM setup with migrations, schema, and DB access. Use when you need type-safe database access in the monorepo.
+
+## Package Type
+
+A **service package** built with **Prisma** and **Effect**: schema, migrations, `db:generate`, `db:push`, `db:migrate`, `db:studio`. Optional domain dependency.
+
+**IDs:** Package type `service`; package name `svc-prisma`.
+
+**Documentation:** [prisma.io](https://prisma.io) — Prisma docs. Use **context7** MCP with library ID `/prisma/docs` for up-to-date docs and code examples.
+
 ## When to Use
 
-Use this skill when you need to add a **Prisma data service**—ORM setup with migrations and DB access.
+Use this skill when you need to add a **Prisma data service**.
 
 ## Commands
 
-**CLI** (from project root):
+**Create service** (from project root):
 ```bash
-bunx scaffold service prisma
-# Or: bunx scaffold package svc-prisma --type=service
+scaffold service prisma
+# Or: scaffold package svc-prisma --type=service
 ```
-
-**MCP**: `mcp_scaffold_service` with service name `prisma`, or `mcp_scaffold_package` with name `svc-prisma`, type `service`.
 
 ## What It Creates
 
