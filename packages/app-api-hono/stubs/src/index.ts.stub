@@ -1,0 +1,15 @@
+import { Hono } from "hono";
+
+const port = Number(process.env.PORT) || 3000;
+const app = new Hono()
+  .get("/", (c) => c.text(`Hello {{{appName}}}!`))
+  .get("/health", (c) => c.json({ status: "ok" }));
+
+export default app;
+
+Bun.serve({
+  fetch: app.fetch,
+  port,
+});
+
+console.log(`Server is running at http://localhost:${port}`);

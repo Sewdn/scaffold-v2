@@ -1,6 +1,6 @@
 /**
- * @workspace/app-backend — Backend app-type scaffolding for the scaffold CLI.
- * Exports a factory to create the backend app type config.
+ * @workspace/app-api-elysia — API app-type scaffolding (Elysia.js) for the scaffold CLI.
+ * Exports a factory to create the api-elysia app type config.
  */
 
 import { dirname, join } from "path";
@@ -14,10 +14,10 @@ const STUBS_DIR = join(__dirname, "..", "stubs");
 export { getPackageMerge, BACKEND_APP_SCRIPTS, BACKEND_APP_MKDIR_PATHS } from "./config.js";
 
 /**
- * Create the backend app type config.
+ * Create the api-elysia app type config.
  * Called by cli-scaffold app-types registry.
  */
-export function createBackendAppType(opts: AppTypeDepsOptions) {
+export function createApiElysiaAppType(opts: AppTypeDepsOptions) {
   const phase = createGeneratePhase({
     stubsDir: STUBS_DIR,
     getMerge: (ctx) => getPackageMerge(ctx as Parameters<typeof getPackageMerge>[0]),
@@ -25,13 +25,13 @@ export function createBackendAppType(opts: AppTypeDepsOptions) {
     getMkdirPaths: () => [...BACKEND_APP_MKDIR_PATHS],
   });
 
-  const backend = {
-    id: "backend",
-    description: "Backend API (Elysia.js)",
-    dirPrefix: "backend",
+  const apiElysia = {
+    id: "api-elysia",
+    description: "REST API (Elysia.js)",
+    dirPrefix: "api-elysia",
     defaultAppName: "api",
     phases: [phase],
   };
 
-  return { backend };
+  return { apiElysia };
 }

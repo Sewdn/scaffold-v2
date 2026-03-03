@@ -35,6 +35,8 @@ const V = {
   elysia: "elysia@^1.2.9",
   elysiaSwagger: "@elysiajs/swagger@^1.2.0",
   elysiaCors: "@elysiajs/cors@^1.2.0",
+  hono: "hono@^4.12.0",
+  fastify: "fastify@^5.7.0",
   commander: "commander@^14.0.3",
   mcpSdk: "@modelcontextprotocol/sdk@^1.9.0",
   prismaClient: "@prisma/client@^7.2.0",
@@ -54,6 +56,8 @@ export const DEP_DOTENV_CLI = V.dotenvCli;
 export const DEP_ELYSIA = V.elysia;
 export const DEP_ELYSIA_SWAGGER = V.elysiaSwagger;
 export const DEP_ELYSIA_CORS = V.elysiaCors;
+export const DEP_HONO = V.hono;
+export const DEP_FASTIFY = V.fastify;
 export const DEP_COMMANDER = V.commander;
 export const DEP_MCP_SDK = V.mcpSdk;
 export const DEP_PRISMA_CLIENT = V.prismaClient;

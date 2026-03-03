@@ -1,7 +1,7 @@
 ---
-name: scaffold-app-backend
+name: scaffold-app-api-elysia
 description: Scaffold a backend API (Elysia). Use when adding an API server to the monorepo.
-globs: ["**/apps/backend-*/**", "**/app-backend/**"]
+globs: ["**/apps/api-elysia-*/**", "**/app-api-elysia/**"]
 ---
 
 # Scaffold Backend App
