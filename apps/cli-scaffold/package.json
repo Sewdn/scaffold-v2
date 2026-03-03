@@ -25,7 +25,9 @@
   },
   "dependencies": {
     "@clack/prompts": "^1.0.1",
-    "@workspace/app-backend": "workspace:*",
+    "@workspace/app-api-elysia": "workspace:*",
+    "@workspace/app-api-hono": "workspace:*",
+    "@workspace/app-api-fastify": "workspace:*",
     "@workspace/app-cli": "workspace:*",
     "@workspace/app-documentation": "workspace:*",
     "@workspace/app-frontend-nextjs": "workspace:*",

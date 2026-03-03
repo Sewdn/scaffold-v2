@@ -2,12 +2,16 @@ import type { AppTypeConfig, GeneratePhase } from "@workspace/core-app-types";
 
 export type { GeneratePhase };
 import { createCliAppType } from "@workspace/app-cli";
-import { createBackendAppType } from "@workspace/app-backend";
+import { createApiElysiaAppType } from "@workspace/app-api-elysia";
+import { createApiHonoAppType } from "@workspace/app-api-hono";
+import { createApiFastifyAppType } from "@workspace/app-api-fastify";
 import { createMcpServerAppType } from "@workspace/app-mcp-server";
 import {
   DEP_ELYSIA,
   DEP_ELYSIA_SWAGGER,
   DEP_ELYSIA_CORS,
+  DEP_HONO,
+  DEP_FASTIFY,
   DEP_EFFECT,
   DEP_COMMANDER,
   DEP_MCP_SDK,
@@ -22,8 +26,16 @@ const { cli } = createCliAppType({
   deps: [DEP_COMMANDER, DEP_EFFECT],
 });
 
-const { backend } = createBackendAppType({
+const { apiElysia } = createApiElysiaAppType({
   deps: [DEP_ELYSIA, DEP_ELYSIA_SWAGGER, DEP_ELYSIA_CORS, DEP_EFFECT],
+});
+
+const { apiHono } = createApiHonoAppType({
+  deps: [DEP_HONO, DEP_EFFECT],
+});
+
+const { apiFastify } = createApiFastifyAppType({
+  deps: [DEP_FASTIFY, DEP_EFFECT],
 });
 
 const { mcpServer } = createMcpServerAppType({
@@ -41,7 +53,9 @@ const ALL_APP_TYPES = [
   frontendVite,
   frontendTanstack,
   cli,
-  backend,
+  apiElysia,
+  apiHono,
+  apiFastify,
   mcpServer,
   slideDeck,
   documentation,

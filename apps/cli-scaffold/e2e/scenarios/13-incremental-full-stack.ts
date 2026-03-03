@@ -1,5 +1,5 @@
 /**
- * Incremental full-stack scenario: init, add backend app, service package, module in sequence.
+ * Incremental full-stack scenario: init, add API (Elysia) app, service package, module in sequence.
  */
 
 import {
@@ -13,7 +13,7 @@ import type { Scenario } from "../types.js";
 
 export const scenario: Scenario = {
   id: "incremental-full-stack",
-  description: "Init, add backend app, service package, module in sequence",
+  description: "Init, add API (Elysia) app, service package, module in sequence",
   timeoutMs: 150_000,
   steps: [
     {
@@ -22,7 +22,7 @@ export const scenario: Scenario = {
     },
     {
       command: "app",
-      args: ["api", "--type", "backend", "--non-interactive"],
+      args: ["api", "--type", "api-elysia", "--non-interactive"],
     },
     {
       command: "service",
@@ -34,7 +34,7 @@ export const scenario: Scenario = {
     },
   ],
   validators: [
-    pathExists("apps/backend-api"),
+    pathExists("apps/api-elysia-api"),
     pathExists("packages/svc-auth"),
     pathExists("packages/svc-users"),
     pathExists("packages/ui-users"),

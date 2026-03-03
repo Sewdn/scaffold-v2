@@ -8,8 +8,8 @@ This document is the **directory** for the entire roadmap. Each feature, app typ
 
 | Category                   | Count |
 | -------------------------- | ----- |
-| **App types**              | 16    |
-| **Service packages**       | 17    |
+| **App types**              | 23    |
+| **Service packages**       | 19    |
 | **Expansion commands**     | ~120  |
 | **Vertical presets**       | 6     |
 | **Architectural patterns** | 8     |
@@ -20,14 +20,15 @@ This document is the **directory** for the entire roadmap. Each feature, app typ
 
 ```
 roadmap/
-├── INDEX.md                    ← You are here
-├── vision/                     # Strategic vision and principles
-├── architecture/              # Architectural patterns (registry, stubs, etc.)
-├── app-types/                 # One folder per app type, one file per expansion
-├── services/                  # One folder per service, one file per expansion
-├── ui-domain/                 # UI packages and domain (shared with services)
-├── verticals/                 # Industry templates and vertical expansions
-└── implementation/           # Phasing, priorities, roadmap
+├── INDEX.md                              ← You are here
+├── SPEC-BACKEND-AND-SYNC-INTEGRATION.md # Backend & realtime sync integration spec
+├── vision/                               # Strategic vision and principles
+├── architecture/                        # Architectural patterns (registry, stubs, etc.)
+├── app-types/                           # One folder per app type, one file per expansion
+├── services/                            # One folder per service, one file per expansion
+├── ui-domain/                           # UI packages and domain (shared with services)
+├── verticals/                            # Industry templates and vertical expansions
+└── implementation/                      # Phasing, priorities, roadmap
 ```
 
 ---
@@ -70,7 +71,9 @@ roadmap/
 | [frontend-nextjs](app-types/frontend-nextjs/)     | Planned                               | [add-page](app-types/frontend-nextjs/add-page.md), [add-layout](app-types/frontend-nextjs/add-layout.md), [add-route](app-types/frontend-nextjs/add-route.md), [add-api](app-types/frontend-nextjs/add-api.md), [add-component](app-types/frontend-nextjs/add-component.md), [add-middleware](app-types/frontend-nextjs/add-middleware.md) |
 | [frontend-vite](app-types/frontend-vite/)         | Planned                               | [add-page](app-types/frontend-vite/add-page.md), [add-layout](app-types/frontend-vite/add-layout.md), [add-route](app-types/frontend-vite/add-route.md), [add-component](app-types/frontend-vite/add-component.md), [add-hook](app-types/frontend-vite/add-hook.md)                                                                        |
 | [frontend-tanstack](app-types/frontend-tanstack/) | Planned                               | [add-page](app-types/frontend-tanstack/add-page.md), [add-layout](app-types/frontend-tanstack/add-layout.md), [add-api](app-types/frontend-tanstack/add-api.md), [add-component](app-types/frontend-tanstack/add-component.md), [add-addon](app-types/frontend-tanstack/add-addon.md)                                                      |
-| [backend](app-types/backend/)                     | Planned                               | [add-route](app-types/backend/add-route.md), [add-middleware](app-types/backend/add-middleware.md), [add-plugin](app-types/backend/add-plugin.md), [add-handler](app-types/backend/add-handler.md)                                                                                                                                         |
+| [api-elysia](app-types/api-elysia/)               | Planned                               | [add-route](app-types/api-elysia/add-route.md), [add-middleware](app-types/api-elysia/add-middleware.md), [add-plugin](app-types/api-elysia/add-plugin.md), [add-handler](app-types/api-elysia/add-handler.md)                                                                                                                             |
+| [api-hono](app-types/api-hono/)                   | Proposed                              | add-route, add-middleware, add-handler                                                                                                                                                                                                                                         |
+| [api-fastify](app-types/api-fastify/)             | Proposed                              | add-route, add-plugin, add-handler                                                                                                                                                                                                                                              |
 | [mcp-server](app-types/mcp-server/)               | Planned                               | [add-tool](app-types/mcp-server/add-tool.md), [add-resource](app-types/mcp-server/add-resource.md), [add-prompt](app-types/mcp-server/add-prompt.md)                                                                                                                                                                                       |
 | [slide-deck](app-types/slide-deck/)               | Planned                               | [add-slide](app-types/slide-deck/add-slide.md), [add-section](app-types/slide-deck/add-section.md), [add-fragment](app-types/slide-deck/add-fragment.md)                                                                                                                                                                                   |
 | [documentation](app-types/documentation/)         | Planned                               | [add-page](app-types/documentation/add-page.md), [add-sidebar](app-types/documentation/add-sidebar.md), [add-component](app-types/documentation/add-component.md)                                                                                                                                                                          |
@@ -82,6 +85,11 @@ roadmap/
 | [mobile](app-types/mobile/)                       | Proposed                              | [add-screen](app-types/mobile/add-screen.md), [add-plugin](app-types/mobile/add-plugin.md), [add-component](app-types/mobile/add-component.md)                                                                                                                                                                                             |
 | [desktop](app-types/desktop/)                     | Proposed                              | [add-command](app-types/desktop/add-command.md), [add-window](app-types/desktop/add-window.md), [add-plugin](app-types/desktop/add-plugin.md)                                                                                                                                                                                              |
 | [cron](app-types/cron/)                           | Proposed                              | [add-job](app-types/cron/add-job.md), [add-task](app-types/cron/add-task.md)                                                                                                                                                                                                                                                               |
+| [backend-booster](app-types/backend-booster/)     | Proposed                              | add-command, add-event, add-entity, add-read-model, add-reducer |
+| [backend-motia](app-types/backend-motia/)         | Proposed                              | add-step, add-api-step, add-event-step, add-cron-step, add-flow |
+| [backend-temporal](app-types/backend-temporal/)   | Proposed                              | add-workflow, add-activity, add-worker, add-client |
+| [backend-mastra](app-types/backend-mastra/)       | Proposed                              | add-agent, add-tool, add-workflow, add-scorer, add-prompt |
+| [backend-convex](app-types/backend-convex/)        | Proposed                              | add-query, add-mutation, add-action, add-schema, add-cron |
 
 ---
 
@@ -104,6 +112,8 @@ roadmap/
 | [svc-elysia-api](services/svc-elysia-api/)       | Proposed | [add-route](services/svc-elysia-api/add-route.md), [add-resource](services/svc-elysia-api/add-resource.md), [add-middleware](services/svc-elysia-api/add-middleware.md), [add-guard](services/svc-elysia-api/add-guard.md), [add-plugin](services/svc-elysia-api/add-plugin.md) |
 | [svc-workos](services/svc-workos/)               | Proposed | [add-connection](services/svc-workos/add-connection.md), [add-directory-sync](services/svc-workos/add-directory-sync.md), [add-webhook](services/svc-workos/add-webhook.md), [add-sso-provider](services/svc-workos/add-sso-provider.md)                                        |
 | [svc-logging](services/svc-logging/)             | Proposed | [add-transport](services/svc-logging/add-transport.md), [add-formatter](services/svc-logging/add-formatter.md), [add-context-enricher](services/svc-logging/add-context-enricher.md), [add-sink](services/svc-logging/add-sink.md)                                              |
+| [svc-spacetimedb](services/svc-spacetimedb/)     | Proposed | add-table, add-reducer, add-module, add-subscription |
+| [svc-powersync](services/svc-powersync/)         | Proposed | add-schema, add-sync-rule, add-bucket, add-connector |
 
 ---
 
@@ -126,6 +136,14 @@ roadmap/
 | [internal-tools](verticals/internal-tools/) | Proposed | [add-report](verticals/internal-tools/add-report.md), [add-workflow](verticals/internal-tools/add-workflow.md), [add-admin-page](verticals/internal-tools/add-admin-page.md), [add-audit-scope](verticals/internal-tools/add-audit-scope.md)                                 |
 | [dev-tools](verticals/dev-tools/)           | Proposed | [add-endpoint-group](verticals/dev-tools/add-endpoint-group.md), [add-api-key-scope](verticals/dev-tools/add-api-key-scope.md), [add-docs-section](verticals/dev-tools/add-docs-section.md), [add-playground-example](verticals/dev-tools/add-playground-example.md)         |
 | [data-pipeline](verticals/data-pipeline/)   | Proposed | [add-source](verticals/data-pipeline/add-source.md), [add-transform](verticals/data-pipeline/add-transform.md), [add-destination](verticals/data-pipeline/add-destination.md), [add-schedule](verticals/data-pipeline/add-schedule.md)                                       |
+
+---
+
+## Specifications
+
+| File                                                                       | Purpose                                              |
+| -------------------------------------------------------------------------- | ---------------------------------------------------- |
+| [SPEC-BACKEND-AND-SYNC-INTEGRATION.md](SPEC-BACKEND-AND-SYNC-INTEGRATION.md) | Backend app types & realtime sync services integration |
 
 ---
 

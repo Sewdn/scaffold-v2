@@ -39,7 +39,9 @@ function getPackageName(appTypeId: string): string {
 function formatTitle(id: string): string {
   const titles: Record<string, string> = {
     cli: "CLI",
-    backend: "Backend",
+    "api-elysia": "API (Elysia)",
+    "api-hono": "API (Hono)",
+    "api-fastify": "API (Fastify)",
     "frontend-nextjs": "Frontend (Next.js)",
     "frontend-vite": "Frontend (Vite)",
     "frontend-tanstack": "Frontend (TanStack)",
@@ -136,7 +138,7 @@ ${tableRows}
 ## Naming examples
 
 - \`scaffold app web --type frontend-vite\` → \`apps/frontend-web\`
-- \`scaffold app api --type backend\` → \`apps/backend-api\`
+- \`scaffold app api --type api-elysia\` → \`apps/api-elysia-api\`
 - \`scaffold app docs --type documentation\` → \`apps/docs-docs\`
 - \`scaffold app tool --type cli\` → \`apps/cli-tool\`
 

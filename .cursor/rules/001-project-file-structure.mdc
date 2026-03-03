@@ -19,7 +19,7 @@ This project is a monorepo setup that was scaffolded using the `scaffold` comman
 1. **Applications (`/apps`)**
 
    - contains packages per app that was scaffolded in the project
-   - every app name is prefixed by the type of app: frontend, backend, cli, mcp, slides, docs
+   - every app name is prefixed by the type of app: frontend, api-elysia, api-hono, api-fastify, cli, mcp, slides, docs
 
 2. **Shared Packages (`/packages`)**
 
@@ -104,7 +104,7 @@ This mirrors the TanStack Create add-on philosophy: frameworks/libraries are mod
   - Can optionally add various app types to be tested
   - Parameters:
     - Message to process
-    - Optional list of apps (frontend-nextjs, frontend-vite, cli, backend)
+    - Optional list of apps (frontend-nextjs, frontend-vite, cli, api-elysia, api-hono, api-fastify)
     - Working directory
 
 - **mcp_scaffold_project**
@@ -113,7 +113,7 @@ This mirrors the TanStack Create add-on philosophy: frameworks/libraries are mod
   - Parameters:
     - Project name
     - Template type (analysis or no-analysis)
-    - List of apps to include (frontend-nextjs, frontend-vite, cli, backend)
+    - List of apps to include (frontend-nextjs, frontend-vite, cli, api-elysia, api-hono, api-fastify)
     - Working directory
 
 - **mcp_scaffold_service**
@@ -135,7 +135,7 @@ This mirrors the TanStack Create add-on philosophy: frameworks/libraries are mod
   - Adds a new application to the project
   - Parameters:
     - App name
-    - App type (frontend-nextjs, frontend-vite, cli, backend, mcp-server, slide-deck, docs)
+    - App type (frontend-nextjs, frontend-vite, cli, api-elysia, api-hono, api-fastify, mcp-server, slide-deck, docs)
     - Working directory
 
 - **mcp_scaffold_component**

@@ -30,7 +30,9 @@ const CORE_SCENARIO_LOADERS = [
 /** App-type scenario modules (export scenarios array) - add when extracting app-types to packages */
 const APP_TYPE_SCENARIO_LOADERS: Array<() => Promise<{ scenarios?: readonly Scenario[] }>> = [
   () => import("@workspace/app-cli/e2e/scenarios"),
-  () => import("@workspace/app-backend/e2e/scenarios"),
+  () => import("@workspace/app-api-elysia/e2e/scenarios"),
+  () => import("@workspace/app-api-hono/e2e/scenarios"),
+  () => import("@workspace/app-api-fastify/e2e/scenarios"),
   () => import("@workspace/app-documentation/e2e/scenarios"),
   () => import("@workspace/app-mcp-server/e2e/scenarios"),
   () => import("@workspace/app-frontend-nextjs/e2e/scenarios"),

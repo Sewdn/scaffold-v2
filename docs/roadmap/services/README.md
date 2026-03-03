@@ -19,3 +19,5 @@ One folder per service package. Within each folder: `README.md` (overview) and o
 | [svc-elysia-api](svc-elysia-api/)       | Proposed (high priority) | add-route, add-resource, add-middleware, add-guard, add-plugin              |
 | [svc-workos](svc-workos/)               | Proposed                 | add-connection, add-directory-sync, add-webhook, add-sso-provider           |
 | [svc-logging](svc-logging/)             | Proposed                 | add-transport, add-formatter, add-context-enricher, add-sink                |
+| [svc-spacetimedb](svc-spacetimedb/)     | Proposed                 | add-table, add-reducer, add-module, add-subscription                         |
+| [svc-powersync](svc-powersync/)         | Proposed                 | add-schema, add-sync-rule, add-bucket, add-connector                        |

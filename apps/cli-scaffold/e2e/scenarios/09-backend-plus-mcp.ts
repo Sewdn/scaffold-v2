@@ -1,5 +1,5 @@
 /**
- * Backend + MCP scenario: project with Elysia backend and MCP server apps.
+ * API Elysia + MCP scenario: project with Elysia API and MCP server apps.
  */
 
 import {
@@ -12,15 +12,15 @@ import {
 import type { Scenario } from "../types.js";
 
 export const scenario: Scenario = {
-  id: "backend-plus-mcp",
-  description: "Project with backend and MCP server apps",
+  id: "api-elysia-plus-mcp",
+  description: "Project with API (Elysia) and MCP server apps",
   steps: [
     {
       command: "project",
       args: [
         "e2e-bm",
         "--apps",
-        "backend,mcp-server",
+        "api-elysia,mcp-server",
         "--app-names",
         "api,mcp",
         "--non-interactive",
@@ -28,9 +28,9 @@ export const scenario: Scenario = {
     },
   ],
   validators: [
-    pathExists("apps/backend-api"),
+    pathExists("apps/api-elysia-api"),
     pathExists("apps/mcp-mcp"),
-    pathExists("apps/backend-api/package.json"),
+    pathExists("apps/api-elysia-api/package.json"),
     pathExists("apps/mcp-mcp/package.json"),
     hasScript("build"),
     buildSucceeds(),
