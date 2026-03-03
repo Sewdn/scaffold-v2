@@ -23,6 +23,7 @@ import {
 } from "../init/optional-packages.js";
 import { scaffoldCliExampleDefaults } from "@workspace/app-cli";
 import { promptProjectName, promptOptionalPackages, promptApps } from "../ui/ui-prompts.js";
+import { setScaffoldProjectDirForMetrics } from "../services/scaffold-metrics.js";
 
 function parseOptionalPackages(
   packages: string | string[] | undefined,
@@ -281,6 +282,7 @@ export const projectCommand = new Command("project")
         console.warn("Dora setup skipped or failed. Run 'dora init && dora index' manually.");
       });
 
+      setScaffoldProjectDirForMetrics(projectDir);
       outro(chalk.green(`Monorepo created in ${projectName}/`));
       if (apps.length > 0) {
         console.log(

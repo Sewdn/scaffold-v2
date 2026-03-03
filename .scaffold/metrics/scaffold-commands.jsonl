@@ -1,0 +1,10 @@
+{"command":"metrics","args":["snapshot","--no-log"],"cwd":"/Users/psoudan/workspace/scaffold-v2","durationMs":109,"success":true,"ts":"2026-03-03T15:03:47.445Z"}
+{"command":"metrics","args":["snapshot","--no-log"],"cwd":"/Users/psoudan/workspace/scaffold-v2","durationMs":57,"success":true,"ts":"2026-03-03T15:06:34.381Z"}
+{"command":"metrics","args":["report"],"cwd":"/Users/psoudan/workspace/scaffold-v2","durationMs":8,"success":true,"ts":"2026-03-03T15:10:27.126Z"}
+{"command":"metrics","args":["report"],"cwd":"/Users/psoudan/workspace/scaffold-v2","durationMs":7,"success":true,"ts":"2026-03-03T15:15:52.866Z"}
+{"command":"app","args":["demo","-t","frontend-nextjs","--non-interactive"],"cwd":"/Users/psoudan/workspace/scaffold-v2","durationMs":7386,"success":true,"ts":"2026-03-03T15:16:13.977Z"}
+{"command":"metrics","args":["report"],"cwd":"/Users/psoudan/workspace/scaffold-v2","durationMs":8,"success":true,"ts":"2026-03-03T15:16:17.781Z"}
+{"command":"metrics","args":["report"],"cwd":"/Users/psoudan/workspace/scaffold-v2","durationMs":7,"success":true,"ts":"2026-03-03T15:20:12.321Z"}
+{"command":"app","args":["test-perf","-t","frontend-nextjs","--non-interactive"],"cwd":"/Users/psoudan/workspace/scaffold-v2","durationMs":6218,"success":true,"ts":"2026-03-03T15:23:07.796Z"}
+{"command":"metrics","args":["report"],"cwd":"/Users/psoudan/workspace/scaffold-v2","durationMs":6,"success":true,"ts":"2026-03-03T15:23:13.099Z"}
+{"command":"metrics","args":["report","--snapshots"],"cwd":"/Users/psoudan/workspace/scaffold-v2","durationMs":7,"success":true,"ts":"2026-03-03T15:23:23.716Z"}

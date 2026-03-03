@@ -14,6 +14,7 @@ import { getAppTypeConfig, hasGeneratePhase, isReactFrontend } from "../app-type
 import { ensureUIPackagesExist, hasUIPackages } from "../init/optional-packages.js";
 import { promptForCreateOptions } from "../ui/create-options.js";
 import { createUIEnvironment } from "../ui/ui-environment.js";
+import { setScaffoldProjectDirForMetrics } from "../services/scaffold-metrics.js";
 
 function parseOptionalPackages(
   packages: string | string[] | undefined,
@@ -283,6 +284,7 @@ export const createCommand = new Command("create")
       const appList =
         apps.length > 0 ? apps.map((a) => `${APP_TYPE_PREFIX[a.type]}-${a.name}`).join(", ") : null;
 
+      setScaffoldProjectDirForMetrics(projectDir);
       outro(chalk.green(`Your monorepo is ready in '${projectName}'.`));
       console.log("");
       console.log(chalk.gray("  Packages:") + ` ${pkgList.join(", ")}`);
